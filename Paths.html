@@ -456,37 +456,34 @@ Every time Fandango sees a grammar rule</p>
 </div>
 <p>Then, a resulting derivation tree for <code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span></code> looks like this:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tree</span>
-
-<span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">Tree</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Helper class to visualize trees</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># Use as:</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># tree = Tree(&#39;&lt;foo&gt;&#39;, Tree(&#39;&quot;bar&quot;&#39;), Tree(&#39;&lt;baz&gt;&#39;, Tree(&#39;&quot;qux&quot;&#39;)))</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># tree.visualize()</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">graphviz</span><span class="w"> </span><span class="kn">import</span> <span class="n">Digraph</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_svg</span><span class="p">,</span> <span class="n">display_png</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">class</span><span class="w"> </span><span class="nc">Tree</span><span class="p">:</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;graphviz&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/04d68d9e9885f311456fbbe8c9ed5a9e0ae1dcb34ffc1c7cb8bd0be16bc65cd4.png" src="_images/04d68d9e9885f311456fbbe8c9ed5a9e0ae1dcb34ffc1c7cb8bd0be16bc65cd4.png" />
+</div>
 </div>
 <p>As Fandango expands more and more symbols, it expands the derivation tree accordingly.
 Since the grammar definition for <code class="docutils literal notranslate"><span class="pre">&lt;person_name&gt;</span></code> says</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;person_name&gt; ::= &lt;first_name&gt; &quot; &quot; &lt;last_name&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>the above derivation tree would be extended to</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/61d7a71ed0e4b90a509e339bbe532cb316626589cea6f37bc9c23147cbb46dbd.png" src="_images/61d7a71ed0e4b90a509e339bbe532cb316626589cea6f37bc9c23147cbb46dbd.png" />
+</div>
 </div>
 <p>And if we next extend <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span></code> and then <code class="docutils literal notranslate"><span class="pre">&lt;digit&gt;</span></code> based on their definitions</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;age&gt; ::= &lt;digit&gt;+
+</pre></div>
+</div>
+</div>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -495,9 +492,15 @@ Hence, the <code class="docutils literal notranslate"><span class="pre">&lt;digi
 </aside>
 <p>our tree gets to look like this:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/a723deb60f5b477ebbeea2e0136e51c6be35e0e1918dac3698fe121cceac6e33.png" src="_images/a723deb60f5b477ebbeea2e0136e51c6be35e0e1918dac3698fe121cceac6e33.png" />
+</div>
 </div>
 <p>Repeating the process, it thus obtains a tree like this:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/2b7edaa96bc215fbbde5f2a9f6c5b062186be527912f54c8edc9b07127a4e473.png" src="_images/2b7edaa96bc215fbbde5f2a9f6c5b062186be527912f54c8edc9b07127a4e473.png" />
+</div>
 </div>
 <p>Note how the tree records the entire history of how it was created - how it was <em>derived</em>, actually.</p>
 <p>To obtain a string from the tree, we traverse its children left-to-right,
@@ -530,6 +533,11 @@ In XPath, the first child has the index 1, in Fandango, it has the index 0.</p>
 <p>We can use this to access elements in specific contexts.
 For instance, if we want to refer to a <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> element, but only if it is the child of a <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> element, we can refer to it as <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;[0]</span></code> - the first child of a <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> element:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;first_name&gt; ::= &lt;name&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Here is a constraint that makes Fandango produce first names that end with <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
 <aside class="margin sidebar">
@@ -540,6 +548,20 @@ For instance, if we want to refer to a <code class="docutils literal notranslate
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hux Qrh,10390
+Hux Qrh,10390
+Hux Qrm,10390
+Hux Qrm,10390
+Hux Qrh,10390
+Hux Qrh,10
+Hux Qrh,19
+Hux Qrh,10090
+Rpalx Wgi,40663
+Hux Qrm,10390
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -571,6 +593,20 @@ This allows you to express the earlier constraint in a possibly more readable fo
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cex Mhlql,600
+Gkx Ce,84543
+Dnvsx Fnv,02430
+Ksx Fyk,3
+Cex Mhlql,600
+Gkx Ce,84543
+Dnvsx Fnv,02430
+Ksx Fyk,3
+Ksx Fyk,9116
+Cex Mhlql,633
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -610,6 +646,20 @@ A simpler way to think about <code class="docutils literal notranslate"><span cl
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xblr Sxia,61
+Xtl Egjfry,728
+Xgfxs Llpl,49
+Xoqm Kays,2
+Xf Zlq,04859
+Xsfk Ck,91519
+Xxpedx Ioryoi,84
+Xo Bfywju,15855
+Xjpg Zs,69
+Xzi Zfahl,018
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="chains">
@@ -630,6 +680,20 @@ What would the expression <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>En Mx,92537
+Bx Jx,51480
+Etikgw Ax,77860
+Wvcs Fxxxxx,383
+Mgayr Vxxxx,96
+Gkjil Yx,175
+Dmrdf Vxx,646
+Mbirh Mxxx,4
+Ioy Yxx,95
+Sbaxx Ixxxx,67
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -686,6 +750,20 @@ For instance, we can have a constraint check whether a particular element is in 
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avzaz Aone,9327
+Aizgrt Ypljg,06
+Aewe Kl,18888
+Aq Vads,942
+As Yxr,33899
+Au Irz,288
+Avzaz Aone,9327
+Aizgrt Ypljg,06
+Aewe Kl,18888
+Aq Vads,942
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="universal-quantification">
@@ -712,6 +790,20 @@ Here we use the Python <code class="docutils literal notranslate"><span class="p
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xa Daewt,6155
+Haaaaa Ikac,837
+Faaaa Flnca,4
+Daaaa Mxap,78
+Paa Mtqf,12
+Iaaa Xzgalg,979
+Oaaaaa Iasvrn,85
+Naaa Hgr,5164
+Daaaaa Ut,91
+Waaa Qqi,434
+</pre></div>
+</div>
+</div>
 </div>
 <p>By default, all symbols are universally quantified within <code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span></code>, so a dedicated universal quantifier is only needed if you want to <em>limit the scope</em> to some sub-element.
 This is what we do here with <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;..&lt;ascii_lowercase_letter&gt;</span></code>, limiting the scope to <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code>.</p>
@@ -744,6 +836,20 @@ Let’s try this:</p>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Adcg Frpug,528
+Djtkd Egf,07
+Ufgnb Ckcdyo,27
+Njgbpq Bj,21
+Cuunms Kqexcm,0
+Nsaut Kwl,3
+Nhpbrl Czyiup,2
+Fcr Qtlbg,02
+Av Nbk,9
+Plqs Iire,3
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note how Fandango “solves” the problem by mostly producing only persons whose age is <em>below</em> the threshold.
 But if we have the age come from a Gaussian distribution, as discussed in <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">Data Generators and Fakers</span></a>, we get</p>
@@ -751,6 +857,20 @@ But if we have the age come from a Gaussian distribution, as discussed in <a cla
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alexander Fitzpatrick,35
+Angela Garcia,35
+April Smith,36
+Ashley Bennett,34
+Ashley Miranda,33
+Angela Mcgee,34
+Alexandra Brooks,33
+Anthony Boyer,34
+Amy Walsh,35
+Ashley Weiss,33
+</pre></div>
+</div>
+</div>
 </div>
 <p>While the implication is indeed resolved, note that the Gaussian distribution no longer holds.
 We will revisit this issue in <a class="reference internal" href="Distributions.html#sec-distributions"><span class="std std-ref">Statistical Distributions</span></a>, when we specify targets that must hold for the entire population.</p>
