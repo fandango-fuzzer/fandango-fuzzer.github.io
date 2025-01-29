@@ -430,16 +430,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18522
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+0661
+249
+1
 3
-6
-2626
-544
-604
-46
+73306
 0
-64751
-07
+23
+43318
+79011
 </pre></div>
 </div>
 </div>
@@ -465,24 +465,26 @@ For instance, these are all the options supported by <code class="docutils liter
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango fuzz [-h] [-f FAN_FILE] [-c CONSTRAINT] [--no-cache]
-                     [--no-stdlib] [-s SEPARATOR] [-I DIR]
+                     [--no-stdlib] [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
+                     [-x FILENAME_EXTENSION]
+                     [--format {string,bits,tree,grammar,none}]
+                     [--file-mode {text,binary,auto}] [--validate]
+                     [-S START_SYMBOL] [--warnings-are-errors]
                      [-N MAX_GENERATIONS] [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
                      [--crossover-rate CROSSOVER_RATE]
                      [--mutation-rate MUTATION_RATE]
                      [--random-seed RANDOM_SEED]
                      [--destruction-rate DESTRUCTION_RATE] [-n NUM_OUTPUTS]
-                     [-S START_SYMBOL] [--warnings-are-errors] [--best-effort]
-                     [-i INITIAL_POPULATION] [-o OUTPUT] [-d DIRECTORY]
-                     [--format {string,bits,tree}]
-                     [--input-method {stdin,filename}] [-x FILENAME_EXTENSION]
+                     [--best-effort] [-i INITIAL_POPULATION] [-o OUTPUT]
+                     [--input-method {stdin,filename}]
                      [command] ...
 
 options:
   -h, --help            show this help message and exit
   -f, --fandango-file FAN_FILE
                         Fandango file (.fan, .py) to be processed. Can be
-                        given multiple times.
+                        given multiple times. Use &#39;-&#39; for stdin
   -c, --constraint CONSTRAINT
                         define an additional constraint CONSTRAINT. Can be
                         given multiple times.
@@ -495,12 +497,25 @@ options:
   -I, --include-dir DIR
                         specify a directory DIR to search for included
                         Fandango files
-  -o, --output OUTPUT   write output to OUTPUT (default: stdout)
   -d, --directory DIRECTORY
                         create individual output files in DIRECTORY
-  --format {string,bits,tree}
+  -x, --filename-extension FILENAME_EXTENSION
+                        extension of generated file names (default: &#39;.txt&#39;)
+  --format {string,bits,tree,grammar,none}
                         produce output(s) as string (default), as a bit
-                        string, or as derivation tree
+                        string, as a derivation tree, as a grammar, or none
+  --file-mode {text,binary,auto}
+                        mode in which to open and write files (default is
+                        &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
+                        otherwise)
+  --validate            run internal consistency checks for debugging
+  -o, --output OUTPUT   write output to OUTPUT (default: stdout)
+
+general settings:
+  -S, --start-symbol START_SYMBOL
+                        the grammar start symbol (default: `&lt;start&gt;`)
+  --warnings-are-errors
+                        treat warnings as errors
 
 algorithm settings:
   -N, --max-generations MAX_GENERATIONS
@@ -521,10 +536,6 @@ algorithm settings:
                         destroyed in every generation
   -n, --num-outputs, --desired-solutions NUM_OUTPUTS
                         the number of outputs to produce (default: 100)
-  -S, --start-symbol START_SYMBOL
-                        the grammar start symbol (default: `start`)
-  --warnings-are-errors
-                        treat warnings as errors
   --best-effort         produce a &#39;best effort&#39; population (may not satisfy
                         all constraints)
   -i, --initial-population INITIAL_POPULATION
@@ -532,13 +543,11 @@ algorithm settings:
 
 command invocation settings:
   --input-method {stdin,filename}
-                        When invoking COMMAND, choose whether Fandango input
+                        when invoking COMMAND, choose whether Fandango input
                         will be passed as standard input (`stdin`) or as last
                         argument on the command line (`filename`) (default)
-  -x, --filename-extension FILENAME_EXTENSION
-                        Extension of generated file names (default: &#39;.txt&#39;)
-  command               Command to be invoked with a Fandango input
-  args                  The arguments of the command
+  command               command to be invoked with a Fandango input
+  args                  the arguments of the command
 </pre></div>
 </div>
 </div>

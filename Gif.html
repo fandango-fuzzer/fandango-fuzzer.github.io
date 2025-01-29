@@ -403,6 +403,22 @@
 <p>To be added later.</p>
 </div>
 <p>The <a class="reference external" href="https://www.fileformat.info/format/gif/egff.htm">GIF format</a> is widely used to encode image sequences.</p>
+<p>We start with a very short GIF to keep things simple (<a class="reference external" href="http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever">source</a>): <a class="reference download internal" download="" href="_downloads/76eaac8615c4db457e2d37ab8fe4afcd/tinytrans.gif"><span class="xref download myst">tinytrans.gif</span></a>.</p>
+<p>We can parse this file using Fandango:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>fandango<span class="w"> </span>parse<span class="w"> </span>-b<span class="w"> </span>-f<span class="w"> </span>gif89a.fan<span class="w"> </span>tinytrans.gif
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango [-h] [--version] [--verbose | --quiet]
+                {fuzz,parse,shell,help,copyright,version} ...
+fandango: error: unrecognized arguments: -b
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
