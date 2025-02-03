@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Bits and Bit Fields" href="Bits.html" />
-    <link rel="prev" title="Case Study: ISO 8601 Date + Time" href="ISO8601.html" />
+    <link rel="prev" title="Parsing and Checking Inputs" href="Parsing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -189,6 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
@@ -395,7 +396,10 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checksums">Checksums</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characters-and-bytes">Characters and Bytes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characters-and-bytes">Characters and Bytes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-and-binary-files">Text Files and Binary Files</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-values-to-binary-formats">Converting Values to Binary Formats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-conversion">Compression and Conversion</a></li>
@@ -497,24 +501,44 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2536661971691066
-0463607474721877
-5008948803786632
-2764210043427282
-7124750259901359
-4251614697194401
-5410502640686778
-2221857483793230
-1005506676460776
-1061188767121574
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7930995768537087
+6821318806373874
+1282264747791159
+7161586235539168
+1722498797231561
+4498824456266695
+1450104929282286
+8722611866919479
+5733526930680233
+7473267842750034
 </pre></div>
 </div>
 </div>
 </div>
-<p>And we can also use it to <em>parse</em> and <em>check</em> numbers.</p>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Parsing functionality is not yet available on the command line.</p>
+<p>We can also use the grammar to <em>parse</em> and <em>check</em> numbers.
+This credit card number should be valid:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4931633575526870</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>credit_card.fan
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">  </span><span class="c1"># print exit code</span>
+<span class="m">0</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>Adding 1 to this number should make it <em>invalid</em>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4931633575526871</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>credit_card.fan
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: &#39;&lt;stdin&gt;&#39;: constraint &lt;check_digit&gt; == credit_card_check_digit(str(&lt;number&gt;)) not satisfied
+ValueError: 1 error(s) during parsing
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="w">  </span><span class="c1"># print exit code</span>
+<span class="m">1</span>
+</pre></div>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -532,14 +556,30 @@ In Python, it is likely that someone has already implemented the specific checks
 <section id="characters-and-bytes">
 <h2>Characters and Bytes<a class="headerlink" href="#characters-and-bytes" title="Link to this heading">#</a></h2>
 <p>The second set of features one frequently encounters in binary formats is, well, <em>bytes</em>.
-By default, Fandango operates on strings of <em>characters</em> in UTF-8 encoding.
-This clashes with a byte interpretation as soon as the produced string contains a UTF-8 prefix byte, such as <code class="docutils literal notranslate"><span class="pre">\xc2</span></code> or <code class="docutils literal notranslate"><span class="pre">\xe0</span></code>, which mark the beginning of a two- and three-byte UTF-8 sequence, respectively.
-To ensure bytes will be interpreted as bytes (and as bytes only), place a <code class="docutils literal notranslate"><span class="pre">b</span></code> (binary) prefix in front of them.
-Hence, <code class="docutils literal notranslate"><span class="pre">b'\xc2'</span></code> will always be interpreted as a single byte, whereas <code class="docutils literal notranslate"><span class="pre">💃</span></code> will be interpreted as a single character (despite occupying multiple bytes).</p>
+So far, we have seen Fandango operates on strings of Unicode <em>characters</em>, which use UTF-8 encoding.
+This clashes with a byte interpretation as soon as the produced string contains a UTF-8 prefix byte, such as <code class="docutils literal notranslate"><span class="pre">\xc2</span></code> or <code class="docutils literal notranslate"><span class="pre">\xe0</span></code>, which mark the beginning of a two- and three-byte UTF-8 sequence, respectively.</p>
+<p>To ensure bytes will be interpreted as bytes (and as bytes only), place a <code class="docutils literal notranslate"><span class="pre">b</span></code> (binary) prefix in front of them.
+This ensures that a byte <code class="docutils literal notranslate"><span class="pre">b'\xc2'</span></code> will always be interpreted as a single byte, whereas <code class="docutils literal notranslate"><span class="pre">💃</span></code> will be interpreted as a single character (despite occupying multiple bytes).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Fandango provides a <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;</span></code> symbol by default, which expands into all bytes 0…255.</p>
+<p>Fandango provides a <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;</span></code> symbol by default, which expands into all bytes <code class="docutils literal notranslate"><span class="pre">b'\x00'..b'\xff'</span></code>.</p>
 </div>
+<section id="text-files-and-binary-files">
+<h3>Text Files and Binary Files<a class="headerlink" href="#text-files-and-binary-files" title="Link to this heading">#</a></h3>
+<p>By default, Fandango will read and write files in <code class="docutils literal notranslate"><span class="pre">text</span></code> mode, meaning that characters will be read in using UTF-8 encoding.
+However, if a grammar can produce bytes (or <a class="reference internal" href="Bits.html#sec-bits"><span class="std std-ref">bits</span></a>), the associated files will be read and written in <code class="docutils literal notranslate"><span class="pre">binary</span></code> mode, reading and writing <em>bytes</em> instead of (encoded) characters.
+If your grammar contains bytes <em>and</em> strings, then the strings will be written in UTF-8 encoding into the binary file.</p>
+<p>You can enforce a specific behavior using the Fandango <code class="docutils literal notranslate"><span class="pre">--file-mode</span></code> flag for the <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> and <code class="docutils literal notranslate"><span class="pre">parse</span></code> commands:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fuzz</span> <span class="pre">--file-mode=text</span></code> opens all files in <code class="docutils literal notranslate"><span class="pre">text</span></code> mode. Strings and bytes will be written in UTF-8 encoding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fuzz</span> <span class="pre">--file-mode=binary</span></code> opens all files in <code class="docutils literal notranslate"><span class="pre">binary</span></code> mode. Strings will be written in UTF-8 encoding; bytes will be written as is.</p></li>
+</ul>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">fuzz</span> <span class="pre">--file=mode=auto</span></code> (default), which will use <code class="docutils literal notranslate"><span class="pre">binary</span></code> or <code class="docutils literal notranslate"><span class="pre">text</span></code> mode as described above.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Avoid mixing non-ASCII strings with bits and bytes in a single grammar.</p>
+</div>
+</section>
 </section>
 <section id="length-encodings">
 <h2>Length Encodings<a class="headerlink" href="#length-encodings" title="Link to this heading">#</a></h2>
@@ -594,14 +634,13 @@ Let us produce a single output using <code class="docutils literal notranslate">
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 004  \0   9   1   4   5
-0000006
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000   b   &#39;   \   x   0   4   \   x   0   0   5   9   3   3   &#39;
+0000017
 </pre></div>
 </div>
 </div>
 </div>
 <p>The hexadecimal dump shows that the first two bytes encode the length of the string of digits that follows.
-The last character is a newline <code class="docutils literal notranslate"><span class="pre">\n</span></code> - this is produced by Fandango and not part of the grammar.
 The format is correct - we have successfully produced a length encoding.</p>
 </section>
 <section id="converting-values-to-binary-formats">
@@ -621,8 +660,8 @@ def uint16(n: int) -&gt; str:
 <p>and obtain the same result:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 002  \0   9   3
-0000004
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000   b   &#39;   \   x   0   1   \   x   0   0   1   &#39;
+0000014
 </pre></div>
 </div>
 </div>
@@ -654,7 +693,7 @@ def uint16(n: int) -&gt; str:
 </div>
 </div>
 </div>
-<p>In Python, comparisons of different types always return <code class="docutils literal notranslate"><span class="pre">False</span></code>”:</p>
+<p>In Python, comparisons of different types always return <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Left hand is byte string, right hand is Unicode string</span>
@@ -671,7 +710,7 @@ def uint16(n: int) -&gt; str:
 <p>Hence, a constraint that compares a Fandango symbol against a byte string <em>will always fail</em>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>When comparing symbols against values, always be sure to convert the values to Unicode <code class="docutils literal notranslate"><span class="pre">str</span></code> strings first.</p>
+<p>When comparing symbols against values, always be sure to convert the values to the appropriate type first.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -739,12 +778,12 @@ Here’s a sketch on how to achieve this:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ISO8601.html"
+       href="Parsing.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Case Study: ISO 8601 Date + Time</p>
+        <p class="prev-next-title">Parsing and Checking Inputs</p>
       </div>
     </a>
     <a class="right-next"
@@ -774,7 +813,10 @@ Here’s a sketch on how to achieve this:</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checksums">Checksums</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characters-and-bytes">Characters and Bytes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characters-and-bytes">Characters and Bytes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-and-binary-files">Text Files and Binary Files</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-values-to-binary-formats">Converting Values to Binary Formats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-conversion">Compression and Conversion</a></li>

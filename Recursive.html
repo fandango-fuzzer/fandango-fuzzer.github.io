@@ -189,6 +189,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
@@ -461,16 +462,16 @@ Have a look at the above rule first, and then check out the solution.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76836 + 89
-90840 + 12
-58365
-860
-389 + 80011
-8
-41
-5 + 706
-67
-0066 + 5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+208 + 1 + 23 + 00790 + 49
+43418 + 2929 + 379 + 28
+55631
+08155
+85 + 71508 + 66 + 6
+679
+42313
+7 + 6885 + 153 + 0 + 5
+80 + 03050 + 705
 </pre></div>
 </div>
 </div>
@@ -534,16 +535,16 @@ Hence, <code class="docutils literal notranslate"><span class="pre">2</span> <sp
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+(+-(4) + 0) + 66)
--4 * 1155 + 319 - 90
-+65708 / -09 * 87 * 16 * 0 * 37
-+257 + 2
-5 / -1354 * +-03 / 7 * 1
-16 - 51733 + 26 * 0 + 2
-(-802 + 60 * 56 + 1) * 63 / 53 / 16
-670 / (22 / 5 / 34 - 90) * 85 * 89 / 31
-(+(16 / 58 / 29 * 95 / 9 / 70) / 55) + 2
-80364 / ((36)) / 1 + 24
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+57044 / 79 * 13 * 62 / 66 / 6 * 4
+1117 / +87 / 7 * 97 * 83 / 70 / 5 * 21 - 34
+-((6) / 46 * 0 * 64 / 3 / 93 * 88 - 36) / 62
+7 * 115 / ++698 / 34 + 57
+++220 / (+--85 / 69) + 94
+-+(+4 - 6) / 4 / 45 * 09 * 3 * 2 / 6 + 37
++8951 * (02 / 15 / 21 * 10 / 61 - 74) - 2
+7 + -804 * +(32) / 97
+-+9
+-(-58 * 3 * 4 * 72 * 23 * 8) * 17 / 00 / 32 - 15
 </pre></div>
 </div>
 </div>
@@ -582,16 +583,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4) * 3.78 + 312.31 - 4
-+662.5 / -(9 * 1 + 3) + 7
-(++(1) * 9 * 5 * 2 * 6 - 4) / 8 + 3
-(++1.34910 - 6) + 8
-7
-(+-++569.1 * 5 + 9) / 0 - 1
-873906 * (0) * 9 * 9 * 9
-785165 * +33.23 / 4 / 3
--((1 * 4 * 0 / 3) + 8) * 1 / 9 / 4 + 8
--(+-873.75 * 6 + 8) * 4 + 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-1.26235 / 6.84 - 7
+-((4 / 1 * 9 * 7 * 0 / 4 - 7) / 5 + 2) - 2
+94945.3721 + 5 * 7 + 2
+(8 / 2) * 8 / 0 * -(5)
+6.466
+8.8 * -+-3
+-+(+(6.59) * 8 + 2) + 8
+279 / 3 / 129 / 3 * 2 * 0 - 4
+9 / +((9 / 1) - 0) / 5 * 0 / 9
+3.2234 / 5 / 8 * 8 * 9 * 7 / 6 * 3 + 0
 </pre></div>
 </div>
 </div>
@@ -602,16 +603,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>929098 * +3 / (5) - 5
-3.638 + 7343.37 - 4
-19230.3 + +2 / 3 / 1 / 2
-9395.8813 + 5 * 9 - 2
-99 / ++2 * 2 * 4 / 4 * 2 * 8 * 4 * 8
-9738.19
-+-+-67212.86 / 3 - 8
-5 * 849278.68 * 4 - 8
-7.7 * (9 * 1 * 7 * 3 - 8) * 6 * 5 - 1
-908844.5108 - 9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+525 / 1 * 7 * 2 * 1 * 4 * 5 - 3)
+9.600 + 921 * 5 * 7 + 5
+30197.76112 / 9 - 8
++(--67103) * +948 - 8
++95767.48 * (8) * 7
+6 * (+720 * 1 / 2 * 1 * 4 - 7) / 1
+22729.89 * 5.24 / 8 + 7
+67790 / 4 - 2.3 / 5
+734122 / 22 / --8 - 8
+11053 + 3 * 2 / 1 * 6 / 6 * 5 / 6 - 5
 </pre></div>
 </div>
 </div>

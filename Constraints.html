@@ -189,6 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
@@ -463,16 +464,16 @@ where int(&lt;age&gt;) &lt; 50
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yzuz Cvejiu,2
-Yqxh Zzb,8
-Wh Og,35
-Mmomd Ogocqi,34
-Yvhmd Sptlxp,9
-Xbw Fqlj,7
-Epykef Ryqiqa,4
-Gjiqa Syhyb,1
-Bf Pqyomt,9
-Psutz Blpe,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ycos Bnxpq,6
+Qisenx Pxxbwr,5
+Wdfh Hyedqw,13
+Snbxpv Yxrxlc,37
+Wlaorb Nnfgis,28
+Hdmtq Evj,4
+Tedlk Dn,6
+Azfwzi Toff,8
+Lyy Jget,4
+Lflgl Wyfjhs,3
 </pre></div>
 </div>
 </div>
@@ -491,16 +492,16 @@ Be sure, though, to leave spaces around <code class="docutils literal notranslat
 <p>and we obtain these inputs:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vqlqe Qz,35
-Yvg Vgsis,41
-Gij Ywa,39
-Bzl Tixlw,37
-Aiffet Emtdz,40
-Vqlqe Qz,35
-Yvg Vgsis,41
-Gij Ywa,39
-Bzl Tixlw,37
-Aiffet Emtdz,40
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sdg Ak,25
+Owr Ljrznk,30
+Sdg Ak,25
+Owr Ljrznk,30
+Oww Ljwznk,30
+Owr Otvw,30
+Sdg Ak,25
+Owr Ljrznk,30
+Owr Ljrznk,39
+Sdg Ddyfk,25
 </pre></div>
 </div>
 </div>
@@ -508,16 +509,16 @@ Aiffet Emtdz,40
 <p>Start with <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> and add a constraint such that we generate people whose age is a multiple of 7, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nqpqr Isiej,329
-Otowq Wloes,49
-Mj St,0
-Hgfjhf Yuqvh,84
-Eju Rxedp,84
-Dqylux Xos,224
-Vcnl Ufeoew,910
-Tq Kd,56
-Qkpq Ur,0
-Uhs Zzkrf,7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gizl Weoy,97867
+Dqea Xvb,847
+Lrabay Yac,3640
+Teohv Mx,6699
+Pzvdf Bc,7
+Euc Zjmwxy,448
+Vpeyac Fowzm,77
+Yf Tyrax,749
+Rrxany Emxqlx,56
+Iaxyg Cdsnfv,91
 </pre></div>
 </div>
 </div>
@@ -610,7 +611,7 @@ The <code class="docutils literal notranslate"><span class="pre">-v</span></code
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
-fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/83f38d44f5174619f93305e7d7abc17b5ba6ea256c325aad3d51738d81ae3119.pickle
+fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/426a9a5484562ab252882981c9f6d131c7831a75989ecb8d48aa9697343a0a6b.pickle
 fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/b414727fa16fea7721cf90f0cb6eac30d01a9c9c39c671088a7c3e894a1c0083.pickle
 fandango:INFO: int(&lt;age&gt;) % 7 == 0: loading cached spec from /home/runner/.cache/fandango/a753104490d484ad02278019279173c89eebe7fe1eab0add655483b140a71aef.pickle
 fandango:INFO: File mode: text
@@ -618,24 +619,22 @@ fandango:INFO: ---------- Initializing FANDANGO algorithm ----------
 fandango:INFO: Generating initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.05 seconds
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Starting evolution ----------
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.07 seconds
+fandango:INFO: ---------- Starting evolution ----------
 fandango:INFO: ---------- Evolution finished ----------
 fandango:INFO: Perfect solutions found: (10)
 fandango:INFO: Fitness of final population: 1.00
 fandango:INFO: Time taken: 0.00 seconds
-Qge Pxh,72016
-Sxvlgv Tr,882
-Avvfng Mz,14
-Da Jlxsj,16674
-Xxyt Rowalo,497
-Kcrq Iettxc,623
-Umkhg Ioyxc,763
-Calblz Aoi,7
-Ln Chfhw,07714
-Se Tl,364
+Euq Daiprc,2366
+Sxoebz Jkhrlz,00
+Nizfw Dtr,7154
+Afcbj Ft,0
+Yuuhqc Zx,0
+Qobzd Ze,819
+Uq Yhaibb,700
+Bza Hfuu,7
+Zy Pu,133
+Synn Zfptxg,0
 </pre></div>
 </div>
 </div>
@@ -661,7 +660,7 @@ We can see this if we specify <code class="docutils literal notranslate"><span c
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
-fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/83f38d44f5174619f93305e7d7abc17b5ba6ea256c325aad3d51738d81ae3119.pickle
+fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/426a9a5484562ab252882981c9f6d131c7831a75989ecb8d48aa9697343a0a6b.pickle
 fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/b414727fa16fea7721cf90f0cb6eac30d01a9c9c39c671088a7c3e894a1c0083.pickle
 </pre></div>
 </div>
@@ -671,7 +670,7 @@ fandango:INFO: ---------- Initializing FANDANGO algorithm ----------
 fandango:INFO: Generating initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.02 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.04 seconds
 fandango:INFO: ---------- Starting evolution ----------
 fandango:INFO: Generation 1 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
@@ -680,9 +679,7 @@ fandango:INFO: Generation 1 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 3 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 4 - Fitness: 0.00 - #solutions found: 0
+fandango:INFO: Generation 4 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 5 - Fitness: 0.00 - #solutions found: 0
@@ -710,9 +707,7 @@ fandango:INFO: Generation 1 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14 - Fitness: 0.00 - #solutions found: 0
+fandango:INFO: Generation 14 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 15 - Fitness: 0.00 - #solutions found: 0
@@ -826,7 +821,7 @@ fandango:INFO: Generation 1 - Fitness: 0.00 - #solutions found: 0
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Evolution finished ----------
 fandango:INFO: Perfect solutions found: (0)
 fandango:INFO: Fitness of final population: 0.00
-fandango:INFO: Time taken: 3.55 seconds
+fandango:INFO: Time taken: 2.51 seconds
 fandango:ERROR: Population did not converge to a perfect population
 fandango:ERROR: Only found 0 perfect solutions, instead of the required 10
 </pre></div>

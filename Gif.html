@@ -189,6 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: The GIF Format</a></li>
@@ -407,14 +408,13 @@
 <p>We can parse this file using Fandango:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>fandango<span class="w"> </span>parse<span class="w"> </span>-b<span class="w"> </span>-f<span class="w"> </span>gif89a.fan<span class="w"> </span>tinytrans.gif
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>gif89a.fan<span class="w"> </span>tinytrans.gif<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango [-h] [--version] [--verbose | --quiet]
-                {fuzz,parse,shell,help,copyright,version} ...
-fandango: error: unrecognized arguments: -b
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AssertionError: 
+ValueError: 1 error(s) during parsing
 </pre></div>
 </div>
 </div>

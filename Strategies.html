@@ -189,6 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
@@ -417,16 +418,16 @@ But let us again have a look at the inputs we generated so far:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gxw Ld,06
-Jxcq Ltd,09
-Xzrl Cg,170
-Igga Xrv,741
-Zl Wsogh,1
-Rr Chxdu,1
-Xbnv Wmru,556
-Thuvgf Ekms,9
-Kgjvh Dlrrl,592
-Szd Dkrifo,3877
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kmc Hbln,74
+Itvah Ikagdt,50
+Ufa Sh,4356
+Lo Bkxarj,7
+Ex Oq,1660
+Wvkazs Vxkcs,47
+Pp Gz,208
+Cs Emqkii,161
+Zplgyy Uiua,977
+Oqiqyp Dbrbk,43
 </pre></div>
 </div>
 </div>
@@ -462,16 +463,16 @@ So-called <em>buffer overflows</em> have long been among the most dangerous vuln
 <p>This is the effect of this rule:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xufxlmcomttbjgulrogsoyjogtzaokicoqaijuctleythvsbxqyatsvfawkwahdpuffzhuqwsbxohrbcvwgnjnsmozevnihczncc Wnnlvnqmjxlcxpmsbfgekzbwtvbirgdiahjvlnptkwvpgsznpriwslajtpywpazfjbbiedhswkzaeopwpsnpznaobipzihqvahbc,1
-Lavchgcianuofjkoffxvgernvywdhedfurtepxkpajmneonrjdzlfmpvgxgrmsayxoefaherpyitisuvrwuxgmahyxadjtrlkyfn Cmukjionmvfkkvnpzonlzyohfthpwzznmpbddrzecxgzzbedvphvyqqvoigvvsjxzpqsgfjdfrmbjbfqibnjvftljblctwabsohx,45
-Vdqodxtksbkhgzvwjtiywouslvwdpqkicdppzngofgolerrwahqyrdqegitpbxobnhuiukswwagfbbxpivadcirlfofmixypnugi Ssuztmyvbbiprfjrkdyinibhcrrtmowufrjpeyjovimkcsydlndvdajjnspbvyqmzmxgavhghcvdpxshjojcogscjikbdlyypyzw,75
-Jmnqknixcvlbojpwfsfniohuzlmwccecivfmnlxwbcpfiftmovhdlibjjfheoxnchvycszsrhmmehlovnfuaqgyqmlqtmwzdpspb Olzvsubhrkpduddstvduqigtezebcebnuenfcimkwchlejzxxdithwnsjskukjwlpsoazdfwisgfahlylserezhddqhshhzbwstg,9
-Rkkiutydomnoymvvduiprhejezgoejaowokyhosjvwnpnfkgoqbrdqdmfprnklkrivaikysexiylunpuflvuhjhxdpkxwrovoshp Lndsrtcyxnqgpmfjzafqlnemhowshlsmbokpvlqvrhczzlffiegqeixvjsazubbjcjrtcfbmpmnsithnsalyfwuntmfmsufiksft,03
-Ruvmazkirytvfujcqvccdbrjnunzkcbniimuhesihgbuiuzweissfstbxufhpzaqgprccsdbwyxxsizgaacffxepwgxczgevwuvy Nvyectajbcozmabirtfafavgtbvucgsjobgcgbapkejwajcbmslfzmctlnvkymzhzjwjhzmvtreslvaxmbdnvzknuyfdoqjsxmaf,85
-Rjgojcwusguhizxckvxcqlzivrhonmurzkymgfhuolswqsqwjmmiqmdrlcevxoeqyrcxdsurafwzltrqigwdcowlyzievptvdbbk Wgukbcmrtgdakoubshftdibdyhamgfhbzhprnjtopadghkulxdpknrzphctulqxspazowuvkemvocpinlndjtuqjegiyjsfxnnlz,15
-Ujatcvfsuvadfjbpajmjcuydlbrazhtzmxixhpyswjrxzynrgjdwoyoptbgfjuajkmlzyadhbeztkbmriysakkjcnsfqvvzxdgdh Pwyncxgukdpkymmqskolkgejzlmyvbpbxiikrkjvqvvayftpbyoyebqpylzkzoceoifhluepapjzgihulzfhhuwzungcjvvdagwh,50
-Isqefnuqohvaomxujgoogbssyqybvjctutbpuvumqkvmjuonkfaubxcdjuvaxrrocdolcyjcqccftawkbijdkzdwvnitozcyelwq Eumkeafkqxzuzrchsjymzkasivzemgttozjhzqsekvlrexsnrfdwuirsoceyizsgloqwizidkdnrjplgtpzxjixdwjidwghrkkkl,3
-Rampuubrivcxszyzvktghqkxtierewunlszfswzojmxlvuuwukjqdocdszwdklqptrucnuwexrmqpuhvocgazxlitbcsijwfhvvp Rltivbwnmlxxtqbezwzzdrnmzgbbkxqiskyibrwlwcsdsrrzwtqoarditshvtokjicbuxtdteraltdjqvaaefsdzceektanrwmde,83
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xnzzkqpquwigsmankbxyjcgqzvjmsaurwyrjbsjjoaggqihlmkmokxaoyjufdtnanskfzujoqgbbuyfytvnkteoajxpqafmcmvkb Namniuybgsaagnclahnlssdnrosupgwllmlzqpfvnqwnhvwyzkiwxowpgvkylvgpdjnbibuxqupslitkzcfuvgnsuiullconglbc,1
+Rtmesqkinmeklpeszklzxefdojcwuqetjihpqgkdfwqkexsfurukkjcfvmxhnjvbaiudqglrfzglfgctcpvwfhdnooqogzrthfrz Uzvjjtfhrdamctkthniarglortmsfqxyxorhdiavnkdjpzooulldtqzliflxrmjljmqjfzishjfuhfyqvosioztuufbfbxuajrqv,31
+Awdqpfsxgtmvdlrjclvvunhanovwdzsaxzcnsfwbrqponjertpdhkzxktwgguxpjdcrtmdqmhwgalybvfafirsacyzbhcpvqiooj Upjqarhzyqvtgantzqkpysdwhudebtkrufvmpgnfjitdmczzhnkafcrgugywbmimkcyuxiiumdgtgsgvhmehtthwmgjldvvbfwbo,35
+Kuvtoeakeleiclutnumxyfvgpcfmqiiguyvktbusvyljapbwnnooryfznwkeclifhnmcozcrphfitzlismimkbklqryvqyjjbqoi Yqigichjnlcdtdfggygycqriqbiilzdllnokefdtiiqvivfkleyhajhfjwxhwrvqgkuawdkmqsuwoijlieuirauwmfvooqbdkqmc,55
+Nhoarxtdzubmvvluqxcbvcoylgeodcskgfogfxysrmhofrsqepnwfyldsxssgtendtzbzkxryankbgmlefkcoebbktyvzfxufcon Hoevcdxitgxtcpkxkrayecjfoqxdprvmgghnrlrntprxonqdhuypotatvehmqiymlylydyfpcximxujezggqpmzeogadqcwnovft,67
+Zwzgjcueyqnlwpunnkwgkhejzbqdjewwaviuuganhuozershmmurzsgkupwpdweeelsybkbxqwhnrxbjrrdhbirrjiicjnglmdix Zcjmvigujkypdlmaolgiebfprxvczgzqshecqwnrmeqyhekbjjqxzhjrdmysbubgltjxgkoqyklxphotsnyirbfbbyxgnuxbwbfm,79
+Mdfubpmftutenvhsvauazrbqfyitincyxuccioiauqxovcupysefopiaegupvoaidqcfbxaohojsojltrejrmxixfgdxepheitoc Runegspgnpjqqspmknnqvdvmimjaxgxfkxeonbszsroflzfruimgitmkefvtkfbxttdbzgyovedguqnayztsorpsdckvwswiipfd,1
+Nhomxcibrmbiipabxckkmjxnbaqdrjyuvmvtwlxxuywnhhfmyijsdagaousdastsieakqodrrnvicyigluxtsazntlcaaylujjft Tjollckwoolvoosrohffffkscwmndyjbaznxnzcgzvmvdzssauurzuguihbgmjfpthrtbtdyqpcjyuqjnnwwmwjsylvhshzzbppl,93
+Mtxpyeddgqlzrkmtfjpttizizkpjoshfvktzpsidxfcdrkogvrgibzvyeyglkahxvuggfhtzkyzuujumxnwvdnljfpbxhrjlymmf Liasnrftsoqaggtbmmfulojxxxeqaeuhcpiwacezfuonyyeaylxiuxwgxlywqlmuknotbzecemxxlffogkujfsaxldkzolybynou,18
+Lottlmtagiafijdyjuetqfdggtzsbncdoijxvzccphkepamiwtuflaclesmqagsczxtychxfgcdvihsnckyjxysafswylivvyasv Nuonnsijqhgjgolhqfwpcnqozhaltroumicqkcjhgmuojpipunadwiaysqdcwwuzlnwzxonquorksgjkmdlxqgcsxsjhupxcibzn,60
 </pre></div>
 </div>
 </div>
@@ -499,16 +500,16 @@ What happens if we have a person with a negative age?</p>
 <p>Try it yourself and modify <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> such that it can also produce negative numbers, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lwmsfv Wfjw,81
-Opiw Zqwfj,0
-Yvmm Jhiqrs,-57
-Adelq Kan,421
-Rxb Jq,-07
-Ybe Sp,5
-Ndpsp Wuszf,-9
-Hjorss Qax,1
-Py Snws,-98
-Pboj Fblo,-8331
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vyfjke Vuvd,-92
+Xczlz Qmyhem,59
+Qn Pcsi,8255
+Aejj Xg,-2
+Ndq Ois,2765
+Mdobm Kpsafz,-85
+Uakci Bmyii,54
+Tqxt Oc,814
+Iqey Jsr,43619
+Ftv Skphml,50
 </pre></div>
 </div>
 </div>
