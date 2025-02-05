@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
@@ -418,16 +419,16 @@ But let us again have a look at the inputs we generated so far:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kmc Hbln,74
-Itvah Ikagdt,50
-Ufa Sh,4356
-Lo Bkxarj,7
-Ex Oq,1660
-Wvkazs Vxkcs,47
-Pp Gz,208
-Cs Emqkii,161
-Zplgyy Uiua,977
-Oqiqyp Dbrbk,43
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Liwvm Rcide,0
+Dyio Yqhg,4596
+Hkr Xr,420
+Vf Rsnp,19
+Cle Qrugs,9
+Ujg Dosms,5
+Ej Gytksv,35
+Hgew Mgou,99572
+Gwlazw Un,71
+Okfee Wbgke,928
 </pre></div>
 </div>
 </div>
@@ -463,16 +464,18 @@ So-called <em>buffer overflows</em> have long been among the most dangerous vuln
 <p>This is the effect of this rule:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xnzzkqpquwigsmankbxyjcgqzvjmsaurwyrjbsjjoaggqihlmkmokxaoyjufdtnanskfzujoqgbbuyfytvnkteoajxpqafmcmvkb Namniuybgsaagnclahnlssdnrosupgwllmlzqpfvnqwnhvwyzkiwxowpgvkylvgpdjnbibuxqupslitkzcfuvgnsuiullconglbc,1
-Rtmesqkinmeklpeszklzxefdojcwuqetjihpqgkdfwqkexsfurukkjcfvmxhnjvbaiudqglrfzglfgctcpvwfhdnooqogzrthfrz Uzvjjtfhrdamctkthniarglortmsfqxyxorhdiavnkdjpzooulldtqzliflxrmjljmqjfzishjfuhfyqvosioztuufbfbxuajrqv,31
-Awdqpfsxgtmvdlrjclvvunhanovwdzsaxzcnsfwbrqponjertpdhkzxktwgguxpjdcrtmdqmhwgalybvfafirsacyzbhcpvqiooj Upjqarhzyqvtgantzqkpysdwhudebtkrufvmpgnfjitdmczzhnkafcrgugywbmimkcyuxiiumdgtgsgvhmehtthwmgjldvvbfwbo,35
-Kuvtoeakeleiclutnumxyfvgpcfmqiiguyvktbusvyljapbwnnooryfznwkeclifhnmcozcrphfitzlismimkbklqryvqyjjbqoi Yqigichjnlcdtdfggygycqriqbiilzdllnokefdtiiqvivfkleyhajhfjwxhwrvqgkuawdkmqsuwoijlieuirauwmfvooqbdkqmc,55
-Nhoarxtdzubmvvluqxcbvcoylgeodcskgfogfxysrmhofrsqepnwfyldsxssgtendtzbzkxryankbgmlefkcoebbktyvzfxufcon Hoevcdxitgxtcpkxkrayecjfoqxdprvmgghnrlrntprxonqdhuypotatvehmqiymlylydyfpcximxujezggqpmzeogadqcwnovft,67
-Zwzgjcueyqnlwpunnkwgkhejzbqdjewwaviuuganhuozershmmurzsgkupwpdweeelsybkbxqwhnrxbjrrdhbirrjiicjnglmdix Zcjmvigujkypdlmaolgiebfprxvczgzqshecqwnrmeqyhekbjjqxzhjrdmysbubgltjxgkoqyklxphotsnyirbfbbyxgnuxbwbfm,79
-Mdfubpmftutenvhsvauazrbqfyitincyxuccioiauqxovcupysefopiaegupvoaidqcfbxaohojsojltrejrmxixfgdxepheitoc Runegspgnpjqqspmknnqvdvmimjaxgxfkxeonbszsroflzfruimgitmkefvtkfbxttdbzgyovedguqnayztsorpsdckvwswiipfd,1
-Nhomxcibrmbiipabxckkmjxnbaqdrjyuvmvtwlxxuywnhhfmyijsdagaousdastsieakqodrrnvicyigluxtsazntlcaaylujjft Tjollckwoolvoosrohffffkscwmndyjbaznxnzcgzvmvdzssauurzuguihbgmjfpthrtbtdyqpcjyuqjnnwwmwjsylvhshzzbppl,93
-Mtxpyeddgqlzrkmtfjpttizizkpjoshfvktzpsidxfcdrkogvrgibzvyeyglkahxvuggfhtzkyzuujumxnwvdnljfpbxhrjlymmf Liasnrftsoqaggtbmmfulojxxxeqaeuhcpiwacezfuonyyeaylxiuxwgxlywqlmuknotbzecemxxlffogkujfsaxldkzolybynou,18
-Lottlmtagiafijdyjuetqfdggtzsbncdoijxvzccphkepamiwtuflaclesmqagsczxtychxfgcdvihsnckyjxysafswylivvyasv Nuonnsijqhgjgolhqfwpcnqozhaltroumicqkcjhgmuojpipunadwiaysqdcwwuzlnwzxonquorksgjkmdlxqgcsxsjhupxcibzn,60
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kefyzldewzugasftdqmoswsctsuolfhfxrpqtkflgtjunlkxbmnnuqduufajfanxlgjopiqxfnthsercgsityjnuxbdsspkbacec Irseofhfmvdrabyoxzozwaimryuwngolbgxpixmzmeavuaqtbqfrhdrepjcthtevvkczxoxeewqrzunskcczrszpcvdhhmpjblxg,95
+Uzxqysssdmzpbmhmenflzfyzhdhsavidijzkzgcbhvpjinbofmmmidfyfrwzbwpvfuzvwhnfhmwjaobsitlxzrlkrhnosyaploke Awkslgkuougfxpsatzgymlrodqsmdbhisirmwecdagehxxkoezophfgbbpsrzposqnhwfyajzmnajvgtwxomzpccnqiuxgzabudo,95
+Akmkhsgyszdikdwjdbhkvzghjyrsxcyagvixcbcszgdcoftbefyawrzaknxlgisppvuiaotolzqmbufcjsyvecfubuxevfyylsrw Esuzsoashsclzjiaipctzxrbrcagzktaocjrdjuzeuupvjqmkhywajkzecyonioivhiiwmkbhuyaeticclobilmmlqnsgvhisfdo,48
+Uhmyvztgrqhirwprrfjqhbwoxumyktqfykudwxtwbbjxvvwhgyprpdnvdxdcijulkqysidblayonpnywxfswgsvjeikbgzjusngs Szhcpzjfkwyxkkgufssicehdrtflzsdydcxlhdxrnnztpuwsycvglnsohrqumrksnhxwlxlizggexpfljsdksxqdorszstcviecx,40
+Phmxzxwvdwbdkrpqnyzzdamsgprszttagnygtqheomapgxmytetvgoqcyffngznmthtpqsgbhvnfscpgkjwypygiasyyvkgqrlpx Dldmdttyoyyzsmzjxaodxsrhakreatpsoqmntfkvsbczgfbpzwbmuhmjkegveymkhespkodrshfrhiaiwqjcktckbeajlexmwkyg,47
+Fsjogmpnlvezofczjbjeojoxprybmvmgyabbrebzcbappmxqvepqnljbtkiuisuxoanviqwxcpdjwslvnavsstbjxzhivkasjgvy Ugimdimruebgsxwogvofgprekismazdtgevsqvietrqxujvheuqcohqkmktcmgwbcggkwujxgdduayjsurwudnqkiujvfnydhxwh,36
+Turmyaligpymykvazeuzfmwfeqerbysmqhsibxeavrcjkythkecyvtsrisarltwoyyegnblrxayyqddjaanvrxycivwpznkrevry Znnbvnhdfygqycxvqpzxmlrqruzdfbslhiyinvmxpmjsaiaakyikekcuitjkysklklpesqwjtjqabzbtifzxbggqqlhsxgjwgxcm,39
+Huylaipzrkbzinbhatnpcffijjtuhqkdkeptnbroivmwcvdzhsdhutffvgcawvpqrecvjcavinivbsdwdorozerhnchoqyxoosss Ackjwstbeajgkmfhmyxdsehmrsbjfpxelkxspunezvvgkbjmhesnpcvyipoohanpnzneqqdeeidzbrgzojtyomwrntstvakegobo,0
+Nlgvxihbcfymqoluwvnjtykgjwyklmqhqktokxpkqkveeyllbbwcplsifshsuzcqxxfvtzmyhebpyrjcmbcxyyrdyysggbzxcqrp Matwdkncsqgxogivxrwivkirsumyjkoabnhdlmkoyeophuwbqnukosojlfmkdgraofsnuiplmxkevptvczebscbqczuglhyzvebp,78
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qnsestphugtqtgodzlthymtciefonhndervbxundtzhzipsazfeqlnvfyyagtxyhnavdiwgprfapzehcfkoemfjiijvdbtbnwiwj Tkrpjxovuxwfavcljyaokolqcolunbjgzigwqehufjjrzvmkdxqqicwekdmlkhlbhxavmqvbuonfhumwpzdjzfcvuuoqywmevyxw,43
 </pre></div>
 </div>
 </div>
@@ -500,16 +503,16 @@ What happens if we have a person with a negative age?</p>
 <p>Try it yourself and modify <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> such that it can also produce negative numbers, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vyfjke Vuvd,-92
-Xczlz Qmyhem,59
-Qn Pcsi,8255
-Aejj Xg,-2
-Ndq Ois,2765
-Mdobm Kpsafz,-85
-Uakci Bmyii,54
-Tqxt Oc,814
-Iqey Jsr,43619
-Ftv Skphml,50
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lj Bknb,-40
+Uhruq Bdsf,3166
+Pip Uiti,-2
+Abjs Jlyxl,-119
+Mwkpw Lgtu,33
+Mhqkw Znfnhg,-67
+Wkgxp Hm,-832
+Aa Kwacx,27066
+Ycuegw Wajadi,02
+Exvlh Dlvh,-6
 </pre></div>
 </div>
 </div>

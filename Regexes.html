@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Regular Expressions &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Regexes';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Complex Input Structures" href="Recursive.html" />
+    <link rel="prev" title="Data Generators and Fakers" href="Generators.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first stable release in April 2025.</p></div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Distributions.html">Statistical Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Whitebox.html">Coverage-Guided Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FRegexes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Regexes.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regular Expressions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-regular-expressions">About Regular Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-regular-expressions">Writing Regular Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-points-about-regular-expressions">Fine Points about Regular Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repetition-limits">Repetition Limits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions-over-bytes">Regular Expressions over Bytes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions-vs-grammars">Regular Expressions vs. Grammars</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions-as-equivalence-classes">Regular Expressions as Equivalence Classes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regular-expressions">
+<span id="sec-regexes"></span><h1>Regular Expressions<a class="headerlink" href="#regular-expressions" title="Link to this heading">#</a></h1>
+<p>Although the Fandango grammars cover a wide range of input language features, there are situations where they may be a bit cumbersome to work with.
+Consider specifying <em>every digit except for zeros</em>: this requires you to enumerate all the other digits <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, and so on.
+This is why Fandango also supports <em>regular expressions</em>, which allow you to use a concise syntax for character ranges, repeated characters and more.
+Specifying all digits from <code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">9</span></code>, for instance, becomes the short regular expression <code class="docutils literal notranslate"><span class="pre">r'[1-9]'</span></code>.</p>
+<section id="about-regular-expressions">
+<h2>About Regular Expressions<a class="headerlink" href="#about-regular-expressions" title="Link to this heading">#</a></h2>
+<p>Regular expressions form a language on their own and come with several useful features.
+To get an introduction to the regular expressions Fandango uses, read the Python <a class="reference external" href="https://docs.python.org/3/howto/regex.html">Regular Expression HOWTO</a> and check out the Python <a class="reference external" href="https://docs.python.org/3/library/re.html#regular-expression-syntax">Regular Expression Syntax</a> for a complete reference.</p>
+<p>In Fandango, regular expressions are used for two purposes:</p>
+<ul class="simple">
+<li><p>When <em>producing</em> inputs, a regular expression is instantiated into a random string that matches the expression.</p></li>
+<li><p>When <em>parsing</em> inputs, a regular expression is used to <em>parse</em> and <em>match</em> inputs.</p></li>
+</ul>
+</section>
+<section id="writing-regular-expressions">
+<h2>Writing Regular Expressions<a class="headerlink" href="#writing-regular-expressions" title="Link to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>For Python aficionados: this is actually a Python “raw string”</p>
+</aside>
+<p>In Fandango, a regular expression comes as a string, prefixed with a <code class="docutils literal notranslate"><span class="pre">r</span></code> character.
+To express that a digit can have the values <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">9</span></code>, instead of</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;0&quot;</span> <span class="o">|</span> <span class="s2">&quot;1&quot;</span> <span class="o">|</span> <span class="s2">&quot;2&quot;</span> <span class="o">|</span> <span class="s2">&quot;3&quot;</span> <span class="o">|</span> <span class="s2">&quot;4&quot;</span> <span class="o">|</span> <span class="s2">&quot;5&quot;</span> <span class="o">|</span> <span class="s2">&quot;6&quot;</span> <span class="o">|</span> <span class="s2">&quot;7&quot;</span> <span class="o">|</span> <span class="s2">&quot;8&quot;</span> <span class="o">|</span> <span class="s2">&quot;9&quot;</span>
+</pre></div>
+</div>
+<p>you can write</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]&#39;</span>
+</pre></div>
+</div>
+<p>which is much more concise.</p>
+<p>Likewise, to match a sequence of characters that ends in <code class="docutils literal notranslate"><span class="pre">;</span></code>, you can write</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">some_sequence</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[^;]+;&#39;</span>
+</pre></div>
+</div>
+<p>Besides the <code class="docutils literal notranslate"><span class="pre">r</span></code> prefix indicating a regular expression, it also makes the string a <em>raw</em> string.
+This means that backslashes are treated as <em>literal characters</em>.
+The regular expression <code class="docutils literal notranslate"><span class="pre">\d</span></code>, for instance, matches a Unicode digit, which includes <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code>, and also <a class="reference external" href="https://en.wikipedia.org/wiki/Numerals_in_Unicode">many other digit characters</a>.
+To include <code class="docutils literal notranslate"><span class="pre">\d</span></code> in a regular expression, write it <em>as is</em>; do not escape the backslash with another backslash (as you would do in a regular string):</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The expression <code class="docutils literal notranslate"><span class="pre">r'\\d'</span></code> would actually match a backslash, followed by a <code class="docutils literal notranslate"><span class="pre">d</span></code> character.</p>
+</aside>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">any_digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;\d&#39;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be aware of the specific syntax of <code class="docutils literal notranslate"><span class="pre">r</span></code>-strings as it comes to backslashes.</p>
+</div>
+<p>One consequence of backslashes being interpreted literally is that you cannot escape quote characters in a regular expression.
+This causes a problem if you need two kinds of quotes (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">'</span></code>) in the same regular expression – say, a rule that checks for forbidden characters.</p>
+<p>However, encodings of the form <code class="docutils literal notranslate"><span class="pre">\xNN</span></code> are also interpreted by regular expressions.
+Hence, if you need quotes, you can use</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">\x22</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\x27</span></code> instead of <code class="docutils literal notranslate"><span class="pre">'</span></code></p></li>
+</ul>
+<p>Here is an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">forbidden_characters</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[\x22\x27;]&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="fine-points-about-regular-expressions">
+<h2>Fine Points about Regular Expressions<a class="headerlink" href="#fine-points-about-regular-expressions" title="Link to this heading">#</a></h2>
+<p>For parsing inputs, Fandango uses the Python <a class="reference external" href="https://docs.python.org/3/library/re.html"><code class="docutils literal notranslate"><span class="pre">re</span></code></a> module for matching strings against regular expressions;
+for producing inputs, Fandango uses the Python <a class="reference external" href="https://github.com/asciimoo/exrex"><code class="docutils literal notranslate"><span class="pre">exrex</span></code></a> module for generating strings that match regular expressions.
+All the <code class="docutils literal notranslate"><span class="pre">re</span></code> and <code class="docutils literal notranslate"><span class="pre">exrex</span></code> capabilities and limitations thus extend to Fandango.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For regex shortcuts, the <code class="docutils literal notranslate"><span class="pre">exrex</span></code> producer only produces characters in the range <code class="docutils literal notranslate"><span class="pre">\0x00</span></code> to <code class="docutils literal notranslate"><span class="pre">\0xff</span></code>:</p>
+<ul class="simple">
+<li><p>for digits (<code class="docutils literal notranslate"><span class="pre">\d</span></code>), the characters <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code></p></li>
+<li><p>for whitespace (<code class="docutils literal notranslate"><span class="pre">\s</span></code>), the characters <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">\t\n\r\f\v]</span></code></p></li>
+<li><p>for words (<code class="docutils literal notranslate"><span class="pre">\w</span></code>), the characters <code class="docutils literal notranslate"><span class="pre">[a-zA-Z0-9_]</span></code></p></li>
+<li><p>for non-words (<code class="docutils literal notranslate"><span class="pre">\W</span></code>), the character range <code class="docutils literal notranslate"><span class="pre">[^a-zA-Z0-9_]</span></code></p></li>
+</ul>
+<p>To produce Unicode characters, make them part of an explicit range (e.g. <code class="docutils literal notranslate"><span class="pre">[äöüÄÖÜß]</span></code>).</p>
+</div>
+<section id="repetition-limits">
+<h3>Repetition Limits<a class="headerlink" href="#repetition-limits" title="Link to this heading">#</a></h3>
+<p>Most notably, <code class="docutils literal notranslate"><span class="pre">exrex</span></code> imposes a <em>repetition limit</em> of 20 on generated strings that in principle can have arbitrary length; a <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">*</span></code> operator will not expand to more than 20 repetitions.
+Thus, a grammar <a class="reference download internal" download="" href="_downloads/295385f3b4dfbe39520faba267d06034/infinity.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">infinity.fan</span></code></span></a></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= r&quot;(abc)+&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>that in principle, could produce arbitrary long sequences <code class="docutils literal notranslate"><span class="pre">abcabcabcabc...</span></code> will be limited to 20 repetitions at most:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>infinity.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 20.
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabcabcabcabcabc
+abcabcabc
+abcabcabcabcabcabcabcabcabcabc
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0001.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0002.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0003.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0004.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0005.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0006.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0007.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0008.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0009.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0010.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
+ValueError: 10 error(s) during validation
+abcabcabcabcabcabcabcabcabcabcabcabc
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fandango fuzz -f infinity.fan -n 10 --validate&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>To precisely control the number of repetitions, use the regular expression <code class="docutils literal notranslate"><span class="pre">{m,n}</span></code> construct, limiting the number of repetitions from <code class="docutils literal notranslate"><span class="pre">m</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+Let us limit the number of repetitions to the range 1…5:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>This is what we get:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>finity.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember that <em>grammars</em> also have operators <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, and <code class="docutils literal notranslate"><span class="pre">{N,M}</span></code> which apply to the preceding grammar element, and work like their <em>regular expression</em> counterparts.
+Using these, we could also write the above as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;abc&quot;</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;abc&quot;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>respectively.</p>
+</div>
+</section>
+<section id="regular-expressions-over-bytes">
+<h3>Regular Expressions over Bytes<a class="headerlink" href="#regular-expressions-over-bytes" title="Link to this heading">#</a></h3>
+<p>Regular expressions can also be formed over bytes.
+See <a class="reference internal" href="Binary.html#sec-byte-regexes"><span class="std std-ref">Bytes and Regular Expressions</span></a> for details.</p>
+</section>
+</section>
+<section id="regular-expressions-vs-grammars">
+<h2>Regular Expressions vs. Grammars<a class="headerlink" href="#regular-expressions-vs-grammars" title="Link to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In theory, context-free grammars are a strict <em>superset</em> of regular expressions - any language that can be expressed in a regular expression can also be expressed in an equivalent grammar.
+Practical implementations of regular expressions break this hierarchy by introducing some features such as <em>backreferences</em> (check out what <code class="docutils literal notranslate"><span class="pre">(?P=name)</span></code> does), which cannot be expressed in grammars.</p>
+</aside>
+<p>In many cases, a grammar can be replaced by a regular expression and vice versa.
+This raises the question: When should one use a regular expression, and when a grammar?
+Here are some points to help you decide.</p>
+<ul class="simple">
+<li><p>Regular expressions are often more <em>concise</em> (but arguably harder to read) than grammars.</p></li>
+<li><p>If you want to <em>reference</em> individual elements of a string (say, as part of a constraint now or in the future), use a <em>grammar</em>.</p></li>
+<li><p>Since their underlying model is simpler, regular expressions are <em>faster</em> to generate, and <em>much faster</em> to <a class="reference internal" href="Parsing.html"><span class="std std-doc">parse</span></a> than grammars.</p></li>
+<li><p>If your underlying language separates lexical and syntactical processing, use</p>
+<ul>
+<li><p><em>regular expressions</em> for specifying <em>lexical</em> parts such as tokens and fragments;</p></li>
+<li><p>a <em>grammar</em> for the <em>syntax</em>; and</p></li>
+<li><p><a class="reference internal" href="Constraints.html"><span class="std std-doc">constraints</span></a> for any semantic properties.</p></li>
+</ul>
+</li>
+<li><p>Prefer grammars and constraints over overly complex regular expressions.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not use regular expressions for inputs that are <a class="reference internal" href="Recursive.html"><span class="std std-doc">recursive</span></a>.
+Languages like HTML, XML, even e-mail addresses or URLs, are much easier to capture as grammars.</p>
+</div>
+</section>
+<section id="regular-expressions-as-equivalence-classes">
+<h2>Regular Expressions as Equivalence Classes<a class="headerlink" href="#regular-expressions-as-equivalence-classes" title="Link to this heading">#</a></h2>
+<p>The choice of grammars vs. regular expressions also affects the Fandango generation algorithm.
+Generally speaking, Fandango attempts to cover all alternatives of a grammar.
+If, say, <code class="docutils literal notranslate"><span class="pre">&lt;digits&gt;</span></code> is specified as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;0&quot;</span> <span class="o">|</span> <span class="s2">&quot;1&quot;</span> <span class="o">|</span> <span class="s2">&quot;2&quot;</span> <span class="o">|</span> <span class="s2">&quot;3&quot;</span> <span class="o">|</span> <span class="s2">&quot;4&quot;</span> <span class="o">|</span> <span class="s2">&quot;5&quot;</span> <span class="o">|</span> <span class="s2">&quot;6&quot;</span> <span class="o">|</span> <span class="s2">&quot;7&quot;</span> <span class="o">|</span> <span class="s2">&quot;8&quot;</span> <span class="o">|</span> <span class="s2">&quot;9&quot;</span>
+</pre></div>
+</div>
+<p>then Fandango will attempt to produce every digit at least once, and also try to cover digit <em>combinations</em> up to a certain depth.
+This is useful if you want to specifically test digit processing, or if each of the digits causes a different behavior that needs to be covered.</p>
+<p>If, however, you specify <code class="docutils literal notranslate"><span class="pre">&lt;digits&gt;</span></code> as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]&#39;</span>
+</pre></div>
+</div>
+<p>then Fandango will treat this as a <em>single</em> alternative (with all expansions considered semantically equivalent), which once expanded into (some) digit will be considered as covered.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul class="simple">
+<li><p>If you do want or need to <em>differentiate</em> between individual elements of a set (because they would be treated differently), consider <em>grammar alternatives</em>.</p></li>
+<li><p>If you do <em>not</em> want or need to differentiate between individual elements of a set (because they would all be treated the same), consider a <em>regular expression</em>.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Generators.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Generators and Fakers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Recursive.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Complex Input Structures</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-regular-expressions">About Regular Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-regular-expressions">Writing Regular Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-points-about-regular-expressions">Fine Points about Regular Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repetition-limits">Repetition Limits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions-over-bytes">Regular Expressions over Bytes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions-vs-grammars">Regular Expressions vs. Grammars</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions-as-equivalence-classes">Regular Expressions as Equivalence Classes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

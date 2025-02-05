@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
@@ -452,7 +453,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;00111110&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;10100001&#39;
 </pre></div>
 </div>
 </div>
@@ -468,16 +469,150 @@ Hence, we can also apply <em>constraints</em> to the individual flags:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;10101100&#39;
-b&#39;10110111&#39;
-b&#39;10111100&#39;
-b&#39;10110000&#39;
-b&#39;10001001&#39;
-b&#39;10001010&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+b&#39;10011010&#39;
+b&#39;10010000&#39;
+b&#39;10010100&#39;
+b&#39;10100010&#39;
+b&#39;10000111&#39;
+b&#39;10111101&#39;
+b&#39;10000101&#39;
+b&#39;10101101&#39;
+b&#39;10100001&#39;
 b&#39;10101110&#39;
-b&#39;10011011&#39;
-b&#39;10110110&#39;
-b&#39;10110101&#39;
 </pre></div>
 </div>
 </div>
@@ -488,7 +623,152 @@ b&#39;10110101&#39;
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;10101010&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;bold&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;italic&gt; returned None.
+b&#39;10001100&#39;
 </pre></div>
 </div>
 </div>
@@ -499,7 +779,8 @@ b&#39;10110101&#39;
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;11110000&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+b&#39;11110000&#39;
 </pre></div>
 </div>
 </div>
@@ -517,16 +798,16 @@ Note that its argument (the symbol) must be converted into a string first:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;10111110&#39;
-b&#39;11001110&#39;
-b&#39;01011100&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;11101111&#39;
+b&#39;00111111&#39;
+b&#39;10111100&#39;
 b&#39;00101011&#39;
-b&#39;01111111&#39;
-b&#39;00011111&#39;
-b&#39;10101110&#39;
-b&#39;00011100&#39;
-b&#39;00001111&#39;
-b&#39;10001110&#39;
+b&#39;00101110&#39;
+b&#39;01101110&#39;
+b&#39;01011111&#39;
+b&#39;10011100&#39;
+b&#39;10011110&#39;
+b&#39;10011101&#39;
 </pre></div>
 </div>
 </div>
@@ -550,17 +831,7 @@ This is what happens if we send a byte <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IndexError: index out of range
-ValueError: 1 error(s) during parsing
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;echo -n &#39;</span><span class="se">\\</span><span class="s2">xf0&#39; | fandango parse -f bits.fan -o - --format=bits&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="ne">AssertionError</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011110
 </pre></div>
 </div>
 </div>
@@ -568,12 +839,34 @@ ValueError: 1 error(s) during parsing
 <p>We see that the input was properly parsed and decomposed into individual bits.</p>
 <p>This is the resulting parse tree:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/d15b9d042456f2c1ffb1a08ef78a708e7fbbddc3393cb2069e814383d488bb8d.png" src="_images/d15b9d042456f2c1ffb1a08ef78a708e7fbbddc3393cb2069e814383d488bb8d.png" />
+</div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">grammar</span></code> format shows us that the values are properly assigned:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;\xf0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;format_flag&gt;
+  &lt;format_flag&gt; ::= &lt;italic&gt; &lt;bold&gt; &lt;underlined&gt; &lt;strikethrough&gt; &lt;brightness&gt;
+    &lt;italic&gt; ::= &lt;bit&gt;
+      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 7
+    &lt;bold&gt; ::= &lt;bit&gt;
+      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 6
+    &lt;underlined&gt; ::= &lt;bit&gt;
+      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 5
+    &lt;strikethrough&gt; ::= &lt;bit&gt;
+      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 4
+    &lt;brightness&gt; ::= &lt;bit&gt; &lt;bit&gt; &lt;bit&gt; &lt;bit&gt;
+      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 3
+      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 2
+      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 1
+      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>

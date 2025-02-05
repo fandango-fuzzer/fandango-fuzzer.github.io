@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
@@ -398,6 +399,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checksums">Checksums</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characters-and-bytes">Characters and Bytes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-and-binary-files">Text Files and Binary Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bytes-and-regular-expressions">Bytes and Regular Expressions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a></li>
@@ -501,16 +503,104 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7930995768537087
-6821318806373874
-1282264747791159
-7161586235539168
-1722498797231561
-4498824456266695
-1450104929282286
-8722611866919479
-5733526930680233
-7473267842750034
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+fandango:WARNING: Suggested fix for &lt;number&gt; returned None.
+9973238254774409
+3876875070196829
+2077652250892488
+9094827398109797
+3364975565956544
+3365060384030414
+7485778291451631
+9384759795970225
+1212397748894591
+0038003053373619
 </pre></div>
 </div>
 </div>
@@ -580,24 +670,66 @@ If your grammar contains bytes <em>and</em> strings, then the strings will be wr
 <p>Avoid mixing non-ASCII strings with bits and bytes in a single grammar.</p>
 </div>
 </section>
+<section id="bytes-and-regular-expressions">
+<span id="sec-byte-regexes"></span><h3>Bytes and Regular Expressions<a class="headerlink" href="#bytes-and-regular-expressions" title="Link to this heading">#</a></h3>
+<p>Fandango also supports <a class="reference internal" href="Regexes.html"><span class="std std-doc">regular expressions</span></a> over bytes.
+To obtain a regular expression over a byte string, use both <code class="docutils literal notranslate"><span class="pre">r</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> prefixes.
+This is especially useful for character classes.</p>
+<p>Here is an example: <a class="reference download internal" download="" href="_downloads/7e045c29e0d6adedac754e3744fcba5c/binfinity.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">binfinity.fan</span></code></span></a> produces strings of five bytes <em>outside</em> the range <code class="docutils literal notranslate"><span class="pre">\x80-\xff</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= rb&quot;[^\x80-\xff]{5}&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is what we get:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>binfinity.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;:q=J!&#39;
+b&#39;G@o g&#39;
+b&#39;]TYaF&#39;
+b&#39;*Z^b\\&#39;
+b&#39;&lt;G!p.&#39;
+b&#39;4xBzm&#39;
+b&#39;jA[U/&#39;
+b&#39;N+PO%&#39;
+b&#39;R$@$v&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0001.txt&#39;, position 0x0001 (1): mismatched input b&#39;q&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0002.txt&#39;, position 0x0001 (1): mismatched input b&#39;@&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0003.txt&#39;, position 0x0001 (1): mismatched input b&#39;T&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0004.txt&#39;, position 0x0001 (1): mismatched input b&#39;Z&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0005.txt&#39;, position 0x0001 (1): mismatched input b&#39;G&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0006.txt&#39;, position 0x0001 (1): mismatched input b&#39;x&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0007.txt&#39;, position 0x0001 (1): mismatched input b&#39;A&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0008.txt&#39;, position 0x0001 (1): mismatched input b&#39;+&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0009.txt&#39;, position 0x0001 (1): mismatched input b&#39;$&#39;
+SyntaxError: &#39;/tmp/tmpxlokg_sd/fandango-0010.txt&#39;, position 0x0001 (1): mismatched input b&#39;&quot;&#39;
+ValueError: 10 error(s) during validation
+b&#39;E&quot;0QR&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fandango fuzz -f binfinity.fan -n 10 --validate&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="length-encodings">
 <h2>Length Encodings<a class="headerlink" href="#length-encodings" title="Link to this heading">#</a></h2>
 <p>The third set of features one frequently encounters in binary formats is <em>length encodings</em> - that is, a particular field holds a value that represents the length of one or more fields that follow.
 Here is a simple grammar that expresses this characteristic: A <code class="docutils literal notranslate"><span class="pre">&lt;field&gt;</span></code> has a two-byte length, followed by the actual content (of length <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code>).</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt;    ::= &lt;field&gt;
-&lt;field&gt;    ::= &lt;length&gt; &lt;content&gt;
-&lt;length&gt;   ::= &lt;byte&gt; &lt;byte&gt;
-where &lt;length&gt; == uint16(len(&lt;content&gt;))
-&lt;content&gt;  ::= &lt;digit&gt;+
-
-def uint16(n: int) -&gt; str:
-    return chr(n % 256) + chr(n // 256)
-</pre></div>
-</div>
-</div>
 </div>
 <p>The relationship between <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;content&gt;</span></code> can again be expressed using a constraint.
 Let us assume that <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> comes as a two-byte (16-bit) unsigned integer with <em>little-endian</em> encoding - that is, the low byte comes first, and the high byte follows.
@@ -608,20 +740,9 @@ The value 258 (hexadecimal <code class="docutils literal notranslate"><span clas
 <p>In Python, <code class="docutils literal notranslate"><span class="pre">//</span></code> is used for integer division.</p>
 </aside>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def uint16(n: int) -&gt; str:
-    return chr(n % 256) + chr(n // 256)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Using <code class="docutils literal notranslate"><span class="pre">uint16()</span></code>, we can now define how the value of <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> is related to the length of <code class="docutils literal notranslate"><span class="pre">&lt;content&gt;</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>where &lt;length&gt; == uint16(len(&lt;content&gt;))
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -629,16 +750,10 @@ The value 258 (hexadecimal <code class="docutils literal notranslate"><span clas
 </div>
 <p>Again, all of this goes into a single <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file: <a class="reference download internal" download="" href="_downloads/4c57f6c2c62644bc4b94f1498df6e8f0/binary.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">binary.fan</span></code></span></a> holds the grammar, the <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> definition, and the constraint.
 Let us produce a single output using <code class="docutils literal notranslate"><span class="pre">binary.fan</span></code> and view its (binary) contents, using <code class="docutils literal notranslate"><span class="pre">od</span> <span class="pre">-c</span></code>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary.fan<span class="w"> </span><span class="p">|</span><span class="w"> </span>od<span class="w"> </span>-c
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>od<span class="w"> </span>-c
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000   b   &#39;   \   x   0   4   \   x   0   0   5   9   3   3   &#39;
-0000017
-</pre></div>
-</div>
-</div>
 </div>
 <p>The hexadecimal dump shows that the first two bytes encode the length of the string of digits that follows.
 The format is correct - we have successfully produced a length encoding.</p>
@@ -648,23 +763,9 @@ The format is correct - we have successfully produced a length encoding.</p>
 <p>Instead of implementing <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> manually, we can also use the Python <a class="reference external" href="https://docs.python.org/3/library/struct.html"><code class="docutils literal notranslate"><span class="pre">struct</span></code> module</a>, which offers several functions to convert data into binary formats.
 Using <code class="docutils literal notranslate"><span class="pre">struct</span></code>, we can redefine <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> as</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from struct import pack
-
-def uint16(n: int) -&gt; str:
-    return pack(&#39;&lt;H&#39;, n).decode(&#39;iso8859-1&#39;)  # convert to string
-</pre></div>
-</div>
-</div>
 </div>
 <p>and obtain the same result:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000   b   &#39;   \   x   0   1   \   x   0   0   1   &#39;
-0000014
-</pre></div>
-</div>
-</div>
 </div>
 <p>Note that the return value of <code class="docutils literal notranslate"><span class="pre">struct.pack()</span></code> has the type <code class="docutils literal notranslate"><span class="pre">bytes</span></code> (byte string), which is different from the <code class="docutils literal notranslate"><span class="pre">str</span></code> Unicode strings that Fandango uses:</p>
 <div class="cell tag_remove-input docutils container">
@@ -675,20 +776,10 @@ def uint16(n: int) -&gt; str:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;\x14\x00&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bytes
 </pre></div>
 </div>
 </div>
@@ -698,11 +789,6 @@ def uint16(n: int) -&gt; str:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Left hand is byte string, right hand is Unicode string</span>
 <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x14\x00</span><span class="s1">&#39;</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\x14\x00</span><span class="s1">&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
 </pre></div>
 </div>
 </div>
@@ -815,6 +901,7 @@ Here’s a sketch on how to achieve this:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checksums">Checksums</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characters-and-bytes">Characters and Bytes</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files-and-binary-files">Text Files and Binary Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bytes-and-regular-expressions">Bytes and Regular Expressions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a></li>

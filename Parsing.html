@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
@@ -483,6 +484,10 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
 </div>
 </div>
 <p>We see that input and output are identical (as should always be with parsing and unparsing).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As it comes to producing and storing outputs, the <code class="docutils literal notranslate"><span class="pre">parse</span></code> command has the same options as the <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> command.</p>
+</div>
 <p>Since parsing and unparsing should always be symmetrical to each other, Fandango provides a <code class="docutils literal notranslate"><span class="pre">--validate</span></code> option to run this check automatically:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;2025-01-27&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>iso8601.fan<span class="w"> </span>--validate
 </pre></div>
@@ -525,10 +530,10 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
   Tree(&#39;&lt;iso8601date&gt;&#39;, Tree(&#39;&lt;iso8601calendardate&gt;&#39;,
     Tree(&#39;&lt;iso8601year&gt;&#39;,
       Tree(&#39;&#39;),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;2&#39;)),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;0&#39;)),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;2&#39;)),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;5&#39;))
+      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
+      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;0&#39;))),
+      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
+      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;5&#39;)))
     ),
     Tree(&#39;-&#39;),
     Tree(&#39;&lt;iso8601month&gt;&#39;, Tree(&#39;10&#39;)),
@@ -558,16 +563,20 @@ This is useful for creating and refining a grammar from a sample file.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;iso8601datetime&gt;
-  &lt;iso8601datetime&gt; ::= &lt;iso8601date&gt; &#39;&#39;  # Position 0x0 (0)
+  &lt;iso8601datetime&gt; ::= &lt;iso8601date&gt; &#39;&#39;  # Position 0x0000 (0)
     &lt;iso8601date&gt; ::= &lt;iso8601calendardate&gt;
-      &lt;iso8601calendardate&gt; ::= &lt;iso8601year&gt; &#39;-&#39; &lt;iso8601month&gt; &#39;-&#39; &lt;iso8601day&gt;  # Position 0x0 (0)
-        &lt;iso8601year&gt; ::= &#39;&#39; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # Position 0x2 (2)
-          &lt;digit&gt; ::= &#39;2&#39;  # Position 0x2 (2)
-          &lt;digit&gt; ::= &#39;0&#39;  # Position 0x3 (3)
-          &lt;digit&gt; ::= &#39;2&#39;  # Position 0x4 (4)
-          &lt;digit&gt; ::= &#39;5&#39;  # Position 0x5 (5)
-        &lt;iso8601month&gt; ::= &#39;10&#39;  # Position 0x6 (6)
-        &lt;iso8601day&gt; ::= &#39;27&#39;  # Position 0x8 (8)
+      &lt;iso8601calendardate&gt; ::= &lt;iso8601year&gt; &#39;-&#39; &lt;iso8601month&gt; &#39;-&#39; &lt;iso8601day&gt;  # Position 0x0000 (0)
+        &lt;iso8601year&gt; ::= &#39;&#39; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # Position 0x0002 (2)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0002 (2)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x0003 (3)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0004 (4)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x0005 (5)
+        &lt;iso8601month&gt; ::= &#39;10&#39;  # Position 0x0006 (6)
+        &lt;iso8601day&gt; ::= &#39;27&#39;  # Position 0x0008 (8)
 </pre></div>
 </div>
 </div>

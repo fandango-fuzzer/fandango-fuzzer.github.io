@@ -28,18 +28,40 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-!fandango fuzz -f persons.fan -n 10 -c 'int(<age>) > 30 -> <first_name>.startswith("A")' --validate
+!fandango fuzz -f infinity.fan -n 10 --validate
 assert _exit_code == 0
 ------------------
 
 ----- stdout -----
-UnsupportedOperation: int(<age>)>30-><first_name>.startswith("A"): Implication is deprecated
+fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 20.
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabcabcabcabcabc
+abcabcabc
+abcabcabcabcabcabcabcabcabcabc
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0001.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0002.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0003.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0004.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0005.txt', line 1, column 2: mismatched input 'b'
+----- stdout -----
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0006.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0007.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0008.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0009.txt', line 1, column 2: mismatched input 'b'
+SyntaxError: '/tmp/tmpctvwrpjm/fandango-0010.txt', line 1, column 2: mismatched input 'b'
+ValueError: 10 error(s) during validation
+abcabcabcabcabcabcabcabcabcabcabcabc
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAssertionError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[17], line 2[0m
-[1;32m      1[0m get_ipython()[38;5;241m.[39msystem([38;5;124m'[39m[38;5;124mfandango fuzz -f persons.fan -n 10 -c [39m[38;5;130;01m\'[39;00m[38;5;124mint(<age>) > 30 -> <first_name>.startswith([39m[38;5;124m"[39m[38;5;124mA[39m[38;5;124m"[39m[38;5;124m)[39m[38;5;130;01m\'[39;00m[38;5;124m --validate[39m[38;5;124m'[39m)
+Cell [0;32mIn[2], line 2[0m
+[1;32m      1[0m get_ipython()[38;5;241m.[39msystem([38;5;124m'[39m[38;5;124mfandango fuzz -f infinity.fan -n 10 --validate[39m[38;5;124m'[39m)
 [0;32m----> 2[0m [38;5;28;01massert[39;00m _exit_code [38;5;241m==[39m [38;5;241m0[39m
 
 [0;31mAssertionError[0m: 
