@@ -514,38 +514,16 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 20.
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabc
-abcabcabcabcabc
-abcabcabcabcabcabcabcabcabc
-abcabcabc
-abcabcabcabcabcabcabcabcabcabc
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0001.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0002.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0003.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0004.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0005.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0006.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0007.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0008.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0009.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-SyntaxError: &#39;/tmp/tmpctvwrpjm/fandango-0010.txt&#39;, line 1, column 2: mismatched input &#39;b&#39;
-ValueError: 10 error(s) during validation
 abcabcabcabcabcabcabcabcabcabcabcabc
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fandango fuzz -f infinity.fan -n 10 --validate&#39;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="ne">AssertionError</span>: 
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabc
+abc
 </pre></div>
 </div>
 </div>
@@ -553,12 +531,129 @@ abcabcabcabcabcabcabcabcabcabcabcabc
 <p>To precisely control the number of repetitions, use the regular expression <code class="docutils literal notranslate"><span class="pre">{m,n}</span></code> construct, limiting the number of repetitions from <code class="docutils literal notranslate"><span class="pre">m</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>.
 Let us limit the number of repetitions to the range 1…5:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= r&quot;(abc){1,5}&quot;
+</pre></div>
+</div>
+</div>
 </div>
 <p>This is what we get:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>finity.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 5.
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate full unique new population, filling remaining slots with duplicates.
+abcabcabcabcabc
+abcabc
+abc
+abcabcabcabc
+abcabcabc
+abcabc
+abc
+abcabc
+abcabcabcabcabc
+abc
+abcabc
+abcabc
+abcabc
+abcabc
+abcabcabcabcabc
+abcabc
+abcabcabcabc
+abcabcabc
+abcabcabcabcabc
+abcabcabc
+abc
+abcabcabcabcabc
+abcabc
+abcabcabcabc
+abcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabc
+abcabc
+abcabc
+abcabcabcabc
+abcabcabcabc
+abc
+abc
+abcabcabcabcabc
+abc
+abcabcabcabcabc
+abcabcabc
+abcabc
+abc
+abc
+abcabcabc
+abcabc
+abcabc
+abcabcabcabcabc
+abc
+abcabcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
+abc
+abcabc
+abcabcabcabc
+abc
+abcabcabcabc
+abcabcabc
+abcabcabcabcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabc
+abcabc
+abcabcabc
+abc
+abcabcabc
+abcabc
+abcabc
+abcabcabcabc
+abc
+abcabcabcabcabc
+abc
+abcabc
+abc
+abcabcabcabcabc
+abcabcabcabcabc
+abc
+abcabcabcabc
+abc
+abcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
+abcabc
+abcabcabcabc
+abc
+abc
+abcabc
+abcabcabcabc
+abcabcabc
+abcabcabcabc
+abcabc
+abcabcabcabcabc
+abc
+abcabcabcabc
+abcabc
+abcabcabcabcabc
+abcabcabc
+abcabcabcabcabc
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
