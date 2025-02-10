@@ -28,19 +28,19 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-!echo -n '\xf0' | fandango parse -f bits.fan -o - --format=bits
+!echo -n '\xf0' | fandango parse -f bits.fan -o - --format=bits --validate
 assert _exit_code == 0
 ------------------
 
 ----- stdout -----
-IndexError: index out of range
+ValueError: '<stdin>': parsed tree does not match original
 ValueError: 1 error(s) during parsing
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAssertionError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[7], line 2[0m
-[1;32m      1[0m get_ipython()[38;5;241m.[39msystem([38;5;124m"[39m[38;5;124mecho -n [39m[38;5;124m'[39m[38;5;130;01m\\[39;00m[38;5;124mxf0[39m[38;5;124m'[39m[38;5;124m | fandango parse -f bits.fan -o - --format=bits[39m[38;5;124m"[39m)
+Cell [0;32mIn[6], line 2[0m
+[1;32m      1[0m get_ipython()[38;5;241m.[39msystem([38;5;124m"[39m[38;5;124mecho -n [39m[38;5;124m'[39m[38;5;130;01m\\[39;00m[38;5;124mxf0[39m[38;5;124m'[39m[38;5;124m | fandango parse -f bits.fan -o - --format=bits --validate[39m[38;5;124m"[39m)
 [0;32m----> 2[0m [38;5;28;01massert[39;00m _exit_code [38;5;241m==[39m [38;5;241m0[39m
 
 [0;31mAssertionError[0m: 

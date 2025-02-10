@@ -453,7 +453,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11111011
 </pre></div>
 </div>
 </div>
@@ -462,78 +462,65 @@ We can use the special option <code class="docutils literal notranslate"><span c
 <p class="admonition-title">Note</p>
 <p>The combination of <code class="docutils literal notranslate"><span class="pre">--format=bits</span></code> and <code class="docutils literal notranslate"><span class="pre">--start-symbol</span></code> is particularly useful to debug bit fields.</p>
 </div>
-<p>Internally, Fandango treats the individual flags as if they were strings - that is, <code class="docutils literal notranslate"><span class="pre">&quot;\x00&quot;</span></code> for zero bits and <code class="docutils literal notranslate"><span class="pre">&quot;\x01&quot;</span></code> for nonzero bits.
-Hence, we can also apply <em>constraints</em> to the individual flags:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;italic&gt; == &quot;\x01&quot; and &lt;bold&gt; == &quot;\x00&quot;&#39;</span>
+<p>Internally, Fandango treats individual flags as integers, too.
+Hence, we can also apply <em>constraints</em> to the individual flags.
+For instance, we can profit from the fact that Python treats <code class="docutils literal notranslate"><span class="pre">0</span></code> as False and <code class="docutils literal notranslate"><span class="pre">1</span></code> as True:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;italic&gt; and &lt;bold&gt;&#39;</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10010110
-10110111
-10110000
-10011100
-10000100
-10101010
-10101101
-10111000
-10100111
-10100110
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11001011
+11101100
+11001001
+11011100
+11101000
+11110101
+11011110
+11111000
+11011000
+11111110
 </pre></div>
 </div>
 </div>
 </div>
-<p>This alternative, using <code class="docutils literal notranslate"><span class="pre">chr()</span></code> to generate a single byte out of the specified integer might be more readable:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;italic&gt; == chr(1) and &lt;bold&gt; == chr(0)&#39;</span>
-</pre></div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10100111
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can also easily set the value of the entire <code class="docutils literal notranslate"><span class="pre">format_flag</span></code> field using a constraint:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;format_flag&gt; == chr(0b11110000)&#39;</span>
+<p>Fandango strictly follows a “left-to-right” order - that is, the order in which bits and bytes are specified in the grammar, the most significant bit is stored first.</p>
+<p>Hence, we can also easily set the value of the entire <code class="docutils literal notranslate"><span class="pre">brightness</span></code> field using a constraint:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;brightness&gt; == 0b1111&#39;</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
-11110000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11101111
 </pre></div>
 </div>
 </div>
 </div>
-<p>Since Fandango strictly follows a “left-to-right” order - that is, the order in which bits and bytes are specified in the grammar, the most significant bit is stored first.
-Thus, the order of bits in the <code class="docutils literal notranslate"><span class="pre">chr()</span></code> argument is identical to the order of bits in the produced output.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Fandango always strictly follows a “left-to-right” order - that is, the order in which bits and bytes are specified in the grammar.</p>
 </div>
-<p>To convert a bit into a numerical value, applying the Python <code class="docutils literal notranslate"><span class="pre">ord()</span></code> function comes in handy.
-Note that its argument (the symbol) must be converted into a string first:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;ord(str(&lt;brightness&gt;)) &gt; 10&#39;</span>
+<p>Of course, we can also give the number in decimal format:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--format<span class="o">=</span>bits<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;brightness&gt; == 15&#39;</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00011100
-00001100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01111111
+10101111
+10011111
+01101111
 11001111
-10111111
-01011111
-10101011
-11111110
-01101110
-11001100
+11111111
+00101111
+11011111
+11101111
 00001111
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note how the last four bits (the <code class="docutils literal notranslate"><span class="pre">&lt;brightness&gt;</span></code> field) always represent a number greater than ten.</p>
+<p>Note how the last four bits (the <code class="docutils literal notranslate"><span class="pre">&lt;brightness&gt;</span></code> field) are always set to <code class="docutils literal notranslate"><span class="pre">1111</span></code> - the number 15.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>When implementing a format, be sure to follow its conventions regarding</p>
@@ -552,7 +539,17 @@ This is what happens if we send a byte <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: &#39;&lt;stdin&gt;&#39;: parsed tree does not match original
+ValueError: 1 error(s) during parsing
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;echo -n &#39;</span><span class="se">\\</span><span class="s2">xf0&#39; | fandango parse -f bits.fan -o - --format=bits --validate&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 </div>
@@ -560,34 +557,12 @@ This is what happens if we send a byte <code class="docutils literal notranslate
 <p>We see that the input was properly parsed and decomposed into individual bits.</p>
 <p>This is the resulting parse tree:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/d15b9d042456f2c1ffb1a08ef78a708e7fbbddc3393cb2069e814383d488bb8d.png" src="_images/d15b9d042456f2c1ffb1a08ef78a708e7fbbddc3393cb2069e814383d488bb8d.png" />
-</div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">grammar</span></code> format shows us that the values are properly assigned:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;\xf0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;format_flag&gt;
-  &lt;format_flag&gt; ::= &lt;italic&gt; &lt;bold&gt; &lt;underlined&gt; &lt;strikethrough&gt; &lt;brightness&gt;
-    &lt;italic&gt; ::= &lt;bit&gt;
-      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 7
-    &lt;bold&gt; ::= &lt;bit&gt;
-      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 6
-    &lt;underlined&gt; ::= &lt;bit&gt;
-      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 5
-    &lt;strikethrough&gt; ::= &lt;bit&gt;
-      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 4
-    &lt;brightness&gt; ::= &lt;bit&gt; &lt;bit&gt; &lt;bit&gt; &lt;bit&gt;
-      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 3
-      &lt;bit&gt; ::= 1  # Position 0x0000 (0), bit 2
-      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 1
-      &lt;bit&gt; ::= 0  # Position 0x0000 (0), bit 0
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
