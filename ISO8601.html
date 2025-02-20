@@ -174,6 +174,9 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="current nav bd-sidenav">
@@ -569,7 +572,7 @@ An ISO 8601 date/time spec starts with a date, and an optional time, separated b
 <section id="calendar-dates">
 <h3>Calendar Dates<a class="headerlink" href="#calendar-dates" title="Link to this heading">#</a></h3>
 <p>An ISO 8601 calendar date has the format YYYY-MM-DD, but can also be YYYY-MM or YYYYMMDD.
-The year can be prefixed with <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">-</span></code> to indicate <a class="reference external" href="https://en.wikipedia.org/wiki/Anno_Domini">AC/BC</a> o(or <a class="reference external" href="https://en.wikipedia.org/wiki/Common_Era">CE/BCE</a>) designators.</p>
+The year can be prefixed with <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">-</span></code> to indicate <a class="reference external" href="https://en.wikipedia.org/wiki/Anno_Domini">AC/BC</a> (or <a class="reference external" href="https://en.wikipedia.org/wiki/Common_Era">CE/BCE</a>) designators.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iso8601lib</span> <span class="o">+=</span> <span class="n">make_rule</span><span class="p">(</span><span class="s2">&quot;iso8601calendardate&quot;</span><span class="p">,</span>
@@ -881,8 +884,8 @@ However, we can also simply be lazy and have the existing Python <code class="do
 </section>
 <section id="even-better-validity">
 <h2>Even Better Validity<a class="headerlink" href="#even-better-validity" title="Link to this heading">#</a></h2>
-<p>The Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module has a number of limitations, which extend to our spec:</p>
-<p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> does not support <code class="docutils literal notranslate"><span class="pre">24:00:00</span></code> as a valid time:</p>
+<p>The Python <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module has a some limitations, which extend to our spec.
+For instance, <code class="docutils literal notranslate"><span class="pre">datetime</span></code> does not support <code class="docutils literal notranslate"><span class="pre">24:00:00</span></code> as a valid time:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_valid_iso8601datetime</span><span class="p">(</span><span class="s2">&quot;2024-12-31T24:00:00&quot;</span><span class="p">)</span>
@@ -895,35 +898,8 @@ However, we can also simply be lazy and have the existing Python <code class="do
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> does not support <code class="docutils literal notranslate"><span class="pre">,</span></code> as a separator of fractions (only <code class="docutils literal notranslate"><span class="pre">.</span></code>)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_valid_iso8601datetime</span><span class="p">(</span><span class="s2">&quot;2024-12-31T00:00:00,100&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> does not support fractions unless <a class="reference external" href="https://github.com/python/cpython/issues/60077">they have exactly 3 or 6 digits</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_valid_iso8601datetime</span><span class="p">(</span><span class="s2">&quot;2024-12-31T00:00:00.10&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-<p>Hence, our <code class="docutils literal notranslate"><span class="pre">iso8601.fan</span></code> spec will miss out a number of ISO 9601 features.</p>
-<p>Fortunately, there is an alternative to <code class="docutils literal notranslate"><span class="pre">datetime</span></code>.
-The <a class="reference external" href="https://dateutil.readthedocs.io/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">dateutil</span></code> module</a> provides an ISO 9601 parser without these deficiencies.</p>
+<p>Hence, our <code class="docutils literal notranslate"><span class="pre">iso8601.fan</span></code> spec may miss out a number of ISO 8601 features.</p>
+<p>The <a class="reference external" href="https://dateutil.readthedocs.io/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">dateutil</span></code> alternative</a> provides an ISO 8601 parser without these deficiencies.</p>
 <p>Let us redefine <code class="docutils literal notranslate"><span class="pre">is_valid_iso8601datetime()</span></code> to make use of the <code class="docutils literal notranslate"><span class="pre">dateutil</span></code> parser:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -938,34 +914,10 @@ The <a class="reference external" href="https://dateutil.readthedocs.io/en/stabl
 </div>
 </div>
 </div>
-<p>Let us see if the above examples now work:</p>
+<p>Let us see if the above example now works:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_valid_iso8601datetime</span><span class="p">(</span><span class="s2">&quot;2024-12-31T24:00:00&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_valid_iso8601datetime</span><span class="p">(</span><span class="s2">&quot;2024-12-31T00:00:00,100&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_valid_iso8601datetime</span><span class="p">(</span><span class="s2">&quot;2024-12-31T00:00:00.10&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1152,16 +1104,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9728-095
-7270-W11-4T24Z
-6008
-8216-08
-4696-W15-2
-82450330T21:18
-0070-07-18
-7983-W46
-7496-10-27T00:37Z
-8053-333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12670124T06:41:46,44
+5536
+2964-W02-5
+7331-W37
+7943-08
+5067-09
+3945
+4187
+4541-089
+96290117
 </pre></div>
 </div>
 </div>
@@ -1172,16 +1124,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1998-W38-4
-1953-212T03:17
-1998W46
-1978
-1979
-1998-W38-4T11+20
-19770803
-1971-05
-1991-05
-1977-W38-4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1951-11-30T13:31+2152
+1975-07
+1972
+1975-227
+1951-11-30
+1955-07
+1973-214T22
+19830518
+1961-10
+1976-W21
 </pre></div>
 </div>
 </div>
@@ -1192,16 +1144,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00:36Z
-00:18:22,633
-T00:32Z
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00
+00Z
+T0012Z
+T0054:19.5-00
+T0030
+0031
+T0042
+T00+0016
 T00
-00:5336-00:56
-T00:17
-T0039
-00-00:39
-00:22Z
-0042:18
+00:50-00:41
 </pre></div>
 </div>
 </div>
