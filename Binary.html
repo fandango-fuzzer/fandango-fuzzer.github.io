@@ -420,7 +420,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bytes-and-regular-expressions">Bytes and Regular Expressions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-lengths-with-constraints">Encoding Lengths with Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-lengths-with-repetitions">Encoding Lengths with Repetitions</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-values-to-binary-formats">Converting Values to Binary Formats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-conversion">Compression and Conversion</a></li>
 </ul>
@@ -521,16 +525,16 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5602046506721806
-0567705670328920
-4436538439021762
-9700776010332012
-2650526424039637
-1607996481083222
-3187072301732515
-1202373247941912
-7665301527428869
-7474433614563885
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6138465810654993
+8792355903805474
+5588171178692164
+4411632624995473
+4425488096809526
+9174783050696436
+5070839753994008
+8283816674120662
+4605578899951137
+2378475304113107
 </pre></div>
 </div>
 </div>
@@ -619,16 +623,16 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+1PaW
-dMc:B
-fn3eb
-+XG`6
-/Y&amp;&#39;O
-5&#39;k] 
-k^Zy=
-!_!7!
-YIts&quot;
-uL-*i
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*TIj0
+09.m*
+tBAJv
+.,(%&gt;
+HIFiU
+fzMSp
+;:$Ub
+mS)A9
+-%ywn
+e\Uzm
 </pre></div>
 </div>
 </div>
@@ -638,33 +642,28 @@ uL-*i
 <section id="length-encodings">
 <h2>Length Encodings<a class="headerlink" href="#length-encodings" title="Link to this heading">#</a></h2>
 <p>The third set of features one frequently encounters in binary formats is <em>length encodings</em> - that is, a particular field holds a value that represents the length of one or more fields that follow.
-Here is a simple grammar that expresses this characteristic: A <code class="docutils literal notranslate"><span class="pre">&lt;field&gt;</span></code> has a two-byte length, followed by the actual content (of length <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code>).</p>
+Here is a simple grammar that expresses this characteristic: A <code class="docutils literal notranslate"><span class="pre">&lt;field&gt;</span></code> has a two-byte length, followed by the actual (byte) content (of length <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code>).</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt;    ::= &lt;field&gt;
 &lt;field&gt;    ::= &lt;length&gt; &lt;content&gt;
 &lt;length&gt;   ::= &lt;byte&gt; &lt;byte&gt;
-where &lt;length&gt; == uint16(len(&lt;content&gt;))
-&lt;content&gt;  ::= &lt;digit&gt;+
-
-def uint16(n: int) -&gt; str:
-    return chr(n % 256) + chr(n // 256)
+&lt;content&gt;  ::= &lt;byte&gt;+
 </pre></div>
 </div>
 </div>
 </div>
+<section id="encoding-lengths-with-constraints">
+<h3>Encoding Lengths with Constraints<a class="headerlink" href="#encoding-lengths-with-constraints" title="Link to this heading">#</a></h3>
 <p>The relationship between <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;content&gt;</span></code> can again be expressed using a constraint.
 Let us assume that <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> comes as a two-byte (16-bit) unsigned integer with <em>little-endian</em> encoding - that is, the low byte comes first, and the high byte follows.
 The value 258 (hexadecimal <code class="docutils literal notranslate"><span class="pre">0x0102</span></code>) would thus be represented as the two bytes <code class="docutils literal notranslate"><span class="pre">\x02</span></code> and <code class="docutils literal notranslate"><span class="pre">\x01</span></code>.</p>
-<p>We can define a function <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> that takes an integer and converts it to a two-byte string according to these rules:</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>In Python, <code class="docutils literal notranslate"><span class="pre">//</span></code> is used for integer division.</p>
-</aside>
+<p>We can define a function <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> that takes an integer and converts it to a two-byte string according to these rules.
+The Python method <code class="docutils literal notranslate"><span class="pre">N.to_bytes(LENGTH,</span> <span class="pre">ENDIANNESS)</span></code> converts the integer <code class="docutils literal notranslate"><span class="pre">N</span></code> into a bytes string of length <code class="docutils literal notranslate"><span class="pre">LENGTH</span></code>. <code class="docutils literal notranslate"><span class="pre">ENDIANNESS</span></code> is either <code class="docutils literal notranslate"><span class="pre">'big'</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">'little'</span></code>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def uint16(n: int) -&gt; str:
-    return chr(n % 256) + chr(n // 256)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def uint16(n: int) -&gt; bytes:
+    return n.to_bytes(2, &#39;big&#39;)
 </pre></div>
 </div>
 </div>
@@ -683,23 +682,75 @@ The value 258 (hexadecimal <code class="docutils literal notranslate"><span clas
 </div>
 <p>Again, all of this goes into a single <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file: <a class="reference download internal" download="" href="_downloads/4c57f6c2c62644bc4b94f1498df6e8f0/binary.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">binary.fan</span></code></span></a> holds the grammar, the <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> definition, and the constraint.
 Let us produce a single output using <code class="docutils literal notranslate"><span class="pre">binary.fan</span></code> and view its (binary) contents, using <code class="docutils literal notranslate"><span class="pre">od</span> <span class="pre">-c</span></code>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>od<span class="w"> </span>-c
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: &lt;field&gt;: Concatenating &#39;bytes&#39; (&lt;length&gt;) and &#39;str&#39; (&lt;content&gt;)
-fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: Cannot compare &#39;bytes&#39; and &#39;str&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 5.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 002  \0   0   5
-0000004
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 02 00 02                                       |....|
+00000004
 </pre></div>
 </div>
 </div>
 </div>
 <p>The hexadecimal dump shows that the first two bytes encode the length of the string of digits that follows.
 The format is correct - we have successfully produced a length encoding.</p>
+</section>
+<section id="encoding-lengths-with-repetitions">
+<h3>Encoding Lengths with Repetitions<a class="headerlink" href="#encoding-lengths-with-repetitions" title="Link to this heading">#</a></h3>
+<p>Another way to implement length constraints is by using <em>repetitions</em>.
+In Fandango, repetitions <code class="docutils literal notranslate"><span class="pre">{}</span></code> can also contain <em>expressions</em>, and like constraints, these can also refer to nonterminals that have already been parsed or produced.
+Hence, we can specify a rule</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">-</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="o">&lt;</span><span class="n">length</span><span class="o">&gt;</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">f()</span></code> is a function that computes the number of <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;</span></code> repetitions based on <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code>.</p>
+<p>Let us define a variant <a class="reference download internal" download="" href="_downloads/06beaf77b5ef8c1261e4ce6aecb7754b/binary-rep.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">binary-rep.fan</span></code></span></a> that makes use of this.
+Here, we specify that <code class="docutils literal notranslate"><span class="pre">&lt;content&gt;</span></code> consists of <code class="docutils literal notranslate"><span class="pre">N</span></code> bytes, where <code class="docutils literal notranslate"><span class="pre">N</span></code> is given as follows:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>We use a generator expression <code class="docutils literal notranslate"><span class="pre">:=</span> <span class="pre">VALUE</span></code> to prevent generated values from getting too large.</p>
+</aside>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt;    ::= &lt;field&gt;
+&lt;field&gt;    ::= &lt;length&gt; &lt;content&gt;
+&lt;length&gt;   ::= &lt;byte&gt; &lt;byte&gt; := b&#39;\x00\x04&#39;
+&lt;content&gt;  ::= &lt;byte&gt;{from_uint16(&lt;length&gt;.value())}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The method <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;.value()</span></code> returns the bytes string value of the <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> element.
+The function <code class="docutils literal notranslate"><span class="pre">from_uint16()</span></code> is defined as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def from_uint16(n: bytes) -&gt; int:
+    return n[0] &lt;&lt; 8 | n[1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this, we can easily produce length-encoded inputs:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary-rep.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 00 a8 a7 e2                                 |......|
+00000006
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parsing</span></a> inputs, computed repetitions are much more efficient than constraints.</p>
+</div>
+</section>
 </section>
 <section id="converting-values-to-binary-formats">
 <h2>Converting Values to Binary Formats<a class="headerlink" href="#converting-values-to-binary-formats" title="Link to this heading">#</a></h2>
@@ -725,8 +776,8 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: I/O operation on closed file.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 004  \0   3   2   5   8
-0000006
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 005  \0   5   9   9   6   2
+0000007
 </pre></div>
 </div>
 </div>
@@ -882,7 +933,11 @@ Here’s a sketch on how to achieve this:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bytes-and-regular-expressions">Bytes and Regular Expressions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#length-encodings">Length Encodings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-lengths-with-constraints">Encoding Lengths with Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-lengths-with-repetitions">Encoding Lengths with Repetitions</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-values-to-binary-formats">Converting Values to Binary Formats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-conversion">Compression and Conversion</a></li>
 </ul>

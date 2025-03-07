@@ -450,16 +450,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5845
-321
-59471
-622
-53
-89837
-5
-4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+49825
+0655
+3
 1
-421
+71543
+73827
+873
+616
+86073
 </pre></div>
 </div>
 </div>
@@ -489,8 +489,9 @@ For instance, these are all the options supported by <code class="docutils liter
                      [-x FILENAME_EXTENSION]
                      [--format {string,bits,tree,grammar,value,repr,none}]
                      [--file-mode {text,binary,auto}] [--validate]
-                     [-S START_SYMBOL] [--warnings-are-errors]
-                     [-N MAX_GENERATIONS] [--population-size POPULATION_SIZE]
+                     [--max-repetitions MAX_REPETITIONS] [-S START_SYMBOL]
+                     [--warnings-are-errors] [-N MAX_GENERATIONS]
+                     [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
                      [--crossover-rate CROSSOVER_RATE]
                      [--mutation-rate MUTATION_RATE]
@@ -530,6 +531,9 @@ options:
                         &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
                         otherwise)
   --validate            run internal consistency checks for debugging
+  --max-repetitions MAX_REPETITIONS
+                        the maximal number of repetitions if not specified
+                        otherwise by {N, M} in the grammar (default: 5)
   -o, --output OUTPUT   write output to OUTPUT (default: stdout)
 
 general settings:
