@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -67,7 +64,6 @@
     <link rel="prev" title="Accessing Input Elements" href="Paths.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -83,8 +79,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -92,6 +99,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -99,8 +107,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +127,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,17 +157,21 @@
     
     
     <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
-    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -206,6 +217,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
 </ul>
 
@@ -215,14 +227,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -366,16 +373,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -1012,10 +1027,7 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 &lt;iso8601weekdate&gt; ::= &lt;iso8601year&gt; <span class=" -Color -Color-Yellow">&#39;-&#39;</span>? <span class=" -Color -Color-Yellow">&#39;W&#39;</span> &lt;iso8601week&gt; (<span class=" -Color -Color-Yellow">&#39;-&#39;</span> 
 &lt;iso8601weekday&gt;)?
 &lt;iso8601week&gt; ::= <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | <span class=" -Color -Color-Yellow">&#39;08&#39;</span> | <span class=" -Color -Color-Yellow">&#39;09&#39;</span> 
-| <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | 
+| <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | <span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;21&#39;</span> | <span class=" -Color -Color-Yellow">&#39;22&#39;</span> | <span class=" -Color -Color-Yellow">&#39;23&#39;</span> | <span class=" -Color -Color-Yellow">&#39;24&#39;</span> | <span class=" -Color -Color-Yellow">&#39;25&#39;</span> | <span class=" -Color -Color-Yellow">&#39;26&#39;</span> | <span class=" -Color -Color-Yellow">&#39;27&#39;</span> | <span class=" -Color -Color-Yellow">&#39;28&#39;</span> | <span class=" -Color -Color-Yellow">&#39;29&#39;</span> | <span class=" -Color -Color-Yellow">&#39;30&#39;</span> | <span class=" -Color -Color-Yellow">&#39;31&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;32&#39;</span> | <span class=" -Color -Color-Yellow">&#39;33&#39;</span> | <span class=" -Color -Color-Yellow">&#39;34&#39;</span> | <span class=" -Color -Color-Yellow">&#39;35&#39;</span> | <span class=" -Color -Color-Yellow">&#39;36&#39;</span> | <span class=" -Color -Color-Yellow">&#39;37&#39;</span> | <span class=" -Color -Color-Yellow">&#39;38&#39;</span> | <span class=" -Color -Color-Yellow">&#39;39&#39;</span> | <span class=" -Color -Color-Yellow">&#39;40&#39;</span> | <span class=" -Color -Color-Yellow">&#39;41&#39;</span> | <span class=" -Color -Color-Yellow">&#39;42&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;43&#39;</span> | <span class=" -Color -Color-Yellow">&#39;44&#39;</span> | <span class=" -Color -Color-Yellow">&#39;45&#39;</span> | <span class=" -Color -Color-Yellow">&#39;46&#39;</span> | <span class=" -Color -Color-Yellow">&#39;47&#39;</span> | <span class=" -Color -Color-Yellow">&#39;48&#39;</span> | <span class=" -Color -Color-Yellow">&#39;49&#39;</span> | <span class=" -Color -Color-Yellow">&#39;50&#39;</span> | <span class=" -Color -Color-Yellow">&#39;51&#39;</span> | <span class=" -Color -Color-Yellow">&#39;52&#39;</span> | <span class=" -Color -Color-Yellow">&#39;53&#39;</span>
@@ -1033,7 +1045,10 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <span class=" -Color -Color-Yellow">&#39;078&#39;</span> | <span class=" -Color -Color-Yellow">&#39;079&#39;</span> | <span class=" -Color -Color-Yellow">&#39;080&#39;</span> | <span class=" -Color -Color-Yellow">&#39;081&#39;</span> | <span class=" -Color -Color-Yellow">&#39;082&#39;</span> | <span class=" -Color -Color-Yellow">&#39;083&#39;</span> | <span class=" -Color -Color-Yellow">&#39;084&#39;</span> | <span class=" -Color -Color-Yellow">&#39;085&#39;</span> | <span class=" -Color -Color-Yellow">&#39;086&#39;</span> | <span class=" -Color -Color-Yellow">&#39;087&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;088&#39;</span> | <span class=" -Color -Color-Yellow">&#39;089&#39;</span> | <span class=" -Color -Color-Yellow">&#39;090&#39;</span> | <span class=" -Color -Color-Yellow">&#39;091&#39;</span> | <span class=" -Color -Color-Yellow">&#39;092&#39;</span> | <span class=" -Color -Color-Yellow">&#39;093&#39;</span> | <span class=" -Color -Color-Yellow">&#39;094&#39;</span> | <span class=" -Color -Color-Yellow">&#39;095&#39;</span> | <span class=" -Color -Color-Yellow">&#39;096&#39;</span> | <span class=" -Color -Color-Yellow">&#39;097&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;098&#39;</span> | <span class=" -Color -Color-Yellow">&#39;099&#39;</span> | <span class=" -Color -Color-Yellow">&#39;100&#39;</span> | <span class=" -Color -Color-Yellow">&#39;101&#39;</span> | <span class=" -Color -Color-Yellow">&#39;102&#39;</span> | <span class=" -Color -Color-Yellow">&#39;103&#39;</span> | <span class=" -Color -Color-Yellow">&#39;104&#39;</span> | <span class=" -Color -Color-Yellow">&#39;105&#39;</span> | <span class=" -Color -Color-Yellow">&#39;106&#39;</span> | <span class=" -Color -Color-Yellow">&#39;107&#39;</span> | 
-<span class=" -Color -Color-Yellow">&#39;108&#39;</span> | <span class=" -Color -Color-Yellow">&#39;109&#39;</span> | <span class=" -Color -Color-Yellow">&#39;110&#39;</span> | <span class=" -Color -Color-Yellow">&#39;111&#39;</span> | <span class=" -Color -Color-Yellow">&#39;112&#39;</span> | <span class=" -Color -Color-Yellow">&#39;113&#39;</span> | <span class=" -Color -Color-Yellow">&#39;114&#39;</span> | <span class=" -Color -Color-Yellow">&#39;115&#39;</span> | <span class=" -Color -Color-Yellow">&#39;116&#39;</span> | <span class=" -Color -Color-Yellow">&#39;117&#39;</span> | 
+<span class=" -Color -Color-Yellow">&#39;108&#39;</span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> <span class=" -Color -Color-Yellow">&#39;109&#39;</span> | <span class=" -Color -Color-Yellow">&#39;110&#39;</span> | <span class=" -Color -Color-Yellow">&#39;111&#39;</span> | <span class=" -Color -Color-Yellow">&#39;112&#39;</span> | <span class=" -Color -Color-Yellow">&#39;113&#39;</span> | <span class=" -Color -Color-Yellow">&#39;114&#39;</span> | <span class=" -Color -Color-Yellow">&#39;115&#39;</span> | <span class=" -Color -Color-Yellow">&#39;116&#39;</span> | <span class=" -Color -Color-Yellow">&#39;117&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;118&#39;</span> | <span class=" -Color -Color-Yellow">&#39;119&#39;</span> | <span class=" -Color -Color-Yellow">&#39;120&#39;</span> | <span class=" -Color -Color-Yellow">&#39;121&#39;</span> | <span class=" -Color -Color-Yellow">&#39;122&#39;</span> | <span class=" -Color -Color-Yellow">&#39;123&#39;</span> | <span class=" -Color -Color-Yellow">&#39;124&#39;</span> | <span class=" -Color -Color-Yellow">&#39;125&#39;</span> | <span class=" -Color -Color-Yellow">&#39;126&#39;</span> | <span class=" -Color -Color-Yellow">&#39;127&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;128&#39;</span> | <span class=" -Color -Color-Yellow">&#39;129&#39;</span> | <span class=" -Color -Color-Yellow">&#39;130&#39;</span> | <span class=" -Color -Color-Yellow">&#39;131&#39;</span> | <span class=" -Color -Color-Yellow">&#39;132&#39;</span> | <span class=" -Color -Color-Yellow">&#39;133&#39;</span> | <span class=" -Color -Color-Yellow">&#39;134&#39;</span> | <span class=" -Color -Color-Yellow">&#39;135&#39;</span> | <span class=" -Color -Color-Yellow">&#39;136&#39;</span> | <span class=" -Color -Color-Yellow">&#39;137&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;138&#39;</span> | <span class=" -Color -Color-Yellow">&#39;139&#39;</span> | <span class=" -Color -Color-Yellow">&#39;140&#39;</span> | <span class=" -Color -Color-Yellow">&#39;141&#39;</span> | <span class=" -Color -Color-Yellow">&#39;142&#39;</span> | <span class=" -Color -Color-Yellow">&#39;143&#39;</span> | <span class=" -Color -Color-Yellow">&#39;144&#39;</span> | <span class=" -Color -Color-Yellow">&#39;145&#39;</span> | <span class=" -Color -Color-Yellow">&#39;146&#39;</span> | <span class=" -Color -Color-Yellow">&#39;147&#39;</span> | 
@@ -1104,16 +1119,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12670124T06:41:46,44
-5536
-2964-W02-5
-7331-W37
-7943-08
-5067-09
-3945
-4187
-4541-089
-96290117
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3228-09-30
+9427100
+5913-07
+6749057T13
+59430311
+5632304
+3761-02-18
+7466
+3337
+4786309
 </pre></div>
 </div>
 </div>
@@ -1124,16 +1139,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1951-11-30T13:31+2152
-1975-07
-1972
-1975-227
-1951-11-30
-1955-07
-1973-214T22
-19830518
-1961-10
-1976-W21
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19550720T0349-08
+19550815T00+2254
+19570106
+19750216
+19550720T00+2254
+19550815T0349-08
+19880318T18:44-17
+1962-W09
+19570106T00+2254
+19550815
 </pre></div>
 </div>
 </div>
@@ -1145,15 +1160,15 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00
-00Z
-T0012Z
-T0054:19.5-00
-T0030
-0031
-T0042
-T00+0016
+00:56:13
 T00
-00:50-00:41
+T0001
+00:11:29
+T00+00:33
+00:58:08
+00-00
+T000838Z
+T00:32:52.74
 </pre></div>
 </div>
 </div>
@@ -1218,8 +1233,7 @@ The generated <a class="reference download internal" download="" href="_download
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1296,8 +1310,8 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

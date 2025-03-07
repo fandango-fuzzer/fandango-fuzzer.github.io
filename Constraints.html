@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -67,7 +64,6 @@
     <link rel="prev" title="Some Fuzzing Strategies" href="Strategies.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -83,8 +79,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -92,6 +99,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -99,8 +107,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +127,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,17 +157,21 @@
     
     
     <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
-    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -206,6 +217,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
 </ul>
 
@@ -215,14 +227,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -366,16 +373,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -468,16 +483,16 @@ where int(&lt;age&gt;) &lt; 50
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xona Gz,17
-Ino Bzi,3
-Pyza Jo,46
-Kcgxao Sco,4
-God Rgt,4
-Fb Vm,1
-Dhnuil Hafsqr,28
-Kvcer Pu,36
-Hcxuxw Uscxx,9
-Est Gqpczy,47
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phcj Cy,0
+Pmba Rgzjbz,36
+Sywfuo Gb,2
+Zro Ziufgg,3
+Olonwd Jxbeub,14
+Sqwz Vv,1
+Gt Zocaf,2
+Soqno Owyrrc,4
+Dabns Yie,3
+Dmuuro Fndf,3
 </pre></div>
 </div>
 </div>
@@ -496,16 +511,16 @@ Be sure, though, to leave spaces around <code class="docutils literal notranslat
 <p>and we obtain these inputs:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zdcwwa Hconk,36
-Rc Ervn,34
-Gi Ik,036
-Wsou Nfp,34
-Xg Mz,026
-Zgllfd Vtbuhz,35
-Tw Aixsc,032
-Za Qyq,31
-Ouia Rieqw,36
-Jiuvve Wdaexp,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gplg Mnjc,38
+Fm Ftxxgn,028
+Wq Zo,38
+Wtzp Pwhq,36
+Qj Vi,32
+Sxxyeb Dfiigq,29
+Vwjr Tb,35
+Gplg Mnxc,38
+Yalwo Ftxxgn,028
+Tjun Jq,40
 </pre></div>
 </div>
 </div>
@@ -513,16 +528,16 @@ Jiuvve Wdaexp,25
 <p>Start with <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> and add a constraint such that we generate people whose age is a multiple of 7, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bbm Gg,85190
-Pjvco Bu,987
-Jrmb Atrwre,574
-Aoweqy Zs,44716
-Swz Dfwyrc,0868
-Wd Hbdgn,623
-Ip Dg,74186
-Jvyf Ssqud,4732
-Eroqon Kvqtlm,77
-Jhfsp Fgs,59409
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zxee Dz,364
+Mc Iw,84
+Zkrw Bdgc,0
+Nzxq Zx,7
+Gcrls Vijh,7
+Qh Wvw,2359
+Nac Iaky,0
+Tysv Qbz,0
+To Ds,28
+Xjxsot Mhzyyo,63
 </pre></div>
 </div>
 </div>
@@ -629,26 +644,26 @@ fandango:INFO: ---------- Evolution finished ----------
 fandango:INFO: Perfect solutions found: (10)
 fandango:INFO: Fitness of final population: 1.00
 fandango:INFO: Time taken: 0.00 seconds
-Mft Em,00
-Dx Nciiv,3591
-Ion Otau,42
-Pnoi Ljleo,7973
-Ezf Fhwsu,7
-Gdsxw Nofnnk,70
-Yla Rhnp,049
-Pakzw Zdl,7
-Nikh Afb,854
-Vx Xmmhs,21
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0001.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0002.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0003.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0004.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0005.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0006.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0007.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0008.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0009.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpb1zry8js/fandango-0010.txt&#39;
+Rt Vejf,84
+Row Crqgpv,385
+Pq Exm,98
+Jknyl Ubxal,574
+Jof Cvrrgv,49
+Cniobf Jzprf,07
+Rtqpc Rjjqdh,84
+Mu Psocps,14
+Vf Lowu,70
+Bckz Kciui,2996
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0001.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0002.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0003.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0004.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0005.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0006.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0007.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0008.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0009.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmp0ierl6y_/fandango-0010.txt&#39;
 </pre></div>
 </div>
 </div>
@@ -687,7 +702,9 @@ fandango:INFO: Generating initial population (size: 100)...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.04 seconds
 fandango:INFO: ---------- Starting evolution ----------
 fandango:INFO: Generation 1 - Fitness: 0.02 - #solutions found: 0
-fandango:INFO: Generation 1: Increasing mutation rate from 0.20 to 0.22
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1: Increasing mutation rate from 0.20 to 0.22
 fandango:INFO: Generation 1: Increasing crossover rate from 0.80 to 0.84
 fandango:INFO: Generation 1 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 2 - Fitness: 0.00 - #solutions found: 0
@@ -709,13 +726,13 @@ fandango:INFO: Generation 4 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 4: Increasing crossover rate from 0.93 to 0.97
 fandango:INFO: Generation 4 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 5 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 5: Increasing mutation rate from 0.29 to 0.32
+fandango:INFO: Generation 5: Increasing mutation rate from 0.29 to 0.32
 fandango:INFO: Generation 5: Increasing crossover rate from 0.97 to 1.00
 fandango:INFO: Generation 5 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 6 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 6: Increasing mutation rate from 0.32 to 0.35
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 6: Increasing mutation rate from 0.32 to 0.35
 fandango:INFO: Generation 6: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 6 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 7 - Fitness: 0.00 - #solutions found: 0
@@ -727,10 +744,10 @@ fandango:INFO: Generation 7 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg 
 fandango:INFO: Generation 8 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 8: Increasing mutation rate from 0.39 to 0.43
 fandango:INFO: Generation 8: Increasing crossover rate from 1.00 to 1.00
+fandango:INFO: Generation 8 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 8 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 9 - Fitness: 0.00 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 9 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 9: Increasing mutation rate from 0.43 to 0.47
 fandango:INFO: Generation 9: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 9 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
@@ -741,13 +758,13 @@ fandango:INFO: Generation 10 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 10: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 10 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 11 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 11: Increasing mutation rate from 0.52 to 0.57
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 11: Increasing mutation rate from 0.52 to 0.57
 fandango:INFO: Generation 11: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 11 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 12 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 12: Increasing mutation rate from 0.57 to 0.63
+fandango:INFO: Generation 12: Increasing mutation rate from 0.57 to 0.63
 fandango:INFO: Generation 12: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 12 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 13 - Fitness: 0.00 - #solutions found: 0
@@ -769,13 +786,13 @@ fandango:INFO: Generation 15 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 15: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 15 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 16 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 16: Increasing mutation rate from 0.84 to 0.92
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 16: Increasing mutation rate from 0.84 to 0.92
 fandango:INFO: Generation 16: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 16 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 17 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 17: Increasing mutation rate from 0.92 to 1.00
+fandango:INFO: Generation 17: Increasing mutation rate from 0.92 to 1.00
 fandango:INFO: Generation 17: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 17 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 18 - Fitness: 0.00 - #solutions found: 0
@@ -785,39 +802,41 @@ fandango:INFO: Generation 18 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 18: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 18 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 19 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 19: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 19: Increasing crossover rate from 1.00 to 1.00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 19: Increasing crossover rate from 1.00 to 1.00
+fandango:INFO: Generation 19 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 20 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 20: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 20: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 20 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 21 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21: Increasing mutation rate from 1.00 to 1.00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 21 - Fitness: 0.00 - #solutions found: 0
+fandango:INFO: Generation 21: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 21: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 21 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 22 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 22: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 22: Increasing crossover rate from 1.00 to 1.00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 22: Increasing crossover rate from 1.00 to 1.00
+fandango:INFO: Generation 22 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 23 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 23: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 23: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 23: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 23 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 24 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 24: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 24: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 24 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 25 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 25: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 25: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 25: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 25 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 26 - Fitness: 0.00 - #solutions found: 0
@@ -827,13 +846,13 @@ fandango:INFO: Generation 26 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 26: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 26 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 27 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 27: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 27: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 27 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 28 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 28: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 28: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 28: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 28 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 29 - Fitness: 0.00 - #solutions found: 0
@@ -843,9 +862,7 @@ fandango:INFO: Generation 29 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 29: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 29 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 30 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 30: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 30: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 30: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 30 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 31 - Fitness: 0.00 - #solutions found: 0
@@ -855,23 +872,25 @@ fandango:INFO: Generation 31 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 31: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 31 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 32 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 32: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 32: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 32 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 33 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 33: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 33: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 33 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 34 - Fitness: 0.00 - #solutions found: 0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34: Increasing mutation rate from 1.00 to 1.00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 34 - Fitness: 0.00 - #solutions found: 0
+fandango:INFO: Generation 34: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 34: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 34 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 35 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 35: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 35: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 35: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 35 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 36 - Fitness: 0.00 - #solutions found: 0
@@ -881,13 +900,13 @@ fandango:INFO: Generation 36 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 36: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 36 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 37 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 37: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 37: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 37: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 37 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 38 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 38: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 38: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 38 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 39 - Fitness: 0.00 - #solutions found: 0
@@ -903,9 +922,7 @@ fandango:INFO: Generation 40 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 40: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 40 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 41 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 41: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 41: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 41: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 41 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 42 - Fitness: 0.00 - #solutions found: 0
@@ -915,13 +932,13 @@ fandango:INFO: Generation 42 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 42: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 42 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 43 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 43: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 43: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 43: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 43 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 44 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 44: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 44: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 44 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 45 - Fitness: 0.00 - #solutions found: 0
@@ -931,13 +948,13 @@ fandango:INFO: Generation 45 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 45: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 45 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 46 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 46: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 46: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 46 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 47 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 47: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 47: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 47 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 48 - Fitness: 0.00 - #solutions found: 0
@@ -947,19 +964,19 @@ fandango:INFO: Generation 48 - Fitness: 0.00 - #solutions found: 0
 fandango:INFO: Generation 48: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 48 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 49 - Fitness: 0.00 - #solutions found: 0
-fandango:INFO: Generation 49: Increasing mutation rate from 1.00 to 1.00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 49: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 49: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 49 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 50 - Fitness: 0.00 - #solutions found: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 50: Increasing mutation rate from 1.00 to 1.00
+fandango:INFO: Generation 50: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 50: Increasing crossover rate from 1.00 to 1.00
 fandango:INFO: Generation 50 stats -- Best fitness: 0.00, Avg fitness: 0.00, Avg diversity: 0.02, Population size: 100
 fandango:INFO: ---------- Evolution finished ----------
 fandango:INFO: Perfect solutions found: (0)
 fandango:INFO: Fitness of final population: 0.00
-fandango:INFO: Time taken: 1.84 seconds
+fandango:INFO: Time taken: 1.88 seconds
 fandango:ERROR: Population did not converge to a perfect population
 fandango:ERROR: Only found 0 perfect solutions, instead of the required 10
 </pre></div>
@@ -1030,8 +1047,7 @@ Of course, if the constraint is <code class="docutils literal notranslate"><span
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1094,8 +1110,8 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

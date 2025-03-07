@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -69,7 +66,6 @@
     <link rel="prev" title="The Fandango Shell" href="Shell.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -85,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -94,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -101,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -121,8 +129,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -152,17 +159,21 @@
     
     
     <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
-    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -208,6 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
 </ul>
 
@@ -217,14 +229,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -368,16 +375,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -448,16 +463,16 @@ In order to obtain more natural first and last names in our <a class="reference 
 <p>then we can have Fandango create names such as</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice Smith,35331
-Bob Smith,9399
-Alice Zogwbj,93
-Bob Smith,27858
-Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Ruiz Picasso,69
-Jpnboi Ruiz Picasso,633
-Bob Smith,3
-Eve Fpz,2
-Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Smith,568
-Alice Smith,09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bob Doe,8
+Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Ruiz Picasso,89
+Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Doe,14494
+Ovxmg Doe,57483
+Pxgnbe Smith,15
+Lajfrv Qy,0511
+Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Ruiz Picasso,81
+Alice Ruiz Picasso,1610
+Hk Doe,21211
+Eve Doe,660
 </pre></div>
 </div>
 </div>
@@ -486,16 +501,16 @@ Let us illustrate this with an example.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nicholas
-Kendra
-Lisa
-Samuel
-David
-Calvin
-Scott
-Andrew
-Erin
-Ryan
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sean
+Micheal
+Keith
+Timothy
+Kaitlin
+Anna
+Jade
+Jill
+Barry
+Karen
 </pre></div>
 </div>
 </div>
@@ -547,16 +562,16 @@ Use the Python <code class="docutils literal notranslate"><span class="pre">impo
 <p>This is what the output of the above spec looks like:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Marie Baker,76
-Christopher Moore,65
-Carrie Ryan,657
-Dustin Garrison,3
-Lawrence Waters,56
-Jamie Mills,324
-David Aguilar,34
-Marisa Vega,61
-April Richard,45
-Chad Morris,1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Leslie Taylor,28
+Peter Harrington,60
+Crystal Li,441
+Courtney Houston,7
+Heather Harper,31
+Erica Underwood,86
+Dominique Robertson,64
+Christine Jones,04
+Christopher Peck,63
+Carol Oliver,8
 </pre></div>
 </div>
 </div>
@@ -585,16 +600,16 @@ Use <code class="docutils literal notranslate"><span class="pre">str()</span></c
 <p>The resulting <a class="reference download internal" download="" href="_downloads/22db315d6c7c283d43c6fb1e355624fe/persons-faker-age.fan"><span class="xref download myst">Fandango spec file</span></a> produces the desired range of ages:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kimberly Collins,30
-Derek Pearson,33
-John Le,32
-Dylan Gonzalez,28
-Douglas Wright,27
-Louis Cox,34
-Mike Morgan,27
-Brittney Floyd,29
-Maria Winters,32
-Mike Wilkerson,29
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brenda Thompson,29
+Ashley Williams,26
+Kelly Mcguire,33
+Hannah Ruiz,28
+Kerry Martin,25
+Michael Ryan,25
+Gina Pierce,30
+Deborah Robinson,30
+Linda Perez,30
+Audrey Sanchez,31
 </pre></div>
 </div>
 </div>
@@ -608,18 +623,16 @@ However, the final value must fit the given symbol rules (in our case, <code cla
 <p>These are the ages we get this way:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jennifer Mullins,34
-Dawn Hoover,34
-Valerie Mitchell,35
-Sarah Romero,34
-Samantha Williams,34
-Stacey Turner,36
-Laura Guzman,34
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stephanie Kim,34
-Jason Castro,35
-Noah Hoffman,34
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Teresa Mccarthy,34
+Christopher Clark,34
+Allison Nixon,36
+Jessica Reeves,34
+Pamela Young,35
+Pam Cruz,33
+Robert Todd,34
+David Hall,36
+Gary Avery,34
+Jeremy Hernandez,33
 </pre></div>
 </div>
 </div>
@@ -641,16 +654,16 @@ Noah Hoffman,34
 <p>With this, both random names (<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code>) and natural names (<code class="docutils literal notranslate"><span class="pre">&lt;natural_name&gt;</span></code>) will have a chance of 50% to be produced:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mark Montgomery,4
-Djov Kim,84760
-Adh Medina,6307
-Ync Wilson,6581
-Ln Guerrero,802
-Ahef Byrd,59
-Marc Barron,790
-Kit Lewis,927
-Derek Parker,54
-Ahhqk Wood,7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scott Davis,71
+Elizabeth Ford,42
+Auy Watson,25
+Yyhisi Dawson,01
+Shannon Bullock,55
+Fol Brown,10
+Aeml Crawford,47
+Hqzxyr Gay,17
+Kimberly Silva,16
+St Rodriguez,30
 </pre></div>
 </div>
 </div>
@@ -680,16 +693,16 @@ If we want all last names to start with an <code class="docutils literal notrans
 <p>and we get</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Natalie Snow,84
-Veronica Scott,0
-Michael Smith,58
-John Smith,2643
-Alejandro Smith,4
-Christopher Snyder,92
-Ashley Smith,46
-Barbara Spencer,24
-Stephanie Sullivan,44
-Rebecca Smith,32
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kelly Sandoval,49
+Catherine Smith,2
+Jacob Stokes,05
+Laurie Smith,86
+John Serrano,48
+Carol Smith,80
+Seth Smith,6
+Kimberly Smith,7
+Roy Sosa,4893
+Megan Spencer,72
 </pre></div>
 </div>
 </div>
@@ -716,16 +729,16 @@ If the target keeps on changing, the algorithm will lose guidance and will not p
 <p>This would work:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Robert Smith,25
-Peter Smith,34
-Katherine Sparks,35
-John Scott,34
-Peter Smith,27
-Larry Smith,34
-Katherine Sparks,25
-Joseph Stafford,30
-Lori Singh,30
-Lori Singh,34
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jorge Santiago,25
+Lauren Smith,35
+Linda Smith,34
+Justin Sutton,33
+Cristian Smith,26
+Tonya Sims,29
+Mary Scott,35
+Suzanne Sutton,33
+Suzanne Salinas,33
+Sarah Stephens,33
 </pre></div>
 </div>
 </div>
@@ -798,8 +811,7 @@ To obtain well-distributed numbers from the beginning, use a generator.</p>
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -862,8 +874,8 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
