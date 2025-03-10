@@ -33,8 +33,8 @@ assert _exit_code == 0
 ------------------
 
 ----- stdout -----
-SyntaxError: '<stdin>', position 0x0001 (1): mismatched input b'x'
-ValueError: 1 error(s) during parsing
+FandangoParseError: Parse error at position '<stdin>', position 0x0001 (1): mismatched input b'x'
+FandangoParseError: Parse error at position 1 error(s) during parsing
 ------------------
 
 [31m---------------------------------------------------------------------------[39m

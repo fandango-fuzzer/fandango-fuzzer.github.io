@@ -218,6 +218,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
 </ul>
 
@@ -450,21 +451,29 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
-49825
-0655
-3
-1
-71543
-73827
-873
-616
-86073
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>816
+7
+40
+6571
+67641
+313
+09
+89
+21
+3836
 </pre></div>
 </div>
 </div>
 </div>
 <p>Success! We have created 10 random sequences of digits.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Be aware that <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files can contain Python code that is <em>executed when being loaded</em>. This code can execute arbitrary commands.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Only load <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files you can trust.</p>
+</div>
 </section>
 <section id="more-commands-and-options">
 <h2>More Commands and Options<a class="headerlink" href="#more-commands-and-options" title="Link to this heading">#</a></h2>

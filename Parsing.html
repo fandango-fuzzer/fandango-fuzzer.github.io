@@ -218,6 +218,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
 </ul>
 
@@ -462,8 +463,8 @@ This holds for <em>syntactically</em> invalid inputs:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SyntaxError: &#39;&lt;stdin&gt;&#39;, line 1, column 4: mismatched input &#39;2&#39;
-ValueError: 1 error(s) during parsing
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: Parse error at position &#39;&lt;stdin&gt;&#39;, line 1, column 4: mismatched input &#39;2&#39;
+FandangoParseError: Parse error at position 1 error(s) during parsing
 </pre></div>
 </div>
 </div>
@@ -474,8 +475,8 @@ ValueError: 1 error(s) during parsing
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: &#39;&lt;stdin&gt;&#39;: constraint is_valid_iso8601datetime(str(&lt;iso8601datetime&gt;)) not satisfied
-ValueError: 1 error(s) during parsing
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoError: &#39;&lt;stdin&gt;&#39;: constraint is_valid_iso8601datetime(str(&lt;iso8601datetime&gt;)) not satisfied
+FandangoParseError: Parse error at position 1 error(s) during parsing
 </pre></div>
 </div>
 </div>
