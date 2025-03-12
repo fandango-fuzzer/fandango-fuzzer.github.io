@@ -526,16 +526,16 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0547935021839805
-8947382465513191
-2790243808616847
-2902622271296200
-9407668412164042
-4866638918512486
-3542545004403641
-0821793657445307
-7152155548333775
-7616376626587179
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9982794121634316
+8254203053592404
+6793271370970027
+1734624771653472
+2298401099291129
+6795337584209490
+1495574980991230
+9701635056491588
+5395575935479496
+0463337633479916
 </pre></div>
 </div>
 </div>
@@ -624,16 +624,16 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PspP&amp;
-HF0Te
-]Cp&quot;Q
-r0fIv
-QQ2uk
-0au%O
-M*Wk&amp;
-uePz_
-G1lx5
-TduBK
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n\;r]
+?fdL-
+$@CFz
+9e3=T
+pw%EX
+R2&lt;Q*
+1pO`T
+:uBUC
+86hap
+WwyUo
 </pre></div>
 </div>
 </div>
@@ -664,7 +664,7 @@ The Python method <code class="docutils literal notranslate"><span class="pre">N
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def uint16(n: int) -&gt; bytes:
-    return n.to_bytes(2, &#39;big&#39;)
+    return n.to_bytes(2, &#39;little&#39;)
 </pre></div>
 </div>
 </div>
@@ -672,7 +672,7 @@ The Python method <code class="docutils literal notranslate"><span class="pre">N
 <p>Using <code class="docutils literal notranslate"><span class="pre">uint16()</span></code>, we can now define how the value of <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> is related to the length of <code class="docutils literal notranslate"><span class="pre">&lt;content&gt;</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>where &lt;length&gt; == uint16(len(&lt;content&gt;))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>where &lt;length&gt; == uint16(len(bytes(&lt;content&gt;)))
 </pre></div>
 </div>
 </div>
@@ -691,7 +691,7 @@ Let us produce a single output using <code class="docutils literal notranslate">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 5.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 02 00 02                                       |....|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  02 00 02 00                                       |....|
 00000004
 </pre></div>
 </div>
@@ -741,7 +741,7 @@ The function <code class="docutils literal notranslate"><span class="pre">from_u
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 46 72 e6 c7                                 |..Fr..|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 76 f6 82 31                                 |..v..1|
 00000006
 </pre></div>
 </div>
@@ -777,8 +777,8 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: I/O operation on closed file.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 005  \0   8   6   6   4   9
-0000007
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 001  \0   7
+0000003
 </pre></div>
 </div>
 </div>

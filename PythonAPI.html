@@ -466,7 +466,8 @@ To use it, write</p>
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Fandango</span></code> constructor allows reading in a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> specification, either from an (open) file, a string, or a list of strings or files.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fandango</span><span class="p">(</span><span class="n">fan_files</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">IO</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="n">IO</span><span class="p">],</span> <span class="n">constraints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fandango</span><span class="p">(</span><span class="n">fan_files</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">IO</span> <span class="o">|</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">IO</span><span class="p">],</span>
+    <span class="n">constraints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
     <span class="n">start_symbol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">use_cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">use_stdlib</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -492,7 +493,11 @@ This is either</p>
 </ul>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Be aware that <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files can contain Python code that is <em>executed when loaded</em>. This code can execute arbitrary commands and also can gain access to your API-calling code.</p>
+<p>Be aware that <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files can contain Python code that is <em>executed when loaded</em>. This code can execute arbitrary commands.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Code in the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> spec cannot access identifiers from the API-calling code or vice versa. However, as both are executed in the same Python interpreter, there is a risk that loaded <code class="docutils literal notranslate"><span class="pre">.fan</span></code> code may bypass these restrictions and gain access to the API-calling code.</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
@@ -513,6 +518,10 @@ This is either</p>
 </pre></div>
 </div>
 <p>Create outputs from the specification, as a list of <a class="reference internal" href="DerivationTree.html#sec-derivation-tree"><span class="std std-ref">derivation trees</span></a>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In the future, the set of available <code class="docutils literal notranslate"><span class="pre">settings</span></code> may change dependent on the chosen algorithm.</p>
+</aside>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">extra_constraints</span></code>: if given, use this list of strings as additional constraints</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">settings</span></code>: pass extra values to control the fuzzer algorithm. These include</p>
@@ -586,16 +595,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michelle Mcclure,6431
-Ariana West,52
-Breanna Dunn,92553
-Julie Norton,41
-Belinda Herrera,2971
-Andrea Wilson,73
-Jennifer Malone,00957
-April Lopez,951
-Tiffany Moore,1
-Jerry Watkins,06482
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Steven Schwartz,5171
+Michael Williams,9367
+Elizabeth Edwards,94808
+Philip Larson,25
+Brent Cox,321
+Melissa Nunez,7
+Barbara Blair,3
+Gregory Dyer,124
+Sharon Peterson,41571
+Kyle Holt,71
 </pre></div>
 </div>
 </div>
@@ -652,9 +661,9 @@ Jerry Watkins,06482
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Time taken: 0.00 seconds
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cc
-bbcba
-baab
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cabab
+c
+ababc
 </pre></div>
 </div>
 </div>
@@ -744,7 +753,7 @@ baab
   <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
     <span class="n">fan</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
-  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">208</span> <span class="ow">in</span> <span class="n">parse</span>
+  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">213</span> <span class="ow">in</span> <span class="n">parse</span>
     <span class="k">raise</span> <span class="n">FandangoParseError</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
 
   <span class="n">File</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
