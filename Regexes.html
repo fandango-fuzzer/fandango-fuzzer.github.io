@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first stable release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
 </aside>
 
   
@@ -208,14 +208,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Distributions.html">Statistical Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Whitebox.html">Coverage-Guided Fuzzing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
@@ -533,16 +533,16 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 20.
-abcabcabc
-abcabcabcabcabc
-abc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabc
-abcabc
+abcabcabcabcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabc
 </pre></div>
 </div>
 </div>
@@ -563,108 +563,114 @@ Let us limit the number of repetitions to the range 1…5:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 5.
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate full unique new population, filling remaining slots with duplicates.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabc
+abcabcabc
+abcabcabcabcabc
+abc
+abcabcabcabc
+abcabcabcabc
 abcabcabc
 abcabcabcabc
+abc
+abcabc
+abcabcabc
+abcabc
+abcabc
+abcabc
+abcabcabcabc
+abcabc
+abcabcabc
+abcabcabc
+abcabcabcabc
+abc
+abcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabc
+abcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abc
+abc
+abcabcabc
+abcabc
+abcabcabcabcabc
+abcabc
+abcabcabcabcabc
+abcabcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabc
+abc
+abcabcabcabc
+abcabcabc
+abcabc
+abcabcabcabcabc
 abcabc
 abc
 abcabcabcabcabc
 abcabcabc
 abc
-abcabcabcabc
-abcabcabc
-abcabcabcabc
-abcabc
 abc
-abcabc
-abcabc
-abcabc
-abcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abc
-abcabcabcabc
-abc
-abcabcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabc
-abcabcabcabcabc
 abcabcabcabcabc
 abcabcabcabcabc
 abcabcabc
-abcabcabcabc
 abcabcabcabcabc
 abcabcabcabcabc
-abcabcabcabcabc
-abc
 abcabcabcabcabc
 abcabcabcabc
 abc
 abc
+abcabcabcabcabc
+abcabcabcabcabc
+abcabc
 abcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
 abcabcabcabc
-abc
-abc
-abc
+abcabc
+abcabcabcabcabc
+abcabc
 abcabcabcabc
-abcabcabc
 abcabc
 abcabcabcabc
 abcabcabcabc
+abcabc
 abcabcabc
 abcabc
-abcabcabcabc
-abc
-abcabc
-abcabcabcabcabc
 abc
 abcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabcabcabcabc
 abcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
 abc
-abcabcabcabcabc
-abcabcabcabcabc
+abcabcabcabc
+abcabc
+abcabc
+abc
 abc
 abcabc
 abcabc
-abcabcabcabc
-abc
+abcabcabc
 abc
 abcabcabc
 abcabcabcabcabc
 abc
-abcabcabcabc
 abcabcabc
-abcabcabcabc
-abcabcabc
-abcabcabc
-abc
-abc
-abcabcabcabc
-abcabcabc
-abc
-abcabcabcabc
-abc
-abc
-abcabcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabcabc
-abc
-abcabc
-abcabcabcabc
-abcabcabcabc
-abc
-abc
 abcabcabc
 </pre></div>
 </div>
@@ -841,7 +847,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Fuzzing with Fandango</title>
+    <title>Fandango Command Reference &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -57,9 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Footer';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Commands';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fandango Language Reference" href="Language.html" />
+    <link rel="prev" title="Installing Fandango" href="Installing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +126,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -211,10 +211,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
@@ -291,7 +291,7 @@
       
       
       
-      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FFooter.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FCommands.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +321,7 @@
       
       
       
-      <li><a href="_sources/Footer.md" target="_blank"
+      <li><a href="_sources/Commands.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -405,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Fandango Command Reference</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,9 +414,12 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-commands">All Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzing">Fuzzing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing">Parsing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell">Shell</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -427,22 +430,228 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="_images/logo_cispa.png"><img alt="_images/logo_cispa.png" src="_images/logo_cispa.png" style="width: 75%;" />
-</a>
-</figure>
-</aside>
-<p><small>Fandango is a project of the <a class="reference external" href="https://www.cispa.de/">CISPA Helmholtz Center for Information Security</a> to facilitate highly efficient and highly customizable software testing.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="_images/logo_erc.png"><img alt="_images/logo_erc.png" src="_images/logo_erc.png" style="width: 75%;" />
-</a>
-</figure>
-</aside>
-<p><i>This research was funded by the European Union (<a class="reference external" href="https://www.cispa.de/s3">ERC “Semantics of Software Systems”, S3</a>, 101093186). Views and opinions expressed are however those of the authors only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them.</i></small></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="fandango-command-reference">
+<span id="sec-commands"></span><h1>Fandango Command Reference<a class="headerlink" href="#fandango-command-reference" title="Link to this heading">#</a></h1>
+<section id="all-commands">
+<h2>All Commands<a class="headerlink" href="#all-commands" title="Link to this heading">#</a></h2>
+<p>Here is a list of all <code class="docutils literal notranslate"><span class="pre">fandango</span></code> commands:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango [-h] [--version] [--verbose | --quiet]
+                {fuzz,parse,shell,help,copyright,version} ...
+
+The access point to the Fandango framework
+
+options:
+  -h, --help            show this help message and exit
+  --version             show version number
+  --verbose, -v         increase verbosity. Can be given multiple times (-vv)
+  --quiet, -q           decrease verbosity. Can be given multiple times (-qq)
+
+commands:
+  {fuzz,parse,shell,help,copyright,version}
+                        the command to execute
+    fuzz                produce outputs from .fan files and test programs
+    parse               parse input file(s) according to .fan spec
+    shell               run an interactive shell (default)
+    help                show this help and exit
+    copyright           show copyright
+    version             show version
+
+Use `fandango help` to get a list of commands.
+Use `fandango help COMMAND` to learn more about COMMAND.
+See https://fandango-fuzzer.github.io/ for more information.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fuzzing">
+<h2>Fuzzing<a class="headerlink" href="#fuzzing" title="Link to this heading">#</a></h2>
+<p>To <a class="reference internal" href="Fuzzing.html#sec-fuzzing"><span class="std std-ref">produce outputs with <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango fuzz [-h] [-f FAN_FILE] [-c CONSTRAINT] [--no-cache]
+                     [--no-stdlib] [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
+                     [-x FILENAME_EXTENSION]
+                     [--format {string,bits,tree,grammar,value,repr,none}]
+                     [--file-mode {text,binary,auto}] [--validate]
+                     [-S START_SYMBOL] [--warnings-are-errors]
+                     [-N MAX_GENERATIONS] [--population-size POPULATION_SIZE]
+                     [--elitism-rate ELITISM_RATE]
+                     [--crossover-rate CROSSOVER_RATE]
+                     [--mutation-rate MUTATION_RATE]
+                     [--random-seed RANDOM_SEED]
+                     [--destruction-rate DESTRUCTION_RATE]
+                     [--max-repetition-rate MAX_REPETITION_RATE]
+                     [--max-repetitions MAX_REPETITIONS]
+                     [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
+                     [-n NUM_OUTPUTS] [--best-effort] [-i INITIAL_POPULATION]
+                     [-o OUTPUT] [--input-method {stdin,filename}]
+                     [command] ...
+
+options:
+  -h, --help            show this help message and exit
+  -f, --fandango-file FAN_FILE
+                        Fandango file (.fan, .py) to be processed. Can be
+                        given multiple times. Use &#39;-&#39; for stdin
+  -c, --constraint CONSTRAINT
+                        define an additional constraint CONSTRAINT. Can be
+                        given multiple times.
+  --no-cache            do not cache parsed Fandango files.
+  --no-stdlib           do not use standard library when parsing Fandango
+                        files.
+  -s, --separator SEPARATOR
+                        output SEPARATOR between individual inputs. (default:
+                        newline)
+  -I, --include-dir DIR
+                        specify a directory DIR to search for included
+                        Fandango files
+  -d, --directory DIRECTORY
+                        create individual output files in DIRECTORY
+  -x, --filename-extension FILENAME_EXTENSION
+                        extension of generated file names (default: &#39;.txt&#39;)
+  --format {string,bits,tree,grammar,value,repr,none}
+                        produce output(s) as string (default), as a bit
+                        string, as a derivation tree, as a grammar, as a
+                        Python value, in internal representation, or none
+  --file-mode {text,binary,auto}
+                        mode in which to open and write files (default is
+                        &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
+                        otherwise)
+  --validate            run internal consistency checks for debugging
+  -o, --output OUTPUT   write output to OUTPUT (default: stdout)
+
+general settings:
+  -S, --start-symbol START_SYMBOL
+                        the grammar start symbol (default: `&lt;start&gt;`)
+  --warnings-are-errors
+                        treat warnings as errors
+
+algorithm settings:
+  -N, --max-generations MAX_GENERATIONS
+                        the maximum number of generations to run the algorithm
+  --population-size POPULATION_SIZE
+                        the size of the population
+  --elitism-rate ELITISM_RATE
+                        the rate of individuals preserved in the next
+                        generation
+  --crossover-rate CROSSOVER_RATE
+                        the rate of individuals that will undergo crossover
+  --mutation-rate MUTATION_RATE
+                        the rate of individuals that will undergo mutation
+  --random-seed RANDOM_SEED
+                        the random seed to use for the algorithm
+  --destruction-rate DESTRUCTION_RATE
+                        the rate of individuals that will be randomly
+                        destroyed in every generation
+  --max-repetition-rate MAX_REPETITION_RATE
+                        rate at which the number of maximal repetitions should
+                        be increased
+  --max-repetitions MAX_REPETITIONS
+                        Maximal value, the number of repetitions can be
+                        increased to
+  --max-node-rate MAX_NODE_RATE
+                        rate at which the maximal number of nodes in a tree is
+                        increased
+  --max-nodes MAX_NODES
+                        Maximal value, the number of nodes in a tree can be
+                        increased to
+  -n, --num-outputs, --desired-solutions NUM_OUTPUTS
+                        the number of outputs to produce (default: 100)
+  --best-effort         produce a &#39;best effort&#39; population (may not satisfy
+                        all constraints)
+  -i, --initial-population INITIAL_POPULATION
+                        directory or ZIP archive with initial population
+
+command invocation settings:
+  --input-method {stdin,filename}
+                        when invoking COMMAND, choose whether Fandango input
+                        will be passed as standard input (`stdin`) or as last
+                        argument on the command line (`filename`) (default)
+  command               command to be invoked with a Fandango input
+  args                  the arguments of the command
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parsing">
+<h2>Parsing<a class="headerlink" href="#parsing" title="Link to this heading">#</a></h2>
+<p>To <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parse inputs with <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">parse</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango parse [-h] [-f FAN_FILE] [-c CONSTRAINT] [--no-cache]
+                      [--no-stdlib] [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
+                      [-x FILENAME_EXTENSION]
+                      [--format {string,bits,tree,grammar,value,repr,none}]
+                      [--file-mode {text,binary,auto}] [--validate]
+                      [-S START_SYMBOL] [--warnings-are-errors] [--prefix]
+                      [-o OUTPUT]
+                      [files ...]
+
+positional arguments:
+  files                 files to be parsed. Use &#39;-&#39; for stdin
+
+options:
+  -h, --help            show this help message and exit
+  -f, --fandango-file FAN_FILE
+                        Fandango file (.fan, .py) to be processed. Can be
+                        given multiple times. Use &#39;-&#39; for stdin
+  -c, --constraint CONSTRAINT
+                        define an additional constraint CONSTRAINT. Can be
+                        given multiple times.
+  --no-cache            do not cache parsed Fandango files.
+  --no-stdlib           do not use standard library when parsing Fandango
+                        files.
+  -s, --separator SEPARATOR
+                        output SEPARATOR between individual inputs. (default:
+                        newline)
+  -I, --include-dir DIR
+                        specify a directory DIR to search for included
+                        Fandango files
+  -d, --directory DIRECTORY
+                        create individual output files in DIRECTORY
+  -x, --filename-extension FILENAME_EXTENSION
+                        extension of generated file names (default: &#39;.txt&#39;)
+  --format {string,bits,tree,grammar,value,repr,none}
+                        produce output(s) as string (default), as a bit
+                        string, as a derivation tree, as a grammar, as a
+                        Python value, in internal representation, or none
+  --file-mode {text,binary,auto}
+                        mode in which to open and write files (default is
+                        &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
+                        otherwise)
+  --validate            run internal consistency checks for debugging
+  --prefix              parse a prefix only
+  -o, --output OUTPUT   write output to OUTPUT (default: none). Use &#39;-&#39; for
+                        stdout
+
+general settings:
+  -S, --start-symbol START_SYMBOL
+                        the grammar start symbol (default: `&lt;start&gt;`)
+  --warnings-are-errors
+                        treat warnings as errors
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="shell">
+<h2>Shell<a class="headerlink" href="#shell" title="Link to this heading">#</a></h2>
+<p>To <a class="reference internal" href="Shell.html#sec-shell"><span class="std std-ref">enter commands in <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">shell</span></code> or just <code class="docutils literal notranslate"><span class="pre">fandango</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango shell [-h]
+
+options:
+  -h, --help  show this help message and exit
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -474,6 +683,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Installing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installing Fandango</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Language.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fandango Language Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -489,9 +716,12 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-commands">All Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzing">Fuzzing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing">Parsing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell">Shell</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

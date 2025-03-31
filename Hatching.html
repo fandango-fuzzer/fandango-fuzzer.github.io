@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Fandango Reference" href="Reference.html" />
-    <link rel="prev" title="Coverage-Guided Fuzzing" href="Whitebox.html" />
+    <link rel="prev" title="Case Study: The GIF Format" href="Gif.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first stable release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
 </aside>
 
   
@@ -208,14 +208,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Distributions.html">Statistical Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Whitebox.html">Coverage-Guided Fuzzing</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
@@ -415,7 +415,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-include-function">The <code class="docutils literal notranslate"><span class="pre">include()</span></code> Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-specs-with-include">Including Specs with <code class="docutils literal notranslate"><span class="pre">include()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incremental-refinement">Incremental Refinement</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crafting-a-library">Crafting a Library</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#include-vs-import"><code class="docutils literal notranslate"><span class="pre">include()</span></code> vs. <code class="docutils literal notranslate"><span class="pre">import</span></code></a></li>
@@ -432,14 +432,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hatching-specs">
 <span id="sec-hatching"></span><h1>Hatching Specs<a class="headerlink" href="#hatching-specs" title="Link to this heading">#</a></h1>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>This chapter is still in construction.</p>
-</div>
-<section id="the-include-function">
-<h2>The <code class="docutils literal notranslate"><span class="pre">include()</span></code> Function<a class="headerlink" href="#the-include-function" title="Link to this heading">#</a></h2>
 <p>Fandango provides an <code class="docutils literal notranslate"><span class="pre">include()</span></code> function that you can use to <em>include</em> existing Fandango content.
-Specifically, in a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, a call to <code class="docutils literal notranslate"><span class="pre">include(FILE)</span></code></p>
+This allows you to distribute specifications over multiple files, defining <em>base</em> specs whose definitions can be further <em>refined</em> in specs that use them.</p>
+<section id="including-specs-with-include">
+<h2>Including Specs with <code class="docutils literal notranslate"><span class="pre">include()</span></code><a class="headerlink" href="#including-specs-with-include" title="Link to this heading">#</a></h2>
+<p>Specifically, in a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, a call to <code class="docutils literal notranslate"><span class="pre">include(FILE)</span></code></p>
 <ol class="arabic simple">
 <li><p>Finds and loads <code class="docutils literal notranslate"><span class="pre">FILE</span></code> (typically <a class="reference internal" href="Including.html#sec-including"><span class="std std-ref">in the same location as the including file</span></a>)</p></li>
 <li><p>Executes the <em>code</em> in <code class="docutils literal notranslate"><span class="pre">FILE</span></code></p></li>
@@ -457,9 +454,47 @@ Then, in a <em>refined</em> spec (say, <code class="docutils literal notranslate
 <li><p>override <em>function and constant definitions</em>, by redefining them; and</p></li>
 <li><p>add additional <em>constraints</em>.</p></li>
 </ul>
+<p>As an example, consider our <code class="docutils literal notranslate"><span class="pre">persons.fan</span></code> <a class="reference internal" href="Fuzzing.html#sec-fuzzing"><span class="std std-ref">definition of a name database</span></a>.
+We can create a more specialized version <a class="reference download internal" download="" href="_downloads/a2d982e6938dc979eed4ec800ebcc00b/persons50.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons50.fan</span></code></span></a> by including <code class="docutils literal notranslate"><span class="pre">persons.fan</span></code> and adding a <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraint</span></a>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;persons.fan&#39;)
+where int(&lt;age&gt;) &lt; 50
+</pre></div>
+</div>
+</div>
+</div>
+<p>Likewise, we can create a specialized version <a class="reference download internal" download="" href="_downloads/6449eb07859146fcf82907493793d86e/persons-faker.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons-faker.fan</span></code></span></a> that uses <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">fakers</span></a> by overriding the <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;last_name&gt;</span></code> definitions:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from faker import Faker
+fake = Faker()
+
+include(&#39;persons.fan&#39;)
+
+&lt;first_name&gt; ::= &lt;name&gt; := fake.first_name()
+&lt;last_name&gt; ::= &lt;name&gt; := fake.last_name()
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <em>include</em> mechanism thus allows us to split responsibilities across multiple files:</p>
+<ul class="simple">
+<li><p>We can have one spec #1 with basic definitions of individual elements</p></li>
+<li><p>We can have a spec #2 that uses (includes) these basic definitions from spec #1 to define a <em>syntax</em></p></li>
+<li><p>We can have a spec #3 that refines spec #2 to define a specific format for a particular program or device</p></li>
+<li><p>We can have a spec #4 that refines spec #3 towards a particular testing goal.</p></li>
+</ul>
+<p>These mechanisms are akin to <em>inheritance</em> and <em>specialization</em> in object-oriented programming.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Generally, Fandango will warn about unused symbols, but not in an included <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file.</p>
+</div>
 </section>
 <section id="crafting-a-library">
 <h2>Crafting a Library<a class="headerlink" href="#crafting-a-library" title="Link to this heading">#</a></h2>
+<p>If you create multiple specifications, you may wonder where best to store them.
+The <a class="reference internal" href="Including.html#sec-including"><span class="std std-ref">rules for where Fandango searches for included files</span></a> are complex, but they boil down to two simple rules:</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Store your included Fandango specs either</p>
@@ -516,12 +551,12 @@ Most importantly, the current Fandango implementation will process “included�
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Whitebox.html"
+       href="Gif.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Coverage-Guided Fuzzing</p>
+        <p class="prev-next-title">Case Study: The GIF Format</p>
       </div>
     </a>
     <a class="right-next"
@@ -549,7 +584,7 @@ Most importantly, the current Fandango implementation will process “included�
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-include-function">The <code class="docutils literal notranslate"><span class="pre">include()</span></code> Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-specs-with-include">Including Specs with <code class="docutils literal notranslate"><span class="pre">include()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incremental-refinement">Incremental Refinement</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crafting-a-library">Crafting a Library</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#include-vs-import"><code class="docutils literal notranslate"><span class="pre">include()</span></code> vs. <code class="docutils literal notranslate"><span class="pre">import</span></code></a></li>
@@ -577,7 +612,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

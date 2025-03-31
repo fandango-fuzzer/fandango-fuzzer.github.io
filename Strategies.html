@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first stable release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
 </aside>
 
   
@@ -208,14 +208,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Distributions.html">Statistical Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Whitebox.html">Coverage-Guided Fuzzing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
@@ -438,16 +438,16 @@ But let us again have a look at the inputs we generated so far:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ual Kp,2071
-Nonfc Zvu,7
-Fzho Eocj,629
-Ksbbxx Gazpbg,2866
-Cmr Ubb,972
-Bv Cywtxc,07
-Lt Sm,3
-Mcgk Dajjof,99
-Yfpur Ubahz,69
-Oykynf Xshp,42340
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nsvheq Pckcfe,29
+Cyfg Munyqj,16
+Gdyju Yglseu,21
+Kyuik Npo,8
+Cnfb Rtakpq,811
+Cq Js,86
+Jsrpe Dw,09245
+Ef Cw,4841
+Svreyu Dmgjv,32
+Pfm Eizn,8798
 </pre></div>
 </div>
 </div>
@@ -483,16 +483,16 @@ So-called <em>buffer overflows</em> have long been among the most dangerous vuln
 <p>This is the effect of this rule:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bdllfjgvdmbpflvllkagagfpybnnlmpakwsakrsvcnvhyyasufxnzzgpoiwelpeipsnhqyjyarilnkhejccjpudlthdqiaterzlq Wubwmhnicogruwanjwamfimjkvgtbubmqewfuejaqwgbkwydkqdwiutvnayifozwiwfhbyhcasxkhcbqshlibmfyrgxtxqafjfoj,6343
-Hdbjizdwsjqtlkeybricixxehtbbbuqtgkvbcfeopblfjtpjetidymyfuntzoxwqtysxznkkarxijathuttbjaylyoaspkjwqnhu Lglgdrlecdacdjyefazmcbnctikmwpsmwxpnkgexbpawfujdepnzxbozynvfbsjaapqrlxfyirbedfdzrkvgzbomlqzgbvlsuvsm,960
-Bdxcpnncfmhrxmoanxiqmjkaomuijtkbnblpitlnlccuygyqumxferorkhdsxtwxloidspmrdidfdqqivslsoiwztxjxllcftmjz Dwaosffzpohajtornqgoxltjundvypsaosfwkvptzzsfxdlxpxkgsxfbdyopoyzdezlfsukvwrucgeotznebfxbxdmpqamyypnqf,044
-Vsenqiwfhlokmmemakxzwmaidedpmdxxwzadylyofjzxypepgcksaltedxliagxtjekxknqqeprcvcfreoilgheadwhhriufojgb Yclcgequhxejvajavzaznxnuhqhwonhlrkzvcgqcbyludopkdrliyxuiqgtbwdcstockpyjmxjhyrreyjrqduruqfdfbpwhypzlt,95132
-Rdggbinsoillsqnenxtfcealqomtooydzfismkeehuwnbozdspuchdogaltmjvwyaomtdeytewdfcuybtjryfmczmnhrbpkwixgj Uvdkzbmwmxngwrfhnukgsfrlpxxwjdwhitnsomgvwkdgyzesdgopcgaciwssiwieywujcjnmbdvrprbjylxyzcxcwpdugomeuzvz,661
-Cqilrsscsvswjlokukbeorwjqjxamvnwtkfuabwulmiipcumotwvcuogliqfvekamzzhmbeuwzsoenvewgwimkdsqaxizdmnzqrd Dsfsrydffbeckkwpolkqbodcykyhngvomwgtkrnasknixnnkyrutasndmsicpllbjwyfcharvhytqonxbemoqwvqhzhappegypuq,2679
-Iiyhataytgynfwijmjrnegwyfwcrxcfmchnpxglkprfxfynigspbgopxjmfogtuevrbxwqojaosybzopxthltbrtkmjnhcmjtkkn Cgngwrwrmfceaywwcndbzbzkozelhffonzklienouivnemomuubkbdpotsavfjuaongvvavhhbhiwpocbasbbpqfaxingoquzujh,55
-Iwtqqugrayelmxfinucjfwrzdzyggidddelpptuxwvtiqlpfnxccczpikqwjgwndbqbzoewnqvcrfuzqemujjphjgsxghsdjwutv Qegaphqlzyfkjmftelbnywnhwwujmoteryodnuuwcfhdojjjpkwuzfmzmtmhahwbxymolkigqfjiiuzzfqynlucawlsbqikbcpnl,972
-Dukepucubswporodopmvneggnplinhsocrgluvwuufzrqmxgbgfzxiaikpchciynrtwyylnabawcgccxjejdncofxsffwdgydjjl Xsjpzcnlqwiyriagikdinxzlomtewfmnbmznmnatxpfkybboweqvxetrprpbibitjbgxgbscwvrupavbpywjhnavietdcwrzclbs,2838
-Yspapocpxgasnxgbsewrxiqiyizqdoilhcjzvsdnitbyaviswqdwjnxnbmqenybsnjrjfnfrerdtkhuuegdtwegafuzhzvxjynld Ltdaxehcpnmiknrqirjayanfviedzkagugfsccpyzwsigmfclwqiurttstojpdouaghejayzmpbpdwgwhvqsrzsyvmyctzmhiiyh,63
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skopjsomkqjwjuxatqmdwfrckvwgwttkpxhkrfffdufkbnshjpobtzvwwpzaiepzsexzmibwcvulbuupmqpodbiytnwyxfyjevco Flaejbrspwigbdphyupqqzivuzgpsrehbfkcjbxdahvhlymqghrjfxnbxcjhevdcgvmryedmuviqulshrallcluwastlzmsgbbjm,79
+Iuduthemokixvmzenrqaljxknmnntnkpveuknemgbqhojtwxuitoijalslkdiorwfqqyapzmodydjdnhuwcczgmqyeflzhcowijc Bgoiawkbdvvpgvirkzazxkkwxoepikjfhaniysihepcldhkokykxihhoqiggthxxzuhjkrebphtrupgandgralzuphtdebpauodh,15
+Rshdqtadfziadteiokhxyevjmqgvrkokkdynpzznogbfxjoiqjchjjtfcfkliruueklcmpyplgfngvflzeexcrbhlzgbjsfdpmwd Qchrwfommyjlhkynducblxpyqpnhronsxhcajshsvrbibcmzasnfcmhdjmrrottpliifgdigngrsptkvhfogglhucudwppxzxhlo,5
+Agypwaoaioxrezxhmnnwygzhcndbsuevdosesifpdmiphhutpfrtwlqnmaemnjkqleyzalapedbqzrwqdszascnrqcqojidetiep Lbkleyancnmsfvkwmfxcjnledlfgomlyvzmigxtouzokeruqolzwnnteieknybpnoloxkdzyuontqfcvwzbqagettngvfjyzxiwt,90
+Woimkrjvqaxwfxiqptdtegpmgluucrndftfhdoudjrkteaqhaypnowuawqhgavdumhpykygnxibghukzrpmiemxanbmujvjqvzog Ryshgkebahvmpxrioorwyfkuzyefsstuofqqgxlfqfmylmxnwgrwyjxpcdsfzdkscwpzgwgtnowihbqljyeygmtyvivxzhfszzut,55
+Hockkyvikpsisftqzxauprvzwztuwtgpxfgyazcowzadtucqrfnbcavrxyladcayxvtktpskkylqgrksqdzruwydaoftfufxalvb Iuprwjeopxurdeimnsxlqbfchnmpqxnbnvetatyrpugrkbxznaxbgfaxfzfqnsijqbbsyxoqgirltsomotsfnilmyqmwzsypuctl,6
+Kxwmfxomhzqcdmztxwhflhgnikvdpvlvhytyaegvfmgwivdhnmxekzauokyqwfrvundudjdsxfnqwiquqflxzhxawlyeyxwdwgjo Qckxxeyyyxwkpcdjouqnveehktecvjcesfzdufcspxfzjqbbkcgwexzcvmzjcylnszuiwqopemjagtrkucsdqzsgxwagserfilzn,41
+Zqvmblkzywvqlpxuwvgietrnpscxgtvowswotczzldmfxqbnphdmsnbbwjvjvpxzfpkvzxubocbynhpoppxrtoixryjpzjriwiga Ahkgwppgnpbdqcqfschufdbprksjzotuazrnvsincczgupmemqeyaazcdicudqoapyfbrhqrlsomjffbqtbuysavnjtwgawouwjw,68
+Rgocvgkehwbfbnxgnlmsrtsjalthltvrityhyfltrkmraypxoyekvlevvaiujyqwrffggyrpebwxwzazcaqnmkzpwboaxsambohd Xflxwqorhcggqxqjwkbdczhrscrqvskqdznjnyekkjkvlzmodkhczlllkpfoznoaphlrrjwncbcrukpssbaanyfbfzowojueixhy,42
+Hhvikatlqedretrnbzxjgobctlhialmsixrsosuzfhkmzqdcvbrneyxggamjiyrxtmlgjypljcjqqcgmfiyabsumupzssrtvljdr Uduqaamvhbkegokfcdbmbzqbqizdnnqtjgoaytacwivdqfpghwfwllbhavkbgymxjxdpxjvgawjlbqriqvkseaiofnuqfunixlyl,04
 </pre></div>
 </div>
 </div>
@@ -520,16 +520,16 @@ What happens if we have a person with a negative age?</p>
 <p>Try it yourself and modify <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> such that it can also produce negative numbers, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oprtxu Rhyw,3
-Wwt Llsmx,-97266
-Eqx Onctb,-8610
-Tzpab Vgmk,00755
-Yb Tcg,-34559
-Zz Zikz,19262
-Jrf Lzbvkc,-8
-Wlwwxp Sryrr,55210
-Yo Ilofji,64
-Izwlcn Qrc,90
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wnfznj Ogu,272
+Swehc Evb,-1974
+Qbuiz Okmkb,91
+Hz Uqd,6497
+Nqv Njc,-3
+Vib Nt,-0826
+Ye Sdgthp,4238
+Lgymas Nerzhz,30
+Xbmew Qhtf,-621
+Ing Fstktp,-7
 </pre></div>
 </div>
 </div>
@@ -700,7 +700,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

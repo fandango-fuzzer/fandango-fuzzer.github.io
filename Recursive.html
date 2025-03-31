@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first stable release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
 </aside>
 
   
@@ -208,14 +208,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Distributions.html">Statistical Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Whitebox.html">Coverage-Guided Fuzzing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
@@ -482,16 +482,16 @@ Have a look at the above rule first, and then check out the solution.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>321 + 47666 + 475
-03180
-9 + 7 + 49 + 9897 + 189 + 91 + 1583
-2
-04
-4
-3
-15321 + 674 + 97251
-4711
-3072
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35330
+62
+8 + 94 + 2
+871 + 3615
+8 + 1 + 04027
+354
+553
+06147 + 68 + 834 + 54 + 68
+1686
+8
 </pre></div>
 </div>
 </div>
@@ -555,18 +555,16 @@ Hence, <code class="docutils literal notranslate"><span class="pre">2</span> <sp
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>++-(68) * 07 / (93 * (1 / 40 - 5) * -(3 / 86 - 0) + (69 + 58) * +(78) + -(97)) / 3861 * +50020 / +5 - (--55120 + -(94) / +4519 * +(5) * +--37 / -+(37) + (40 * 64) / (76 * 00 - 29) - 00 / 71 / -38 * (06) - -76 + 1) - 0010 + 6066
---0481 + +-0 / +++15 * +(21 / 89 - 84) / (17 / 96 / -48 / ++25 - (76) + 88) / ((74 * 44 - 27) - 69 * 12 / +48 * -5 - 79 * 38 - 89) * -951 / +---(44 * 08 + 9) / -(++56669) + -62 / (2 * 81 / (52)) * 77840 / +6757 / --084 / +1843 + +13 / +-(42) / +55466 / ----2
-++(+-(+00 + 57) + 53382 * (04) / -+1) / ((9) * -84 / 6 * +(29) / 81680 / (2 * 8 / -88 - 79 / 83 + 49) * +-7 / +-+-(07) / +-+---68) - +(+--26 + 9 * 7 / +44 / (6)) * +-(+1982 - 54 / 99) * 43492 * (-+56143 / 9 + 0683 / (4) * --+66 * (9484)) + 46 * 75 / 49 / (67) / 0978 / ++-58 * +(43 + 84) * (26 * 23 / 42 * -76 + 26 * 06) / -+6755 / -0238 / +0 + ((37) / 2385 * (90 - 1) / 6 + --57 * (42) + +(41) - 4 + 91)
--276 / (-(+++90 - (60) / 20) - (8013) + 01 / 89 * -33 / +-45 * -(68) * +54526 + (08 * 6)) * 43
-+(+47514 * 48 + 05 * 15 * -84 * -+1 / +(37) - (60) * -15 - 76 * 88 + 9) * 616 / (1592 * 39977 / -+(+3 - 79)) * -79322 + +--12 * (24 + 39) / 28054 / -+++81 * +-2 / ++1 / -82152 / ((55 + 32) / +-45 * 2498 / -3 - (+49) - +29 / +5 * (08)) / --(94 / 30 * -04 * +40 / (3) * -(89) - -75672) - +++-(4) * +(+02 / -07 * 51 + 7 / 0 / 401) / 79973
--+-(+(35) / +20 + 6210) / -+(+-47 / -+95 * (39 - 98) / 6827 * (63 * 95 / 02 / +44 + 12 / 47 - 48) + --81 * 41 / ++-06 + 05 / 9 * +16 * 992 * 265)
-06213 / 3 + 256 + +2944 / ++-46 / +-+-++7 + (21 * 99 * +31 / +23 / 4724 / -+(76) - 96 * 86 / -36 * (76) - 24 / 05 * +04 + 36) + ((27) - 74 / 9 - 23) / (8707 / -2 - -9 - 70)
-39
-635 * 863 - ---(-2 * +80 / 4) * (--20409 / ---27 / +(-(54) + 51 * 42)) - -(01 / 16 * +58 - 48) / -+49990 / (37 + -50 * -3 * -06) * 369 / 27
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-+(64 * 35 * 9761 * -+5 / --+00) / (96 + 793 * 7638 / (-(96) / -+08)) / -022 - --1 / 4 / -22 * 6344 * +168 * +((60) - 05 - 16) * --++-2 / +(--7236 - (87) - 65 / 02) / (+(83 - 7) / --(87) / ++282) * +2083 - +-82304 - (-3633) + -8873 * -9718 / +49492 / (48 * 38 / -87 - 50 / 9 + 8) - -15666
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--269 * -+-(06 + 99)
+--+(56 * 3 * 81 + 54) * 64 / 05 * 75 / 6 + 13
+++++(4 - (80) - 4) - 76
+15167 / 20 * 13 / 0 / 30 / 92 / 8 / 86 * 48 - 52
+44 / 5 * ((08) - 51) * 35 + 47
++1629 * -25 * 40 / 2 * 43 / 17 / 87 / 81 + 36
+(23 / 72 / 32 + 1) / 59 / 98 / 94 / 00 * 53 * 79 / 17 + 59
+((7) * 2 / 1 * 05 * 6 / 88 / 84 / 62 - 01) - 09
+8 / +-((0 / 12) / 2 + 64) - 55
+-++--+-+--96 + 87 / 73 / 0 - 58
 </pre></div>
 </div>
 </div>
@@ -605,16 +603,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64494 * +(73520.97405 / +499.11123 - (8) * 7.68 / -23 / -2 + 1 + 6 * 8 * +1 + 0 + 4) / -(++-+9 / 6.44 + 7 / 0 * +9 * 4216 * (3 / 8) / (5 / 1 / 989) / +(6 * 3 + 1) - +-676.48)
-5.61 / -(37138 - 6 / 8 * +0 + 3 * 2) * (8.02763 * 1.6 + +779.86652 + +0 * (0) + 0 * 4 - 0) / 1 * (8.75668 - (6 * 9 * +1 - (2)) / (+9 / (1) + 2 / 7) + 23.3504 * 304392.558) / -+--7.8 + ++--(2 * 355) * (425.94 * -9 / 8 * -(2) * 29098.7303 / +((0) - 8) + (0 / 4 / 8.14) - 0 * 5 / (3) / ++8 - 6 * 7 * (8)) * 12223
-(345733 * 9800 / +-10603 - +9.2 / 18.8829) / 3.53 / 3 - 48
-+++(6 / +(6)) * 7 / --5.67939
-6.7710 * +4.39 * +--(-450.61 / 51) / 85 + -3709.69 - 24 / -647 * -+6206.29851 * -69678 - +((8) - -0 + 8) / ((1) / -7 * (2) - +0.87) + +4 * 4.427 / 5 / -(7) / (0.8 - 1 / 1 - 6) - 5102.8 * (1 / 8 + 8) + 6 + (8) - 9
-(3 / -(3) * 30070.53 / (2 * 8 / 1) * 55359) / 9402 * 9 / 8 / ++(+++-3 / ((2) + 0.58 - 8)) - 1.7 * -+88.4 - 1.40 * (9) / 34 * 1159.3927 / -33490 * 44 * +2 / (--3 * (6) / +87.12 - 6 / 1 / 984 + 6 * 7) / 5.3 / 8
-2 * 437408 + (4503.578 - 1 / 7 / 8.90 / 9.70 * 661.3758 * -1.641 * +69 / (1 * 3 / +1 / -(8)) - --6 * +396 * 3 + +3 / -8 * 3.736 - 0 * 0 * 7.68 - 9) + 3.4 * (-5.5 + 0 / (4) * 6.94 + 3 * 4 + 0) * 8 + +6060.3996 * -8 / +-2.99257
-88403.3518 * 738884.9883 / ++6 / 9 / 5.9384 * 48.82845 / +-9270 * (9.575) / -7 * -156.2279
-(7.98485 * (-+272.73 * (6.47 - 2) / (-9 * +0 - 5) + -++46 - ---4)) - (4 / +0.8 + 4 / 1 * 5.75 / 4 / -4 / 8.684 * -+++8 * +--(9))
-+(4.4088 * 3740.4 / --63.46 - 0 / 1 * (1) * 42.826 - 3.11 - 3) / +(0.66 * 2) * (-44.632) / 3227 / 9749
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>303.9948 * 50.61 * 5 * 1 - 5
+(+5.28236 * 5.73 + 8)
+-4192 * 5 * 9 + (8)
+6.1006 - +(1 / 8) - 2
++++-4.65 / (3) * 4 / 9 * 4
++10580 / 6 - 68.38 + 2
+(+(142 / 3 / 7) * 4 - 3) + 8
+4.57637
+24245.8259 + (8) + 0
+74
 </pre></div>
 </div>
 </div>
@@ -625,16 +623,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8 - -(-(0.3536 - 4 * 3 + 2) - (7) / (5) * (5) * 3 * -+3) - (27501 - (7) * 7.7 * -1.2 + 2 / 6 + 0) * +(1 / 1 * +9 * 4.382 - 3 * 0 / -3 + 9) / +575724 + ((7) * (4) + 4 / 9 + 2) * --+(6) * 9.086 + 3.59 / -+6
-8 * 9 * +2184.1
-968.83 * 626194.3954
-124924.49 + ---((9 / 4 * -6 - 0)) - (3323 / --346.5 / 7.491 / +49694.0437) + (--438) * +---8.1
-7 + 497092.6855 / (72 / -+6 * +508.739 + 992.50 / (2) / +(7)) / +((0 * 7 + 0) - --2) * 61 * (8 * 3 * (7) / 830 * 8.4225 * (7 * 4 - 5) * -+-+6 / -+5 / -9)
-(8 * 140993 + 0.5) + -241365.6440 / (-(4 / 3 - 0) * 0.2043 * ++9225 - 5.33906 - 9 * 4 * +6 * (6) * +3.69 - -+7 - 6 * 8 - 7) - (974.7) * 0 / 617675 / (-2.74 / -3 / 81 * +++2 + -+9.57 + 2 * 6 * +9 + 1) * 705162
-31604 / 7.7
-+(2.65 / 7.69260 - 9.3 / 237669 * 8.93708 * ((4) * +4 * 8 - +8 - 9)) - +0 + (6 * 0 * +5 / 577 - +1) * -6.40373 * -0 / (3.43 / -5 / 886 / 7.061 * +45.19 - 4.2 / 5 + (3)) * 1.654 + (0 / 1 * (2) / +-5 / -(3) / 5.88103 - (4) / (6) * --2 + 3 * 3 * +7 + 4) + 236 * (8 + 7) * +--2 / +2.104 + (8) * 760917 * 5.381
-99401 * (+8.131) - 6.735 * +(+4280 / (73 * 569) / ((2) * -1 - 4 - 2))
-(690146.53240 - 171.24285 + -(7 * 6) / (7.43) / +-++3 - +--9 * +(7) - 33) - +2 / 6 / +69552.153 + 74.2782 / 66244
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-+(-++458.56 * 8 - 4) - 4
+50566 / ((5) / 1) / 8 - 6
++722792.7718 / 9 - 6
+65554 + 3 / 1 / 9 / 8 / 6 / 8 * 1 + 5
+--+--8 * 478 * 563.94
+939388 - 459.42 * 0
+60719.47 * +(1)
+--+469032 * 665
++12967.80 - 1 / 6 / 8 + 5
+(804510 - (6) / 5) - 2
 </pre></div>
 </div>
 </div>
@@ -738,7 +736,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>
