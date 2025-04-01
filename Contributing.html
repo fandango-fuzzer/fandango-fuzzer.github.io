@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Contributing &#8212; Fuzzing with Fandango</title>
+    <title>Contributing to Fandango &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Contributing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -392,7 +393,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -403,11 +406,35 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Contributing</h1>
+    <h1>Contributing to Fandango</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-of-conduct">Code of Conduct</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-development">Getting Started with Development</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-fork-the-fandango-repository">Step 1: Fork the Fandango repository</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-clone-the-fandango-repository-and-enter-into-it">Step 2: Clone the Fandango repository and enter into it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-create-then-activate-a-virtual-environment">Step 3: Create, then activate a virtual environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-install-development-tools">Step 4: Install development tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-install-fandango">Step 5: Install Fandango</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-time-contributors">First Time Contributors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-code">Contributing Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parser-files">Changing Parser Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-documentation">Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributions">Attributions</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -417,10 +444,143 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="contributing">
-<span id="sec-contributing"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h1>
-<p>We’re always happy for suggestions and extensions.
-Check out our <a class="reference external" href="https://github.com/fandango-fuzzer/fandango">GitHub repository</a>, where you can find all code, current issues, and ways to contribute.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="contributing-to-fandango">
+<span id="sec-contributing"></span><h1>Contributing to Fandango<a class="headerlink" href="#contributing-to-fandango" title="Link to this heading">#</a></h1>
+<p>Welcome!
+Fandango is a community project that aims to work for a wide
+range of developers.
+If you’re trying out Fandango, your experience and what you can contribute are
+important to the project’s success.</p>
+<section id="code-of-conduct">
+<h2>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading">#</a></h2>
+<p>Everyone participating in Fandango, and in particular in our
+issue tracker, pull requests, and chat, is expected to treat
+other people with respect and more generally to follow the guidelines
+articulated in the <a class="reference external" href="https://www.python.org/psf/codeofconduct/">Python Community Code of Conduct</a>.</p>
+</section>
+<section id="getting-started-with-development">
+<h2>Getting Started with Development<a class="headerlink" href="#getting-started-with-development" title="Link to this heading">#</a></h2>
+<section id="step-1-fork-the-fandango-repository">
+<h3>Step 1: Fork the Fandango repository<a class="headerlink" href="#step-1-fork-the-fandango-repository" title="Link to this heading">#</a></h3>
+<p>Within GitHub, navigate to the <a class="reference external" href="https://github.com/fandango-fuzzer/fandango">Fandango GitHub repository</a> and fork the repository.</p>
+</section>
+<section id="step-2-clone-the-fandango-repository-and-enter-into-it">
+<h3>Step 2: Clone the Fandango repository and enter into it<a class="headerlink" href="#step-2-clone-the-fandango-repository-and-enter-into-it" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/fandango-fuzzer/fandango.git
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>fandango
+</pre></div>
+</div>
+</section>
+<section id="step-3-create-then-activate-a-virtual-environment">
+<h3>Step 3: Create, then activate a virtual environment<a class="headerlink" href="#step-3-create-then-activate-a-virtual-environment" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</pre></div>
+</div>
+<p>For Windows, use</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>.<span class="w"> </span>venv/Scripts/activate
+</pre></div>
+</div>
+<p>For more details, see <a class="reference external" href="https://docs.python.org/3/library/venv.html#creating-virtual-environments">https://docs.python.org/3/library/venv.html#creating-virtual-environments</a></p>
+</section>
+<section id="step-4-install-development-tools">
+<h3>Step 4: Install development tools<a class="headerlink" href="#step-4-install-development-tools" title="Link to this heading">#</a></h3>
+<p>Install <code class="docutils literal notranslate"><span class="pre">antlr</span></code> and other system-level tools:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>system-dev-tools
+</pre></div>
+</div>
+<p>Install <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code> and other Python tools:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>dev-tools
+</pre></div>
+</div>
+<p>Install <code class="docutils literal notranslate"><span class="pre">pytest</span></code> and required files:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>install-test
+</pre></div>
+</div>
+</section>
+<section id="step-5-install-fandango">
+<h3>Step 5: Install Fandango<a class="headerlink" href="#step-5-install-fandango" title="Link to this heading">#</a></h3>
+<p>Install your local copy of Fandango:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Reset the shell PATH cache (not necessary on Windows):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">hash</span><span class="w"> </span>-r
+</pre></div>
+</div>
+<p>That’s it! You just have installed your personal copy of Fandango.
+You can invoke it as <code class="docutils literal notranslate"><span class="pre">fandango</span></code> and can alter its code as you like.</p>
+</section>
+</section>
+<section id="running-tests">
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">#</a></h2>
+<p>Running the full test suite can take a while, and usually is not necessary when
+preparing a pull request.
+Once you file a pull request, the full test suite will run on GitHub.
+You’ll then be able to see any test failures, and make any necessary changes to
+your pull request.</p>
+<p>However, if you wish to do so, you can run the full test suite
+like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>tests
+</pre></div>
+</div>
+<p>or simply</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest
+</pre></div>
+</div>
+</section>
+<section id="first-time-contributors">
+<h2>First Time Contributors<a class="headerlink" href="#first-time-contributors" title="Link to this heading">#</a></h2>
+<p>If you’re looking for things to help with, browse our <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/issues">issue tracker</a>!</p>
+<p>You do not need to ask for permission to work on any of these issues.
+Just fix the issue yourself, <a class="reference internal" href="#running-tests"><span class="xref myst">try to add a unit test</span></a> and <a class="reference internal" href="#submitting-changes"><span class="xref myst">open a pull request</span></a>.</p>
+<p>To get help fixing a specific issue, it’s often best to comment on the issue itself.
+You’re much more likely to get help if you provide details about what you’ve tried and where you’ve looked (maintainers tend to help those who help themselves).</p>
+</section>
+<section id="contributing-code">
+<h2>Contributing Code<a class="headerlink" href="#contributing-code" title="Link to this heading">#</a></h2>
+<p>Even more excellent than a good bug report is a fix for a bug, or the implementation of a much-needed new feature.
+We’d love to have your contributions.</p>
+<p>We use the usual GitHub pull-request flow, which may be familiar to you if you’ve contributed to other projects on GitHub.
+For the mechanics, see <a class="reference external" href="https://help.github.com/articles/using-pull-requests/">GitHub’s own documentation</a>.</p>
+<p>Anyone interested in Fandango may review your code.
+One of the Fandango core developers will merge your pull request when they think it’s ready.</p>
+<p>If your change will be a significant amount of work to write, we highly recommend starting by opening an issue laying out
+what you want to do.
+That lets a conversation happen early in case other contributors disagree with what you’d like to do or have ideas that will help you do it.</p>
+<p>The best pull requests are focused, clearly describe what they’re for and why they’re correct, and contain tests for whatever changes they make to the code’s behavior.
+As a bonus these are easiest for someone to review, which helps your pull request get merged quickly!
+Standard advice about good pull requests for open-source projects applies.</p>
+<section id="changing-parser-files">
+<h3>Changing Parser Files<a class="headerlink" href="#changing-parser-files" title="Link to this heading">#</a></h3>
+<p>If your contribution involves changing the ANTLR <code class="docutils literal notranslate"><span class="pre">.g4</span></code> parser files, you need to recreate the parser code.</p>
+<p>Use</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>parser
+</pre></div>
+</div>
+<p>to recreate the parser code.</p>
+</section>
+<section id="contributing-to-documentation">
+<h3>Contributing to Documentation<a class="headerlink" href="#contributing-to-documentation" title="Link to this heading">#</a></h3>
+<p>If you want to contribute to this very tutorial and reference, be sure to preview your changes.
+Use</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>html
+</pre></div>
+</div>
+<p>to create a HTML version of the documentation in <code class="docutils literal notranslate"><span class="pre">docs/_build/html</span></code>.</p>
+</section>
+</section>
+<section id="attributions">
+<h2>Attributions<a class="headerlink" href="#attributions" title="Link to this heading">#</a></h2>
+<p>This guide was forked from the <a class="reference external" href="https://github.com/python/mypy/blob/master/CONTRIBUTING.md">mypy contribution guide</a>, which is licensed under the terms of the MIT license.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -477,6 +637,37 @@ Check out our <a class="reference external" href="https://github.com/fandango-fu
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-of-conduct">Code of Conduct</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-development">Getting Started with Development</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-fork-the-fandango-repository">Step 1: Fork the Fandango repository</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-clone-the-fandango-repository-and-enter-into-it">Step 2: Clone the Fandango repository and enter into it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-create-then-activate-a-virtual-environment">Step 3: Create, then activate a virtual environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-install-development-tools">Step 4: Install development tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-install-fandango">Step 5: Install Fandango</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-time-contributors">First Time Contributors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-code">Contributing Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parser-files">Changing Parser Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-documentation">Contributing to Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributions">Attributions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

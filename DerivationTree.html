@@ -116,7 +116,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -189,7 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="nav bd-sidenav">
@@ -208,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -221,7 +222,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -549,7 +550,7 @@ The descendants are all concatenated as follows:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;.value()</span></code> will be the byte string <code class="docutils literal notranslate"><span class="pre">b&quot;barfoo&quot;</span></code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you mix Unicode strings and byte strings in a grammar, Fandango will issue a warning.</p>
+<p>If you mix byte strings and Unicode strings a grammar, Fandango will issue a warning.</p>
 </div>
 <p>Example 2 - in</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">foo</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="sa">b</span><span class="s2">&quot;foo&quot;</span>    <span class="c1"># a byte string</span>
@@ -559,7 +560,7 @@ The descendants are all concatenated as follows:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;.value()</span></code> will be the byte string <code class="docutils literal notranslate"><span class="pre">b&quot;foo\xff&quot;</span></code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you mix Unicode strings and bits in a grammar, Fandango will issue a warning.</p>
+<p>If you mix bits and Unicode strings in a grammar, Fandango will issue a warning.</p>
 </div>
 </section>
 </section>

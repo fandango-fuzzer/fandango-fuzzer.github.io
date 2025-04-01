@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fandango Spec Locations &#8212; Fuzzing with Fandango</title>
+    <title>Fandango Include Reference &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -113,7 +113,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -186,7 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="nav bd-sidenav">
@@ -205,6 +205,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -218,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Spec Locations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -404,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fandango Spec Locations</h1>
+    <h1>Fandango Include Reference</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -426,8 +427,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fandango-spec-locations">
-<span id="sec-including"></span><h1>Fandango Spec Locations<a class="headerlink" href="#fandango-spec-locations" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="fandango-include-reference">
+<span id="sec-including"></span><h1>Fandango Include Reference<a class="headerlink" href="#fandango-include-reference" title="Link to this heading">#</a></h1>
 <section id="where-does-fandango-look-for-included-specs">
 <h2>Where Does Fandango Look for Included Specs?<a class="headerlink" href="#where-does-fandango-look-for-included-specs" title="Link to this heading">#</a></h2>
 <p>In a Fandango spec, <a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">the <code class="docutils literal notranslate"><span class="pre">include()</span></code> function</span></a> searches for Fandango files in a number of locations.

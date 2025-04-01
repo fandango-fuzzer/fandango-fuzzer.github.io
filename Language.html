@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -553,10 +554,12 @@ It starts with a letter (regular expression <code class="docutils literal notran
 <span id="sec-repeat"></span><h2>Repetitions<a class="headerlink" href="#repetitions" title="Link to this heading">#</a></h2>
 <p>Any symbol can be followed by a repetition specification.
 The syntax <code class="docutils literal notranslate"><span class="pre">{N,M}</span></code> stands for a number of repetitions from <code class="docutils literal notranslate"><span class="pre">N</span></code> to <code class="docutils literal notranslate"><span class="pre">M</span></code>.
-Both <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> can be omitted:</p>
+For example, <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;{3,5}</span></code> will match from 3 to 5 <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> symbols.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> can be omitted:</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">N</span></code> is omitted, it defaults to zero.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">M</span></code> is omitted, it defaults to infinity (i.e, any number of repetitions).</p></li>
+<li><p>Omitting <code class="docutils literal notranslate"><span class="pre">N</span></code> creates a lower bound of zero.</p></li>
+<li><p>Omitting <code class="docutils literal notranslate"><span class="pre">M</span></code> creates an infinite upper bound (i.e, any number of repetitions).</p></li>
+<li><p>The comma may not be omitted, as this would create confusion with <code class="docutils literal notranslate"><span class="pre">{N}</span></code> (see below).</p></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -565,10 +568,10 @@ Use the <code class="docutils literal notranslate"><span class="pre">--max-repet
 </div>
 <p>Fandango supports a number of abbreviations for repetitions:</p>
 <ul class="simple">
-<li><p>The syntax <code class="docutils literal notranslate"><span class="pre">{N}</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{N,</span> <span class="pre">N}</span></code> (exactly <code class="docutils literal notranslate"><span class="pre">N</span></code> repetitions)</p></li>
-<li><p>The syntax <code class="docutils literal notranslate"><span class="pre">*</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{0,}</span></code> (zero or more repetitions)</p></li>
-<li><p>The syntax <code class="docutils literal notranslate"><span class="pre">+</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{1,}</span></code> (one or more repetitions)</p></li>
-<li><p>The syntax <code class="docutils literal notranslate"><span class="pre">?</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1}</span></code> (an optional element)</p></li>
+<li><p>The form <code class="docutils literal notranslate"><span class="pre">{N}</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{N,</span> <span class="pre">N}</span></code> (exactly <code class="docutils literal notranslate"><span class="pre">N</span></code> repetitions)</p></li>
+<li><p>The form <code class="docutils literal notranslate"><span class="pre">*</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{0,}</span></code> (zero or more repetitions)</p></li>
+<li><p>The form <code class="docutils literal notranslate"><span class="pre">+</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{1,}</span></code> (one or more repetitions)</p></li>
+<li><p>The form <code class="docutils literal notranslate"><span class="pre">?</span></code> stands for <code class="docutils literal notranslate"><span class="pre">{0,1}</span></code> (an optional element)</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">kleene</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="s1">&#39;*&#39;</span>
 <span class="o">&lt;</span><span class="n">plus</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="s1">&#39;+&#39;</span>

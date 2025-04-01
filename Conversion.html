@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fuzzing with Fandango &#8212; Fuzzing with Fandango</title>
+    <title>Conversion and Compression &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -57,12 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Conversion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About Fandango" href="About.html" />
+    <link rel="next" title="Bits and Bit Fields" href="Bits.html" />
+    <link rel="prev" title="Generating Binary Inputs" href="Binary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -128,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -148,7 +145,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="Intro.html">
   
   
   
@@ -179,8 +176,8 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -193,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
@@ -209,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -295,7 +292,7 @@
       
       
       
-      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FIntro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FConversion.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -325,7 +322,7 @@
       
       
       
-      <li><a href="_sources/Intro.md" target="_blank"
+      <li><a href="_sources/Conversion.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -396,7 +393,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -407,11 +406,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fuzzing with Fandango</h1>
+    <h1>Conversion and Compression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data">Encoding Data</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -421,89 +428,96 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fuzzing-with-fandango">
-<h1 class="sd-d-none">Fuzzing with Fandango<a class="headerlink" href="#fuzzing-with-fandango" title="Link to this heading">#</a></h1>
-<div class="sd-container-fluid sd-sphinx-override sd-mt-1 sd-mb-2 sd-ml-1 sd-mr-2 docutils">
-<div class="sd-row sd-g-3 sd-g-xs-3 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 sd-flex-row-reverse docutils">
-<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
-<a class="sd-m-auto reference internal image-reference" href="_images/Icon-reverse.png"><img alt="_images/Icon-reverse.png" class="sd-m-auto" src="_images/Icon-reverse.png" style="width: 200px;" />
-</a>
+  <section class="tex2jax_ignore mathjax_ignore" id="conversion-and-compression">
+<span id="sec-conversion"></span><h1>Conversion and Compression<a class="headerlink" href="#conversion-and-compression" title="Link to this heading">#</a></h1>
+<p>When defining a complex input format, some parts may be the result of applying an <em>operation</em> on another, more structured part.
+Most importantly, content may be <em>encoded</em>, <em>compressed</em>, or <em>sanitized</em>.</p>
+<p>Fandango uses a special form of <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">generators</span></a> to handle these, namely generators with <em>symbols</em>.
+Let’s have a look at how these work.</p>
+<section id="encoding-data">
+<h2>Encoding Data<a class="headerlink" href="#encoding-data" title="Link to this heading">#</a></h2>
+<p>In Fandango, a <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">generator</span></a> expression can contain <em>symbols</em> (enclosed in <code class="docutils literal notranslate"><span class="pre">&lt;...&gt;</span></code>) as elements.
+When fuzzing, this has the effect of Fandango using the grammar to</p>
+<ul class="simple">
+<li><p>instantiate each symbol from the grammar,</p></li>
+<li><p>evaluate the resulting expression, and</p></li>
+<li><p>return the resulting value.</p></li>
+</ul>
+<p>Here is a simple example to get you started.
+The <a class="reference external" href="https://docs.python.org/3/library/base64.html">Python <code class="docutils literal notranslate"><span class="pre">base64</span></code> module</a> provides methods to encode arbitrary binary data into printable ASCII characters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+
+<span class="n">encoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Fandango</span><span class="se">\x01</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">encoded</span>
+</pre></div>
 </div>
-<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 sd-align-major-justify sd-fs-5 docutils">
-<p class="rubric">Fuzzing with Fandango</p>
-<p>Fandango produces myriads of <em>high-quality random inputs</em> to test programs, giving users unprecedented control over format and shape of the inputs.</p>
-<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary sd-rounded-pill reference internal" href="Tutorial.html"><span class="doc">Get Started</span></a></p>
 </div>
-</div>
-</div>
-<hr class="docutils" />
-<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
-<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-1 sd-g-xs-1 sd-g-sm-1 sd-g-md-1 sd-g-lg-2 docutils">
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="2em" fill="#5f6368"><path d="m787-145 28-28-75-75v-112h-40v128l87 87Zm-587 25q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Z"/></svg> At a Glance</div>
-<p class="sd-card-text">Specify the format of your input data in a single file, combining <em>grammars</em> (for input syntax) and <em>constraints</em> (for arbitrary input features).
-Constraints come as <em>Python code</em>, so there are no limits to what you can specify.</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><a class="reference internal" href="About.html#sec-about"><span class="std std-ref">Learn more »</span></a></p>
-</div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="About.html#sec-about"><span class="std std-ref">About Fandango</span></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="2em" fill="#5f6368"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-640v560h560v-560h-80v280l-100-60-100 60v-280H200Zm0 560v-560 560Z"/></svg> Tutorial</div>
-<p class="sd-card-text">Produce valid inputs at high speeds, from hundreds to thousands of inputs per second, quickly covering the entire input space.
-Test with <em>extreme</em> and <em>uncommon</em> values, uncovering bugs before your users do.</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><a class="reference internal" href="Tutorial.html"><span class="doc std std-doc">Learn more »</span></a></p>
-</div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="Tutorial.html#sec-tutorial"><span class="std std-ref">Fandango Tutorial</span></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="2em" fill="#5f6368"><path d="M480-60q-72-68-165-104t-195-36v-440q101 0 194 36.5T480-498q73-69 166-105.5T840-640v440q-103 0-195.5 36T480-60Zm0-104q63-47 134-75t146-37v-276q-73 13-143.5 52.5T480-394q-66-66-136.5-105.5T200-552v276q75 9 146 37t134 75Zm0-436q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-760q0-33-23.5-56.5T480-840q-33 0-56.5 23.5T400-760q0 33 23.5 56.5T480-680Zm0-80Zm0 366Z"/></svg> Reference</div>
-<p class="sd-card-text">Create <em>textual</em> and <em>binary</em> inputs, using bit fields and bit sequences.
-Use <em>regular expressions</em> for quick and easy specifications.
-Make use of <em>existing samples</em> to obtain realistic inputs.</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text"><a class="reference internal" href="Reference.html#sec-reference"><span class="std std-ref">Learn more »</span></a></p>
-</div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="Reference.html#sec-reference"><span class="std std-ref">Fandango Reference</span></a></div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;RmFuZGFuZ28B&#39;
+</pre></div>
 </div>
 </div>
 </div>
-<hr class="docutils" />
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="_images/logo_cispa.png"><img alt="_images/logo_cispa.png" src="_images/logo_cispa.png" style="width: 75%;" />
-</a>
-</figure>
-</aside>
-<p><small>Fandango is a project of the <a class="reference external" href="https://www.cispa.de/">CISPA Helmholtz Center for Information Security</a> to facilitate highly efficient and highly customizable software testing.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="_images/logo_erc.png"><img alt="_images/logo_erc.png" src="_images/logo_erc.png" style="width: 75%;" />
-</a>
-</figure>
-</aside>
-<p><i>This research was funded by the European Union (<a class="reference external" href="https://www.cispa.de/s3">ERC “Semantics of Software Systems”, S3</a>, 101093186). Views and opinions expressed are however those of the authors only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them.</i></small></p>
-<div class="toctree-wrapper compound">
+<p>Of course, these can be decoded again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="toctree-wrapper compound">
 </div>
-<div class="toctree-wrapper compound">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;Fandango\x01&#39;
+</pre></div>
 </div>
+</div>
+</div>
+<p>Let us assume we have a <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> field that contains a number of bytes:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+
+</pre></div>
+</div>
+</div>
+</div>
+<p>To encode such a <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> field into an <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>, we can write</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;item&gt; ::= rb&#39;.*&#39; := base64.b64encode(bytes(&lt;data&gt;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>This rule brings multiple things together:</p>
+<ul class="simple">
+<li><p>First, we convert <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> into a suitable type (in our case, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>).</p></li>
+<li><p>Then, we invoke <code class="docutils literal notranslate"><span class="pre">base64.b64encode()</span></code> on it as a generator to obtain a string of bytes.</p></li>
+<li><p>We parse the string into an <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>, whose definition is <code class="docutils literal notranslate"><span class="pre">rb'.*'</span></code> (any sequence of bytes except newline).</p></li>
+</ul>
+<p>In a third step, we embed the <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> into a (binary) string:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting <a class="reference download internal" download="" href="_downloads/bd159dafb24f62d8e725cdf229149ca3/encode.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">encode.fan</span></code></span></a> spec allows us to encode and embed binary data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>encode.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ2+utLwseA==
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the same vein, one can use functions for compressing data or any other kind of conversion.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -536,12 +550,21 @@ Make use of <em>existing samples</em> to obtain realistic inputs.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Binary.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Generating Binary Inputs</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="About.html"
+       href="Bits.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">About Fandango</p>
+        <p class="prev-next-title">Bits and Bit Fields</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -551,6 +574,21 @@ Make use of <em>existing samples</em> to obtain realistic inputs.</p>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data">Encoding Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

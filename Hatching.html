@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="current nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -514,7 +515,7 @@ In general, you should use</p>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">include</span></code> for Python code, as in <code class="docutils literal notranslate"><span class="pre">include('code.py')</span></code> is not recommended.
+<p>Using <code class="docutils literal notranslate"><span class="pre">include</span></code> for <em>pure Python code</em>, as in <code class="docutils literal notranslate"><span class="pre">include('code.py')</span></code> is not recommended.
 Most importantly, the current Fandango implementation will process “included” Python code only <em>after</em> all code in the “including” spec has been run. In contrast, the effects of <code class="docutils literal notranslate"><span class="pre">import</span></code> are immediate.</p>
 </div>
 </section>

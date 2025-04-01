@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Binary';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bits and Bit Fields" href="Bits.html" />
+    <link rel="next" title="Conversion and Compression" href="Conversion.html" />
     <link rel="prev" title="Parsing and Checking Inputs" href="Parsing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="current nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -427,7 +428,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-values-to-binary-formats">Converting Values to Binary Formats</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-conversion">Compression and Conversion</a></li>
 </ul>
             </nav>
         </div>
@@ -526,16 +526,16 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9455630074749198
-9190358095565225
-7223971852192168
-5461817952167185
-7466492970982733
-3361343464843607
-0132460314378909
-7533493153450968
-5688683693319981
-3882227557196637
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2874383847953568
+4819490306075421
+5103625541681713
+0273565879006205
+2780624765581201
+5482452039726442
+0202256096639582
+1491437920087895
+1152186306438244
+2926230756499984
 </pre></div>
 </div>
 </div>
@@ -624,16 +624,16 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C&quot;cl;
-qxbd5
-G[tz`
-hwr+h
-/6AAu
-Ks3/(
-iQJk3
-,8ZR+
-Z#^*;
-6Gn+j
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[q\Lc
+8^:9#
+OueO*
+VQCM4
+X7l21
+N*r/n
+Q(s9p
+ ^@%K
+P&amp;&gt;ft
+qwt5K
 </pre></div>
 </div>
 </div>
@@ -741,7 +741,7 @@ The function <code class="docutils literal notranslate"><span class="pre">from_u
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 54 40 08 f5                                 |..T@..|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 35 03 63 77                                 |..5.cw|
 00000006
 </pre></div>
 </div>
@@ -777,8 +777,8 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: I/O operation on closed file.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 004  \0   1   1   0   4
-0000006
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 001  \0   4
+0000003
 </pre></div>
 </div>
 </div>
@@ -839,29 +839,6 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
 </div>
 <p>Check out the <a class="reference external" href="https://docs.python.org/3/library/struct.html"><code class="docutils literal notranslate"><span class="pre">struct</span></code> module</a> for additional encodings, including float types, long and short integers, and many more.</p>
 </section>
-<section id="compression-and-conversion">
-<h2>Compression and Conversion<a class="headerlink" href="#compression-and-conversion" title="Link to this heading">#</a></h2>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>To be completed later.</p>
-</div>
-<p>Some parts of a binary file may be <em>compressed</em> to save space.
-Here’s a sketch on how to achieve this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">chunk</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">header</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">trailer</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;*</span>
-<span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;*</span>
-
-<span class="n">where</span> <span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span> <span class="o">==</span> <span class="n">compress</span><span class="p">(</span><span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span><span class="p">)</span>    <span class="c1"># for producing</span>
-<span class="n">where</span> <span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span> <span class="o">==</span> <span class="n">uncompress</span><span class="p">(</span><span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span><span class="p">)</span>  <span class="c1"># for parsing</span>
-</pre></div>
-</div>
-<p>or, using generators:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">chunk</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">header</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">trailer</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;*</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">foo</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="n">compress</span><span class="p">(</span><span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;*</span> <span class="o">=</span> <span class="n">uncompress</span><span class="p">(</span><span class="o">&lt;</span><span class="n">compressed_content</span><span class="o">&gt;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -904,11 +881,11 @@ Here’s a sketch on how to achieve this:</p>
       </div>
     </a>
     <a class="right-next"
-       href="Bits.html"
+       href="Conversion.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bits and Bit Fields</p>
+        <p class="prev-next-title">Conversion and Compression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -940,7 +917,6 @@ Here’s a sketch on how to achieve this:</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-values-to-binary-formats">Converting Values to Binary Formats</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-conversion">Compression and Conversion</a></li>
 </ul>
   </nav></div>
 

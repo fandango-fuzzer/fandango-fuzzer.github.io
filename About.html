@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -437,11 +438,18 @@ If you need the inputs to have particular values or distributions, you can expre
 <ul class="simple">
 <li><p>By default, Fandango operates as a <em>black-box</em> fuzzer - that is, it creates inputs from a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Fandango specification file.</p></li>
 <li><p>If you have <em>sample inputs</em>, Fandango can <em>mutate</em> these to obtain more realistic inputs.</p></li>
-<li><p>Fandango can also operate as a <em>white-box</em> fuzzer - that is, it runs a program under test to maximize coverage. In this case, only a minimal specification may be needed.</p></li>
 </ul>
 <p>Fandango comes as a portable Python program and can easily be run on a large variety of platforms.</p>
 <p>Under the hood, Fandango uses sophisticated <em>evolutionary algorithms</em> to produce inputs,
-it starts with a population of random inputs, and evolving these through mutations and cross-over until they fulfill the given constraints.</p>
+it starts with a population of random inputs, and evolves these through mutations and cross-over until they fulfill the given constraints.</p>
+<p>Fandango is in active development! Features planned for 2025 include:</p>
+<ul class="simple">
+<li><p>protocol testing</p></li>
+<li><p>coverage-guided testing</p></li>
+<li><p>code-directed testing</p></li>
+<li><p>high diversity inputs</p></li>
+</ul>
+<p>and many more.</p>
 <section id="acknowledgments">
 <h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Link to this heading">#</a></h2>
 <aside class="margin sidebar">

@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="current nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -438,16 +439,16 @@ But let us again have a look at the inputs we generated so far:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nsvheq Pckcfe,29
-Cyfg Munyqj,16
-Gdyju Yglseu,21
-Kyuik Npo,8
-Cnfb Rtakpq,811
-Cq Js,86
-Jsrpe Dw,09245
-Ef Cw,4841
-Svreyu Dmgjv,32
-Pfm Eizn,8798
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wnqvvl Eo,20
+Zxhdjm Oabuh,89
+Tk Oki,1
+Ubj Xqcgww,2921
+Ypm Dfc,46386
+Chq Rxhn,17500
+Dpu Sdy,99550
+Os Tnutnn,62
+Eslb Ljg,88
+Fw Rp,955
 </pre></div>
 </div>
 </div>
@@ -483,16 +484,16 @@ So-called <em>buffer overflows</em> have long been among the most dangerous vuln
 <p>This is the effect of this rule:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skopjsomkqjwjuxatqmdwfrckvwgwttkpxhkrfffdufkbnshjpobtzvwwpzaiepzsexzmibwcvulbuupmqpodbiytnwyxfyjevco Flaejbrspwigbdphyupqqzivuzgpsrehbfkcjbxdahvhlymqghrjfxnbxcjhevdcgvmryedmuviqulshrallcluwastlzmsgbbjm,79
-Iuduthemokixvmzenrqaljxknmnntnkpveuknemgbqhojtwxuitoijalslkdiorwfqqyapzmodydjdnhuwcczgmqyeflzhcowijc Bgoiawkbdvvpgvirkzazxkkwxoepikjfhaniysihepcldhkokykxihhoqiggthxxzuhjkrebphtrupgandgralzuphtdebpauodh,15
-Rshdqtadfziadteiokhxyevjmqgvrkokkdynpzznogbfxjoiqjchjjtfcfkliruueklcmpyplgfngvflzeexcrbhlzgbjsfdpmwd Qchrwfommyjlhkynducblxpyqpnhronsxhcajshsvrbibcmzasnfcmhdjmrrottpliifgdigngrsptkvhfogglhucudwppxzxhlo,5
-Agypwaoaioxrezxhmnnwygzhcndbsuevdosesifpdmiphhutpfrtwlqnmaemnjkqleyzalapedbqzrwqdszascnrqcqojidetiep Lbkleyancnmsfvkwmfxcjnledlfgomlyvzmigxtouzokeruqolzwnnteieknybpnoloxkdzyuontqfcvwzbqagettngvfjyzxiwt,90
-Woimkrjvqaxwfxiqptdtegpmgluucrndftfhdoudjrkteaqhaypnowuawqhgavdumhpykygnxibghukzrpmiemxanbmujvjqvzog Ryshgkebahvmpxrioorwyfkuzyefsstuofqqgxlfqfmylmxnwgrwyjxpcdsfzdkscwpzgwgtnowihbqljyeygmtyvivxzhfszzut,55
-Hockkyvikpsisftqzxauprvzwztuwtgpxfgyazcowzadtucqrfnbcavrxyladcayxvtktpskkylqgrksqdzruwydaoftfufxalvb Iuprwjeopxurdeimnsxlqbfchnmpqxnbnvetatyrpugrkbxznaxbgfaxfzfqnsijqbbsyxoqgirltsomotsfnilmyqmwzsypuctl,6
-Kxwmfxomhzqcdmztxwhflhgnikvdpvlvhytyaegvfmgwivdhnmxekzauokyqwfrvundudjdsxfnqwiquqflxzhxawlyeyxwdwgjo Qckxxeyyyxwkpcdjouqnveehktecvjcesfzdufcspxfzjqbbkcgwexzcvmzjcylnszuiwqopemjagtrkucsdqzsgxwagserfilzn,41
-Zqvmblkzywvqlpxuwvgietrnpscxgtvowswotczzldmfxqbnphdmsnbbwjvjvpxzfpkvzxubocbynhpoppxrtoixryjpzjriwiga Ahkgwppgnpbdqcqfschufdbprksjzotuazrnvsincczgupmemqeyaazcdicudqoapyfbrhqrlsomjffbqtbuysavnjtwgawouwjw,68
-Rgocvgkehwbfbnxgnlmsrtsjalthltvrityhyfltrkmraypxoyekvlevvaiujyqwrffggyrpebwxwzazcaqnmkzpwboaxsambohd Xflxwqorhcggqxqjwkbdczhrscrqvskqdznjnyekkjkvlzmodkhczlllkpfoznoaphlrrjwncbcrukpssbaanyfbfzowojueixhy,42
-Hhvikatlqedretrnbzxjgobctlhialmsixrsosuzfhkmzqdcvbrneyxggamjiyrxtmlgjypljcjqqcgmfiyabsumupzssrtvljdr Uduqaamvhbkegokfcdbmbzqbqizdnnqtjgoaytacwivdqfpghwfwllbhavkbgymxjxdpxjvgawjlbqriqvkseaiofnuqfunixlyl,04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Viahnawpscpowoaesecyymicxrwvprrxhxytmjisabrxdpjrplzhxfxauzgszhblbplmdzfbnavzgqblcnuvqccsegltfakjldiv Svirakuglkgbrlsvduycjmblswhrrcaqxhgtvdpcegxxpfnfthqupbprsxhrjuafmxbzsrzclxvfkxztsazwfznmnwaoxgvlxasd,4
+Fdbidfrxfnkslgzsmacdoyqjleaxdsbomzfvbsgrqjydjprvgxewysfqlijaaygttuzoftzctdjnijudznhylkcnlqgasfdehgnb Hyefkwevhnybbfwmjdhgjanadtcayhirdrnlwhitbpzyombjlxdboxsstctywracmlxqsrcooujtcnikhhejjhxszlsenqnvqdbq,07
+Ymziilovzzghppeexxxqgtepkyducisweyjdadrdtkrigbnmwjfjfgrigdxynekciqsdemwkdwpndjhyhxwnvtwcrkgtconzkcmv Mqsbvstmobmopoedzsgvhtrmulltxbwbunjufvhdzomvlqhahdrzzrjlbktbzhbyjobxxhwjnkgmuiwgcwcmjcrhiwdiieomhxmq,79
+Emxoteayhmgdjzdgvqwblizykkwooabovggkdyojssfixleyoobbtvkmhnuhzzknezkulxejutgidbvlnufgyvurobstiiixzysb Yarsfrpzdcvpgvhemqmtuucabxwphpdwuapfqlipqoskhntyutcyopbxgtmkmjneakbrxtyqzpnfwwsieamsatqzepqlpikleubq,78
+Uhqowxmqqchagfqamjmfdybpcbjfzlsqaahnheifykhaxwmojykjvatlbuuntwlgwrtdgzhzqbamwqhxvnqgisxbwfvlfndhydln Bjwxlzvukmqlpwakhhyoegjvqtwoijpzdxhlfbwibbrnkyikyyflfebilwjftvtmdybfvybsuxjqqsubiuokcegknreeknlmmvpk,42
+Xqwoduizghoazphvmzursbwnqbmrzlzhxnrqtvqjrgaqgsfwatiemtkhhxdfbdgzzrfpkwtkugosachjbavnrghxfujhaavksxcs Pgjovxrcjqxcgtfqdyxyuzzqnnrrqyiwqsiogvhqupucwkpqcjspxazrghgijjcmgtnuatcdjkgyhtpdxbhncclsgfpsvhgxpczg,07
+Mnfyayvrllccrxaesmxggxxshsccosfkbdaakdjwkpijxjtbyqlvuhwxphuibaeuegtqbadmojwvewpplarodbbelnjezavswoip Fuiwofoluxubfgjurgbldjrumvzjrlxznswfdutjllgpthnbnckbrhhvmgyyecqxaimwepfksdjzsgufijdqgckpagqwfufwdbvm,30
+Cosfwnlsiofxnearrdnycbfaimymsqsuqfnsjhplvelmtatktdgzcnmaezkconbkyxbwefihdcfobpsetzcglnubmzawrcykzvzo Uhcvhtaymlsdoiufljhhviqrnurwfpwuaztuqhpfutpovpqzxlzdrpuxplwkuwwafjfjdovyfptkxhxdtxelymcmgoebjpinrgqi,4
+Eaihfenvcikczpainaknjbmqegxajztxrodbojycwgmwlklnpgjmsspauafmeiwlodgiavfteustlwwaezfkuztldftouniyclku Tpvnyquwnxxdgzvavkqmbrtnjnwjogsmixlwhestxqnbyzumuhmsjukklegzgdvccvsxacdubnvmodqpvzgosrrlnlhbosileeyc,70
+Pchntiythzpfduphmzxmsqghibxdtcxiyxbflcjlpvffvhryxljovsmqopsjvjvgzoqzwqjoafwstpymwvclbzuhxxsdzlhxwmio Eedxgnebpvutlnmtvrirmfbupwdixxswkdepgvuhlpubyiqbxwrateraxqpsraldvekhmpgsiuipexgqwkomvsozohqoxtnxcrlh,56
 </pre></div>
 </div>
 </div>
@@ -520,16 +521,16 @@ What happens if we have a person with a negative age?</p>
 <p>Try it yourself and modify <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> such that it can also produce negative numbers, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wnfznj Ogu,272
-Swehc Evb,-1974
-Qbuiz Okmkb,91
-Hz Uqd,6497
-Nqv Njc,-3
-Vib Nt,-0826
-Ye Sdgthp,4238
-Lgymas Nerzhz,30
-Xbmew Qhtf,-621
-Ing Fstktp,-7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fquu Xl,34056
+Vbkrgs Srfiq,79
+Otxj Ea,31343
+Lxajl Tr,-5
+Ppd Mxjwn,42743
+Wejard Eb,-7401
+Ujfl Fb,-10
+Ofg Fukff,-0658
+Pdpse Myg,-9
+Ttphk Zpe,-394
 </pre></div>
 </div>
 </div>

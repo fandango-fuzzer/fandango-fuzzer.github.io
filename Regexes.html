@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. Expect a first beta release in April 2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in development - see our <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of bugs and incomplete features</a>. A first beta release is scheduled for early April 2025.</p></div>
 </aside>
 
   
@@ -187,7 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
 <ul class="current nav bd-sidenav">
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -219,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Spec Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -504,17 +505,6 @@ Hence, if you need quotes, you can use</p>
 <p>For parsing inputs, Fandango uses the Python <a class="reference external" href="https://docs.python.org/3/library/re.html"><code class="docutils literal notranslate"><span class="pre">re</span></code></a> module for matching strings against regular expressions;
 for producing inputs, Fandango uses the Python <a class="reference external" href="https://github.com/asciimoo/exrex"><code class="docutils literal notranslate"><span class="pre">exrex</span></code></a> module for generating strings that match regular expressions.
 All the <code class="docutils literal notranslate"><span class="pre">re</span></code> and <code class="docutils literal notranslate"><span class="pre">exrex</span></code> capabilities and limitations thus extend to Fandango.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>For regex shortcuts, the <code class="docutils literal notranslate"><span class="pre">exrex</span></code> producer only produces characters in the range <code class="docutils literal notranslate"><span class="pre">\0x00</span></code> to <code class="docutils literal notranslate"><span class="pre">\0xff</span></code>:</p>
-<ul class="simple">
-<li><p>for digits (<code class="docutils literal notranslate"><span class="pre">\d</span></code>), the characters <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code></p></li>
-<li><p>for whitespace (<code class="docutils literal notranslate"><span class="pre">\s</span></code>), the characters <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">\t\n\r\f\v]</span></code></p></li>
-<li><p>for words (<code class="docutils literal notranslate"><span class="pre">\w</span></code>), the characters <code class="docutils literal notranslate"><span class="pre">[a-zA-Z0-9_]</span></code></p></li>
-<li><p>for non-words (<code class="docutils literal notranslate"><span class="pre">\W</span></code>), the character range <code class="docutils literal notranslate"><span class="pre">[^a-zA-Z0-9_]</span></code></p></li>
-</ul>
-<p>To produce Unicode characters, make them part of an explicit range (e.g. <code class="docutils literal notranslate"><span class="pre">[äöüÄÖÜß]</span></code>).</p>
-</div>
 <section id="repetition-limits">
 <h3>Repetition Limits<a class="headerlink" href="#repetition-limits" title="Link to this heading">#</a></h3>
 <p>Most notably, <code class="docutils literal notranslate"><span class="pre">exrex</span></code> imposes a <em>repetition limit</em> of 20 on generated strings that in principle can have arbitrary length; a <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">*</span></code> operator will not expand to more than 20 repetitions.
@@ -533,16 +523,16 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 20.
+abcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
 abc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabc
+abcabcabc
+abcabcabcabcabcabc
+abcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
 </pre></div>
 </div>
 </div>
@@ -567,6 +557,8 @@ fandango:ERROR: Error during crossover: Sample larger than population or is nega
 fandango:ERROR: Error during crossover: Sample larger than population or is negative
 fandango:ERROR: Error during crossover: Sample larger than population or is negative
 fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
+fandango:ERROR: Error during crossover: Sample larger than population or is negative
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate full unique new population, filling remaining slots with duplicates.
@@ -575,103 +567,103 @@ fandango:ERROR: Error during crossover: Sample larger than population or is nega
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabc
 abcabcabc
 abcabcabcabcabc
-abc
-abcabcabcabc
-abcabcabcabc
-abcabcabc
 abcabcabcabc
 abc
-abcabc
-abcabcabc
-abcabc
-abcabc
-abcabc
+abcabcabcabcabc
 abcabcabcabc
-abcabc
 abcabcabc
-abcabcabc
-abcabcabcabc
+abcabcabcabcabc
 abc
 abcabcabc
-abcabcabcabc
-abcabcabcabcabc
-abcabc
-abcabc
-abcabcabc
-abcabcabcabc
-abcabcabcabc
-abcabcabcabc
-abcabcabcabcabc
-abc
-abc
-abcabcabc
-abcabc
-abcabcabcabcabc
-abcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabcabc
-abcabcabcabc
-abcabcabcabc
-abc
-abcabcabcabc
-abcabcabc
-abcabc
-abcabcabcabcabc
-abcabc
-abc
-abcabcabcabcabc
-abcabcabc
-abc
-abc
-abcabcabcabcabc
 abcabcabcabcabc
 abcabcabc
 abcabcabcabcabc
-abcabcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abc
-abc
-abcabcabcabcabc
-abcabcabcabcabc
-abcabc
 abcabcabc
-abcabcabcabcabc
-abcabcabcabcabc
 abcabcabcabc
-abcabc
-abcabcabcabcabc
-abcabc
-abcabcabcabc
-abcabc
-abcabcabcabc
-abcabcabcabc
-abcabc
 abcabcabc
+abcabcabcabc
+abcabcabcabcabc
 abcabc
+abcabcabcabcabc
 abc
 abcabcabcabc
 abcabcabc
 abcabcabc
 abcabcabcabc
-abcabcabcabcabc
-abcabcabcabcabc
+abcabcabc
+abc
+abcabcabcabc
 abc
 abcabcabcabc
 abcabc
-abcabc
+abcabcabcabcabc
 abc
-abc
-abcabc
-abcabc
+abcabcabcabcabc
 abcabcabc
+abcabcabcabc
 abc
+abcabcabcabc
 abcabcabc
+abcabcabcabcabc
 abcabcabcabcabc
 abc
 abcabcabc
+abcabc
+abcabc
+abc
+abcabc
 abcabcabc
+abcabcabc
+abc
+abc
+abc
+abcabcabcabcabc
+abcabc
+abcabcabc
+abcabcabc
+abcabcabcabc
+abc
+abcabcabc
+abcabcabcabcabc
+abcabc
+abcabcabcabcabc
+abcabcabcabc
+abc
+abcabcabcabc
+abcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabc
+abcabcabc
+abcabcabcabcabc
+abcabc
+abc
+abcabcabc
+abc
+abcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabc
+abcabcabc
+abcabc
+abcabcabcabc
+abcabc
+abcabcabcabcabc
+abcabcabcabcabc
+abcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
+abcabc
+abc
+abcabcabc
+abcabcabcabcabc
+abcabcabcabc
+abcabcabcabc
 </pre></div>
 </div>
 </div>
