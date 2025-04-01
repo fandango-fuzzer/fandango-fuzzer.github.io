@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Conversion and Compression &#8212; Fuzzing with Fandango</title>
+    <title>Data Conversions &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conversion and Compression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -406,7 +406,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Conversion and Compression</h1>
+    <h1>Data Conversions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,7 +416,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data">Encoding Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data-during-fuzzing">Encoding Data During Fuzzing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-encoders-and-constraints">Sources, Encoders, and Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoding-parsed-data">Decoding Parsed Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
 </ul>
             </nav>
         </div>
@@ -428,16 +431,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="conversion-and-compression">
-<span id="sec-conversion"></span><h1>Conversion and Compression<a class="headerlink" href="#conversion-and-compression" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-conversions">
+<span id="sec-conversion"></span><h1>Data Conversions<a class="headerlink" href="#data-conversions" title="Link to this heading">#</a></h1>
 <p>When defining a complex input format, some parts may be the result of applying an <em>operation</em> on another, more structured part.
-Most importantly, content may be <em>encoded</em>, <em>compressed</em>, or <em>sanitized</em>.</p>
-<p>Fandango uses a special form of <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">generators</span></a> to handle these, namely generators with <em>symbols</em>.
+Most importantly, content may be <em>encoded</em>, <em>compressed</em>, or <em>converted</em>.</p>
+<p>Fandango uses a special form of <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">generators</span></a> to handle these, called <em>converters</em>.
+These are generator expressions with <em>symbols</em>, mostly functions that take symbols as arguments.
 Let’s have a look at how these work.</p>
-<section id="encoding-data">
-<h2>Encoding Data<a class="headerlink" href="#encoding-data" title="Link to this heading">#</a></h2>
+<section id="encoding-data-during-fuzzing">
+<h2>Encoding Data During Fuzzing<a class="headerlink" href="#encoding-data-during-fuzzing" title="Link to this heading">#</a></h2>
 <p>In Fandango, a <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">generator</span></a> expression can contain <em>symbols</em> (enclosed in <code class="docutils literal notranslate"><span class="pre">&lt;...&gt;</span></code>) as elements.
-When fuzzing, this has the effect of Fandango using the grammar to</p>
+Such generators are called <em>converters</em>.
+When fuzzing, converters have the effect of Fandango using the grammar to</p>
 <ul class="simple">
 <li><p>instantiate each symbol from the grammar,</p></li>
 <li><p>evaluate the resulting expression, and</p></li>
@@ -473,7 +478,8 @@ The <a class="reference external" href="https://docs.python.org/3/library/base64
 </div>
 </div>
 </div>
-<p>Let us assume we have a <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> field that contains a number of bytes:</p>
+<p>Let us make use of these functions.
+Assume we have a <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> field that contains a number of bytes:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+
@@ -503,20 +509,186 @@ The <a class="reference external" href="https://docs.python.org/3/library/base64
 </div>
 </div>
 </div>
-<p>The resulting <a class="reference download internal" download="" href="_downloads/bd159dafb24f62d8e725cdf229149ca3/encode.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">encode.fan</span></code></span></a> spec allows us to encode and embed binary data:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>encode.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+<p>The full resulting <a class="reference download internal" download="" href="_downloads/bd159dafb24f62d8e725cdf229149ca3/encode.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">encode.fan</span></code></span></a> spec looks like this:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>import base64
+
+&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;
+&lt;item&gt; ::= rb&#39;.*&#39; := base64.b64encode(bytes(&lt;data&gt;))
+&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+
 </pre></div>
 </div>
 </div>
+</div>
+<p>With this, we can encode and embed binary data:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>encode.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ29t0Hg=
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ29Nyhg=
 </pre></div>
 </div>
 </div>
 </div>
 <p>In the same vein, one can use functions for compressing data or any other kind of conversion.</p>
+</section>
+<section id="sources-encoders-and-constraints">
+<h2>Sources, Encoders, and Constraints<a class="headerlink" href="#sources-encoders-and-constraints" title="Link to this heading">#</a></h2>
+<p>When Fandango produces an input using a generator, it <em>saves</em> the generated arguments as a <em>source</em> in the produced derivation tree.
+Sources become visible as soon as the input is shown as a grammar:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>encode.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>--format<span class="o">=</span>grammar
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ29Nyhg=&#39;
+  &lt;item&gt; ::= b&#39;RmFuZGFuZ29Nyhg=&#39; := f(&lt;data&gt;)  # Position 0x0006 (6)
+    &lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt;  # Position 0x0000 (0); b&#39;FandangoM\xca\x18&#39;
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;M&#39;  # Position 0x0008 (8)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;\xca&#39;  # Position 0x0009 (9)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;\x18&#39;  # Position 0x000a (10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the definition of <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>, we see a generic converter <code class="docutils literal notranslate"><span class="pre">f(&lt;data&gt;)</span></code> as well as the definition of <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> that went into the generator.
+(The actual generator code, <code class="docutils literal notranslate"><span class="pre">base64.b64encode(bytes(&lt;data&gt;))</span></code>, is not saved in the derivation tree.)</p>
+<p>We can visualize the resulting tree, using a double arrow between <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> and its source <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>, indicating that their values depend on each other:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/eecbd0037c3bfdd46dbfca1e4e390092a6ddea6583b1287c882b44f63ea19a39.png" src="_images/eecbd0037c3bfdd46dbfca1e4e390092a6ddea6583b1287c882b44f63ea19a39.png" />
+</div>
+</div>
+<p>Since sources like <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> are preserved, we can use them in <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a>.
+For instance, we can produce a string with specific values for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>encode.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;data&gt; == b&quot;Fandango author&quot;&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ28gYXV0aG9y
+</pre></div>
+</div>
+</div>
+</div>
+<p>Is this string a correct encoding of a correct string?
+We will see in the next section.</p>
+</section>
+<section id="decoding-parsed-data">
+<h2>Decoding Parsed Data<a class="headerlink" href="#decoding-parsed-data" title="Link to this heading">#</a></h2>
+<p>So far, we can only <em>encode</em> data during fuzzing.
+But what if we also want to <em>decode</em> data, say during <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parsing</span></a>?
+Our <code class="docutils literal notranslate"><span class="pre">encode.fan</span></code> will help us <em>parse</em> the data, but not decode it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>encode.fan
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoValueError: &lt;data&gt;: Missing converter from &lt;item&gt; (&lt;data&gt; ::= ... := f(&lt;item&gt;))
+FandangoParseError: 1 error(s) during parsing
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that parsing fails is not a big surprise, as we only have specified an <em>encoder</em>, but not a <em>decoder</em>.
+As the error message suggests, we need to add a generator for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> - a decoder that converts <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> elements into <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>.</p>
+<p>We can achieve this by providing a generator for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> that builds on <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+ := base64.b64decode(bytes(&lt;item&gt;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">base64.b64decode(bytes(&lt;item&gt;))</span></code> takes an <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> (which is previously parsed) and decodes it.
+The decoded result is parsed and placed in <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>.</p>
+<p>The resulting <a class="reference download internal" download="" href="_downloads/9a8bcacb6a6ca5e89847e1f01e9dc4a1/encode-decode.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">encode-decode.fan</span></code></span></a> file now looks like this:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>import base64
+
+&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;
+&lt;item&gt; ::= rb&#39;.*&#39; := base64.b64encode(bytes(&lt;data&gt;))
+&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+ := base64.b64decode(bytes(&lt;item&gt;))
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Fandango allows generators in both directions so one <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file can be used for fuzzing and parsing.</p>
+</aside>
+<p>If this looks like a mutual recursive definition, that is because it is.
+During fuzzing and parsing, Fandango tracks the <em>dependencies</em> between generators and uses them to decide which generators to use first:</p>
+<ul class="simple">
+<li><p>When fuzzing, Fandango operates <em>top-down</em>, starting with the topmost generator encountered; their arguments are <em>produced</em>.
+In our case, this is the <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> generator, generating a value for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>.</p></li>
+<li><p>When parsing, Fandango operates <em>bottom-up</em>, starting with the lowest generators encountered; their arguments are <em>parsed</em>.
+In our case, this is the <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> generator, parsing a value for <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>.</p></li>
+</ul>
+<p>In both case, when Fandango encounters a recursion, <em>it stops evaluating the generator</em>:</p>
+<ul class="simple">
+<li><p>When parsing an <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>, Fandango does not invoke the generator for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> because <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> is being processed already.</p></li>
+<li><p>Likewise, when producing <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>, Fandango does not invoke the generator for <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> because <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> is being processed already.</p></li>
+</ul>
+<p>Let us see if all of this works and if this input is indeed properly parsed and decoded.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>encode-decode.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;
+  &lt;item&gt; ::= b&#39;RmFuZGFuZ28gYXV0aG9y&#39; := f(&lt;data&gt;)  # Position 0x0006 (6)
+    &lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt;  # Position 0x0000 (0); b&#39;Fandango author&#39;
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39; &#39;  # Position 0x0008 (8)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;a&#39;  # Position 0x0009 (9)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;u&#39;  # Position 0x000a (10)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;t&#39;  # Position 0x000b (11)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;h&#39;  # Position 0x000c (12)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;o&#39;  # Position 0x000d (13)
+      &lt;byte&gt; ::= &lt;_byte&gt;
+        &lt;_byte&gt; ::= b&#39;r&#39;  # Position 0x000e (14)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> element contains the <code class="docutils literal notranslate"><span class="pre">&quot;Fandango</span> <span class="pre">author&quot;</span></code> string we provided as a constraint during generation.
+This is what the parsed derivation tree looks like:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/393f5c4681e7a7da5dd1f79f31c93c7b7ae0dc41f480035734c9ad9258f77baf.png" src="_images/393f5c4681e7a7da5dd1f79f31c93c7b7ae0dc41f480035734c9ad9258f77baf.png" />
+</div>
+</div>
+<p>With a constraint, we can check that the decoded string is correct:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>encode-decode.fan<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;data&gt; == b&quot;Fandango author&quot;&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>We get no error - so the parse was successful, and that all constraints hold.</p>
+</section>
+<section id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h2>
+<p>The above scheme can be used for all kinds of encodings and compressions - and thus allow <em>translations between abstraction layers</em>.
+Typical applications include:</p>
+<ul class="simple">
+<li><p><em>Compressed</em> data (e.g. pixels in a GIF or PNG file)</p></li>
+<li><p><em>Encoded</em> data (e.g. binary input as ASCII chars in MIME encodings)</p></li>
+<li><p><em>Converted</em> data (e.g. ASCII to UTF-8 to UTF-16 and back)</p></li>
+</ul>
+<p>Even though parts of the input are encoded (or compressed), you can still use <em>constraints</em> to shape them.
+And if the encoding or compression can be inverted, you can also use it to <em>parse</em> inputs again.</p>
 </section>
 </section>
 
@@ -584,7 +756,10 @@ The <a class="reference external" href="https://docs.python.org/3/library/base64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data">Encoding Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-data-during-fuzzing">Encoding Data During Fuzzing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-encoders-and-constraints">Sources, Encoders, and Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoding-parsed-data">Decoding Parsed Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
 </ul>
   </nav></div>
 

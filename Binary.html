@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Binary';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Conversion and Compression" href="Conversion.html" />
+    <link rel="next" title="Data Conversions" href="Conversion.html" />
     <link rel="prev" title="Parsing and Checking Inputs" href="Parsing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -526,16 +526,16 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6704700831496337
-6483215730585483
-8198551504481620
-3802645214747814
-4514859009477696
-6378647073671470
-2901610704657883
-7594824086685526
-8646997946994407
-8273239028422498
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1753210751268055
+1408150017193144
+5988513773102758
+2656214515748739
+5214514568334610
+7110340798789014
+9012037272716811
+9196772542331128
+1008590666475611
+1312785568983784
 </pre></div>
 </div>
 </div>
@@ -556,7 +556,7 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoError: &#39;&lt;stdin&gt;&#39;: constraint &lt;check_digit&gt; == credit_card_check_digit(str(&lt;number&gt;)) not satisfied
-FandangoParseError: Parse error at position 1 error(s) during parsing
+FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
 </div>
@@ -624,16 +624,16 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_kCtV
-b&gt;qkT
-&lt;r4$E
-8kDdO
-m:H9;
-[EE:+
-$OkBe
-4&quot;?TM
-Qok[M
-eqC =
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X..&lt;7
+jBxbA
+#Pczh
+y=^r9
+LbK;,
+7tFD!
+)4qV.
+r0,If
+=pT,P
+!1wsd
 </pre></div>
 </div>
 </div>
@@ -741,7 +741,7 @@ The function <code class="docutils literal notranslate"><span class="pre">from_u
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 6d a4 41 18                                 |..m.A.|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 4a 56 f1 58                                 |..JV.X|
 00000006
 </pre></div>
 </div>
@@ -775,8 +775,10 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: I/O operation on closed file.
-0000000 001  \0   8
-0000003
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 005  \0   5   5   2   7   7
+0000007
 </pre></div>
 </div>
 </div>
@@ -883,7 +885,7 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Conversion and Compression</p>
+        <p class="prev-next-title">Data Conversions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

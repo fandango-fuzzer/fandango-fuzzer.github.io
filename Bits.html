@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Case Study: The GIF Format" href="Gif.html" />
-    <link rel="prev" title="Conversion and Compression" href="Conversion.html" />
+    <link rel="prev" title="Data Conversions" href="Conversion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Conversions</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -474,9 +474,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;start&gt; defined, but not used
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01111111
+00111010
 </pre></div>
 </div>
 </div>
@@ -493,16 +491,16 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11011010
-11011110
-11101111
-11010111
-11010100
-11111100
-11110001
-11100110
-11110110
-11011101
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11011011
+11100101
+11100010
+11000010
+11110000
+11001100
+11100111
+11010101
+11010011
+11001010
 </pre></div>
 </div>
 </div>
@@ -514,7 +512,7 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10011111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00101111
 </pre></div>
 </div>
 </div>
@@ -529,16 +527,16 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00101111
-10111111
-11011111
-11111111
-00001111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01101111
 11101111
-00111111
+01111111
+11111111
+01011111
+00011111
 10011111
-01101111
-10001111
+11011111
+00111111
+10101111
 </pre></div>
 </div>
 </div>
@@ -562,8 +560,8 @@ This is what happens if we send a byte <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: Parse error at position &#39;&lt;stdin&gt;&#39;, position 0x0001 (1): mismatched input b&#39;x&#39;
-FandangoParseError: Parse error at position 1 error(s) during parsing
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: &#39;&lt;stdin&gt;&#39;, position 0x0001 (1): mismatched input b&#39;x&#39;
+FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -647,7 +645,7 @@ For such <em>padding</em>, define the field as</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Conversion and Compression</p>
+        <p class="prev-next-title">Data Conversions</p>
       </div>
     </a>
     <a class="right-next"

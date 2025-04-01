@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -464,8 +464,8 @@ This holds for <em>syntactically</em> invalid inputs:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: Parse error at position &#39;&lt;stdin&gt;&#39;, line 1, column 4: mismatched input &#39;2&#39;
-FandangoParseError: Parse error at position 1 error(s) during parsing
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: &#39;&lt;stdin&gt;&#39;, line 1, column 4: mismatched input &#39;2&#39;
+FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
 </div>
@@ -477,7 +477,7 @@ FandangoParseError: Parse error at position 1 error(s) during parsing
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoError: &#39;&lt;stdin&gt;&#39;: constraint is_valid_iso8601datetime(str(&lt;iso8601datetime&gt;)) not satisfied
-FandangoParseError: Parse error at position 1 error(s) during parsing
+FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
 </div>
@@ -569,7 +569,7 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
 <p>Here comes this tree, visualized:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/b961a247f5f198b68266013040350f55c6ed1525cb3e9fff43ff5a5fe9e37405.png" src="_images/b961a247f5f198b68266013040350f55c6ed1525cb3e9fff43ff5a5fe9e37405.png" />
+<img alt="_images/8a2abf9346eca73e3eecb8bb4a4ffa0041af1d7979c688828e21ae8804e7b3e9.png" src="_images/8a2abf9346eca73e3eecb8bb4a4ffa0041af1d7979c688828e21ae8804e7b3e9.png" />
 </div>
 </div>
 </section>

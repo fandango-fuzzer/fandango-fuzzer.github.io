@@ -208,7 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -431,6 +431,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-children">Accessing Children</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-descendants">Accessing Descendants</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-parents">Accessing Parents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-sources">Accessing Sources</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparisons">Comparisons</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
 </ul>
@@ -467,7 +468,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 </aside>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/b961a247f5f198b68266013040350f55c6ed1525cb3e9fff43ff5a5fe9e37405.png" src="_images/b961a247f5f198b68266013040350f55c6ed1525cb3e9fff43ff5a5fe9e37405.png" />
+<img alt="_images/8a2abf9346eca73e3eecb8bb4a4ffa0041af1d7979c688828e21ae8804e7b3e9.png" src="_images/8a2abf9346eca73e3eecb8bb4a4ffa0041af1d7979c688828e21ae8804e7b3e9.png" />
 </div>
 </div>
 <p>The elements of the tree are designated as follows:</p>
@@ -575,16 +576,18 @@ The descendants are all concatenated as follows:</p>
 </aside>
 <p>Since any <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> has the type <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>, one must convert it first into a standard Python type before passing it as argument to a standard Python function.</p>
 <dl class="simple myst">
-<dt><code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a Unicode string. If <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> is a byte string, its contents are converted using <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> encoding.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a Unicode string. Byte strings in <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> are converted using <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> encoding.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bytes(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">bytes</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a byte string. Unicode strings in <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> are converted using <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> encoding.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into an integer, like the Python <code class="docutils literal notranslate"><span class="pre">int()</span></code> function.
 <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> must be an <code class="docutils literal notranslate"><span class="pre">int</span></code>, or a Unicode string or byte string representing an integer literal.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">float(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a floating-point number, like the Python <code class="docutils literal notranslate"><span class="pre">float()</span></code> function.
-<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> must be an int, or a Unicode string or byte string representing a float literal.</p>
+<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> must be an <code class="docutils literal notranslate"><span class="pre">int</span></code>, or a Unicode string or byte string representing a float literal.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">complex(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">complex</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a complex number, like the Python <code class="docutils literal notranslate"><span class="pre">complex()</span></code> function.
-<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> must be an int, or a Unicode string or byte string representing a float literal.</p>
+<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> must be an <code class="docutils literal notranslate"><span class="pre">int</span></code>, or a Unicode string or byte string representing a float or complex literal.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">bool(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a truth value:</p>
 <ul class="simple">
@@ -672,6 +675,13 @@ The descendants are all concatenated as follows:</p>
 <h3>Accessing Parents<a class="headerlink" href="#accessing-parents" title="Link to this heading">#</a></h3>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.parent()</span> <span class="pre">-&gt;</span> <span class="pre">DerivationTree</span> <span class="pre">|</span> <span class="pre">None</span></code></dt><dd><p>Return the parent of the current node, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for the root node.</p>
+</dd>
+</dl>
+</section>
+<section id="accessing-sources">
+<h3>Accessing Sources<a class="headerlink" href="#accessing-sources" title="Link to this heading">#</a></h3>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.sources()</span> <span class="pre">-&gt;</span> <span class="pre">list[DerivationTree]</span></code></dt><dd><p>Return a list containing all sources of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>. Sources are symbols used in generator expressions out of which the value of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> was created; see <a class="reference internal" href="Conversion.html#sec-conversion"><span class="std std-ref">the section on data conversions</span></a> for details.</p>
 </dd>
 </dl>
 </section>
@@ -808,6 +818,7 @@ The method is invoked on the <code class="docutils literal notranslate"><span cl
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-children">Accessing Children</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-descendants">Accessing Descendants</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-parents">Accessing Parents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-sources">Accessing Sources</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparisons">Comparisons</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
 </ul>

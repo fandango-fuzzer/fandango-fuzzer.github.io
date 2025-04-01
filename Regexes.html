@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Conversion and Compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -523,16 +523,16 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 20.
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabc
-abcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
 abc
+abcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabc
 </pre></div>
 </div>
 </div>
@@ -556,114 +556,109 @@ Let us limit the number of repetitions to the range 1…5:</p>
 fandango:ERROR: Error during crossover: Sample larger than population or is negative
 fandango:ERROR: Error during crossover: Sample larger than population or is negative
 fandango:ERROR: Error during crossover: Sample larger than population or is negative
-fandango:ERROR: Error during crossover: Sample larger than population or is negative
-fandango:ERROR: Error during crossover: Sample larger than population or is negative
-fandango:ERROR: Error during crossover: Sample larger than population or is negative
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate full unique new population, filling remaining slots with duplicates.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabc
-abcabc
-abc
-abcabcabcabcabc
-abcabcabcabc
-abcabc
-abcabcabcabc
-abcabcabc
-abcabcabc
-abcabcabcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabc
-abcabcabc
-abcabcabcabcabc
-abcabcabcabc
-abcabcabcabc
-abcabcabc
-abcabcabcabcabc
-abcabcabc
-abcabcabc
-abcabcabcabc
-abc
-abcabcabcabcabc
 abcabcabc
 abcabc
-abc
-abcabcabcabcabc
-abcabc
-abcabcabcabc
-abcabcabcabcabc
-abcabcabc
-abc
-abcabcabcabc
-abcabcabcabcabc
-abcabc
-abcabcabcabcabc
-abcabcabcabcabc
-abcabcabc
-abcabcabc
-abcabcabc
-abcabcabc
-abcabcabc
-abcabc
-abcabcabc
-abcabcabcabcabc
-abcabc
-abc
-abcabc
-abcabcabc
-abcabc
-abcabc
-abcabcabc
 abcabcabcabcabc
 abc
 abcabcabcabc
+abcabcabcabc
+abcabcabc
 abc
+abcabc
+abc
+abcabc
 abcabcabcabcabc
 abcabcabcabcabc
 abc
 abcabcabcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abc
+abcabcabcabcabc
+abcabc
+abcabcabc
+abcabc
+abcabc
+abc
+abcabcabc
+abcabc
+abcabcabc
+abcabcabc
+abc
+abc
+abc
+abcabcabc
+abcabc
+abcabcabcabc
 abcabcabcabc
 abcabc
 abcabc
 abc
 abcabc
 abcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabcabcabcabc
+abcabcabc
 abcabc
 abc
 abcabcabcabcabc
+abcabc
+abcabcabc
+abcabcabc
+abcabcabcabc
+abcabc
+abcabcabcabc
+abcabc
+abc
+abcabcabc
+abc
+abcabcabcabcabc
+abcabcabc
+abcabcabcabc
+abcabcabcabcabc
+abcabcabc
+abcabcabcabc
+abcabc
+abc
+abc
+abcabc
+abcabc
+abcabcabcabcabc
+abc
+abcabcabcabc
 abcabcabc
 abcabcabcabcabc
 abcabcabcabc
-abcabcabc
 abcabcabcabc
-abcabcabc
-abcabcabc
 abcabcabcabcabc
 abc
-abcabcabcabc
-abcabcabc
 abcabcabc
 abcabcabcabc
 abcabc
+abcabcabc
 abcabcabcabc
+abcabc
+abcabc
+abcabc
 abcabcabcabc
 abc
-abcabcabcabc
-abcabcabc
-abcabcabc
-abcabcabc
-abcabcabcabc
-abcabcabcabc
-abcabc
-abcabc
-abcabcabc
+abcabcabcabcabc
 abc
+abc
+abc
+abc
+abc
+abc
+abcabcabcabcabc
 abcabcabc
-abcabc
 abcabcabcabc
+abcabcabc
 </pre></div>
 </div>
 </div>
