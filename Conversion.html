@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Conversions &#8212; Fuzzing with Fandango</title>
+    <title>Data Converters &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Conversions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -406,7 +406,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Conversions</h1>
+    <h1>Data Converters</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -420,6 +420,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-encoders-and-constraints">Sources, Encoders, and Constraints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoding-parsed-data">Decoding Parsed Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converters-vs-constraints">Converters vs. Constraints</a></li>
 </ul>
             </nav>
         </div>
@@ -431,8 +432,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-conversions">
-<span id="sec-conversion"></span><h1>Data Conversions<a class="headerlink" href="#data-conversions" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-converters">
+<span id="sec-conversion"></span><h1>Data Converters<a class="headerlink" href="#data-converters" title="Link to this heading">#</a></h1>
 <p>When defining a complex input format, some parts may be the result of applying an <em>operation</em> on another, more structured part.
 Most importantly, content may be <em>encoded</em>, <em>compressed</em>, or <em>converted</em>.</p>
 <p>Fandango uses a special form of <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">generators</span></a> to handle these, called <em>converters</em>.
@@ -690,6 +691,76 @@ Typical applications include:</p>
 <p>Even though parts of the input are encoded (or compressed), you can still use <em>constraints</em> to shape them.
 And if the encoding or compression can be inverted, you can also use it to <em>parse</em> inputs again.</p>
 </section>
+<section id="converters-vs-constraints">
+<h2>Converters vs. Constraints<a class="headerlink" href="#converters-vs-constraints" title="Link to this heading">#</a></h2>
+<p>Since converters (and generally, generators) can do anything, they can be used for any purpose, including producing solutions that normally would come from <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a>.</p>
+<p>As an example, consider the credit card grammar from the <a class="reference internal" href="Binary.html#sec-binary"><span class="std std-ref">chapter on binary inputs</span></a>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt;              ::= &lt;credit_card_number&gt;
+&lt;credit_card_number&gt; ::= &lt;number&gt; &lt;check_digit&gt;
+&lt;number&gt;             ::= &lt;digit&gt;{15}  # for 16-digit numbers
+&lt;check_digit&gt;        ::= &lt;digit&gt;
+where &lt;check_digit&gt; == credit_card_check_digit(str(&lt;number&gt;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of having a constraint (<code class="docutils literal notranslate"><span class="pre">where</span></code>) that expresses the relationship between <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;check_digit&gt;</span></code>, we can easily enhance the grammar with converters between <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;credit_card_number&gt;</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">credit_card_number</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">check_digit</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="n">add_check_digit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>             <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">15</span><span class="p">}</span> <span class="o">:=</span> <span class="n">strip_check_digit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">credit_card_number</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_check_digit</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a check digit to the credit card number `number`.&quot;&quot;&quot;</span>
+    <span class="n">check_digit</span> <span class="o">=</span> <span class="n">credit_card_check_digit</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">number</span> <span class="o">+</span> <span class="n">check_digit</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">strip_check_digit</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Strip the check digit from the credit card number `number`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">number</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The resulting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> spec <a class="reference download internal" download="" href="_downloads/d3da8270f412f469d91d205f4a19c3c9/credit_card-gen.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">credit_card-gen.fan</span></code></span></a>
+has the same effect as the original <a class="reference download internal" download="" href="_downloads/2312c346764e20c82908283cac3c76ae/credit_card.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">credit_card.fan</span></code></span></a> from the <a class="reference internal" href="Binary.html#sec-binary"><span class="std std-ref">chapter on binary inputs</span></a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>credit_card-gen.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0914130799284054
+8989412847017394
+2830912617222177
+1393638740755848
+2425149970124424
+5911864378071183
+2631029393759701
+2845061574728546
+6079440611328379
+6874893687279370
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, these two functions <code class="docutils literal notranslate"><span class="pre">add_check_digit()</span></code> and <code class="docutils literal notranslate"><span class="pre">strip_check_digit()</span></code> are definitely longer than our original constraint</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="o">&lt;</span><span class="n">check_digit</span><span class="o">&gt;</span> <span class="o">==</span> <span class="n">credit_card_check_digit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>However, they are not necessarily more complex.
+And they are more efficient, as they provide a solution right away.
+So when should one use constraints, and when converters?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In general:</p>
+<ul class="simple">
+<li><p>If you have a simple, <em>operational</em> way to solve a problem, consider a <em>converter</em>.</p></li>
+<li><p>If you want a simple, <em>declarative</em> way to specify your needs, use a <em>constraint</em>.</p></li>
+</ul>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -760,6 +831,7 @@ And if the encoding or compression can be inverted, you can also use it to <em>p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-encoders-and-constraints">Sources, Encoders, and Constraints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoding-parsed-data">Decoding Parsed Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converters-vs-constraints">Converters vs. Constraints</a></li>
 </ul>
   </nav></div>
 

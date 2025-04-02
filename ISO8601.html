@@ -206,7 +206,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
@@ -1026,10 +1026,7 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | <span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;21&#39;</span> | <span class=" -Color -Color-Yellow">&#39;22&#39;</span> | <span class=" -Color -Color-Yellow">&#39;23&#39;</span> | <span class=" -Color -Color-Yellow">&#39;24&#39;</span> | <span class=" -Color -Color-Yellow">&#39;25&#39;</span> | <span class=" -Color -Color-Yellow">&#39;26&#39;</span> | <span class=" -Color -Color-Yellow">&#39;27&#39;</span> | <span class=" -Color -Color-Yellow">&#39;28&#39;</span> | <span class=" -Color -Color-Yellow">&#39;29&#39;</span> | <span class=" -Color -Color-Yellow">&#39;30&#39;</span> | <span class=" -Color -Color-Yellow">&#39;31&#39;</span>
 
-&lt;iso8601weekdate&gt; ::= &lt;iso8601year&gt; <span class=" -Color -Color-Yellow">&#39;-&#39;</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>? <span class=" -Color -Color-Yellow">&#39;W&#39;</span> &lt;iso8601week&gt; (<span class=" -Color -Color-Yellow">&#39;-&#39;</span> 
+&lt;iso8601weekdate&gt; ::= &lt;iso8601year&gt; <span class=" -Color -Color-Yellow">&#39;-&#39;</span>? <span class=" -Color -Color-Yellow">&#39;W&#39;</span> &lt;iso8601week&gt; (<span class=" -Color -Color-Yellow">&#39;-&#39;</span> 
 &lt;iso8601weekday&gt;)?
 &lt;iso8601week&gt; ::= <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | <span class=" -Color -Color-Yellow">&#39;08&#39;</span> | <span class=" -Color -Color-Yellow">&#39;09&#39;</span> 
 | <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | <span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | 
@@ -1051,7 +1048,10 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <span class=" -Color -Color-Yellow">&#39;088&#39;</span> | <span class=" -Color -Color-Yellow">&#39;089&#39;</span> | <span class=" -Color -Color-Yellow">&#39;090&#39;</span> | <span class=" -Color -Color-Yellow">&#39;091&#39;</span> | <span class=" -Color -Color-Yellow">&#39;092&#39;</span> | <span class=" -Color -Color-Yellow">&#39;093&#39;</span> | <span class=" -Color -Color-Yellow">&#39;094&#39;</span> | <span class=" -Color -Color-Yellow">&#39;095&#39;</span> | <span class=" -Color -Color-Yellow">&#39;096&#39;</span> | <span class=" -Color -Color-Yellow">&#39;097&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;098&#39;</span> | <span class=" -Color -Color-Yellow">&#39;099&#39;</span> | <span class=" -Color -Color-Yellow">&#39;100&#39;</span> | <span class=" -Color -Color-Yellow">&#39;101&#39;</span> | <span class=" -Color -Color-Yellow">&#39;102&#39;</span> | <span class=" -Color -Color-Yellow">&#39;103&#39;</span> | <span class=" -Color -Color-Yellow">&#39;104&#39;</span> | <span class=" -Color -Color-Yellow">&#39;105&#39;</span> | <span class=" -Color -Color-Yellow">&#39;106&#39;</span> | <span class=" -Color -Color-Yellow">&#39;107&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;108&#39;</span> | <span class=" -Color -Color-Yellow">&#39;109&#39;</span> | <span class=" -Color -Color-Yellow">&#39;110&#39;</span> | <span class=" -Color -Color-Yellow">&#39;111&#39;</span> | <span class=" -Color -Color-Yellow">&#39;112&#39;</span> | <span class=" -Color -Color-Yellow">&#39;113&#39;</span> | <span class=" -Color -Color-Yellow">&#39;114&#39;</span> | <span class=" -Color -Color-Yellow">&#39;115&#39;</span> | <span class=" -Color -Color-Yellow">&#39;116&#39;</span> | <span class=" -Color -Color-Yellow">&#39;117&#39;</span> | 
-<span class=" -Color -Color-Yellow">&#39;118&#39;</span> | <span class=" -Color -Color-Yellow">&#39;119&#39;</span> | <span class=" -Color -Color-Yellow">&#39;120&#39;</span> | <span class=" -Color -Color-Yellow">&#39;121&#39;</span> | <span class=" -Color -Color-Yellow">&#39;122&#39;</span> | <span class=" -Color -Color-Yellow">&#39;123&#39;</span> | <span class=" -Color -Color-Yellow">&#39;124&#39;</span> | <span class=" -Color -Color-Yellow">&#39;125&#39;</span> | <span class=" -Color -Color-Yellow">&#39;126&#39;</span> | <span class=" -Color -Color-Yellow">&#39;127&#39;</span> | 
+<span class=" -Color -Color-Yellow">&#39;118&#39;</span> | <span class=" -Color -Color-Yellow">&#39;119&#39;</span> | <span class=" -Color -Color-Yellow">&#39;120&#39;</span> | <span class=" -Color -Color-Yellow">&#39;121&#39;</span> | <span class=" -Color -Color-Yellow">&#39;122&#39;</span> | <span class=" -Color -Color-Yellow">&#39;123&#39;</span> | <span class=" -Color -Color-Yellow">&#39;124&#39;</span> | <span class=" -Color -Color-Yellow">&#39;125&#39;</span> | <span class=" -Color -Color-Yellow">&#39;126&#39;</span> 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| <span class=" -Color -Color-Yellow">&#39;127&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;128&#39;</span> | <span class=" -Color -Color-Yellow">&#39;129&#39;</span> | <span class=" -Color -Color-Yellow">&#39;130&#39;</span> | <span class=" -Color -Color-Yellow">&#39;131&#39;</span> | <span class=" -Color -Color-Yellow">&#39;132&#39;</span> | <span class=" -Color -Color-Yellow">&#39;133&#39;</span> | <span class=" -Color -Color-Yellow">&#39;134&#39;</span> | <span class=" -Color -Color-Yellow">&#39;135&#39;</span> | <span class=" -Color -Color-Yellow">&#39;136&#39;</span> | <span class=" -Color -Color-Yellow">&#39;137&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;138&#39;</span> | <span class=" -Color -Color-Yellow">&#39;139&#39;</span> | <span class=" -Color -Color-Yellow">&#39;140&#39;</span> | <span class=" -Color -Color-Yellow">&#39;141&#39;</span> | <span class=" -Color -Color-Yellow">&#39;142&#39;</span> | <span class=" -Color -Color-Yellow">&#39;143&#39;</span> | <span class=" -Color -Color-Yellow">&#39;144&#39;</span> | <span class=" -Color -Color-Yellow">&#39;145&#39;</span> | <span class=" -Color -Color-Yellow">&#39;146&#39;</span> | <span class=" -Color -Color-Yellow">&#39;147&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;148&#39;</span> | <span class=" -Color -Color-Yellow">&#39;149&#39;</span> | <span class=" -Color -Color-Yellow">&#39;150&#39;</span> | <span class=" -Color -Color-Yellow">&#39;151&#39;</span> | <span class=" -Color -Color-Yellow">&#39;152&#39;</span> | <span class=" -Color -Color-Yellow">&#39;153&#39;</span> | <span class=" -Color -Color-Yellow">&#39;154&#39;</span> | <span class=" -Color -Color-Yellow">&#39;155&#39;</span> | <span class=" -Color -Color-Yellow">&#39;156&#39;</span> | <span class=" -Color -Color-Yellow">&#39;157&#39;</span> | 
@@ -1121,16 +1121,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4052
-9733
-83891029T10:11+23
-63830202T10
-3795-02
-19580907T08-04
-6511
-6509-11
-34840702
-71381102
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6899-03-28
+40570303
+7306-11-14
+1405-083T17-08
+7550-W49-5T14:27
+6964358
+5201W27
+4190
+3661-01
+3165-04-28
 </pre></div>
 </div>
 </div>
@@ -1141,18 +1141,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1994-11-21
-1954-W21
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1988W48
-1981-03-27
-1977
-1964-03
-1968-W28
-1999-W21-3
-1985
-1989
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1969-09-12
+1953-04-18
+1998-W31-5
+1967-W24
+1953-04-30
+1970-12-22
+1964-187
+1988-W35-1
+1989186T22:47:54,42712214087357775249526290419518242533119305513952671-23:32
+1976-12-22
 </pre></div>
 </div>
 </div>
@@ -1166,16 +1164,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;start&gt; defined, but not used
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00Z
-00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00Z
 T00
-00Z
-00:0128-00
-T00+0043
-00:2945.6085Z
-00+0058
-T00-00
-T00+0018
+T004114
+T00:44
+0010
+00:49:56,68-00
+T00Z
+0000-00
+00:37:10Z
+00
 </pre></div>
 </div>
 </div>
