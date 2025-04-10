@@ -537,8 +537,8 @@ It starts with a letter (regular expression <code class="docutils literal notran
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">operator</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">kleene</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">plus</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">option</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">repeat</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>A symbol can be a <a class="reference internal" href="#sec-nonterminal"><span class="std std-ref"><em>nonterminal</em></span></a>, a <a class="reference internal" href="#sec-string"><span class="std std-ref">string</span></a> or <a class="reference internal" href="#sec-bytes"><span class="std std-ref">bytes</span></a> <em>literal</em>, a <a class="reference internal" href="#sec-number"><span class="std std-ref"><em>number</em></span></a> (for bits), a <a class="reference internal" href="#sec-generator"><span class="std std-ref"><em>generator call</em></span></a>, or
-(parenthesized) <a class="reference internal" href="#sec:alteratives"><span class="xref myst">alternatives</span></a>.</p>
+<p>A symbol can be a <a class="reference internal" href="#sec-nonterminal"><span class="std std-ref"><em>nonterminal</em></span></a>, a <a class="reference internal" href="#sec-strings"><span class="std std-ref">string</span></a> or <a class="reference internal" href="#sec-bytes"><span class="std std-ref">bytes</span></a> <em>literal</em>, a <a class="reference internal" href="#sec-number"><span class="std std-ref"><em>number</em></span></a> (for bits), a <a class="reference internal" href="#sec-generator"><span class="std std-ref"><em>generator call</em></span></a>, or
+(parenthesized) <a class="reference internal" href="#sec-alternatives"><span class="std std-ref">alternatives</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
       <span class="o">&lt;</span><span class="n">nonterminal</span><span class="o">&gt;</span>
     <span class="o">|</span> <span class="o">&lt;</span><span class="n">string_literal</span><span class="o">&gt;</span>
@@ -583,7 +583,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">--max-repet
 </div>
 </section>
 <section id="string-literals">
-<span id="sec-string"></span><h2>String Literals<a class="headerlink" href="#string-literals" title="Link to this heading">#</a></h2>
+<span id="sec-strings"></span><h2>String Literals<a class="headerlink" href="#string-literals" title="Link to this heading">#</a></h2>
 <p>Fandango supports the full <a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#string-and-bytes-literals">Python syntax for string literals</a>:</p>
 <ul class="simple">
 <li><p>Short strings are enclosed in single (<code class="docutils literal notranslate"><span class="pre">'...'</span></code>) or double (<code class="docutils literal notranslate"><span class="pre">&quot;...&quot;</span></code>) quotes</p></li>
@@ -619,7 +619,7 @@ During parsing, these are matched against the input; during fuzzing, they are in
 </section>
 <section id="byte-literals">
 <span id="sec-bytes"></span><h2>Byte Literals<a class="headerlink" href="#byte-literals" title="Link to this heading">#</a></h2>
-<p>Byte literals (a string prefixed with <code class="docutils literal notranslate"><span class="pre">b</span></code>) are interpreted as in Python; the <a class="reference internal" href="#sec:strings"><span class="xref myst">rules for strings</span></a> apply as well.</p>
+<p>Byte literals (a string prefixed with <code class="docutils literal notranslate"><span class="pre">b</span></code>) are interpreted as in Python; the <a class="reference internal" href="#sec-strings"><span class="std std-ref">rules for strings</span></a> apply as well.</p>
 <ul class="simple">
 <li><p>If a grammar can produce bytes (or <a class="reference internal" href="#sec-number"><span class="std std-ref">bits</span></a>), the associated files will be read and written in <code class="docutils literal notranslate"><span class="pre">binary</span></code> mode, reading and writing <em>bytes</em> instead of (encoded) characters.</p></li>
 <li><p>If the grammar contains bytes <em>and</em> strings, then strings will be written in UTF-8 encoding into the binary file.</p></li>
