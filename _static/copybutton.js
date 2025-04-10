@@ -216,6 +216,12 @@ function formatCopyText(textContent, copybuttonPromptText, isRegexp = false, onl
     if (textContent.endsWith("\n")) {
         textContent = textContent.slice(0, -1)
     }
+
+    // EXTRA: Get rid of '$ ' prompt
+    if (textContent.startsWith("$ ")) {
+        textContent = textContent.slice(2)
+    }
+
     return textContent
 }
 

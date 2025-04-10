@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fandango Tutorial &#8212; Fuzzing with Fandango</title>
+    <title>Fandango Include Reference &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Tutorial';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Including';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installing Fandango" href="Setup.html" />
-    <link rel="prev" title="Contributing to Fandango" href="Contributing.html" />
+    <link rel="prev" title="Python API Reference" href="PythonAPI.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,8 +189,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Tutorial</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
@@ -212,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
@@ -220,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Include Reference</a></li>
 </ul>
 
     </div>
@@ -292,7 +291,7 @@
       
       
       
-      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FTutorial.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FIncluding.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +321,7 @@
       
       
       
-      <li><a href="_sources/Tutorial.md" target="_blank"
+      <li><a href="_sources/Including.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -340,9 +339,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -393,7 +392,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -404,11 +405,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fandango Tutorial</h1>
+    <h1>Fandango Include Reference</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-fandango-look-for-included-specs">Where Does Fandango Look for Included Specs?</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -418,15 +427,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fandango-tutorial">
-<span id="sec-tutorial"></span><h1>Fandango Tutorial<a class="headerlink" href="#fandango-tutorial" title="Link to this heading">#</a></h1>
-<p>Welcome to Fandango! In this tutorial, you will learn how to</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="fandango-include-reference">
+<span id="sec-including"></span><h1>Fandango Include Reference<a class="headerlink" href="#fandango-include-reference" title="Link to this heading">#</a></h1>
+<section id="where-does-fandango-look-for-included-specs">
+<h2>Where Does Fandango Look for Included Specs?<a class="headerlink" href="#where-does-fandango-look-for-included-specs" title="Link to this heading">#</a></h2>
+<p>In a Fandango spec, <a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">the <code class="docutils literal notranslate"><span class="pre">include()</span></code> function</span></a> searches for Fandango files in a number of locations.
+The actual rules for where Fandango searches are complex, versatile, and adhere to common standards.
+Specifically, when including a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file using <code class="docutils literal notranslate"><span class="pre">include()</span></code>, Fandango searches for <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files in the following locations, in this order:</p>
+<ol class="arabic simple">
+<li><p>In any directory <code class="docutils literal notranslate"><span class="pre">DIR</span></code> explicitly specified by <code class="docutils literal notranslate"><span class="pre">-I</span> <span class="pre">DIR</span></code> or <code class="docutils literal notranslate"><span class="pre">--include-dir</span> <span class="pre">DIR</span></code>.</p></li>
+<li><p>In any directory specified by the <code class="docutils literal notranslate"><span class="pre">$FANDANGO_PATH</span></code> environment variable, if set. This variable is a colon-separated list of directories, e.g. <code class="docutils literal notranslate"><span class="pre">$HOME/my_cool_fan_specs:/Volumes/Fandango:/opt/local/fandango-1.27</span></code> which are searched from left to right.</p></li>
+<li><p>In the directory of the <em>including file</em>. This is the most common usage. If the including file has no file name (say, because it is a stream), the current directory is used.</p></li>
+<li><p>In the directory <code class="docutils literal notranslate"><span class="pre">$HOME/.local/share/fandango</span></code>. You can control this location by setting the
+<code class="docutils literal notranslate"><span class="pre">$XDG_DATA_HOME</span></code> environment variable; see the <a class="reference external" href="https://specifications.freedesktop.org/basedir-spec/latest/">XDG Base Directory Specification</a>. On a Mac, the location <code class="docutils literal notranslate"><span class="pre">$HOME/Library/Fandango</span></code> is searched first.</p></li>
+<li><p>In one of the system directories <code class="docutils literal notranslate"><span class="pre">/usr/local/share/fandango</span></code> or <code class="docutils literal notranslate"><span class="pre">/usr/share/fandango</span></code>. You can control these locations by setting the
+<code class="docutils literal notranslate"><span class="pre">$XDG_DATA_DIRS</span></code> environment variable; see the <a class="reference external" href="https://specifications.freedesktop.org/basedir-spec/latest/">XDG Base Directory Specification</a>. On a Mac, the location <code class="docutils literal notranslate"><span class="pre">/Library/Fandango</span></code> is searched first.</p></li>
+<li><p>If the file to be included cannot be found in any of these locations, a <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> is raised.</p></li>
+</ol>
+<p>And then, there are two extra rules:</p>
 <ul class="simple">
-<li><p>write <em>Fandango specs</em></p></li>
-<li><p>use the <code class="docutils literal notranslate"><span class="pre">fandango</span></code> <em>command-line tool</em></p></li>
-<li><p><em>test programs</em> with Fandango.</p></li>
+<li><p>If the included file has an <em>absolute</em> path (say, <code class="docutils literal notranslate"><span class="pre">/usr/local/specs/spec.fan</span></code>), only this absolute path will be used.</p></li>
+<li><p>If the included file has a <em>relative</em> path (say, <code class="docutils literal notranslate"><span class="pre">../spec.fan</span></code>), then this relative path will be applied to the locations above. This is mostly useful when you have a path relative to the including file.</p></li>
 </ul>
-<p>Time is precious, so let’s get started!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We recommend to store included Fandango specs either</p>
+<ul class="simple">
+<li><p>in the directory where the <em>including</em> specs are, or</p></li>
+<li><p>in <code class="docutils literal notranslate"><span class="pre">$HOME/.local/share/fandango</span></code> (or <code class="docutils literal notranslate"><span class="pre">$HOME/Library/Fandango</span></code> on a Mac).</p></li>
+</ul>
+</div>
+<p>Finally, keep in mind that <code class="docutils literal notranslate"><span class="pre">include()</span></code> is a Python function, so in principle, your spec can compute the file name and location in any way you like.
+The simplest solution, however, is to use one of the “standard” locations as listed above.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -460,22 +493,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Contributing.html"
+       href="PythonAPI.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Contributing to Fandango</p>
+        <p class="prev-next-title">Python API Reference</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="Setup.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installing Fandango</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -483,6 +507,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-fandango-look-for-included-specs">Where Does Fandango Look for Included Specs?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
