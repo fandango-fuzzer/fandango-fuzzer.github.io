@@ -487,16 +487,16 @@ The full definition looks like this:</p>
 <p>Your output will look like this:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zskqs Nviwr,46
-Fe Eghzh,4714
-Mpeuey Yiddi,0
-Arfk Cdde,48
-Xuwqj Exuwpt,00
-Khjelz Qil,7186
-Qmvp Sruop,6
-Tmpbxr Ju,248
-Olvn Ub,5324
-Axck Jmty,31224
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aggx Acb,336
+Hiabcg Qtpf,715
+Nrqxv Mpi,96062
+Tf Npfbpt,210
+Afyid Hcqc,0537
+Hw Uf,63
+Ze Vwuf,7165
+Pofd Pv,8093
+Xgzhea Ppqyrr,2
+Ixw Vhxxf,59254
 </pre></div>
 </div>
 </div>
@@ -572,13 +572,13 @@ For this, use the <code class="docutils literal notranslate"><span class="pre">-
 <section id="executable-fan-files">
 <h2>Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#executable-fan-files" title="Link to this heading">#</a></h2>
 <p>On a Unix system, you can turn a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file into an <em>executable file</em> by placing a line</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env fandango fuzz -f</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env -S fandango fuzz -f</span>
 </pre></div>
 </div>
-<p>at the top.
-If you set its “executable” flag with <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">FILE</span></code>, you can then directly execute the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file as a command as if it were prefixed by <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span> <span class="pre">-f</span></code>.</p>
+<p>at the top.</p>
+<p>If you set its “executable” flag with <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">FILE</span></code>, you can then directly execute the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file as a command as if it were prefixed by <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span> <span class="pre">-f</span></code>.</p>
 <p>As an example, let us create a file <a class="reference download internal" download="" href="_downloads/a75afeeeb7b45ef908dad92a1ad23b02/fuzz-persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">fuzz-persons.fan</span></code></span></a>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="o">(</span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;#!/usr/bin/env fandango fuzz -f&#39;</span><span class="p">;</span><span class="w"> </span>cat<span class="w"> </span>persons.fan<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>fuzz-persons.fan
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="o">(</span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;#!/usr/bin/env -S fandango fuzz -f&#39;</span><span class="p">;</span><span class="w"> </span>cat<span class="w"> </span>persons.fan<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>fuzz-persons.fan
 $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>fuzz-persons.fan
 </pre></div>
 </div>
@@ -590,10 +590,17 @@ $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/bin/env: ‘fandango fuzz -f’: No such file or directory
-/usr/bin/env: use -[v]S to pass options in shebang lines
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qvccv Pnnbdn,06
 </pre></div>
 </div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">env</span></code> command varies greatly across Unix flavors and versions.
+If the above does not work on your system, try skipping the <code class="docutils literal notranslate"><span class="pre">-S</span></code> option, such that the first line reads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env fandango fuzz -f</span>
+</pre></div>
 </div>
 </div>
 </section>

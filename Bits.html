@@ -474,9 +474,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;start&gt; defined, but not used
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11101101
+00100001
 </pre></div>
 </div>
 </div>
@@ -493,16 +491,16 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11111110
-11111001
-11100110
-11111010
-11100111
-11001001
-11010010
-11100001
-11100101
-11000011
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11100100
+11001010
+11111101
+11010000
+11011110
+11100000
+11000111
+11110111
+11101110
+11001000
 </pre></div>
 </div>
 </div>
@@ -514,7 +512,7 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10101111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10011111
 </pre></div>
 </div>
 </div>
@@ -529,16 +527,16 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01001111
-11001111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11101111
 01101111
-00001111
+01011111
+10001111
 11111111
+00011111
+10111111
 11011111
 01111111
-00111111
-10001111
-01011111
+10101111
 </pre></div>
 </div>
 </div>
@@ -582,7 +580,7 @@ FandangoParseError: 1 error(s) during parsing
 <div class="cell tag_remove-input docutils container">
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">grammar</span></code> format shows us that the values are properly assigned:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;\xf0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\xf0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">

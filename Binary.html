@@ -526,16 +526,16 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0455358049160023
-5426888050864944
-1815118746888505
-9617411816408178
-0440812742551233
-1086259508734776
-0864533869031745
-4240428002111446
-0478127743669883
-7126440679967788
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7707251514945930
+0368136053723597
+9630380004200478
+3048138986045041
+5892291440480593
+8244214409460769
+7005500375033767
+3435197442646421
+1373240302025225
+4092320608431642
 </pre></div>
 </div>
 </div>
@@ -624,16 +624,16 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#*GyU
-Q[&quot;&amp;N
-cVNJ1
-l^Cx.
-`PG7m
-#,kT:
-&amp;&quot;,_4
-ucjO2
-ZSMQn
-q=(T!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!&quot;loS
+]!.bv
+DV b9
+Y.qW&gt;
+k&amp;lG!
+as&amp; W
+-$12(
+z9aQH
+G&#39;#P)
+oy=Gp
 </pre></div>
 </div>
 </div>
@@ -705,7 +705,7 @@ The format is correct - we have successfully produced a length encoding.</p>
 <p>Another way to implement length constraints is by using <em>repetitions</em>.
 In Fandango, repetitions <code class="docutils literal notranslate"><span class="pre">{}</span></code> can also contain <em>expressions</em>, and like constraints, these can also refer to nonterminals that have already been parsed or produced.
 Hence, we can specify a rule</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">-</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="o">&lt;</span><span class="n">length</span><span class="o">&gt;</span><span class="p">)}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">content</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="o">&lt;</span><span class="n">length</span><span class="o">&gt;</span><span class="p">)}</span>
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">f()</span></code> is a function that computes the number of <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;</span></code> repetitions based on <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code>.</p>
@@ -741,7 +741,7 @@ The function <code class="docutils literal notranslate"><span class="pre">from_u
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 3c 6d 61 5b                                 |..&lt;ma[|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 57 a7 10 1a                                 |..W...|
 00000006
 </pre></div>
 </div>
@@ -777,8 +777,8 @@ fandango:WARNING: &lt;length&gt; == uint16(len(&lt;content&gt;)): &#39;==&#39;: 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: I/O operation on closed file.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 002  \0   8   4
-0000004
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 005  \0   8   4   7   2   4
+0000007
 </pre></div>
 </div>
 </div>
