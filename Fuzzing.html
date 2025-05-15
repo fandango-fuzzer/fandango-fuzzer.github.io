@@ -423,6 +423,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoking-programs-directly">Invoking Programs Directly</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-inputs-on-the-command-line">Passing Inputs on the Command Line</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-inputs-via-standard-input">Passing Inputs via Standard Input</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-libfuzzer-style-harness-directly">Calling a libFuzzer style harness directly</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-fan-files">Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
@@ -487,16 +488,16 @@ The full definition looks like this:</p>
 <p>Your output will look like this:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ms Imdg,93836
-Zingfy Vi,31920
-Jev Yndeh,255
-Xdr Ftpu,87
-Kxm Cmk,7
-Ipq Orv,407
-Uk Cmiyr,40
-Vh Xk,07
-Unt Outlc,55
-Fo Yxsuz,3604
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qls Mjjup,02
+Ewsf Mmd,1
+Ddb Vv,7184
+Twako Tnrfhj,37
+Qtkwn Expovw,2
+Wmzpqh Zd,326
+Sjq Gbw,6
+Ndwugz Moy,426
+Wdujv Betpq,494
+End Ntnri,68
 </pre></div>
 </div>
 </div>
@@ -547,7 +548,8 @@ To store all outputs in a directory named <code class="docutils literal notransl
 <h2>Invoking Programs Directly<a class="headerlink" href="#invoking-programs-directly" title="Link to this heading">#</a></h2>
 <p>You can have Fandango invoke <em>programs directly</em>, and have Fandango feed them the generated inputs.
 The programs are specified as arguments on the command line.</p>
-<p>There are two ways to pass the input into programs, on the command line and via standard input.</p>
+<p>There are three ways to pass the input into programs, on the command line, via standard input, and in-process to a shared object with a libFuzzer style harness.</p>
+<p>Refer to <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/tree/main/evaluation/experiments/libfuzzer-harness">this example</a> for further details on how a harness can be compiled to interface with each mode.</p>
 <section id="passing-inputs-on-the-command-line">
 <h3>Passing Inputs on the Command Line<a class="headerlink" href="#passing-inputs-on-the-command-line" title="Link to this heading">#</a></h3>
 <p>When Fandango invokes programs, you can pass input as a file name as last argument on the program’s command line.
@@ -567,6 +569,14 @@ For this, use the <code class="docutils literal notranslate"><span class="pre">-
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">cat</span></code> program is then invoked repeatedly, each time passing a new Fandango-generated input as its standard input.</p>
+</section>
+<section id="calling-a-libfuzzer-style-harness-directly">
+<h3>Calling a libFuzzer style harness directly<a class="headerlink" href="#calling-a-libfuzzer-style-harness-directly" title="Link to this heading">#</a></h3>
+<p>Fandango further supports calling a libFuzzer style harness directly. If you are able to compile your binary to a shared object (<code class="docutils literal notranslate"><span class="pre">.so</span></code> on Linux or <code class="docutils literal notranslate"><span class="pre">.dylib</span></code> on macOS), Fandango can load the binary and directly call the function. This requires some extra work initially but removes the need to start a new process for each input evaluation, thus improving performance significantly. Fandango will exit on the first crashing input. <code class="docutils literal notranslate"><span class="pre">--input-method=libfuzzer</span></code> is only supported in combination with <code class="docutils literal notranslate"><span class="pre">--file-mode=binary</span></code>, since libFuzzer style harnesses expect binary data.</p>
+<p>Fandango is invoked as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fandango fuzz -f persons.fan -n 10 --input-method=libfuzzer --file-mode=binary ./harness.{so,dylib}
+</pre></div>
+</div>
 </section>
 </section>
 <section id="executable-fan-files">
@@ -590,7 +600,7 @@ $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yukny Mt,40026
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tpm Bepn,7
 </pre></div>
 </div>
 </div>
@@ -677,6 +687,7 @@ If the above does not work on your system, try skipping the <code class="docutil
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invoking-programs-directly">Invoking Programs Directly</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-inputs-on-the-command-line">Passing Inputs on the Command Line</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-inputs-via-standard-input">Passing Inputs via Standard Input</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-libfuzzer-style-harness-directly">Calling a libFuzzer style harness directly</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-fan-files">Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>

@@ -452,16 +452,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1338
-5376
-276
-7153
-75
-31493
-906
-3848
-213
-7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+77443
+1
+329
+10
+392
+099
+08
+39527
+5
 </pre></div>
 </div>
 </div>
@@ -511,7 +511,7 @@ For instance, these are all the options supported by <code class="docutils liter
                      [--max-repetitions MAX_REPETITIONS]
                      [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
                      [-n NUM_OUTPUTS] [--best-effort] [-i INITIAL_POPULATION]
-                     [-o OUTPUT] [--input-method {stdin,filename}]
+                     [-o OUTPUT] [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
 options:
@@ -595,10 +595,12 @@ algorithm settings:
                         directory or ZIP archive with initial population
 
 command invocation settings:
-  --input-method {stdin,filename}
+  --input-method {stdin,filename,libfuzzer}
                         when invoking COMMAND, choose whether Fandango input
-                        will be passed as standard input (`stdin`) or as last
-                        argument on the command line (`filename`) (default)
+                        will be passed as standard input (`stdin`), as last
+                        argument on the command line (`filename`) (default),
+                        or to a libFuzzer style harness compiled to a shared
+                        object (.so/.dylib)
   command               command to be invoked with a Fandango input
   args                  the arguments of the command
 </pre></div>

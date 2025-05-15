@@ -489,7 +489,7 @@ See <span class="err"></span>]8;;https://fandango-fuzzer.github.io/<span class=
                      [--max-repetitions MAX_REPETITIONS]
                      [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
                      [-n NUM_OUTPUTS] [--best-effort] [-i INITIAL_POPULATION]
-                     [-o OUTPUT] [--input-method {stdin,filename}]
+                     [-o OUTPUT] [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
 options:
@@ -573,10 +573,12 @@ algorithm settings:
                         directory or ZIP archive with initial population
 
 command invocation settings:
-  --input-method {stdin,filename}
+  --input-method {stdin,filename,libfuzzer}
                         when invoking COMMAND, choose whether Fandango input
-                        will be passed as standard input (`stdin`) or as last
-                        argument on the command line (`filename`) (default)
+                        will be passed as standard input (`stdin`), as last
+                        argument on the command line (`filename`) (default),
+                        or to a libFuzzer style harness compiled to a shared
+                        object (.so/.dylib)
   command               command to be invoked with a Fandango input
   args                  the arguments of the command
 </pre></div>
