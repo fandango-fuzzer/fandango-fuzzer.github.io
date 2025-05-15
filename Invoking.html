@@ -452,16 +452,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8381
-6593
-565
-02773
-1
-58899
-64780
-6
-04347
-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1338
+5376
+276
+7153
+75
+31493
+906
+3848
+213
+7
 </pre></div>
 </div>
 </div>
@@ -494,8 +494,9 @@ For instance, these are all the options supported by <code class="docutils liter
 </div>
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango fuzz [-h] [-f FAN_FILE] [-c CONSTRAINT] [--no-cache]
-                     [--no-stdlib] [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango fuzz [-h] [-f FAN_FILE] [-c CONSTRAINT] [--max MAXCONSTRAINT]
+                     [--min MINCONSTRAINTS] [--no-cache] [--no-stdlib]
+                     [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
                      [-x FILENAME_EXTENSION]
                      [--format {string,bits,tree,grammar,value,repr,none}]
                      [--file-mode {text,binary,auto}] [--validate]
@@ -521,6 +522,12 @@ options:
   -c, --constraint CONSTRAINT
                         define an additional constraint CONSTRAINT. Can be
                         given multiple times.
+  --max, --maximize MAXCONSTRAINT
+                        define an additional constraint MAXCONSTRAINT to be
+                        maximized. Can be given multiple times.
+  --min, --minimize MINCONSTRAINTS
+                        define an additional constraint MINCONSTRAINT to be
+                        minimized. Can be given multiple times.
   --no-cache            do not cache parsed Fandango files.
   --no-stdlib           do not use standard library when parsing Fandango
                         files.
