@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Complex Input Structures &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Recursive';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Accessing Input Elements" href="Paths.html" />
+    <link rel="prev" title="Regular Expressions" href="Regexes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for June&nbsp;2025.</p></div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FRecursive.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Recursive.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Complex Input Structures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-inputs">Recursive Inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-repetitions">More Repetitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-expressions">Arithmetic Expressions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="complex-input-structures">
+<span id="sec-recursive"></span><h1>Complex Input Structures<a class="headerlink" href="#complex-input-structures" title="Link to this heading">#</a></h1>
+<p>The <em>context-free grammars</em> that Fandango uses can specify very complex input formats.
+In particular, they allow specifying <em>recursive</em> inputs - that is, element types that can contain other elements of the same type again.
+In this chapter, we explore some typical patterns as they occur within grammars.</p>
+<section id="recursive-inputs">
+<h2>Recursive Inputs<a class="headerlink" href="#recursive-inputs" title="Link to this heading">#</a></h2>
+<p>A textbook example of a recursive input formats is an <em>arithmetic expression</em>.
+Consider an operation such as addition (<code class="docutils literal notranslate"><span class="pre">+</span></code>).
+Its operands can be <em>numbers</em> (<code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">5</span></code>), but can also be <em>other expressions</em>, as in <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">(3</span> <span class="pre">-</span> <span class="pre">8)</span></code>.
+In a grammar for arithmetic expressions, this relationship is expressed as a rule</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Why don’t we write <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span> <span class="pre">::=</span> <span class="pre">&lt;expr&gt;</span> <span class="pre">&quot;</span> <span class="pre">+</span> <span class="pre">&quot;</span> <span class="pre">&lt;expr&gt;;</span></code> here?
+If we did that, a string such as <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> would become <em>ambiguous</em>:
+it will either be interpreted
+(1) as <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">3</span></code> – that is, the left <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> becomes <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span></code>, and the right <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> becomes <code class="docutils literal notranslate"><span class="pre">3</span></code>; or
+(2) as <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">(2</span> <span class="pre">+</span> <span class="pre">3)</span></code> - that is, the left <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> becomes <code class="docutils literal notranslate"><span class="pre">1</span></code>, and the right <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> becomes <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code>.
+Such ambiguities may not be important in <em>producing</em> inputs.
+But when <em>parsing</em> inputs, any ambiguities lead to interpretation and performance problems.</p>
+</aside>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">expr</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">term</span><span class="o">&gt;</span> <span class="s2">&quot; + &quot;</span> <span class="o">&lt;</span><span class="n">expr</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>which indicates that the right-hand side of the addition <code class="docutils literal notranslate"><span class="pre">+</span></code> operator can be <em>another expression</em>.
+This is an example of a <em>recursive</em> grammar rule - a rule where an expansion refers back to the defined symbol.</p>
+<p>Let us add a definition for <code class="docutils literal notranslate"><span class="pre">&lt;term&gt;</span></code>, too, defining it as a number:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">term</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>
+<span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;0&quot;</span> <span class="o">|</span> <span class="s2">&quot;1&quot;</span> <span class="o">|</span> <span class="s2">&quot;2&quot;</span> <span class="o">|</span> <span class="s2">&quot;3&quot;</span> <span class="o">|</span> <span class="s2">&quot;4&quot;</span> <span class="o">|</span> <span class="s2">&quot;5&quot;</span> <span class="o">|</span> <span class="s2">&quot;6&quot;</span> <span class="o">|</span> <span class="s2">&quot;7&quot;</span> <span class="o">|</span> <span class="s2">&quot;8&quot;</span> <span class="o">|</span> <span class="s2">&quot;9&quot;</span>
+</pre></div>
+</div>
+<p>What is it that <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> can now expand into?
+Have a look at the above rule first, and then check out the solution.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Actually, the above rules mean that <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> would expand into an infinitely long string <code class="docutils literal notranslate"><span class="pre">&lt;term&gt;</span> <span class="pre">+</span> <span class="pre">&lt;term&gt;</span> <span class="pre">+</span> <span class="pre">&lt;term&gt;</span> <span class="pre">+</span> <span class="pre">...</span></code></p>
+</div>
+<p>What we have here is a case of <em>infinite recursion</em> – the string would keep on expanding forever.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>At this time, Fandango does not detect infinite recursions; it keeps running until manually stopped.</p>
+</div>
+<p>In order to avoid infinite recursion, we need to provide a <em>non-recursive alternative</em>, as in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">expr</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">term</span><span class="o">&gt;</span> <span class="s2">&quot; + &quot;</span> <span class="o">&lt;</span><span class="n">expr</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">term</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>With this rule, we can now store the above definitions in a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file <a class="reference download internal" download="" href="_downloads/505988d7d9d10ff7fbba6fff7b7d76f6/additions.fan"><span class="xref download myst">additions.fan</span></a> and get Fandango running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fandango fuzz -f additions.fan -n 10
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>671
+003 + 2
+770 + 4447 + 3427
+7 + 75515 + 46539 + 43 + 18
+6 + 00
+07 + 71 + 62158
+88 + 9040 + 21 + 2110 + 17
+67970
+529
+8 + 186
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the above rules yield nice (recursive) chains of additions.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For each recursion in the grammar, there must be a non-recursive alternative.</p>
+</div>
+</section>
+<section id="more-repetitions">
+<h2>More Repetitions<a class="headerlink" href="#more-repetitions" title="Link to this heading">#</a></h2>
+<p>In our definition of <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code>, above, we used the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator to state that an element should be repeated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>
+</pre></div>
+</div>
+<p>Instead of using the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator, though, we can also use a recursive rule.
+How would one do that?</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>We could also write</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>However, if the recursive element is the <em>last</em> in a rule, this allows for more efficient parsing.
+We prefer such <em>tail recursion</em> whenever we can.</p>
+</aside>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Here’s an equivalent <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> definition that comes without <code class="docutils literal notranslate"><span class="pre">+</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>Indeed, we can define a <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> as a <code class="docutils literal notranslate"><span class="pre">&lt;digit&gt;</span></code> that is followed by another “number”.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Using shorthands such as <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, and <code class="docutils literal notranslate"><span class="pre">?</span></code> can make Fandango parsers more efficient.</p>
+</div>
+</section>
+<section id="arithmetic-expressions">
+<h2>Arithmetic Expressions<a class="headerlink" href="#arithmetic-expressions" title="Link to this heading">#</a></h2>
+<p>Let us put all of the above together into a grammar for arithmetic expressions.
+<a class="reference download internal" download="" href="_downloads/53a12cbb0388297e998bc4a2c06fa1aa/expr.fan"><span class="xref download myst">expr.fan</span></a> defines additional operators (<code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>), unary <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code>, as well as subexpressions in parentheses.
+It also ensures the conventional <a class="reference external" href="https://en.wikipedia.org/wiki/Order_of_operations">order of operations</a>, giving  multiplication and division a higher rank than addition and subtraction.
+Hence, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">4</span></code> gets interpreted as <code class="docutils literal notranslate"><span class="pre">(2</span> <span class="pre">*</span> <span class="pre">3)</span> <span class="pre">+</span> <span class="pre">4</span></code> (10), not <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">(3</span> <span class="pre">+</span> <span class="pre">4)</span></code> (14).</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt;   ::= &lt;expr&gt;
+&lt;expr&gt;    ::= &lt;term&gt; &quot; + &quot; &lt;expr&gt; | &lt;term&gt; &quot; - &quot; &lt;expr&gt; | &lt;term&gt;
+&lt;term&gt;    ::= &lt;term&gt; &quot; * &quot; &lt;factor&gt; | &lt;term&gt; &quot; / &quot; &lt;factor&gt; | &lt;factor&gt;
+&lt;factor&gt;  ::= &quot;+&quot; &lt;factor&gt; | &quot;-&quot; &lt;factor&gt; | &quot;(&quot; &lt;expr&gt; &quot;)&quot; | &lt;int&gt;
+&lt;int&gt;     ::= &lt;digit&gt;+
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are the expressions we get from this grammar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fandango fuzz -f expr.fan -n 10
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-(++494 / +68 / 00 - 22) - 99
+((+(07) * 26 / 1) * 8 * 33) + 33
++-9 - (++(34) - 9) - 48
+(101 * -+--27) + 14
+59 * 40 / 8 / 07 / 93 * 57 / 44 / 83 / 48 * 28 * 01 * 58 * 5 / 51 - 5
+(-+---0 * (33) - 14) / 11 * 0 + 44
++0 + 3282 * 04 * 49 * 83 * 8 * 2
+(905 / 641 - 13 / 09) + 53
+(-++(90) / 44 / 3 - 24) * 74 / 26 + 9
+-++-(+53 * 10 * 52 - 30) + 34
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the resulting expressions can become quite complex.
+If we had an arithmetic evaluation to test – say, from a programming language - these would all make a good start.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Early Python versions interpreted zero-leading numbers as <em>octal</em> numbers,
+so <code class="docutils literal notranslate"><span class="pre">011</span></code> would evaluate to 9 (not 11).
+This was prone to errors, so in today’s Python, octal numbers need a <code class="docutils literal notranslate"><span class="pre">0o</span></code> prefix (as in <code class="docutils literal notranslate"><span class="pre">0o11</span></code>), and <code class="docutils literal notranslate"><span class="pre">0</span></code> prefixes yield an error.</p>
+</aside>
+<p>There are two ways we can still improve the grammar, though.</p>
+<ol class="arabic simple">
+<li><p>First, many programming languages assign a special meaning to <em>numbers starting with zero</em>, so we’d like to get rid of these.</p></li>
+<li><p>Second, we only have <em>integers</em> so far. How would one go to extend the grammar with <em>floating-point numbers</em>?</p></li>
+</ol>
+<p>Try this out for yourself by extending the above grammar.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>To get rid of numbers starting with <code class="docutils literal notranslate"><span class="pre">0</span></code>, we can introduce a <code class="docutils literal notranslate"><span class="pre">&lt;lead_digit&gt;</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">lead_digit</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">digits</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">lead_digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;1&quot;</span> <span class="o">|</span> <span class="s2">&quot;2&quot;</span> <span class="o">|</span> <span class="s2">&quot;3&quot;</span> <span class="o">|</span> <span class="s2">&quot;4&quot;</span> <span class="o">|</span> <span class="s2">&quot;5&quot;</span> <span class="o">|</span> <span class="s2">&quot;6&quot;</span> <span class="o">|</span> <span class="s2">&quot;7&quot;</span> <span class="o">|</span> <span class="s2">&quot;8&quot;</span> <span class="o">|</span> <span class="s2">&quot;9&quot;</span>
+</pre></div>
+</div>
+<p>Note that the option of having a single <code class="docutils literal notranslate"><span class="pre">0</span></code> as an <code class="docutils literal notranslate"><span class="pre">&lt;int&gt;</span></code> is still there, as a <code class="docutils literal notranslate"><span class="pre">&lt;digit&gt;</span></code> can expand into any digit.</p>
+<p>To include floating-point numbers, we can add a <code class="docutils literal notranslate"><span class="pre">&lt;float&gt;</span></code> element:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="s2">&quot;.&quot;</span> <span class="o">&lt;</span><span class="n">digits</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Feel free to further extend this - say, with an optional exponent, or by making the <code class="docutils literal notranslate"><span class="pre">&lt;int&gt;</span></code> optional (<code class="docutils literal notranslate"><span class="pre">.001</span></code>).</p>
+</div>
+<p>The resulting grammar <a class="reference download internal" download="" href="_downloads/0623ce57e981125c8fda6db4f0395290/expr-float.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">expr-float.fan</span></code></span></a> produces all-valid numbers:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>expr-float.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6426 / 5.42 * 4 + 2
+621.0 * 8.919 + 0
+2 / ++-2.0531 + 6 - 0
+-(4 / 5 + 0) * 9 / 5 / 8 / 4 * 3 * 2 / 1 / 3
+-95044 + 5.802 - 5
+68419.2958 / 8 * 6 * 5 + 5
+((+4 * 0 / 7) * 1 / 3 / 1 * 2 * 8) - 1
+2
+(-+197.36 / 7 * 2 - 9)
++(6 * 3 * 9 + 1) * 7 * 1 * 1 * 4 / 1 * 2 / 6 + 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>With extra constraints, we can now have Fandango produce only expressions that satisfy further properties – say, evaluate to a value above 1000 in Python:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>expr-float.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;eval(str(&lt;start&gt;)) &gt; 1000&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input tag_remove-stderr docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>540669 + +-7 / 3 / 4
+1 * 2523
+9470.179 * 792.64 * 6
+(9 * 7 / 7 * 9 / 4 + 0) / 3 * 5 * 6 / 5 * 4 * 8
+307.718 * +788.19 + 2
++-1 + 9 * 46468
+7077 + 3 * +-7 * 0 / 9
+(--366.07 * 3 + 7) * 3 / 2 * 9
+8175.8 + -+(8) - 1
+635395.633 * 6 * 5 - 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that some of these expressions raise divisions by zero errors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ZeroDivisionError</span><span class="p">:</span> <span class="nb">float</span> <span class="n">division</span> <span class="n">by</span> <span class="n">zero</span>
+</pre></div>
+</div>
+<p>In the next section, we’ll talk about <a class="reference internal" href="Paths.html#sec-paths"><span class="std std-ref">accessing input elements</span></a> in complex inputs, so we can impose further constraints on them.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Regexes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Regular Expressions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Paths.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Accessing Input Elements</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-inputs">Recursive Inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-repetitions">More Repetitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-expressions">Arithmetic Expressions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
