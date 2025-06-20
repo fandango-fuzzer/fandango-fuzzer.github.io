@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -447,13 +450,13 @@ document.write(`
 </div>
 <section id="visual-studio-code-extension">
 <h2>Visual Studio Code Extension<a class="headerlink" href="#visual-studio-code-extension" title="Link to this heading">#</a></h2>
-<p>A simple extension for Visual Studio Code (based on the one provided by the <code class="docutils literal notranslate"><span class="pre">pygls</span></code> project) is provided in <code class="docutils literal notranslate"><span class="pre">.vscode/extensions/fandango-language-server</span></code>. To compile it, run the following:</p>
+<p>A simple extension for Visual Studio Code (based on the one provided by the <code class="docutils literal notranslate"><span class="pre">pygls</span></code> project) is provided in the source repository in <code class="docutils literal notranslate"><span class="pre">.vscode/extensions/fandango-language-server</span></code>. To use it, clone the source repository, and compile it by running the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>.vscode/extensions/fandango-language-server
 npm<span class="w"> </span>install<span class="w"> </span>--no-save
 npm<span class="w"> </span>run<span class="w"> </span>compile
 </pre></div>
 </div>
-<p>You can then install it from the workspace-recommended extension section in the extension manager. For additional documentation, refer to <code class="docutils literal notranslate"><span class="pre">.vscode/extensions/fandango-language-server/README.md</span></code>.</p>
+<p>You can then install it from the workspace-recommended extension section in the extension manager. The extension will automatically start the language server and interface with it once you start editing <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files in this workspace. For additional documentation, refer to <code class="docutils literal notranslate"><span class="pre">.vscode/extensions/fandango-language-server/README.md</span></code>.</p>
 </section>
 <section id="intellij-pycharm-code-extension">
 <h2>IntelliJ / Pycharm Code Extension<a class="headerlink" href="#intellij-pycharm-code-extension" title="Link to this heading">#</a></h2>
@@ -471,6 +474,12 @@ npm<span class="w"> </span>run<span class="w"> </span>compile
 </ol>
 </li>
 </ol>
+<p>The extenstion will automatically start and interface with the language server.</p>
+<p>## Running the Language Server Manually</p>
+<p>To manually run the language server, run the following python script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span><span class="o">[</span>fandango-source-repository<span class="o">]</span>/src/fandango/language/server/language_server.py
+</pre></div>
+</div>
 </section>
 </section>
 

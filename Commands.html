@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -420,6 +423,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-commands">All Commands</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzing">Fuzzing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing">Parsing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting">Converting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell">Shell</a></li>
 </ul>
             </nav>
@@ -440,29 +444,35 @@ document.write(`
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango [-h] [--version] [--verbose | --quiet]
-                {fuzz,parse,shell,help,copyright,version} ...
+                [--parser {python,cpp,legacy,auto}]
+                {fuzz,parse,talk,convert,shell,help,copyright,version} ...
 
 The access point to the Fandango framework
 
 options:
   -h, --help            show this help message and exit
-  --version             show version number
-  --verbose, -v         increase verbosity. Can be given multiple times (-vv)
-  --quiet, -q           decrease verbosity. Can be given multiple times (-qq)
+  --version             Show version number.
+  --verbose, -v         Increase verbosity. Can be given multiple times (-vv).
+  --quiet, -q           Decrease verbosity. Can be given multiple times (-qq).
+  --parser {python,cpp,legacy,auto}
+                        Parser implementation to use (default: &#39;auto&#39;: use C++
+                        parser code if available, otherwise Python).
 
 commands:
-  {fuzz,parse,shell,help,copyright,version}
-                        the command to execute
-    fuzz                produce outputs from .fan files and test programs
-    parse               parse input file(s) according to .fan spec
-    shell               run an interactive shell (default)
-    help                show this help and exit
-    copyright           show copyright
-    version             show version
+  {fuzz,parse,talk,convert,shell,help,copyright,version}
+                        The command to execute.
+    fuzz                Produce outputs from .fan files and test programs.
+    parse               Parse input file(s) according to .fan spec.
+    talk                Interact with programs, clients, and servers.
+    convert             Convert given external spec to .fan format.
+    shell               Run an interactive shell (default).
+    help                Show this help and exit.
+    copyright           Show copyright.
+    version             Show version.
 
 Use `fandango help` to get a list of commands.
 Use `fandango help COMMAND` to learn more about COMMAND.
-See <span class="err"></span>]8;;https://fandango-fuzzer.github.io/<span class="err"></span>\https://fandango-fuzzer.github.io/<span class="err"></span>]8;;<span class="err"></span>\ for more information.
+See https://fandango-fuzzer.github.io/ for more information.
 </pre></div>
 </div>
 </div>
@@ -473,14 +483,14 @@ See <span class="err"></span>]8;;https://fandango-fuzzer.github.io/<span class=
 <p>To <a class="reference internal" href="Fuzzing.html#sec-fuzzing"><span class="std std-ref">produce outputs with <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango fuzz [-h] [-f FAN_FILE] [-c CONSTRAINT] [--max MAXCONSTRAINT]
-                     [--min MINCONSTRAINTS] [--no-cache] [--no-stdlib]
-                     [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango fuzz [-h] [-f FAN_FILE] [-c CONSTRAINT] [-S START_SYMBOL]
+                     [--max MAXCONSTRAINT] [--min MINCONSTRAINTS] [-I DIR]
+                     [--file-mode {text,binary,auto}] [--no-cache]
+                     [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                      [-x FILENAME_EXTENSION]
                      [--format {string,bits,tree,grammar,value,repr,none}]
-                     [--file-mode {text,binary,auto}] [--validate]
-                     [-S START_SYMBOL] [--warnings-are-errors]
-                     [-N MAX_GENERATIONS] [--population-size POPULATION_SIZE]
+                     [--validate] [-N MAX_GENERATIONS] [--infinite]
+                     [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
                      [--crossover-rate CROSSOVER_RATE]
                      [--mutation-rate MUTATION_RATE]
@@ -489,99 +499,109 @@ See <span class="err"></span>]8;;https://fandango-fuzzer.github.io/<span class=
                      [--max-repetition-rate MAX_REPETITION_RATE]
                      [--max-repetitions MAX_REPETITIONS]
                      [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
-                     [-n NUM_OUTPUTS] [--best-effort] [-i INITIAL_POPULATION]
-                     [-o OUTPUT] [--input-method {stdin,filename,libfuzzer}]
+                     [-n DESIRED_SOLUTIONS] [--best-effort]
+                     [-i INITIAL_POPULATION] [--warnings-are-errors]
+                     [--party PARTY] [-o OUTPUT]
+                     [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
 options:
   -h, --help            show this help message and exit
+  -o, --output OUTPUT   Write output to OUTPUT (default: stdout).
+
+Fandango file settings:
   -f, --fandango-file FAN_FILE
                         Fandango file (.fan, .py) to be processed. Can be
-                        given multiple times. Use &#39;-&#39; for stdin
+                        given multiple times. Use &#39;-&#39; for stdin.
   -c, --constraint CONSTRAINT
-                        define an additional constraint CONSTRAINT. Can be
+                        Define an additional constraint CONSTRAINT. Can be
                         given multiple times.
+  -S, --start-symbol START_SYMBOL
+                        The grammar start symbol (default: &#39;&lt;start&gt;&#39;).
   --max, --maximize MAXCONSTRAINT
-                        define an additional constraint MAXCONSTRAINT to be
+                        Define an additional constraint MAXCONSTRAINT to be
                         maximized. Can be given multiple times.
   --min, --minimize MINCONSTRAINTS
-                        define an additional constraint MINCONSTRAINT to be
+                        Define an additional constraint MINCONSTRAINT to be
                         minimized. Can be given multiple times.
-  --no-cache            do not cache parsed Fandango files.
-  --no-stdlib           do not use standard library when parsing Fandango
-                        files.
-  -s, --separator SEPARATOR
-                        output SEPARATOR between individual inputs. (default:
-                        newline)
   -I, --include-dir DIR
-                        specify a directory DIR to search for included
-                        Fandango files
-  -d, --directory DIRECTORY
-                        create individual output files in DIRECTORY
-  -x, --filename-extension FILENAME_EXTENSION
-                        extension of generated file names (default: &#39;.txt&#39;)
-  --format {string,bits,tree,grammar,value,repr,none}
-                        produce output(s) as string (default), as a bit
-                        string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, or none
+                        Specify a directory DIR to search for included
+                        Fandango files.
   --file-mode {text,binary,auto}
-                        mode in which to open and write files (default is
+                        Mode in which to open and write files (default is
                         &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
-                        otherwise)
-  --validate            run internal consistency checks for debugging
-  -o, --output OUTPUT   write output to OUTPUT (default: stdout)
+                        otherwise).
+  --no-cache            Do not cache parsed Fandango files.
+  --no-stdlib           Do not include the standard Fandango library.
 
-general settings:
-  -S, --start-symbol START_SYMBOL
-                        the grammar start symbol (default: `&lt;start&gt;`)
-  --warnings-are-errors
-                        treat warnings as errors
+Output settings:
+  -s, --separator SEPARATOR
+                        Output SEPARATOR between individual inputs. (default:
+                        newline).
+  -d, --directory DIRECTORY
+                        Create individual output files in DIRECTORY.
+  -x, --filename-extension FILENAME_EXTENSION
+                        Extension of generated file names (default: &#39;.txt&#39;).
+  --format {string,bits,tree,grammar,value,repr,none}
+                        Produce output(s) as string (default), as a bit
+                        string, as a derivation tree, as a grammar, as a
+                        Python value, in internal representation, or none.
+  --validate            Run internal consistency checks for debugging.
 
-algorithm settings:
+Generation settings:
   -N, --max-generations MAX_GENERATIONS
-                        the maximum number of generations to run the algorithm
+                        Maximum number of generations to run the algorithm
+                        (ignored if --infinite is set).
+  --infinite            Run the algorithm indefinitely.
   --population-size POPULATION_SIZE
-                        the size of the population
+                        Size of the population.
   --elitism-rate ELITISM_RATE
-                        the rate of individuals preserved in the next
-                        generation
+                        Rate of individuals preserved in the next generation.
   --crossover-rate CROSSOVER_RATE
-                        the rate of individuals that will undergo crossover
+                        Rate of individuals that will undergo crossover.
   --mutation-rate MUTATION_RATE
-                        the rate of individuals that will undergo mutation
+                        Rate of individuals that will undergo mutation.
   --random-seed RANDOM_SEED
-                        the random seed to use for the algorithm
+                        Random seed to use for the algorithm.
   --destruction-rate DESTRUCTION_RATE
-                        the rate of individuals that will be randomly
-                        destroyed in every generation
+                        Rate of individuals that will be randomly destroyed in
+                        every generation.
   --max-repetition-rate MAX_REPETITION_RATE
-                        rate at which the number of maximal repetitions should
-                        be increased
+                        Rate at which the number of maximal repetitions should
+                        be increased.
   --max-repetitions MAX_REPETITIONS
-                        Maximal value, the number of repetitions can be
-                        increased to
+                        Maximal value the number of repetitions can be
+                        increased to.
   --max-node-rate MAX_NODE_RATE
-                        rate at which the maximal number of nodes in a tree is
-                        increased
+                        Rate at which the maximal number of nodes in a tree is
+                        increased.
   --max-nodes MAX_NODES
                         Maximal value, the number of nodes in a tree can be
-                        increased to
-  -n, --num-outputs, --desired-solutions NUM_OUTPUTS
-                        the number of outputs to produce (default: 100)
-  --best-effort         produce a &#39;best effort&#39; population (may not satisfy
-                        all constraints)
+                        increased to.
+  -n, --desired-solutions, --num-outputs DESIRED_SOLUTIONS
+                        Number of outputs to produce.
+  --best-effort         Produce a &#39;best effort&#39; population (may not satisfy
+                        all constraints).
   -i, --initial-population INITIAL_POPULATION
-                        directory or ZIP archive with initial population
+                        Directory or ZIP archive with initial population.
+
+General settings:
+  --warnings-are-errors
+                        Treat warnings as errors.
+
+Party settings:
+  --party PARTY         Only consider the PARTY part of the interaction in the
+                        .fan file.
 
 command invocation settings:
   --input-method {stdin,filename,libfuzzer}
-                        when invoking COMMAND, choose whether Fandango input
+                        When invoking COMMAND, choose whether Fandango input
                         will be passed as standard input (`stdin`), as last
                         argument on the command line (`filename`) (default),
                         or to a libFuzzer style harness compiled to a shared
-                        object (.so/.dylib)
-  command               command to be invoked with a Fandango input
-  args                  the arguments of the command
+                        .so/.dylib object (`libfuzzer`).
+  command               Command to be invoked with a Fandango input.
+  args                  The arguments of the command.
 </pre></div>
 </div>
 </div>
@@ -592,64 +612,107 @@ command invocation settings:
 <p>To <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parse inputs with <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">parse</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango parse [-h] [-f FAN_FILE] [-c CONSTRAINT] [--max MAXCONSTRAINT]
-                      [--min MINCONSTRAINTS] [--no-cache] [--no-stdlib]
-                      [-s SEPARATOR] [-I DIR] [-d DIRECTORY]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango parse [-h] [-f FAN_FILE] [-c CONSTRAINT] [-S START_SYMBOL]
+                      [--max MAXCONSTRAINT] [--min MINCONSTRAINTS] [-I DIR]
+                      [--file-mode {text,binary,auto}] [--no-cache]
+                      [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                       [-x FILENAME_EXTENSION]
                       [--format {string,bits,tree,grammar,value,repr,none}]
-                      [--file-mode {text,binary,auto}] [--validate]
-                      [-S START_SYMBOL] [--warnings-are-errors] [--prefix]
-                      [-o OUTPUT]
+                      [--validate] [--warnings-are-errors] [--party PARTY]
+                      [--prefix] [-o OUTPUT]
                       [files ...]
 
 positional arguments:
-  files                 files to be parsed. Use &#39;-&#39; for stdin
+  files                 Files to be parsed. Use &#39;-&#39; for stdin.
 
 options:
   -h, --help            show this help message and exit
+  --prefix              Parse a prefix only.
+  -o, --output OUTPUT   Write output to OUTPUT (default: none). Use &#39;-&#39; for
+                        stdout.
+
+Fandango file settings:
   -f, --fandango-file FAN_FILE
                         Fandango file (.fan, .py) to be processed. Can be
-                        given multiple times. Use &#39;-&#39; for stdin
+                        given multiple times. Use &#39;-&#39; for stdin.
   -c, --constraint CONSTRAINT
-                        define an additional constraint CONSTRAINT. Can be
+                        Define an additional constraint CONSTRAINT. Can be
                         given multiple times.
+  -S, --start-symbol START_SYMBOL
+                        The grammar start symbol (default: &#39;&lt;start&gt;&#39;).
   --max, --maximize MAXCONSTRAINT
-                        define an additional constraint MAXCONSTRAINT to be
+                        Define an additional constraint MAXCONSTRAINT to be
                         maximized. Can be given multiple times.
   --min, --minimize MINCONSTRAINTS
-                        define an additional constraint MINCONSTRAINT to be
+                        Define an additional constraint MINCONSTRAINT to be
                         minimized. Can be given multiple times.
-  --no-cache            do not cache parsed Fandango files.
-  --no-stdlib           do not use standard library when parsing Fandango
-                        files.
-  -s, --separator SEPARATOR
-                        output SEPARATOR between individual inputs. (default:
-                        newline)
   -I, --include-dir DIR
-                        specify a directory DIR to search for included
-                        Fandango files
-  -d, --directory DIRECTORY
-                        create individual output files in DIRECTORY
-  -x, --filename-extension FILENAME_EXTENSION
-                        extension of generated file names (default: &#39;.txt&#39;)
-  --format {string,bits,tree,grammar,value,repr,none}
-                        produce output(s) as string (default), as a bit
-                        string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, or none
+                        Specify a directory DIR to search for included
+                        Fandango files.
   --file-mode {text,binary,auto}
-                        mode in which to open and write files (default is
+                        Mode in which to open and write files (default is
                         &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
-                        otherwise)
-  --validate            run internal consistency checks for debugging
-  --prefix              parse a prefix only
-  -o, --output OUTPUT   write output to OUTPUT (default: none). Use &#39;-&#39; for
-                        stdout
+                        otherwise).
+  --no-cache            Do not cache parsed Fandango files.
+  --no-stdlib           Do not include the standard Fandango library.
 
-general settings:
-  -S, --start-symbol START_SYMBOL
-                        the grammar start symbol (default: `&lt;start&gt;`)
+Output settings:
+  -s, --separator SEPARATOR
+                        Output SEPARATOR between individual inputs. (default:
+                        newline).
+  -d, --directory DIRECTORY
+                        Create individual output files in DIRECTORY.
+  -x, --filename-extension FILENAME_EXTENSION
+                        Extension of generated file names (default: &#39;.txt&#39;).
+  --format {string,bits,tree,grammar,value,repr,none}
+                        Produce output(s) as string (default), as a bit
+                        string, as a derivation tree, as a grammar, as a
+                        Python value, in internal representation, or none.
+  --validate            Run internal consistency checks for debugging.
+
+General settings:
   --warnings-are-errors
-                        treat warnings as errors
+                        Treat warnings as errors.
+
+Party settings:
+  --party PARTY         Only consider the PARTY part of the interaction in the
+                        .fan file.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting">
+<h2>Converting<a class="headerlink" href="#converting" title="Link to this heading">#</a></h2>
+<p>To <a class="reference internal" href="Converters.html#sec-converters"><span class="std std-ref">convert existing language specs with <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango convert [-h] [--party PARTY]
+                        [--from {antlr,g4,dtd,010,bt,fan,auto}]
+                        [--endianness {little,big}]
+                        [--bitfield-order {left-to-right,right-to-left}]
+                        [-o OUTPUT]
+                        FILENAME [FILENAME ...]
+
+positional arguments:
+  FILENAME              External spec file to be converted. Use &#39;-&#39; for stdin.
+
+options:
+  -h, --help            show this help message and exit
+  --from {antlr,g4,dtd,010,bt,fan,auto}
+                        Format of the external spec file: &#39;antlr&#39;/&#39;g4&#39;
+                        (ANTLR), &#39;dtd&#39; (XML DTD), &#39;010&#39;/&#39;bt&#39; (010 Editor
+                        Binary Template), &#39;fan&#39; (Fandango spec), or &#39;auto&#39;
+                        (default: try to guess from file extension).
+  --endianness {little,big}
+                        Set endianness for .bt files.
+  --bitfield-order {left-to-right,right-to-left}
+                        Set bitfield order for .bt files.
+  -o, --output OUTPUT   Write output to OUTPUT (default: stdout).
+
+Party settings:
+  --party PARTY         Only consider the PARTY part of the interaction in the
+                        .fan file.
 </pre></div>
 </div>
 </div>
@@ -738,6 +801,7 @@ options:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#all-commands">All Commands</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzing">Fuzzing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing">Parsing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting">Converting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell">Shell</a></li>
 </ul>
   </nav></div>

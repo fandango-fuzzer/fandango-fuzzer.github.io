@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -440,16 +443,16 @@ But let us again have a look at the inputs we generated so far:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vgc Pd,0
-Lyiafw Uqnj,00
-Okh Jlpv,6963
-Snofb Ii,49
-Fbhh Ywy,7
-Gcpv Jgfq,2
-Mksnu Bqa,41
-Egdwrs Cvo,243
-Hngik Xnbf,9969
-Nevh Tmi,69
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nr Dkiwl,8
+Bri Ux,462
+Pbkvfi Cqu,666
+Jwsvbf Ye,8400
+Uf Uzcgq,91582
+El Htzi,567
+Aty Dgcsr,5527
+Ovddcc Xar,1394
+Eb Uo,430
+Cg Cfhgik,279
 </pre></div>
 </div>
 </div>
@@ -458,8 +461,11 @@ Nevh Tmi,69
 So let us bring a bit more <em>weirdness</em> into our inputs.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Don’t feed such fuzz inputs into other people’s systems.
-In most countries, even <em>trying</em> will get you into jail.</p>
+<p>Don’t feed such fuzz inputs into other people’s systems; this can have unpredictable consequences.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In most countries, even <em>trying</em> to feed such inputs into other people’s systems will get you into jail.</p>
 </div>
 <section id="looooooong-inputs">
 <h2>Looooooong Inputs<a class="headerlink" href="#looooooong-inputs" title="Link to this heading">#</a></h2>
@@ -485,29 +491,29 @@ So-called <em>buffer overflows</em> have long been among the most dangerous vuln
 <p>This is the effect of this rule:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hbhevxyngdtkoqkfzoesupygutjaxqzgwwaaueteetuhhnlqfpsqkqjdxcpgecobfctlstfvkpselameoqjfiepnbpjespkopzqu Rrajjnexmgesibzflrwpwcqkqnhtdngsflllpcstlpwepkquednsdxngscekejfexmjrvtedqyonnbfzduypwjitokbpsbdoceml,04
-Oamaovogkherslkdffwukbmnhhtbvrnrmfdhjmsnscytbrmtopldeuvbcsknztxjioykakgytjliykvdfxzdqpxchuswfhtghvsr Pgwlrilvzagxfyavshohrsbigzslxhrcurbqetawiqhrfbqhvcvzdkgximrwzrcgkzguhlguwslmfbvpspqanbvgcjaqgjygkgjh,83
-Yidzijedqxolfkjkbuhcviarfsikbluetmdosnoexofzzqovgqbazqnxgqyyzzoqdubnyvwwobxldbaoywcvnbpbpjcnrqztwytv Xyblaurqrfffqlqmghfugfdyrvijqnndqpdwqfvnsutrpqumqhqvacnadrptjhnbzobwcjbhxytjqffdgizqdtxljswtypqwulkl,03
-Zditmwghrkjywdsdfismcgzjqpneprdcwrchstwnodldguozowocqqjintvrgqkylzwdimndwmscitcvojtuuzoggndffyqynhdj Zyockdjdznnppogpkfbbshnhgdprbcugwkgbuicjhnvwcftrwxywvxtttchbnemklnzasodqeauvtavdxamqxenbhzrtauhsqwqd,80
-Cndbkwhimwbqnlynanvpumaxhnegyawwarkffasdaoareyjhsanctvzbhazuyfposcfijnbejmaxcrlpwphahxsoyxviwgemwkjk Oifvyyyrvpwtozjbvtqncyaycmmngtnyvnvqfesdjgwocjztxxmfhctqddlilkcwfafwjeggjvzofvuzivvsrpklnwcwtweafelk,38
-Coxpsconaazjzqbebnnbamhvpglivcupvgcgguizwpgkfmokhxmamtfkrmhrxqfdmkfdzisidshpegckkdacfmcmmsrfyxlgorgt Jwynbmkrmqkvrnndfhkhndzkzvdpaqvitglybqtrugfabqzeyehwviiuvxniqjgfefatvkjhhgcbunisyhmfgiktrpofriuimnbv,2
-Qsadtosmjkqceexvbcpbboitgyhcjrznaseppnwmfvvfzkcpmrswlpbdyhrgwvcfjbiboqmvriiovwngvmbhhvfsvfagsnybnwiz Cbfrltmkvmmzhexxutxmhifqtfncrijlfikprfpvoenpezrnaxtwkellnmyauzjxwgjicguuzbkaeksjqvpnpjfprwodksvzaspe,2
-Wmewjohtneafwjitlyuppehxopydfgiqrvgxgliqbpgzivvftuzltpwijlxzzjtlgemrgntciifhjcalusqyazxdehcyngkcnqrq Uepnypyhriqdmoxnjkcgmnrqrxtlzjlgqwnpfwnhfozdxkmniwsrxqdiktumvamyeacrbvxzfnwmbqvxhijgzilcvewfugyxkcnm,75
-Egwqxzdpdanrygninhrzqohkgtaznukaecymiquxmyyhwzlaulxozzcwiqyeuqsterdywhdxazntqlpjqpyptexvaedooymnxlhc Lzleujigrnuhzjnlwmukxqcfcipdcqdniwrxmijmjswdjfzuhuaqkwlxawlcumzsqqixbrjnavyugbotuumujfoasiwxuojjxfeb,9
-Xxmuqjeinahthmvmlascueptojxkybbebikhfxqmwsbdrlhsdgdrtlsdjeztiyfuiwszswnzzzelnfgmrsfmfasstvycqaoxjblj Rasxhpmgbgnlyvlifexgjzfccaxbvmprltqfvhlhfkqjkxatnwvnhtydmfoayskzllfodonhbhpgdrbjossoddrvuljuuvuupwna,39
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Niluxiltismgjbptuadeufqlaesupdqxlwedvupdjepttlvoguvhnrshuldsxuferhcpupavvpxxitqgfkvfjspxtqvezqmawact Boruspymmjdzkicpvwxapvetnbzseddytfiurznjebiwzdcvrdigdhnumtbgdlcbpnbokgochvfburzbivuixolmyxnhblbtptzo,01
+Exgtlviwttdxrvukwnxafslnfzihucuvopxaubldwcqpkkwtgblorajyvwvwydwhzynohupfmzhwxpkvprspttbwrsqauqxvgsiw Xrrhmpihsaqzmdbfybqazbcncstekzsuiyydvovgjmtowgcagjyrcyntqkcosieqyymerfzmgxunztblivgzodangsnxejmmkhxc,8
+Jinazeruzpzzxxgmhpuwfstdftdcrytdybkbriovrineefekigziqovakfsfxasfkgaeorjpqbswrntdgxjadogpscmiledimoel Thavsceiotdxmzpzhicievlnucokhsatfijqgjbbglriuckrvmvcyyvjhhcmbbzlydzlergegysmtaehmwjcegdibgpzikuxotia,1
+Luuccuhaqrzaouoqnxoirucmfpyxtjwfwnguscqhckdxtmuygrhoaiglzjvyeoduxwnbdufrfqzuwzfeiphlxqukloccfciroymk Lacjhhlwnhmjlcvdanwvmyovmxtssumbonxafmwryxgrtkevbmncdjcqtfmgyglqynuougekyxumcfasdpsrowmgdzjchmzmszuj,59
+Eyedglnbcofeathgbkyrrscjvfvuebppnhodznuzoinkfwphumtwyzrzffgcnpoqdudtvbdzcjffmajatuvsesyylqwvxumcdhqq Poqrekzkhqedaebgdlouufieiuoycpogrvjwrtekdjfmacdpxodsljwuycmfqpzrmtedctixrpavsepeygsihsxlmxeqqpmllckj,7
+Iqhruerporgqhldwlfgaxirglnuyuewaiagkplnxxgkbezwlcywygbhrefvebjzrxcmceqckwjhglynazfnawxbromizdkjparun Mrctrgiojpkdjlktnoairpnqhgccinwkuxcekmhqcuhtpqvsspoosphxphgxccldkpmrqtiuscfpbvwfmgoadelweyqkrrlyrhnz,37
+Xesixlbguqsohcxnazsivcizmhbxiljqeymwaqykspfqzsgggxnmvcuieomsaxzznjwylxlrufuhcsdphrdeyudtkcuexashookt Nysqkstejvgvrnitwoebaseapoddniihdplfpsyytzwgbisadgbxtobsdevjrfipkqqsxasleuifhnafimccbbcessgmwngzkvgc,72
+Ewtxqrzmhcezpdxbfzlnbfemqxzyvctvcgxvnhsqfmnnlrhbkqfhlztjmrfykembxbrlmwijokllfnchyuhwxxfuweysamvudslk Oyxarqxfkznpxjexuyarvssqfazzrhhdhzpqlgyreoevhsmsxiuaemdccgmuwenpmmarklywyegybqhipcpkxuxykgqfqmmomfuj,6
+Ulbnaxpxvseqwogqwmndhxmrfdfrxukjvboedhdwgarpvqbrbmdpwbmrpecffklsxidflpuqrkyopwgrvkprnjctbofbvifldsfw Qtszzvsdtdggpjlbcvtdapfskjvfiyoruaukingwimfhnyunnvtneidkhvusmrnznczhrlhimwztfuyrezuhygvwhrbqpunbglac,2
+Vhzzcyjkkplrwdmmpcgkslgnmfdjbithufpxsgpezbraoxlgnashjnwlzkbtuydpcyzigszufgpahtehrwvniznbevfnqswlzqci Idghytikygqmvvgadyievygajtmrbhrmzeunkvvinhvdhceybosiwoqjsarxxuumibkjybkcvuynijoaqhvvzjsgmopncfppiblf,36
 </pre></div>
 </div>
 </div>
 </div>
 <p>We see that the names are now much longer.
 For real-world fuzzing, we may try even longer fields (say, 1,000) to test the limits of our system.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Programmers often make “off-by-one” errors, so if an input is specified to have at most <code class="docutils literal notranslate"><span class="pre">N</span></code> characters, you should test this exact boundary - say, by giving <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">N</span></code>+1 characters.</p>
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Don’t try this with other people’s systems.</p>
+<p>Don’t try this with other people’s systems; the consequences are unpredictable.</p>
 </div>
 </section>
 <section id="unusual-inputs">
@@ -522,16 +528,16 @@ What happens if we have a person with a negative age?</p>
 <p>Try it yourself and modify <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> such that it can also produce negative numbers, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zskk We,-8749
-Ralz Ciump,8611
-Dcdpm Bt,-7153
-Lik Urwkdk,-670
-Objsl Lrkgm,-14
-Bkjl Dd,6759
-Tcjqrt Tps,-047
-Hzbi Fema,51540
-Kr Nb,694
-Oaj Pz,-6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zyrsxx Evyci,-31
+Ocicb Ebxi,-290
+Es Vkowr,1
+Ypm Gyowxu,4529
+Yntp Bf,0737
+Dterap Nhs,-805
+Jdm Fovd,-76
+Mbjah Au,-87
+Br Rv,-13
+Lzwgif Svznaq,-19
 </pre></div>
 </div>
 </div>
@@ -566,7 +572,7 @@ The <code class="docutils literal notranslate"><span class="pre">NaN</span></cod
 Luckily, programs are prepared against that - or are they?</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Don’t try this with other people’s systems.</p>
+<p>Don’t try this with other people’s systems; the consequences are unpredictable.</p>
 </div>
 </section>
 <section id="string-injections">
@@ -606,7 +612,7 @@ Well, for the above, it suffices to have one more alternative to the <code class
 <p>Try adding such alternatives to <em>all</em> data fields processed by a system; feed the Fandango-generated inputs to it; and if you then find a <code class="docutils literal notranslate"><span class="pre">PWNED</span></code> table on your system, you know that you have a vulnerability.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Don’t try this with other people’s systems.</p>
+<p>Don’t try this with other people’s systems; the consequences are unpredictable.</p>
 </div>
 </section>
 </section>

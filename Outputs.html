@@ -1,0 +1,801 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Checking Outputs &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Outputs';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generating Binary Inputs" href="Binary.html" />
+    <link rel="prev" title="Parsing Inputs" href="Parsing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for June&nbsp;2025.</p></div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FOutputs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Outputs.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Checking Outputs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-testing">Interaction Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-input-output-testing">Simple Input/Output Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fandango-talk-command">The Fandango <code class="docutils literal notranslate"><span class="pre">talk</span></code> command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oracles">Oracles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-complex-interactions">More Complex Interactions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-strategies">Testing Strategies</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="checking-outputs">
+<span id="sec-outputs"></span><h1>Checking Outputs<a class="headerlink" href="#checking-outputs" title="Link to this heading">#</a></h1>
+<p>Since Fandango makes use of specifications both to <a class="reference internal" href="Fuzzing.html#sec-fuzzing"><span class="std std-ref"><em>produce</em></span></a> and to <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref"><em>parse</em></span></a> strings, it can actually <em>combine both</em> to</p>
+<ol class="arabic simple">
+<li><p>first send an input to a program under test; and</p></li>
+<li><p>then parse its output to check if it produced the correct result.</p></li>
+</ol>
+<p>For this purpose, Fandango provides a means to combine both input and output in a <em>single specification</em>, used by the Fandango <code class="docutils literal notranslate"><span class="pre">talk</span></code> command.
+Let us see how this works.</p>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>Checking outputs is currently in beta.
+Check out <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/issues">the list of open issues</a>.</p>
+</div>
+<section id="interaction-testing">
+<h2>Interaction Testing<a class="headerlink" href="#interaction-testing" title="Link to this heading">#</a></h2>
+<p>So far, we have only considered two settings.
+In <em>fuzzing</em>, Fandango sends a synthesized input to the program under test:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    Fandango-&gt;&gt;Program under Test: Some input
+    </pre><p>During <em>parsing</em>, Fandango accepts and processes <em>outputs</em> from the program under test:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    Program under Test--&gt;&gt;Fandango: Some output
+    </pre><p>What we want, though, is an <em>interaction</em> - a means to <em>first</em> send an input to the program, and then parse its output to check it:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    Fandango-&gt;&gt;Program under Test: Some input
+    Program under Test--&gt;&gt;Fandango: Some output
+    </pre><p>For this, we need to specify which parts of the interaction are supposed to be <em>sent</em> or <em>received</em> by which <em>party</em> in the interaction.</p>
+</section>
+<section id="simple-input-output-testing">
+<h2>Simple Input/Output Testing<a class="headerlink" href="#simple-input-output-testing" title="Link to this heading">#</a></h2>
+<p>Fandango allows a simple means to combine inputs and outputs in a single <code class="docutils literal notranslate"><span class="pre">.fan</span></code> specification.
+The key idea is to <em>identify individual nonterminals with the party that is supposed to produce it</em>.
+In Fandango, this is done by prefixing the nonterminal with a party name (an identifier), followed by a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>).
+Hence, a nonterminal <code class="docutils literal notranslate"><span class="pre">&lt;fandango:string&gt;</span></code> refers to a <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code> element that would be produced by a party named <code class="docutils literal notranslate"><span class="pre">fandango</span></code> (whoever that might be).</p>
+<p>Fandango conveniently defines two standard parties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">In</span></code> refers to the standard input of the program under test; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Out</span></code> refers to the standard output of the program under test.</p></li>
+</ul>
+<p>Hence, in a Fandango spec, <code class="docutils literal notranslate"><span class="pre">&lt;In:id&gt;</span></code> refers to an <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> element that is <em>received</em> (or input) by the program, and <code class="docutils literal notranslate"><span class="pre">&lt;Out:result&gt;</span></code> is a <code class="docutils literal notranslate"><span class="pre">&lt;result&gt;</span></code> element that is <em>sent</em> (or output) by the program.</p>
+<p>With this, we can already write a first specification.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">cat</span></code> is an abbreviation for “concatenate”. <code class="docutils literal notranslate"><span class="pre">cat</span></code> can take multiple inputs, and concatenates them as one.</p>
+</aside>
+<p>The UNIX <code class="docutils literal notranslate"><span class="pre">cat</span></code> command accepts some input, and outputs this very input unchanged.
+In Fandango, this interaction can be described in a file <a class="reference download internal" download="" href="_downloads/95be33e98b9dc61c04d462948fe53037/cat.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">cat.fan</span></code></span></a> as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;In:input&gt; &lt;Out:output&gt;
+&lt;input&gt; ::= &lt;line&gt;
+&lt;output&gt; ::= &lt;line&gt;
+&lt;line&gt; ::= r&#39;.*\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this specification,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;output&gt;</span></code> define the inputs and outputs of <code class="docutils literal notranslate"><span class="pre">cat</span></code>, respectively, as a <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code>; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code> defines a regular expression standing for any sequence of characters, including newlines.</p></li>
+</ul>
+<p>Let us use Fandango with this spec to test the <code class="docutils literal notranslate"><span class="pre">cat</span></code> program.</p>
+</section>
+<section id="the-fandango-talk-command">
+<h2>The Fandango <code class="docutils literal notranslate"><span class="pre">talk</span></code> command<a class="headerlink" href="#the-fandango-talk-command" title="Link to this heading">#</a></h2>
+<p>Fandango provides a <code class="docutils literal notranslate"><span class="pre">talk</span></code> command that allows testing interactions.
+Like <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> and <code class="docutils literal notranslate"><span class="pre">parse</span></code>, it takes as argument a <code class="docutils literal notranslate"><span class="pre">-f</span></code> option, followed by a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file; however, this one must contain party specifications.
+The remainder of the command line is the program to be tested (possibly with arguments).</p>
+<p>In our case, this is how the invocation of Fandango looks like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>cat.fan<span class="w"> </span>cat
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>This command does not issue any outputs (all of them are being sent to <code class="docutils literal notranslate"><span class="pre">cat</span></code>), but here is what is happening behind the scenes:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">cat</span></code> command sends back the input via its output;</p></li>
+<li><p>Fandango receives and parses the <code class="docutils literal notranslate"><span class="pre">cat</span></code> output.</p></li>
+</ul>
+<p>We can also specify multiple interactions, as in</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>cat.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>cat
+</pre></div>
+</div>
+<p>Now, each time, <code class="docutils literal notranslate"><span class="pre">cat</span></code> is started anew, as shown in this diagram:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    Fandango-&gt;&gt;cat: &quot;eroih&amp;^%^32&quot;
+    cat--&gt;&gt;Fandango: &quot;eroih&amp;^%^32&quot;
+    Fandango-&gt;&gt;cat2: &quot;0[9481]^^^\n\n&quot;
+    cat2--&gt;&gt;Fandango: &quot;0[9481]^^^\n\n&quot;
+    Fandango-&gt;&gt;cat3: &quot;ewifehfba&quot;
+    cat3--&gt;&gt;Fandango: &quot;ewifehfba&quot;
+    </pre><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once a communication party is set for a nonterminal, it need not be repeated for its constituents.
+In the above example, we can define <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code> without restating the <code class="docutils literal notranslate"><span class="pre">In:</span></code> prefix; from the first line, it is clear that <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code> comes from <code class="docutils literal notranslate"><span class="pre">In</span></code>.
+Also, this allows multiple parties to share the same elements (such as <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code>).</p>
+</div>
+</section>
+<section id="oracles">
+<h2>Oracles<a class="headerlink" href="#oracles" title="Link to this heading">#</a></h2>
+<p>So far, our <code class="docutils literal notranslate"><span class="pre">.fan</span></code> specification has not really checked whether <code class="docutils literal notranslate"><span class="pre">cat</span></code> operates correctly.
+It does check the <code class="docutils literal notranslate"><span class="pre">cat</span></code> output against the <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code> regular expression - but that is a “match-all” expression, meaning that anything is valid.</p>
+<p>To check whether the <code class="docutils literal notranslate"><span class="pre">cat</span></code> output is correct, we must compare it against the input we sent and ensure that input and output are identical.
+For this, <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a> are the ideal tool, as they allow us to reference arbitrary elements in the entire interaction.
+In our case, this simple constraint would suffice:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">input</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This constraint defines the full behavior of <code class="docutils literal notranslate"><span class="pre">cat</span></code>; it acts as an <em>oracle</em> that determines whether the behavior of the program under test is correct or not.</p>
+<p>Let us add this constraint using a <code class="docutils literal notranslate"><span class="pre">where</span></code> clause to <code class="docutils literal notranslate"><span class="pre">cat.fan</span></code>, resulting in <a class="reference download internal" download="" href="_downloads/4535c7c7753f0496a8d84dc8f05bc45f/cat-oracle.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">cat-oracle.fan</span></code></span></a>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;In:input&gt; &lt;Out:output&gt;
+&lt;input&gt; ::= &lt;line&gt;
+&lt;output&gt; ::= &lt;line&gt;
+&lt;line&gt; ::= r&#39;.*\n&#39;
+where str(&lt;input&gt;) == str(&lt;output&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we can test, and normally, nothing should happen.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>cat-oracle.fan<span class="w"> </span>cat
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <a class="reference external" href="https://gist.github.com/sinclairtarget/47143ba52b9d9e360d8db3762ee0cbf5#file-3-cat-v7-c">first C implementation of <code class="docutils literal notranslate"><span class="pre">cat</span></code></a> had 80 lines of code.
+A <a class="reference external" href="https://twobithistory.org/2018/11/12/cat.html">detailed history of <code class="docutils literal notranslate"><span class="pre">cat</span></code></a> is available.</p>
+</aside>
+<p>So far, we have mostly seen constraints as a <em>precondition</em> - that is, a condition that makes inputs valid in the first place.
+Our constraint here acts as a <em>postcondition</em> – that is, a condition that checks the output, possibly based on earlier input features.</p>
+</section>
+<section id="more-complex-interactions">
+<h2>More Complex Interactions<a class="headerlink" href="#more-complex-interactions" title="Link to this heading">#</a></h2>
+<p>Let us now test a program whose interaction scheme is a bit more complex.
+The UNIX <code class="docutils literal notranslate"><span class="pre">bc</span></code> command accepts a line with an arithmetic expression, and then produces the result.
+It keeps on doing so until the input ends.
+To compute <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></code>, we can enter</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bc
+&gt;&gt;&gt;<span class="w"> </span><span class="m">2</span><span class="w"> </span>+<span class="w"> </span><span class="m">2</span>
+<span class="m">4</span>
+&gt;&gt;&gt;<span class="w"> </span><span class="o">(</span>Ctrl-D<span class="o">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> </code> is the prompt of the <code class="docutils literal notranslate"><span class="pre">bc</span></code> program; it goes to <code class="docutils literal notranslate"><span class="pre">stderr</span></code> and is only produced in interactive settings, so we can ignore it.
+A typical interaction between Fandango and <code class="docutils literal notranslate"><span class="pre">bc</span></code> would thus look like this:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    Fandango-&gt;&gt;bc: 2 + 2\n
+    bc--&gt;&gt;Fandango: 4\n
+    Fandango-&gt;&gt;bc: 3 * 7\n
+    bc--&gt;&gt;Fandango: 21\n
+    </pre><p>Let us define a sequence of 10 interactions with <code class="docutils literal notranslate"><span class="pre">bc</span></code>.
+Using our earlier <a class="reference internal" href="Recursive.html#sec-recursive"><span class="std std-ref">expression grammar</span></a> <a class="reference download internal" download="" href="_downloads/53a12cbb0388297e998bc4a2c06fa1aa/expr.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">expr.fan</span></code></span></a>, we can define such interactions in a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> spec <a class="reference download internal" download="" href="_downloads/89e68e60c610cc6ffd457bbbb72c10cf/bc.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">bc.fan</span></code></span></a>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;expr.fan&#39;)
+
+&lt;start&gt; ::= &lt;interaction&gt;{10}
+&lt;interaction&gt; ::= &lt;In:input&gt; &lt;Out:output&gt;
+&lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
+&lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code> now is an expression; and the expected <code class="docutils literal notranslate"><span class="pre">&lt;output&gt;</span></code> is an integer.
+This is how we can test <code class="docutils literal notranslate"><span class="pre">bc</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>bc.fan<span class="w"> </span>bc
+</pre></div>
+</div>
+<p>Our <code class="docutils literal notranslate"><span class="pre">.fan</span></code> spec checks that the <code class="docutils literal notranslate"><span class="pre">bc</span></code> indeed produces integers, but it does not check whether the result is correct, too.
+How would one do this? (Hint: use the Python <code class="docutils literal notranslate"><span class="pre">eval()</span></code> function.)</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Add a constraint that <em>evaluates</em> the expression (in Python) and compares it against the <code class="docutils literal notranslate"><span class="pre">bc</span></code> result.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">input</span><span class="o">&gt;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>If we actually do this, we will find that there are a few differences between the way that Python and <code class="docutils literal notranslate"><span class="pre">bc</span></code> interpret expressions:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>bc.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;eval(str(&lt;input&gt;)) == int(&lt;output&gt;)&#39;</span><span class="w"> </span>bc
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+</pre></div>
+</div>
+</div>
+</div>
+<p>To ensure complete testing, we need to</p>
+<ul class="simple">
+<li><p>avoid <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code> prefixes; these are not understood by <code class="docutils literal notranslate"><span class="pre">bc</span></code>;</p></li>
+<li><p>avoid leading zeros in numbers; these are not permitted in Python;</p></li>
+<li><p>allow small differences between floating point numbers, or restrict ourselves to integer operations.</p></li>
+</ul>
+<p>Right now, we leave this as an exercise to the reader :-)</p>
+</section>
+<section id="testing-strategies">
+<h2>Testing Strategies<a class="headerlink" href="#testing-strategies" title="Link to this heading">#</a></h2>
+<p>If you find that checking results is complicated, welcome to the world of testing!
+Specifically, you have just encountered the <em>oracle problem</em> - the effort in specifying what a correct result should be.
+While Fandango makes it easy to <em>produce</em> inputs and to <em>decompose</em> outputs, the burden of specification is still on you.</p>
+<p>Here are some established techniques to ease the oracle problem:</p>
+<dl class="simple myst">
+<dt>Compare against a different implementation.</dt><dd><p>By using Python <code class="docutils literal notranslate"><span class="pre">eval()</span></code>, above, we already make our lives much easier. However, we could also compare against, say, a different <code class="docutils literal notranslate"><span class="pre">bc</span></code> implementation. This is called <em>differential testing</em>.</p>
+</dd>
+<dt>Compare against a different version.</dt><dd><p>After having made a change to a program, we can check it against an older version to make sure there are no unexpected changes in behavior. This is called <em>regression testing</em>.</p>
+</dd>
+<dt>Compare the result of equivalent inputs.</dt><dd><p>Send two inputs to a program that should produce the same result and check for differences. In the case of <code class="docutils literal notranslate"><span class="pre">bc</span></code>, for instance, any term <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span> <span class="pre">+</span> <span class="pre">&lt;b&gt;</span></code> should yield the same result as <code class="docutils literal notranslate"><span class="pre">&lt;b&gt;</span> <span class="pre">+</span> <span class="pre">&lt;a&gt;</span></code>. This is called <em>metamorphic testing</em>.</p>
+</dd>
+</dl>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>Future versions of this tutorial will further detail these strategies and how to integrate them into Fandango.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Parsing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parsing Inputs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Binary.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generating Binary Inputs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-testing">Interaction Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-input-output-testing">Simple Input/Output Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fandango-talk-command">The Fandango <code class="docutils literal notranslate"><span class="pre">talk</span></code> command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oracles">Oracles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-complex-interactions">More Complex Interactions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-strategies">Testing Strategies</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

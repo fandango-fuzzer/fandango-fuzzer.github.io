@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'ISO8601';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Parsing and Checking Inputs" href="Parsing.html" />
+    <link rel="next" title="Converting ANTLR and Other Input Specs" href="Converters.html" />
     <link rel="prev" title="Accessing Input Elements" href="Paths.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -1041,12 +1044,13 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <span class=" -Color -Color-Yellow">&#39;008&#39;</span> | <span class=" -Color -Color-Yellow">&#39;009&#39;</span> | <span class=" -Color -Color-Yellow">&#39;010&#39;</span> | <span class=" -Color -Color-Yellow">&#39;011&#39;</span> | <span class=" -Color -Color-Yellow">&#39;012&#39;</span> | <span class=" -Color -Color-Yellow">&#39;013&#39;</span> | <span class=" -Color -Color-Yellow">&#39;014&#39;</span> | <span class=" -Color -Color-Yellow">&#39;015&#39;</span> | <span class=" -Color -Color-Yellow">&#39;016&#39;</span> | <span class=" -Color -Color-Yellow">&#39;017&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;018&#39;</span> | <span class=" -Color -Color-Yellow">&#39;019&#39;</span> | <span class=" -Color -Color-Yellow">&#39;020&#39;</span> | <span class=" -Color -Color-Yellow">&#39;021&#39;</span> | <span class=" -Color -Color-Yellow">&#39;022&#39;</span> | <span class=" -Color -Color-Yellow">&#39;023&#39;</span> | <span class=" -Color -Color-Yellow">&#39;024&#39;</span> | <span class=" -Color -Color-Yellow">&#39;025&#39;</span> | <span class=" -Color -Color-Yellow">&#39;026&#39;</span> | <span class=" -Color -Color-Yellow">&#39;027&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;028&#39;</span> | <span class=" -Color -Color-Yellow">&#39;029&#39;</span> | <span class=" -Color -Color-Yellow">&#39;030&#39;</span> | <span class=" -Color -Color-Yellow">&#39;031&#39;</span> | <span class=" -Color -Color-Yellow">&#39;032&#39;</span> | <span class=" -Color -Color-Yellow">&#39;033&#39;</span> | <span class=" -Color -Color-Yellow">&#39;034&#39;</span> | <span class=" -Color -Color-Yellow">&#39;035&#39;</span> | <span class=" -Color -Color-Yellow">&#39;036&#39;</span> | <span class=" -Color -Color-Yellow">&#39;037&#39;</span> | 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">&#39;038&#39;</span> | <span class=" -Color -Color-Yellow">&#39;039&#39;</span> | <span class=" -Color -Color-Yellow">&#39;040&#39;</span> | <span class=" -Color -Color-Yellow">&#39;041&#39;</span> | <span class=" -Color -Color-Yellow">&#39;042&#39;</span> | <span class=" -Color -Color-Yellow">&#39;043&#39;</span> | <span class=" -Color -Color-Yellow">&#39;044&#39;</span> | <span class=" -Color -Color-Yellow">&#39;045&#39;</span> | <span class=" -Color -Color-Yellow">&#39;046&#39;</span> | <span class=" -Color -Color-Yellow">&#39;047&#39;</span> | 
+<span class=" -Color -Color-Yellow">&#39;038&#39;</span> | <span class=" -Color -Color-Yellow">&#39;039&#39;</span> | <span class=" -Color -Color-Yellow">&#39;040&#39;</span> | <span class=" -Color -Color-Yellow">&#39;041&#39;</span> | <span class=" -Color -Color-Yellow">&#39;042&#39;</span> | <span class=" -Color -Color-Yellow">&#39;043&#39;</span> | <span class=" -Color -Color-Yellow">&#39;044&#39;</span> | <span class=" -Color -Color-Yellow">&#39;045&#39;</span> | <span class=" -Color -Color-Yellow">&#39;046&#39;</span> | <span class=" -Color -Color-Yellow">&#39;047&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;048&#39;</span> | <span class=" -Color -Color-Yellow">&#39;049&#39;</span> | <span class=" -Color -Color-Yellow">&#39;050&#39;</span> | <span class=" -Color -Color-Yellow">&#39;051&#39;</span> | <span class=" -Color -Color-Yellow">&#39;052&#39;</span> | <span class=" -Color -Color-Yellow">&#39;053&#39;</span> | <span class=" -Color -Color-Yellow">&#39;054&#39;</span> | <span class=" -Color -Color-Yellow">&#39;055&#39;</span> | <span class=" -Color -Color-Yellow">&#39;056&#39;</span> | <span class=" -Color -Color-Yellow">&#39;057&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;058&#39;</span> | <span class=" -Color -Color-Yellow">&#39;059&#39;</span> | <span class=" -Color -Color-Yellow">&#39;060&#39;</span> | <span class=" -Color -Color-Yellow">&#39;061&#39;</span> | <span class=" -Color -Color-Yellow">&#39;062&#39;</span> | <span class=" -Color -Color-Yellow">&#39;063&#39;</span> | <span class=" -Color -Color-Yellow">&#39;064&#39;</span> | <span class=" -Color -Color-Yellow">&#39;065&#39;</span> | <span class=" -Color -Color-Yellow">&#39;066&#39;</span> | <span class=" -Color -Color-Yellow">&#39;067&#39;</span> | 
-<span class=" -Color -Color-Yellow">&#39;068&#39;</span> | <span class=" -Color -Color-Yellow">&#39;069&#39;</span> | <span class=" -Color -Color-Yellow">&#39;070&#39;</span> | <span class=" -Color -Color-Yellow">&#39;071&#39;</span> | <span class=" -Color -Color-Yellow">&#39;072&#39;</span> | <span class=" -Color -Color-Yellow">&#39;073&#39;</span> | <span class=" -Color -Color-Yellow">&#39;074&#39;</span> | <span class=" -Color -Color-Yellow">&#39;075&#39;</span> | <span class=" -Color -Color-Yellow">&#39;076&#39;</span> | <span class=" -Color -Color-Yellow">&#39;077&#39;</span> | 
+<span class=" -Color -Color-Yellow">&#39;068&#39;</span> | <span class=" -Color -Color-Yellow">&#39;069&#39;</span> | <span class=" -Color -Color-Yellow">&#39;070&#39;</span> | <span class=" -Color -Color-Yellow">&#39;071&#39;</span> | <span class=" -Color -Color-Yellow">&#39;072&#39;</span> | <span class=" -Color -Color-Yellow">&#39;073</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">&#39;</span> | <span class=" -Color -Color-Yellow">&#39;074&#39;</span> | <span class=" -Color -Color-Yellow">&#39;075&#39;</span> | <span class=" -Color -Color-Yellow">&#39;076&#39;</span> | <span class=" -Color -Color-Yellow">&#39;077&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;078&#39;</span> | <span class=" -Color -Color-Yellow">&#39;079&#39;</span> | <span class=" -Color -Color-Yellow">&#39;080&#39;</span> | <span class=" -Color -Color-Yellow">&#39;081&#39;</span> | <span class=" -Color -Color-Yellow">&#39;082&#39;</span> | <span class=" -Color -Color-Yellow">&#39;083&#39;</span> | <span class=" -Color -Color-Yellow">&#39;084&#39;</span> | <span class=" -Color -Color-Yellow">&#39;085&#39;</span> | <span class=" -Color -Color-Yellow">&#39;086&#39;</span> | <span class=" -Color -Color-Yellow">&#39;087&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;088&#39;</span> | <span class=" -Color -Color-Yellow">&#39;089&#39;</span> | <span class=" -Color -Color-Yellow">&#39;090&#39;</span> | <span class=" -Color -Color-Yellow">&#39;091&#39;</span> | <span class=" -Color -Color-Yellow">&#39;092&#39;</span> | <span class=" -Color -Color-Yellow">&#39;093&#39;</span> | <span class=" -Color -Color-Yellow">&#39;094&#39;</span> | <span class=" -Color -Color-Yellow">&#39;095&#39;</span> | <span class=" -Color -Color-Yellow">&#39;096&#39;</span> | <span class=" -Color -Color-Yellow">&#39;097&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;098&#39;</span> | <span class=" -Color -Color-Yellow">&#39;099&#39;</span> | <span class=" -Color -Color-Yellow">&#39;100&#39;</span> | <span class=" -Color -Color-Yellow">&#39;101&#39;</span> | <span class=" -Color -Color-Yellow">&#39;102&#39;</span> | <span class=" -Color -Color-Yellow">&#39;103&#39;</span> | <span class=" -Color -Color-Yellow">&#39;104&#39;</span> | <span class=" -Color -Color-Yellow">&#39;105&#39;</span> | <span class=" -Color -Color-Yellow">&#39;106&#39;</span> | <span class=" -Color -Color-Yellow">&#39;107&#39;</span> | 
@@ -1121,16 +1125,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31900405T10
-88980928
-37200704
-0808-W32-7
-7609W47
-43840316
-1836
-5594-11-07
-94321105T17Z
-2919-W50-7T13
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10420603
+4289W31
+5353W35
+53280420T20:27:47
+99720502
+9036-W08-5
+4779-W32-2T21+18
+4789W31
+1859W35
+1785-278T12
 </pre></div>
 </div>
 </div>
@@ -1141,16 +1145,28 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1971
-1974
-1965-W43-3
-1991-092T11Z
-1991-092T11+1042
-1991-092T11+1842
-1991-008T11Z
-1957078T11:31:56
-1965-008T11Z
-1991-W43-3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19630306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1979-185
+19650306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19650321
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1978150
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1963-02-22T20:27:00.45487899139977375822
+1963-017T131046,0333480744Z
+19650321T19:17:17.85969606493168312
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19890315T16-18
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1963-02-22
 </pre></div>
 </div>
 </div>
@@ -1161,19 +1177,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;start&gt; defined, but not used
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeError: fandango.evolution.algorithm.Fandango() got multiple values for keyword argument &#39;start_symbol&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00
-T0053:46,9441
-00:3538
-0042:35,34467Z
-T00Z
-00-00
-T0035
-00Z
-T0014
-00-0001
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fandango fuzz -f iso8601.fan -n 10 --start-symbol=</span><span class="se">\&#39;</span><span class="s1">&lt;iso8601time&gt;</span><span class="se">\&#39;</span><span class="s1"> -c </span><span class="se">\&#39;</span><span class="s1">&lt;iso8601hour&gt; == &quot;00&quot;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 </div>
@@ -1223,11 +1236,11 @@ The generated <a class="reference download internal" download="" href="_download
       </div>
     </a>
     <a class="right-next"
-       href="Parsing.html"
+       href="Converters.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Parsing and Checking Inputs</p>
+        <p class="prev-next-title">Converting ANTLR and Other Input Specs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -206,11 +206,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -343,9 +346,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -354,7 +357,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -459,7 +462,7 @@ document.write(`
 <p>Fandango constraints make use of <em>symbols</em> (anything enclosed in <code class="docutils literal notranslate"><span class="pre">&lt;...&gt;</span></code>) to express desired or required properties of generated inputs.
 During evaluation, any <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> returns a <em>derivation tree</em> representing the composition of the produced or parsed string.</p>
 <p>This derivation tree has a type of <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>, as do all subtrees.
-<code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects support <em><span class="output text_plain">213</span> functions, methods, and operators</em> directly; after converting <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>, the entire Python ecosystem is available.</p>
+<code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects support <em><span class="output text_plain">226</span> functions, methods, and operators</em> directly; after converting <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>, the entire Python ecosystem is available.</p>
 <section id="derivation-tree-structure">
 <span id="sec-derivation-tree-structure"></span><h2>Derivation Tree Structure<a class="headerlink" href="#derivation-tree-structure" title="Link to this heading">#</a></h2>
 <p>Let’s have a look at the structure of a derivation tree. Consider this derivation tree from the <a class="reference internal" href="ISO8601.html"><span class="std std-doc">ISO 8601 date and time grammar</span></a>:</p>
@@ -550,8 +553,8 @@ The descendants are all concatenated as follows:</p>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;.value()</span></code> will be the byte string <code class="docutils literal notranslate"><span class="pre">b&quot;barfoo&quot;</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you mix byte strings and Unicode strings a grammar, Fandango will issue a warning.</p>
 </div>
 <p>Example 2 - in</p>
@@ -560,8 +563,8 @@ The descendants are all concatenated as follows:</p>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;.value()</span></code> will be the byte string <code class="docutils literal notranslate"><span class="pre">b&quot;foo\xff&quot;</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you mix bits and Unicode strings in a grammar, Fandango will issue a warning.</p>
 </div>
 </section>
@@ -628,16 +631,16 @@ The descendants are all concatenated as follows:</p>
 <dt><code class="docutils literal notranslate"><span class="pre">len(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code></dt><dd><p>Return the number of children of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>.</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>To access the length of the <em>string</em> represented by <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, use <code class="docutils literal notranslate"><span class="pre">len(str(&lt;SYMBOL&gt;))</span></code>.</p>
 </div>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;[n]</span> <span class="pre">-&gt;</span> <span class="pre">DerivationTree</span></code></dt><dd><p>Access the <code class="docutils literal notranslate"><span class="pre">n</span></code>th child of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, as a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>. <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;[0]</span></code> is the first child; <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;[-1]</span></code> is the last child.</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>To access the <code class="docutils literal notranslate"><span class="pre">n</span></code>th <em>character</em> of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, use <code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)[n]</span></code>.</p>
 </div>
 <dl class="simple myst">

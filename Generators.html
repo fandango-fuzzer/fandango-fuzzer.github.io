@@ -206,11 +206,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -343,9 +346,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -354,7 +357,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -466,16 +469,16 @@ In order to obtain more natural first and last names in our <a class="reference 
 <p>then we can have Fandango create names such as</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Smith,301
-Yliiwd Doe,29197
-Eve Smith,98
-Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Doe,5298
-Kqgirq Smith,934
-Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Smith,16
-Bob Smith,3449
-Ls Smith,09
-Eve Ahnvu,05437
-Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Smith,954
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Th,63736
+Eve Smith,46603
+Ifdzwx Doe,5
+Alice Smith,32535
+Alice Pchfd,9370
+Bob Smith,16820
+Bob Doe,9
+Qckdfb Ruiz Picasso,20423
+Bob Aztozw,7489
+Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Smith,91970
 </pre></div>
 </div>
 </div>
@@ -504,16 +507,16 @@ Let us illustrate this with an example.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mark
-Jerry
-Benjamin
-Laurie
-Angela
-Thomas
-Kayla
-Kristen
-Michael
-Cheryl
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Veronica
+Wendy
+Erica
+Amy
+Andrea
+David
+Robert
+Raven
+Ashley
+William
 </pre></div>
 </div>
 </div>
@@ -534,8 +537,8 @@ To do so, in Fandango, you can simply extend the grammar as follows:</p>
 <p><code class="docutils literal notranslate"><span class="pre">:=</span></code> is the assignment operator in several programming languages; in Python, it can be used to assign values within expressions.</p>
 </aside>
 <p>The <em>generator</em> <code class="docutils literal notranslate"><span class="pre">:=</span> <span class="pre">EXPR</span></code> <em>assigns</em> the value produced by the expression <code class="docutils literal notranslate"><span class="pre">EXPR</span></code> (in our case, <code class="docutils literal notranslate"><span class="pre">fake.first_name()</span></code>) to the symbol on the left-hand side of the rule (in our case, <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code>).</p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Whatever value the generator returns, it must be <em>parseable</em> by at least one of the alternatives in the rule. Our example works because <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> matches the format of <code class="docutils literal notranslate"><span class="pre">fake.first_name()</span></code>.</p>
 </div>
 <div class="admonition tip">
@@ -570,23 +573,23 @@ This way, we need not repeat the definitions from <code class="docutils literal 
 <p>Python code (from Python files) that you use in a generator (or in a constraint, for that matter) needs to be imported.
 Use the Python <code class="docutils literal notranslate"><span class="pre">import</span></code> features to do that.</p>
 </div>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p><code class="docutils literal notranslate"><span class="pre">include(FILE)</span></code> is for Fandango files, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">MODULE</span></code> is for Python modules.</p>
 </div>
 <p>This is what the output of the above spec looks like:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tristan Price,5
-Sarah Estes,924
-Clinton Griffin,03
-Alyssa Rivera,48
-Timothy Hoffman,45
-Michael Reid,01
-Dustin Jones,15
-Erin Salazar,1
-Kristin Wolf,17
-Stephanie Smith,90
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>James Summers,14
+Patricia Christian,72
+Donna Terry,05
+James Powell,4
+Michael Graham,24
+Donald Cooper,34
+Sherri Brown,49
+Albert Williams,36
+Robert Chen,349
+Emily Jensen,64
 </pre></div>
 </div>
 </div>
@@ -607,8 +610,8 @@ To obtain a range of ages between 25 and 35, we can thus write:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">age</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span> <span class="o">:=</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">));</span>
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>All Fandango generators must return strings or byte strings.</p>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">str(N)</span></code> to convert a number N into a string</p></li>
@@ -618,16 +621,16 @@ To obtain a range of ages between 25 and 35, we can thus write:</p>
 <p>The resulting <a class="reference download internal" download="" href="_downloads/22db315d6c7c283d43c6fb1e355624fe/persons-faker-age.fan"><span class="xref download myst">Fandango spec file</span></a> produces the desired range of ages:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michael Johnson,33
-Anthony Pennington,25
-Sarah Baker,31
-Janice Johnson,25
-Joseph Wright,31
-Angela Adams,31
-Tracy Russell,27
-James Lang,31
-Emily Sims,28
-Kelly Collins,32
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Daniel Guerrero,32
+Bryan Garza,28
+Michelle Gonzalez,30
+Ashley Hopkins,28
+Jonathan Kim,27
+Tracie Olson,28
+Gina Lewis,29
+Jessica Case,32
+Brett Jones,34
+George Orr,27
 </pre></div>
 </div>
 </div>
@@ -641,16 +644,16 @@ However, the final value must fit the given symbol rules (in our case, <code cla
 <p>These are the ages we get this way:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Veronica Aguilar,33
-Kristen Jordan,36
-David Harmon,34
-Nicholas Rodriguez,35
-Jonathan Reid,34
-Tina Wright,36
-Phillip Dunn,34
-Michael Barker,34
-Dana Gonzalez,34
-Anthony Shaw,33
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brenda Kelly,37
+Brad Miller,36
+Kevin Nguyen,34
+Craig Williams,35
+Kevin Aguilar,35
+Michael Page,36
+Julian Vaughn,38
+Lindsey Lee,34
+Christina Nelson,34
+Frank Wood,35
 </pre></div>
 </div>
 </div>
@@ -672,16 +675,16 @@ Anthony Shaw,33
 <p>With this, both random names (<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code>) and natural names (<code class="docutils literal notranslate"><span class="pre">&lt;natural_name&gt;</span></code>) will have a chance of 50% to be produced:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ijawk Bass,06
-Nhtg Bailey,0
-Shannon White,93
-Pi Garrett,5793
-Izz Johnson,869
-Rawy Velazquez,52
-Urf Russo,165
-Christopher Green,3
-Xisv Park,9801
-Rlyof Brown,406
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tgmd Collins,9
+Jacob Jackson,97
+Joseph Franklin,14
+Dti Moses,3
+Jd Lewis,52102
+Hzcuyh White,48
+Stephanie Fleming,79
+Heather Brown,21
+Paul King,30061
+Prvqyq Coffey,99
 </pre></div>
 </div>
 </div>
@@ -711,16 +714,16 @@ If we want all last names to start with an <code class="docutils literal notrans
 <p>and we get</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Victoria Smith,99
-Mary Shaw,540
-Joseph Stewart,28
-Thomas Smith,3
-Robin Spencer,7
-Cindy Smith,620
-Amber Smith,498
-Matthew Smith,15
-Shelby Sanchez,65
-Joseph Stewart,27
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shannon Stewart,56
+Linda Shelton,2
+Jacob Sanchez,1
+Jessica Sandoval,64
+Michelle Smith,13
+Nancy Shelton,4
+Todd Smith,57
+Nancy Shelton,64
+Jessica Sandoval,4
+Erik Smith,57
 </pre></div>
 </div>
 </div>
@@ -747,16 +750,24 @@ If the target keeps on changing, the algorithm will lose guidance and will not p
 <p>This would work:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Angela Smith,33
-Andrea Stout,26
-Marcus Stevens,25
-Brooke Solis,25
-Kevin Schneider,027
-Debra Simmons,25
-Charles Smith,33
-Melissa Stevens,25
-Brooke Stevens,25
-Marcus Solis,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Austin Scott,25
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brian Stephens,32
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michelle Stephens,32
+Austin Scott,29
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Melissa Scott,29
+Kevin Smith,32
+Margaret Scott,25
+Kevin Scott,25
+Michelle Stephens,25
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Austin Sanchez,25
 </pre></div>
 </div>
 </div>

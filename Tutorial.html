@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -394,7 +397,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -410,6 +415,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions-in-this-documentation">Conventions in this Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-commands">Shell Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callouts">Callouts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quizzes">Quizzes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changes">Changes</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -427,7 +447,110 @@ document.write(`
 <li><p>use the <code class="docutils literal notranslate"><span class="pre">fandango</span></code> <em>command-line tool</em></p></li>
 <li><p><em>test programs</em> with Fandango.</p></li>
 </ul>
-<p>Time is precious, so let’s get started!</p>
+<section id="conventions-in-this-documentation">
+<span id="sec-conventions"></span><h2>Conventions in this Documentation<a class="headerlink" href="#conventions-in-this-documentation" title="Link to this heading">#</a></h2>
+<section id="shell-commands">
+<h3>Shell Commands<a class="headerlink" href="#shell-commands" title="Link to this heading">#</a></h3>
+<p>Fandango is mostly operated via the <em>command line</em>.
+A command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">help</span></code> is shown as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span><span class="nb">help</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this tutorial, a <code class="docutils literal notranslate"><span class="pre">$</span></code> at the beginning of a command stands for your input prompt.
+Do not enter it yourself.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Hovering the mouse pointer over the command offers an option to copy the command to the clipboard.</p>
+</div>
+</section>
+<section id="code">
+<h3>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
+<p>File contents (mostly Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files) are shown like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">fandango</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We often only show excerpts; the complete examples can be downloaded, as in <a class="reference download internal" download="" href="_downloads/743ff06243a90b38d58d4cd590981601/digits.fan"><span class="xref download myst">digits.fan</span></a>.</p>
+<p><em>Executable code</em> examples (mostly in Python) are shown like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fandango</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fandango</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Enter these at a Python prompt, or include them in your Python programs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Hovering the mouse pointer over the code offers an option to copy the code to the clipboard.</p>
+</div>
+</section>
+<section id="callouts">
+<h3>Callouts<a class="headerlink" href="#callouts" title="Link to this heading">#</a></h3>
+<p>This documentation uses the following conventions for <em>callouts</em>:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>There are also <em>margin notes</em>, which show interesting background information.</p>
+</aside>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Show helpful information or another way to do something.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bring additional information to the readers’ attention.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Bring important information to the readers’ attention.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>Indicate that some parts of the documentation or the implementation are under construction.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Tell the reader to proceed carefully.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Warn about possible irreversible damage, such as permanent data loss.</p>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Pretty much all of these occur in the chapter on <a class="reference internal" href="Strategies.html#sec-strategies"><span class="std std-ref">Fuzzing Strategies</span></a>.</p>
+</aside>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Warn about hazards that may lead to death or serious injury.</p>
+</div>
+</section>
+<section id="quizzes">
+<h3>Quizzes<a class="headerlink" href="#quizzes" title="Link to this heading">#</a></h3>
+<p>This documentation also uses <em>quizzes</em> – that is, questions for the reader.
+The solutions are initially hidden, but can be unhidden by clicking on them.</p>
+<p>For instance, what does a <em>Warning</em> callout indicate?</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>It indicates a step that might cause irreversible damage, such as permanent data loss.</p>
+</div>
+</section>
+<section id="changes">
+<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h3>
+<p>These hints highlight changes across versions:</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0: </span>Explanation of the new feature.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.0: </span>Explanation of the change.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>Explanation of the deprecation.</p>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -484,6 +607,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions-in-this-documentation">Conventions in this Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-commands">Shell Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callouts">Callouts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quizzes">Quizzes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changes">Changes</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

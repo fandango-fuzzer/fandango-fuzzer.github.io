@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -628,27 +631,29 @@ For instance, if we want to refer to a <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Igx Khr,2520
-Hvhxx Yxwx,6546
-Vvx Ttr,933
-Beiplx Vpm,6
-Ynx Ryxl,183
-Oibox Cyym,6515
-Buaenx Opy,8
-Vx Ylposz,13551
-Gwbnx Wh,95642
-Dldrx Gbquv,603
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xduix Bsqaxn,44
+Ktxwx Pxsx,02
+Ropcx Mijhuy,83
+Ax Lm,68
+Ex Nujthu,39722
+Kzljx Ljtb,3106
+Eekvgx Yykq,08
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jx Msfie,440
+Sjx Wrl,2
+Ix As,7
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>As in Python, you can use <em>negative</em> indexes to refer to the last elements.
 <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;[-1]</span></code>, for instance, gives you the <em>last</em> child of an <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span></code> subtree.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>While symbols act as strings in many contexts, this is where they differ.
 To access the first <em>character</em> of a symbol <code class="docutils literal notranslate"><span class="pre">&lt;foo&gt;</span></code>, you need to explicitly convert it to a string first, as in <code class="docutils literal notranslate"><span class="pre">str(&lt;foo&gt;)[0]</span></code>.</p>
 </div>
@@ -667,16 +672,30 @@ This is useful, for instance, if you want to compare several children against a 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Chavez,95
-Christopher Chavez,782
-Christine Chavez,67079317
-Christine Chavez,93
-Christina Chavez,81524211
-Christine Chavez,9748
-Christine Chapman,36209
-Christine Chavez,36209
-Christopher Chavez,2791
-Christine Chavez,6386
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chelsea Chandler,08
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chandler,08
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christy Chang,1467902
+Chelsea Chandler,38
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chelsea Chandler,39
+Christopher Chandler,52383540076951468914
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chandler,56012970879063827913276944035
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chandler,24661319007798395115593511375878
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chelsey Chavez,90625243627891642944070610128822558106789997469272
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chandler,5163821626093003750924439
 </pre></div>
 </div>
 </div>
@@ -699,16 +718,24 @@ Hence, <code class="docutils literal notranslate"><span class="pre">&lt;start&gt
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Ryan,80
-Christopher Wilson,70
-Charles Thomas,1
-Chelsea Steele,67
-Christina Ryan,3135
-Christopher Lawrence,23
-Charlene Gilbert,90
-Christopher Miller,07
-Christine Kelly,83
-Christopher Lawrence,93
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charlotte Roberts,9
+Christina Woods,70
+Chase Brown,259
+Christina Woods,77
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Garcia,9
+Charles Hunter,95
+Cheryl Stewart,59
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chelsea Silva,95
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Bass,29
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Woods,30
 </pre></div>
 </div>
 </div>
@@ -744,16 +771,20 @@ This allows you to express the earlier constraint in a possibly more readable fo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lbcx Qqcm,529
-Ix Dbqpu,70345
-Zx Mgdw,4722
-Cmx Dfqa,42
-Qgzcx Ytgv,7783
-Nzrphx Yp,28944
-Cmx Szr,42
-Lbcx Xov,27713
-Kjecax Vqee,583
-Fljrx Vpvlt,284
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zpofx Bmd,6
+Nx Mtk,73
+Kfnx Snh,022
+Nyfbx Gg,8
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bsvx Zx,6729
+Byyxux Qjoo,289
+Ccihx Nujvvu,59
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ccihx Ubx,59
+Kwnx Snh,022
+Txwgx Teclly,48
 </pre></div>
 </div>
 </div>
@@ -797,16 +828,16 @@ A simpler way to think about <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xf Uka,243
-Xagb Wb,09004
-Xxvm Oy,0977
-Xl Nfyk,95
-Xc Xpmzjv,17447
-Xba Xvzx,30
-Xqw Ybjumq,6524
-Xgvbdp Trcvd,47
-Xnuw Ncazdz,986
-Xg Bwps,3752
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xmhmdl Hyzt,5
+Xa Akhq,6611
+Xskl Tvis,7564
+Xmiagm Qqicee,43
+Xfrmh Ktcloz,99
+Xcxmrx Khfnwa,52
+Xgcmog Hohzyw,09
+Xmdkj Awpr,0952
+Xizy Jkher,1109
+Xiwjw Usd,6599
 </pre></div>
 </div>
 </div>
@@ -831,16 +862,16 @@ What would the expression <code class="docutils literal notranslate"><span class
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xf Kx,88029
-Dr Mxx,29
-Qatn Txx,1
-Rwkdc Wxxxxx,03
-Enphit Txxxx,03
-Coblx Zxx,3519
-Cltox Sxxx,43
-Nnnld Xxxxx,087
-Oewli Rxxx,959
-Gssg Vx,9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fdpo Qxx,3
+Ijb Xx,9231
+Tanqrn Cx,38
+Ye Tx,91875
+Av Yxxxxx,6801
+Jwfrr Zxxxx,149
+Il Fx,116
+Btngc Lx,8730
+Vgwcgl Ixxxx,40
+Lzw Ixx,33
 </pre></div>
 </div>
 </div>
@@ -854,10 +885,6 @@ For your purposes, though, one such instance already may suffice.
 This is why Fandango allows expressing <em>quantification</em> in constraints.</p>
 <section id="star-expressions">
 <h3>Star Expressions<a class="headerlink" href="#star-expressions" title="Link to this heading">#</a></h3>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> syntax is not operational yet.</p>
-</div>
 <p>In Fandango, you can prefix an element with <code class="docutils literal notranslate"><span class="pre">*</span></code> to obtain a collection of <em>all</em> these elements within an individual string.
 Hence, <code class="docutils literal notranslate"><span class="pre">*&lt;name&gt;</span></code> is a collection of <em>all</em> <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> elements within the generated string.
 This syntax can be used in a variety of ways.
@@ -901,16 +928,18 @@ For instance, we can have a constraint check whether a particular element is in 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aaczi Jptuqc,84
-Atbbci Khulnw,8
-Aa Ypi,1106
-Aekfm Oeyzz,1
-Aeklm Oeyzz,1
-Atbbci Kuulnw,8
-Amupozbrn Klviiney,0688481
-Aarznrknwbp Ygbwj,241
-Aubucqlrp Lo,0172788667
-Al Faxtpoxl,45506
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Duxjhj Aejq,259
+Hfosov Amik,503
+Af Otff,7117
+Cotggd Aeymci,69
+Omq Awnsvb,9280
+Jsun Aaqte,80
+Af Weg,7117
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Az Tzukhu,76865
+Ag Yopt,63113
+Iu Ayx,0
 </pre></div>
 </div>
 </div>
@@ -941,16 +970,16 @@ Here we use the Python <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aaaaaa Ewphn,14
-Haaa Rvoa,34
-Saaaaa Vaaf,548
-Waaaa Jgzar,4
-Eaa Fsi,91
-Baaaa Ryfv,58
-Qaa Axu,359
-Baa Lqz,57849
-Eaaaaa Uw,98671
-Ca Exanmq,51
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jaa Ipffyf,8066
+Yaa Tear,656
+Jaaaaa Or,8
+Laa Qoho,986
+Kaaaaa Fd,33
+Aaa Gsyaym,2754
+Xaaaaa Hsunx,62
+Faa Isdszy,69
+Xaaa Mn,981
+Jaaaaa Siifak,6
 </pre></div>
 </div>
 </div>

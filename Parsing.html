@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Parsing and Checking Inputs &#8212; Fuzzing with Fandango</title>
+    <title>Parsing Inputs &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Parsing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Generating Binary Inputs" href="Binary.html" />
-    <link rel="prev" title="Case Study: ISO 8601 Date + Time" href="ISO8601.html" />
+    <link rel="next" title="Checking Outputs" href="Outputs.html" />
+    <link rel="prev" title="Converting ANTLR and Other Input Specs" href="Converters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -407,7 +410,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Parsing and Checking Inputs</h1>
+    <h1>Parsing Inputs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,13 +440,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="parsing-and-checking-inputs">
-<span id="sec-parsing"></span><h1>Parsing and Checking Inputs<a class="headerlink" href="#parsing-and-checking-inputs" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="parsing-inputs">
+<span id="sec-parsing"></span><h1>Parsing Inputs<a class="headerlink" href="#parsing-inputs" title="Link to this heading">#</a></h1>
 <p>Fandango can also use its specifications to <em>parse</em> given inputs and to <em>check</em> if they conform to the specification - both</p>
 <ul class="simple">
 <li><p><em>syntactically</em> (according to the grammar); and</p></li>
 <li><p><em>semantically</em> (according to the constraints).</p></li>
 </ul>
+<p>Fandango uses this ability extensively for <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">checking outputs</span></a> and <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">protocol testing</span></a>.
+In this section, we cover the basics of parsing.</p>
 <section id="the-parse-command">
 <h2>The <code class="docutils literal notranslate"><span class="pre">parse</span></code> command<a class="headerlink" href="#the-parse-command" title="Link to this heading">#</a></h2>
 <p>To parse an existing input, Fandango provides a <code class="docutils literal notranslate"><span class="pre">parse</span></code> command.
@@ -477,7 +482,7 @@ FandangoParseError: 1 error(s) during parsing
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoError: &#39;&lt;stdin&gt;&#39;: constraint is_valid_iso8601datetime(str(&lt;iso8601datetime&gt;)) not satisfied
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoError: &#39;&lt;stdin&gt;&#39;: constraint is_valid_iso8601datetime(str(NonTerminal(&#39;&lt;iso8601datetime&gt;&#39;))) not satisfied
 FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
@@ -517,8 +522,8 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
 </div>
 <p>Again, if nothing happens, then the (internal) check was successful.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--validate</span></code> option can also be passed to the <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> command; here, it ensures that the produced string can be parsed by the same grammar (again, as should be).</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>If you find that <code class="docutils literal notranslate"><span class="pre">--validate</span></code> fails, please report this as a Fandango bug.</p>
 </div>
 </section>
@@ -547,22 +552,18 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(&#39;&lt;start&gt;&#39;, Tree(&#39;&lt;iso8601datetime&gt;&#39;,
-  Tree(&#39;&lt;iso8601date&gt;&#39;, Tree(&#39;&lt;iso8601calendardate&gt;&#39;,
-    Tree(&#39;&lt;iso8601year&gt;&#39;,
-      Tree(&#39;&#39;),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;0&#39;))),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
-      Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;5&#39;)))
-    ),
-    Tree(&#39;-&#39;),
-    Tree(&#39;&lt;iso8601month&gt;&#39;, Tree(&#39;10&#39;)),
-    Tree(&#39;-&#39;),
-    Tree(&#39;&lt;iso8601day&gt;&#39;, Tree(&#39;27&#39;))
-  )),
-  Tree(&#39;&#39;)
-))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(&#39;&lt;start&gt;&#39;, Tree(&#39;&lt;iso8601datetime&gt;&#39;, Tree(&#39;&lt;iso8601date&gt;&#39;, Tree(&#39;&lt;iso8601calendardate&gt;&#39;,
+  Tree(&#39;&lt;iso8601year&gt;&#39;,
+    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
+    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;0&#39;))),
+    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
+    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;5&#39;)))
+  ),
+  Tree(&#39;-&#39;),
+  Tree(&#39;&lt;iso8601month&gt;&#39;, Tree(&#39;10&#39;)),
+  Tree(&#39;-&#39;),
+  Tree(&#39;&lt;iso8601day&gt;&#39;, Tree(&#39;27&#39;))
+))))
 </pre></div>
 </div>
 </div>
@@ -585,10 +586,10 @@ This is useful for debugging, but also for creating a grammar from a sample file
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;iso8601datetime&gt;
-  &lt;iso8601datetime&gt; ::= &lt;iso8601date&gt; &#39;&#39;  # Position 0x0000 (0); &#39;2025-10-27&#39;
+  &lt;iso8601datetime&gt; ::= &lt;iso8601date&gt;
     &lt;iso8601date&gt; ::= &lt;iso8601calendardate&gt;
       &lt;iso8601calendardate&gt; ::= &lt;iso8601year&gt; &#39;-&#39; &lt;iso8601month&gt; &#39;-&#39; &lt;iso8601day&gt;  # Position 0x0000 (0); &#39;2025-10-27&#39;
-        &lt;iso8601year&gt; ::= &#39;&#39; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # Position 0x0002 (2); &#39;2025&#39;
+        &lt;iso8601year&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # &#39;2025&#39;
           &lt;digit&gt; ::= &lt;_digit&gt;
             &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0002 (2)
           &lt;digit&gt; ::= &lt;_digit&gt;
@@ -653,20 +654,20 @@ This is useful for debugging, but also for creating a grammar from a sample file
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ISO8601.html"
+       href="Converters.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Case Study: ISO 8601 Date + Time</p>
+        <p class="prev-next-title">Converting ANTLR and Other Input Specs</p>
       </div>
     </a>
     <a class="right-next"
-       href="Binary.html"
+       href="Outputs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Generating Binary Inputs</p>
+        <p class="prev-next-title">Checking Outputs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

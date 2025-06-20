@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -471,23 +474,23 @@ Just invoke Fandango without a command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">fandango</span><span class="p">)</span> <span class="n">fuzz</span> <span class="o">-</span><span class="n">f</span> <span class="n">persons</span><span class="o">.</span><span class="n">fan</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span>
 </pre></div>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Use TAB to complete commands, options, and file names.</p>
 </div>
 <p>and you will get the same results:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jpmdh Qdnd,365
-Ht Bbmo,5454
-Yqy Mz,29
-Wkvbbn Tncr,6
-Fkd Hi,51333
-Hs Zmhjc,994
-Fejl Fspc,7
-Cohe Je,29
-Shpc Hnjtfg,47
-Gocpia Hvjlwd,13
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gvpe Yy,14504
+Qcbeg Uhh,91844
+Mfy Elm,05263
+Kvxovz Odbrtd,56
+Ojxuq Mlalt,9
+Doqy Hivl,35618
+Rvdt Ye,3909
+Cji Os,14
+Hoxv Zlz,978
+Vv Faii,09
 </pre></div>
 </div>
 </div>
@@ -561,8 +564,8 @@ This will list:</p>
 <li><p>reset all algorithm settings to their default value.</p></li>
 </ul>
 <p>The current <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file stays unchanged.</p>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Loading a new <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file also clears all <code class="docutils literal notranslate"><span class="pre">set</span></code> constraints.</p>
 </div>
 </section>
@@ -598,8 +601,8 @@ Makefile		language		src
 README.md		pyproject.toml		tests
 </pre></div>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Use TAB to complete file names.</p>
 </div>
 <p>You can also invoke and evaluate <em>Python commands</em> by prefixing them with <code class="docutils literal notranslate"><span class="pre">/</span></code>:</p>
@@ -625,8 +628,8 @@ README.md		pyproject.toml		tests
 </pre></div>
 </div>
 <p>Without arguments, <code class="docutils literal notranslate"><span class="pre">cd</span></code> switches to the home directory.</p>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>This is different from Windows, where <code class="docutils literal notranslate"><span class="pre">cd</span></code> reports the current directory.</p>
 </div>
 </section>
@@ -644,22 +647,22 @@ To have Fandango read and execute commands from, say, <code class="docutils lite
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bw Idq,9347
-Haut Rnyg,653
-Pyztrl Rmxoj,43
-Gxeaxi Enkt,8
-Hzjz Rtx,2
-Tkzrbr Ccobu,64
-Dl Qo,97050
-Pqmrt Ksyqy,0
-Vqot Vsthyn,111
-Lusio Qqureo,69
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Svxamn Tfe,798
+Dbcgg Dqaa,8016
+Bcge Byn,9
+Ifiao Krm,2226
+Petal Pwxb,5
+Anrhr Fk,20
+Mnun Tkrjsw,5
+Tfz Bdrv,61788
+Otwfe Ivvyc,72
+Jucvjm Nef,2
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The input file can contain blank lines as well as comments prefixed with <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p>
 </div>
 <div class="admonition note">

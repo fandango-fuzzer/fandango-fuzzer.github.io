@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Converting ANTLR and Other Input Specs &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Converters';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Parsing Inputs" href="Parsing.html" />
+    <link rel="prev" title="Case Study: ISO 8601 Date + Time" href="ISO8601.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for June&nbsp;2025.</p></div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FConverters.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Converters.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Converting ANTLR and Other Input Specs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-antlr-specs">Converting ANTLR Specs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-010-binary-templates">Converting 010 Binary Templates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dtds">Converting DTDs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-fan-files">Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="converting-antlr-and-other-input-specs">
+<span id="sec-converters"></span><h1>Converting ANTLR and Other Input Specs<a class="headerlink" href="#converting-antlr-and-other-input-specs" title="Link to this heading">#</a></h1>
+<p>Often, you may already have an input format specification available, but not (yet) in Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> format.
+Fandango’s <code class="docutils literal notranslate"><span class="pre">convert</span></code> command allows you automatically translate common input specifications into <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files - at least most of it.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>For instance, <em>executable code</em> in ANTLR and 010 specs can only be partially converted at best.</p>
+</aside>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>All these converters are <em>lossy</em> - that is, some features of the original specifications may not be converted into Fandango.
+Hence, the idea is that you use converted formats as a base for further manual editing and checking.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All these formats define the <em>syntax</em> of input files, typically for the purpose of <em>parsing</em>.
+To <em>produce</em> inputs that are also <em>semantically</em> valid, you will often have to augment the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files with <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a> to make them semantically valid, too.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>All these converters are experimental at this point.</p>
+</div>
+<section id="converting-antlr-specs">
+<h2>Converting ANTLR Specs<a class="headerlink" href="#converting-antlr-specs" title="Link to this heading">#</a></h2>
+<p>Fandango allows you to automatically convert ANTLR grammar specifications (<code class="docutils literal notranslate"><span class="pre">.g4</span></code>, <code class="docutils literal notranslate"><span class="pre">.antlr</span></code>) into Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.
+ANTLR is a very popular parser generator; a <a class="reference external" href="https://github.com/antlr/grammars-v4">wide large collections of ANTLR grammars</a> is available.</p>
+<p>Simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the ANTLR file to be converted.</p>
+<p>As an example, consider this simple <a class="reference download internal" download="" href="_downloads/aa7c9b40a09b1bd90d3a5c73474b1403/Calculator.g4"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">Calculator.g4</span></code></span></a> ANTLR file:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>// https://www.inovex.de/de/blog/building-a-simple-calculator-with-antlr-in-python/
+
+grammar Calculator;
+
+expression 
+    : NUMBER                        # Number
+    | &#39;(&#39; expression &#39;)&#39;            # Parentheses
+    | expression TIMES expression   # Multiplication
+    | expression DIV expression     # Division
+    | expression PLUS expression    # Addition
+    | expression MINUS expression   # Subtraction
+;
+
+PLUS : &#39;+&#39;;
+MINUS: &#39;-&#39;;
+TIMES: &#39;*&#39;;
+DIV  : &#39;/&#39;;
+NUMBER : [0-9]+;
+WS : [ \r\n\t]+ -&gt; skip;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Invoking <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> produces an (almost) equivalent Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> command determines the spec language from the file extension:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.antlr</span></code> and <code class="docutils literal notranslate"><span class="pre">.g4</span></code> - ANTLR</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.bt</span></code> and <code class="docutils literal notranslate"><span class="pre">.010</span></code> - 010 Binary Templates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.dtd</span></code> - DTDs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.fan</span></code> - <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</p></li>
+</ul>
+<p>If your file has another file name, you can use the <code class="docutils literal notranslate"><span class="pre">--from</span></code> option (say, <code class="docutils literal notranslate"><span class="pre">--from=antlr</span></code>) to specify a specific format.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>Calculator.g4
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;../src/fandango/converters/antlr/Calculator.g4&#39;.
+#
+# Calculator
+&lt;expression&gt; ::= &lt;NUMBER&gt; | &#39;(&#39; &lt;expression&gt; &#39;)&#39; | &lt;expression&gt; &lt;TIMES&gt; &lt;expression&gt; | &lt;expression&gt; &lt;DIV&gt; &lt;expression&gt; | &lt;expression&gt; &lt;PLUS&gt; &lt;expression&gt; | &lt;expression&gt; &lt;MINUS&gt; &lt;expression&gt;
+&lt;PLUS&gt; ::= &#39;+&#39;
+&lt;MINUS&gt; ::= &#39;-&#39;
+&lt;TIMES&gt; ::= &#39;*&#39;
+&lt;DIV&gt; ::= &#39;/&#39;
+&lt;NUMBER&gt; ::= r&#39;[0-9]&#39;+
+&lt;WS&gt; ::= r&#39;[ \r\n\t]&#39;+  # NOTE: was &#39;-&gt; skip&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">NOTE</span></code> comment at the bottom: The ANTLR lexer action <code class="docutils literal notranslate"><span class="pre">skip</span></code> has no equivalent in Fandango; hence <code class="docutils literal notranslate"><span class="pre">WS</span></code> elements will neither be skipped nor generated.</p>
+<p>Still, we can use this grammar to produce expressions.
+Note the usage of the <code class="docutils literal notranslate"><span class="pre">-o</span></code> option to specify an output file and the <code class="docutils literal notranslate"><span class="pre">--start</span></code> option to specify a start symbol.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>-o<span class="w"> </span>Calculator.fan<span class="w"> </span>Calculator.g4
+$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>Calculator.fan<span class="w"> </span>--start<span class="o">=</span><span class="s1">&#39;&lt;expression&gt;&#39;</span><span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;WS&gt; defined, but not used
+TypeError: fandango.evolution.algorithm.Fandango() got multiple values for keyword argument &#39;start_symbol&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fandango convert -o Calculator.fan ../src/fandango/converters/antlr/Calculator.g4&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;fandango fuzz -f Calculator.fan --start=&#39;&lt;expression&gt;&#39; -n 10&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most features of ANTLR that cannot be represented in Fandango will be marked by <code class="docutils literal notranslate"><span class="pre">NOTE</span></code> comments.
+These include</p>
+<ul class="simple">
+<li><p>Actions</p></li>
+<li><p>Modifiers</p></li>
+<li><p>Clauses such as <code class="docutils literal notranslate"><span class="pre">return</span></code> or <code class="docutils literal notranslate"><span class="pre">throws</span></code></p></li>
+<li><p>Exceptions</p></li>
+<li><p>Predicate options</p></li>
+<li><p>Element options</p></li>
+<li><p>Negations (<code class="docutils literal notranslate"><span class="pre">~</span></code>) over complex expressions</p></li>
+</ul>
+</div>
+<!-- Let's do some cleanup --><div class="cell tag_remove-input docutils container">
+</div>
+</section>
+<section id="converting-010-binary-templates">
+<h2>Converting 010 Binary Templates<a class="headerlink" href="#converting-010-binary-templates" title="Link to this heading">#</a></h2>
+<p>Fandango provides some basic support for converting Binary Templates (<code class="docutils literal notranslate"><span class="pre">.bt</span></code>, <code class="docutils literal notranslate"><span class="pre">.010</span></code>) for the 010 Editor.
+A <a class="reference external" href="https://www.sweetscape.com/010editor/repository/templates/">large collection of binary templates for various binary formats</a> is available.</p>
+<p>Again, simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the binary template file to be converted.</p>
+<p>Our <a class="reference internal" href="Gif.html#sec-gif"><span class="std std-ref">GIF example</span></a> is automatically created from a GIF binary template.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>010 Binary Templates can contain <em>arbitrary code</em> that will be executed during parsing.
+Fandango will recognize a number of common patterns; features that will require manual work include</p>
+<ul class="simple">
+<li><p>Checksums</p></li>
+<li><p>Complex length encodings</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> command provides two options to specify <em>bit orderings</em>, should the <code class="docutils literal notranslate"><span class="pre">.bt</span></code> file not already do so.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--endianness=(little|big)</span></code> and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--bitfield-order=(left-to-right|right-to-left)</span></code></p></li>
+</ul>
+</div>
+</section>
+<section id="converting-dtds">
+<h2>Converting DTDs<a class="headerlink" href="#converting-dtds" title="Link to this heading">#</a></h2>
+<p>A Document Type Definition (DTD, <code class="docutils literal notranslate"><span class="pre">.dtd</span></code>) specifies the format of an XML file.
+Fandango can convert these into <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files, enabling the production of XML files that conform to the DTD.</p>
+<p>Again, simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the binary template file to be converted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As with Binary Templates, Fandango will recognize a number of common patterns, but not all.</p>
+</div>
+<p>In the generated <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, you can customize every single element in its context.
+As an example, consider this <a class="reference download internal" download="" href="_downloads/bbae7f950a3e4262f21e216b8f01c1ef/svg11.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svg11.fan</span></code></span></a> file which specializes individual elements of a <a class="reference download internal" download="" href="_downloads/bbae7f950a3e4262f21e216b8f01c1ef/svg11.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svg.fan</span></code></span></a> file generated from an <a class="reference download internal" download="" href="_downloads/76e5fa9ecfe5a326117fc3d6f403879d/svg11-flat-20110816.dtd"><span class="xref download myst">SVG DTD</span></a>.
+The DTD by itself does not specify types of individual fields, so we do this here:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>If you find that this is long, consider that SVG is actually a very complex format.</p>
+</aside>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>Once this is all set, we can use this to test SVGs with extreme values, as in this <a class="reference download internal" download="" href="_downloads/27b85a80865562974c43dd5394b3653d/svgextreme.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svgextreme.fan</span></code></span></a> example:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+</section>
+<section id="converting-fan-files">
+<h2>Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#converting-fan-files" title="Link to this heading">#</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, you can also “convert” <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.
+This results in a “normalized” format, where all comments and blank lines have been removed.
+If we send this input to <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>then we get</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>persons-faker.fan
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature can be useful to detect semantic changes in <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ISO8601.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Case Study: ISO 8601 Date + Time</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Parsing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parsing Inputs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-antlr-specs">Converting ANTLR Specs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-010-binary-templates">Converting 010 Binary Templates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dtds">Converting DTDs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-fan-files">Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -489,16 +492,16 @@ The full definition looks like this:</p>
 <p>Your output will look like this:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Otlgfy Mctwpj,14
-Cd Ywdp,969
-Mbi Rj,3003
-Wt Vpbmdo,06
-Tcnth Ke,328
-Nm Xqtpd,15
-Zyqgcz Paq,6
-Ore Cbxdkz,750
-Rwfbro Gw,984
-Rqrdi Uempn,615
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Borgr Etrf,3889
+Hy Hcme,58
+Nyz Ewc,652
+Racqt Lrn,2114
+Akhat Qi,79
+Zxuvc Zqousv,0
+Glmhq Rr,75
+Pvsshe Sgdrmr,88
+Obg Uek,28095
+Vn Bgnvlx,21354
 </pre></div>
 </div>
 </div>
@@ -539,8 +542,8 @@ To store all outputs in a directory named <code class="docutils literal notransl
 <p class="admonition-title">Note</p>
 <p>If the directory is already present, Fandango will use that directory.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
 <p>Fandango will overwrite files <code class="docutils literal notranslate"><span class="pre">Fandango-0001.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Fandango-0002.txt</span></code>, etc., but leave other files in the directory unchanged.</p>
 </div>
 <p>If you want a different file extension (for instance, because <code class="docutils literal notranslate"><span class="pre">.txt</span></code> is not suitable), Fandango provides a <code class="docutils literal notranslate"><span class="pre">--filename-extension</span></code> option to set a different one.</p>
@@ -566,7 +569,7 @@ This is the default, and can also be obtained with the <code class="docutils lit
 <p>As an alternative, Fandango can pass inputs via standard input.
 For this, use the <code class="docutils literal notranslate"><span class="pre">--input-method=stdin</span></code> option.</p>
 <p>For instance, to test the <code class="docutils literal notranslate"><span class="pre">cat</span></code> program with its own <code class="docutils literal notranslate"><span class="pre">-n</span></code> option and the inputs Fandango generates, use</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>--input-method<span class="o">=</span>stdin<span class="w"> </span>cat<span class="w"> </span>-n
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>--input_-method<span class="o">=</span>stdin<span class="w"> </span>cat<span class="w"> </span>-n
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">cat</span></code> program is then invoked repeatedly, each time passing a new Fandango-generated input as its standard input.</p>
@@ -601,13 +604,13 @@ $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eqpa Dlb,84093
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yxp Tmri,86923
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">env</span></code> command varies greatly across Unix flavors and versions.
 If the above does not work on your system, try skipping the <code class="docutils literal notranslate"><span class="pre">-S</span></code> option, such that the first line reads:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env fandango fuzz -f</span>

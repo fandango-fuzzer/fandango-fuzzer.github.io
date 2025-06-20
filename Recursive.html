@@ -204,11 +204,14 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -470,8 +473,8 @@ Have a look at the above rule first, and then check out the solution.</p>
 <p>Actually, the above rules mean that <code class="docutils literal notranslate"><span class="pre">&lt;expr&gt;</span></code> would expand into an infinitely long string <code class="docutils literal notranslate"><span class="pre">&lt;term&gt;</span> <span class="pre">+</span> <span class="pre">&lt;term&gt;</span> <span class="pre">+</span> <span class="pre">&lt;term&gt;</span> <span class="pre">+</span> <span class="pre">...</span></code></p>
 </div>
 <p>What we have here is a case of <em>infinite recursion</em> – the string would keep on expanding forever.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>At this time, Fandango does not detect infinite recursions; it keeps running until manually stopped.</p>
 </div>
 <p>In order to avoid infinite recursion, we need to provide a <em>non-recursive alternative</em>, as in:</p>
@@ -484,23 +487,23 @@ Have a look at the above rule first, and then check out the solution.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>671
-003 + 2
-770 + 4447 + 3427
-7 + 75515 + 46539 + 43 + 18
-6 + 00
-07 + 71 + 62158
-88 + 9040 + 21 + 2110 + 17
-67970
-529
-8 + 186
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>358 + 44013 + 477 + 59 + 45
+36
+8235
+9322
+8410 + 46414 + 94431 + 1
+4 + 0 + 65660 + 396
+77721 + 3358 + 3384 + 39
+2373 + 02034
+23 + 06
+8670 + 8
 </pre></div>
 </div>
 </div>
 </div>
 <p>We see that the above rules yield nice (recursive) chains of additions.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>For each recursion in the grammar, there must be a non-recursive alternative.</p>
 </div>
 </section>
@@ -529,8 +532,8 @@ We prefer such <em>tail recursion</em> whenever we can.</p>
 </div>
 </div>
 <p>Indeed, we can define a <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> as a <code class="docutils literal notranslate"><span class="pre">&lt;digit&gt;</span></code> that is followed by another “number”.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Using shorthands such as <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, and <code class="docutils literal notranslate"><span class="pre">?</span></code> can make Fandango parsers more efficient.</p>
 </div>
 </section>
@@ -557,16 +560,16 @@ Hence, <code class="docutils literal notranslate"><span class="pre">2</span> <sp
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-(++494 / +68 / 00 - 22) - 99
-((+(07) * 26 / 1) * 8 * 33) + 33
-+-9 - (++(34) - 9) - 48
-(101 * -+--27) + 14
-59 * 40 / 8 / 07 / 93 * 57 / 44 / 83 / 48 * 28 * 01 * 58 * 5 / 51 - 5
-(-+---0 * (33) - 14) / 11 * 0 + 44
-+0 + 3282 * 04 * 49 * 83 * 8 * 2
-(905 / 641 - 13 / 09) + 53
-(-++(90) / 44 / 3 - 24) * 74 / 26 + 9
--++-(+53 * 10 * 52 - 30) + 34
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+03651 * (-73 * 53) + 83
+--(+(-25 + 08) * 23 / 7 + 91)
+--3 / (+(08) * 7 / 1 - 14) + 03
+++(-451 / 84 / 83 / 17 / 38) + 5
+(2 + 668 * 52) * 3 / 2 * 43 + 40
+676 / -(96 - 57)
+(-(365 - 56) * 92 / 8 / 63 - 14) + 61
+(---(64 * 26 + 90) + 47) * 70 * 24 + 06
+3435 / 348
+4 - -(27 * 60 / 90 * 55 + 0) / 20 / 10 + 78
 </pre></div>
 </div>
 </div>
@@ -605,16 +608,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6426 / 5.42 * 4 + 2
-621.0 * 8.919 + 0
-2 / ++-2.0531 + 6 - 0
--(4 / 5 + 0) * 9 / 5 / 8 / 4 * 3 * 2 / 1 / 3
--95044 + 5.802 - 5
-68419.2958 / 8 * 6 * 5 + 5
-((+4 * 0 / 7) * 1 / 3 / 1 * 2 * 8) - 1
-2
-(-+197.36 / 7 * 2 - 9)
-+(6 * 3 * 9 + 1) * 7 * 1 * 1 * 4 / 1 * 2 / 6 + 8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-++1.30796 / --0
+6582 / 4172.49 / 8 / 8 - 2
+780 * 7 * 6 / 5 / 0 * 1 / 7 * 8 * 6 / 8 / 1
+3.569 / +3 * 6 / 4 / 5 * 7 - 2
+78 - +550 / 3 * 8 / 6 / 8 / 5
+55752 / --++5 * 7.66 - 3
+4.8222 * -(7) * 0 / 1 + 7
+6 + -998 - 5 * 2 * 6 * 8 * 7 - 1
+1419.4 * 8
+7 * -((9 * 8 / 7) - 2) * 2 / 2
 </pre></div>
 </div>
 </div>
@@ -625,16 +628,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>540669 + +-7 / 3 / 4
-1 * 2523
-9470.179 * 792.64 * 6
-(9 * 7 / 7 * 9 / 4 + 0) / 3 * 5 * 6 / 5 * 4 * 8
-307.718 * +788.19 + 2
-+-1 + 9 * 46468
-7077 + 3 * +-7 * 0 / 9
-(--366.07 * 3 + 7) * 3 / 2 * 9
-8175.8 + -+(8) - 1
-635395.633 * 6 * 5 - 8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+20772 - 9 / 6 * 4 / 2 * 1 * 3
+(624199.228) + 3
+683101.7228 * 8 * 3 + 1
+299447 * --+4 - 3 + 4
+52169.83
++93 * 2 * 2 * 1 / 1 * 3 * 6 * 6 * 3 / 4 * 4 + 5
+--+313708
+852339.2446
++16352 * 36.05 / 8 - 7
++(550713.79 * 3 - 0) / 8 - 9
 </pre></div>
 </div>
 </div>

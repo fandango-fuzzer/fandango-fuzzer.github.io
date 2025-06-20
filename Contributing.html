@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -426,10 +429,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-install-fandango">Step 5: Install Fandango</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit">Pre-commit</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-time-contributors">First Time Contributors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-code">Contributing Code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parser-files">Changing Parser Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parser-files">Changing Parser Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-generate-the-parser-code">Step 1: Generate the parser code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compile-the-parser-code">Step 2: Compile the parser code</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-documentation">Contributing to Documentation</a></li>
 </ul>
 </li>
@@ -507,7 +517,7 @@ articulated in the <a class="reference external" href="https://www.python.org/ps
 </div>
 </section>
 <section id="step-5-install-fandango">
-<h3>Step 5: Install Fandango<a class="headerlink" href="#step-5-install-fandango" title="Link to this heading">#</a></h3>
+<span id="sec-pip-install"></span><h3>Step 5: Install Fandango<a class="headerlink" href="#step-5-install-fandango" title="Link to this heading">#</a></h3>
 <p>Install your local copy of Fandango:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
@@ -536,6 +546,24 @@ like this:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest
 </pre></div>
 </div>
+<p>To run tests in parallel, you can use <a class="reference external" href="https://pytest-xdist.readthedocs.io/en/stable/">pytest-xdist</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pytest-xdist
+pytest<span class="w"> </span>-n<span class="w"> </span>auto
+</pre></div>
+</div>
+<section id="pre-commit">
+<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading">#</a></h3>
+<p>Fandango provides a config file for <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>. To install it, run the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+<p>This will run code formatting and type checking before every commit.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <a class="reference internal" href="#sec-running-tests"><span class="std std-ref">tests</span></a>= aren’t run as part of pre-commit, because they take significant time to complete. Run them manually.</p>
+</div>
+</section>
 </section>
 <section id="first-time-contributors">
 <span id="sec-first-time-contributors"></span><h2>First Time Contributors<a class="headerlink" href="#first-time-contributors" title="Link to this heading">#</a></h2>
@@ -561,12 +589,26 @@ As a bonus these are easiest for someone to review, which helps your pull reques
 Standard advice about good pull requests for open-source projects applies.</p>
 <section id="changing-parser-files">
 <h3>Changing Parser Files<a class="headerlink" href="#changing-parser-files" title="Link to this heading">#</a></h3>
-<p>If your contribution involves changing the ANTLR <code class="docutils literal notranslate"><span class="pre">.g4</span></code> parser files, you need to recreate the parser code.</p>
-<p>Use</p>
+<p>If your contribution involves changing the ANTLR <code class="docutils literal notranslate"><span class="pre">.g4</span></code> parser files,
+you need to <em>regenerate</em> and <em>recompile</em> the parser code.
+For this, you need a C++ compiler such as <code class="docutils literal notranslate"><span class="pre">clang</span></code>.</p>
+<section id="step-1-generate-the-parser-code">
+<h4>Step 1: Generate the parser code<a class="headerlink" href="#step-1-generate-the-parser-code" title="Link to this heading">#</a></h4>
+<p>To (re)generate the parser code, use</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>parser
 </pre></div>
 </div>
-<p>to recreate the parser code.</p>
+</section>
+<section id="step-2-compile-the-parser-code">
+<h4>Step 2: Compile the parser code<a class="headerlink" href="#step-2-compile-the-parser-code" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">pip</span></code> command takes care of (re)compiling the parser code.
+Simply <a class="reference internal" href="#sec-pip-install"><span class="std std-ref">reinstall Fandango</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If compiling the C++ code for parsing fails,
+Fandango uses (slower) Python code instead.</p>
+</div>
+</section>
 </section>
 <section id="contributing-to-documentation">
 <h3>Contributing to Documentation<a class="headerlink" href="#contributing-to-documentation" title="Link to this heading">#</a></h3>
@@ -657,10 +699,17 @@ Use</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-install-fandango">Step 5: Install Fandango</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit">Pre-commit</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-time-contributors">First Time Contributors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-code">Contributing Code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parser-files">Changing Parser Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parser-files">Changing Parser Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-generate-the-parser-code">Step 1: Generate the parser code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compile-the-parser-code">Step 2: Compile the parser code</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-documentation">Contributing to Documentation</a></li>
 </ul>
 </li>

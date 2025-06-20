@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Case Study: The GIF Format" href="Gif.html" />
-    <link rel="prev" title="Data Converters" href="Conversion.html" />
+    <link rel="prev" title="Generating Binary Inputs" href="Binary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -474,14 +477,22 @@ We can use the special option <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;start&gt; defined, but not used
-00000100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeError: fandango.evolution.algorithm.Fandango() got multiple values for keyword argument &#39;start_symbol&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;fandango fuzz --format=bits -f bits.fan -n 1 --start-symbol=&#39;&lt;format_flag&gt;&#39; --validate&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The combination of <code class="docutils literal notranslate"><span class="pre">--format=bits</span></code> and <code class="docutils literal notranslate"><span class="pre">--start-symbol</span></code> is particularly useful to debug bit fields.</p>
 </div>
 <p>Internally, Fandango treats individual flags as integers, too.
@@ -491,20 +502,6 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11001111
-11100100
-11010010
-11111101
-11000101
-11000110
-11101111
-11111010
-11001101
-11000010
-</pre></div>
-</div>
-</div>
 </div>
 <p>Fandango strictly follows a “left-to-right” order - that is, the order in which bits and bytes are specified in the grammar, the most significant bit is stored first.</p>
 <p>Hence, we can also easily set the value of the entire <code class="docutils literal notranslate"><span class="pre">brightness</span></code> field using a constraint:</p>
@@ -512,11 +509,6 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00001111
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -527,24 +519,10 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011111
-00011111
-11101111
-10101111
-11111111
-01111111
-00001111
-10001111
-11011111
-10111111
-</pre></div>
-</div>
-</div>
 </div>
 <p>Note how the last four bits (the <code class="docutils literal notranslate"><span class="pre">&lt;brightness&gt;</span></code> field) are always set to <code class="docutils literal notranslate"><span class="pre">1111</span></code> - the number 15.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>When implementing a format, be sure to follow its conventions regarding</p>
 <ul class="simple">
 <li><p><em>bit ordering</em> (most or least significant bit first)</p></li>
@@ -560,21 +538,6 @@ This is what happens if we send a byte <code class="docutils literal notranslate
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: &#39;&lt;stdin&gt;&#39;, position 0x0001 (1): mismatched input b&#39;x&#39;
-FandangoParseError: 1 error(s) during parsing
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;echo -n &#39;</span><span class="se">\\</span><span class="s2">xf0&#39; | fandango parse -f bits.fan -o - --format=bits --validate&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="ne">AssertionError</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 <p>We see that the input was properly parsed and decomposed into individual bits.</p>
 <p>This is the resulting parse tree:</p>
@@ -586,8 +549,8 @@ FandangoParseError: 1 error(s) during parsing
 </div>
 <div class="cell tag_remove-input docutils container">
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>To parse bits properly, they must come in multiples of eight.</p>
 </div>
 </section>
@@ -641,12 +604,12 @@ For such <em>padding</em>, define the field as</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Conversion.html"
+       href="Binary.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Converters</p>
+        <p class="prev-next-title">Generating Binary Inputs</p>
       </div>
     </a>
     <a class="right-next"

@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -478,7 +481,19 @@ document.write(`
 </section>
 <section id="physical-and-logical-lines">
 <span id="sec-lines"></span><h2>Physical and Logical Lines<a class="headerlink" href="#physical-and-logical-lines" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#explicit-line-joining">As in Python</a>, one can join two physical lines into a logical by adding a backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> at the end of the first line.</p>
+<p><a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#explicit-line-joining">As in Python</a>, one can join two physical lines into a logical by adding a backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> at the end of the first line.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">element</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="o">&lt;</span><span class="n">a_very_long_line</span><span class="o">&gt;</span> \
+    <span class="o">&lt;</span><span class="n">continued_on_the_next_line</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#implicit-line-joining">As in Python</a>, expressions in parentheses can be split over more than one physical line without using backslashes.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">element</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">an_alternative</span><span class="o">&gt;</span> <span class="o">|</span>
+              <span class="o">&lt;</span><span class="n">another_alternative</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Grammar rules can be indented; this has no effect on semantics.</p>
 </section>
 <section id="comments">
 <span id="sec-comment"></span><h2>Comments<a class="headerlink" href="#comments" title="Link to this heading">#</a></h2>
@@ -487,9 +502,13 @@ By convention, there are two spaces in front of the <code class="docutils litera
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">comment</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="s1">&#39;#&#39;</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span> <span class="sa">r</span><span class="s1">&#39;[^\r\n\f]&#39;</span><span class="o">*</span> <span class="o">&lt;</span><span class="n">newline</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">element</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="o">&lt;</span><span class="n">another_element</span><span class="o">&gt;</span>    <span class="c1"># a comment</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The actual implementation allows a comment at any end of a line.</p>
+<p>Extending beyond this grammar, the actual implementation allows a comment at any end of a line.</p>
 </div>
 </section>
 <section id="grammars">
@@ -497,7 +516,7 @@ By convention, there are two spaces in front of the <code class="docutils litera
 <p>A <em>grammar</em> is a set of <em>productions</em>.
 Each production defines a <a class="reference internal" href="#sec-nonterminal"><span class="std std-ref"><em>nonterminal</em></span></a> followed by <code class="docutils literal notranslate"><span class="pre">::=</span></code> and a number of <a class="reference internal" href="#sec-alternatives"><span class="std std-ref"><em>alternatives</em></span></a>.</p>
 <p>An optional <a class="reference internal" href="#sec-generator"><span class="std std-ref"><em>generator</em></span></a> can define a Python function to produce a value during fuzzing.</p>
-<p>Productions end with a newline or a <code class="docutils literal notranslate"><span class="pre">;</span></code> character.</p>
+<p>Productions end with a <em>newline</em> or a <em><code class="docutils literal notranslate"><span class="pre">;</span></code> character</em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">production</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="n">nonterminal</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span> <span class="s1">&#39;::=&#39;</span> <span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">alternatives</span><span class="o">&gt;</span> 
     <span class="o">&lt;</span><span class="n">generator</span><span class="o">&gt;</span><span class="err">?</span> <span class="o">&lt;</span><span class="n">comment</span><span class="o">&gt;</span><span class="err">?</span> <span class="p">(</span><span class="s1">&#39;;&#39;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">newline</span><span class="o">&gt;</span><span class="p">))</span>

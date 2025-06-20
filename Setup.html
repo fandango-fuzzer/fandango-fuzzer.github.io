@@ -204,11 +204,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -341,9 +344,9 @@
       
       
       <li>
-<a href="_static/fandango.pdf" target="_blank"
+<button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Download PDF"
+  title="Print to PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +355,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</a>
+</button>
 </li>
       
   </ul>
@@ -439,29 +442,35 @@ Do not enter it yourself.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango [-h] [--version] [--verbose | --quiet]
-                {fuzz,parse,shell,help,copyright,version} ...
+                [--parser {python,cpp,legacy,auto}]
+                {fuzz,parse,talk,convert,shell,help,copyright,version} ...
 
 The access point to the Fandango framework
 
 options:
   -h, --help            show this help message and exit
-  --version             show version number
-  --verbose, -v         increase verbosity. Can be given multiple times (-vv)
-  --quiet, -q           decrease verbosity. Can be given multiple times (-qq)
+  --version             Show version number.
+  --verbose, -v         Increase verbosity. Can be given multiple times (-vv).
+  --quiet, -q           Decrease verbosity. Can be given multiple times (-qq).
+  --parser {python,cpp,legacy,auto}
+                        Parser implementation to use (default: &#39;auto&#39;: use C++
+                        parser code if available, otherwise Python).
 
 commands:
-  {fuzz,parse,shell,help,copyright,version}
-                        the command to execute
-    fuzz                produce outputs from .fan files and test programs
-    parse               parse input file(s) according to .fan spec
-    shell               run an interactive shell (default)
-    help                show this help and exit
-    copyright           show copyright
-    version             show version
+  {fuzz,parse,talk,convert,shell,help,copyright,version}
+                        The command to execute.
+    fuzz                Produce outputs from .fan files and test programs.
+    parse               Parse input file(s) according to .fan spec.
+    talk                Interact with programs, clients, and servers.
+    convert             Convert given external spec to .fan format.
+    shell               Run an interactive shell (default).
+    help                Show this help and exit.
+    copyright           Show copyright.
+    version             Show version.
 
 Use `fandango help` to get a list of commands.
 Use `fandango help COMMAND` to learn more about COMMAND.
-See <span class="err"></span>]8;;https://fandango-fuzzer.github.io/<span class="err"></span>\https://fandango-fuzzer.github.io/<span class="err"></span>]8;;<span class="err"></span>\ for more information.
+See https://fandango-fuzzer.github.io/ for more information.
 </pre></div>
 </div>
 </div>
