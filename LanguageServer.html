@@ -60,8 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'LanguageServer';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Fandango Standard Library" href="Stdlib.html" />
-    <link rel="prev" title="Fandango Language Reference" href="Language.html" />
+    <link rel="prev" title="Fandango File Locations" href="Including.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -114,7 +113,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +210,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +219,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -444,16 +443,21 @@ document.write(`
 <li><p>Create a definition for an undefined nonterminal</p></li>
 <li><p>Initial Semantic Token support</p></li>
 </ul>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>The language server is experimental.</p>
+</div>
+<p>Download or clone the <a class="reference external" href="https://github.com/fandango-fuzzer/fandango">Fandango source repository</a>.</p>
 <p>Start the language server by running</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>src/fandango/language/server/language_server.py
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>src/fandango/language/server/language_server.py
 </pre></div>
 </div>
 <section id="visual-studio-code-extension">
 <h2>Visual Studio Code Extension<a class="headerlink" href="#visual-studio-code-extension" title="Link to this heading">#</a></h2>
 <p>A simple extension for Visual Studio Code (based on the one provided by the <code class="docutils literal notranslate"><span class="pre">pygls</span></code> project) is provided in the source repository in <code class="docutils literal notranslate"><span class="pre">.vscode/extensions/fandango-language-server</span></code>. To use it, clone the source repository, and compile it by running the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>.vscode/extensions/fandango-language-server
-npm<span class="w"> </span>install<span class="w"> </span>--no-save
-npm<span class="w"> </span>run<span class="w"> </span>compile
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>.vscode/extensions/fandango-language-server
+$<span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>--no-save
+$<span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>compile
 </pre></div>
 </div>
 <p>You can then install it from the workspace-recommended extension section in the extension manager. The extension will automatically start the language server and interface with it once you start editing <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files in this workspace. For additional documentation, refer to <code class="docutils literal notranslate"><span class="pre">.vscode/extensions/fandango-language-server/README.md</span></code>.</p>
@@ -474,10 +478,10 @@ npm<span class="w"> </span>run<span class="w"> </span>compile
 </ol>
 </li>
 </ol>
-<p>The extenstion will automatically start and interface with the language server.</p>
+<p>The extension will automatically start and interface with the language server.</p>
 <p>## Running the Language Server Manually</p>
-<p>To manually run the language server, run the following python script:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span><span class="o">[</span>fandango-source-repository<span class="o">]</span>/src/fandango/language/server/language_server.py
+<p>To manually run the language server, run the following Python script:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span><span class="o">[</span>fandango-source-repository<span class="o">]</span>/src/fandango/language/server/language_server.py
 </pre></div>
 </div>
 </section>
@@ -514,22 +518,13 @@ npm<span class="w"> </span>run<span class="w"> </span>compile
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Language.html"
+       href="Including.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Fandango Language Reference</p>
+        <p class="prev-next-title">Fandango File Locations</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="Stdlib.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Fandango Standard Library</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

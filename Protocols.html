@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Protocol Testing &#8212; Fuzzing with Fandango</title>
+    <title>Testing Protocols &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -57,6 +57,14 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Protocols';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -114,7 +122,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Protocol Testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +228,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -397,7 +405,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -408,11 +418,24 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Protocol Testing</h1>
+    <h1>Testing Protocols</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-an-smtp-server">Interacting with an SMTP server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-smtp-server-for-experiments">An SMTP server for experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-smtp-grammar">A simple SMTP grammar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-client">Interacting as Network Client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-server">Interacting as Network Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bigger-protocol-spec">A Bigger Protocol Spec</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -422,12 +445,375 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="protocol-testing">
-<span id="sec-protocols"></span><h1>Protocol Testing<a class="headerlink" href="#protocol-testing" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="testing-protocols">
+<span id="sec-protocols"></span><h1>Testing Protocols<a class="headerlink" href="#testing-protocols" title="Link to this heading">#</a></h1>
+<p>In <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">the chapter on checking outputs</span></a>, we already have seen how to interact with external programs.
+In this chapter, we will extend this concept to full <em>protocol testing</em> across networks.
+This includes:</p>
+<ul class="simple">
+<li><p>Acting as a network <em>client</em> and interacting with network servers  using generated inputs</p></li>
+<li><p>Acting as a network <em>server</em> and interacting with network clients using generated inputs.</p></li>
+</ul>
 <div class="attention admonition">
 <p class="admonition-title">Under Construction</p>
-<p>This chapter is still under construction.</p>
+<p>Protocol testing is currently in beta.
+Check out <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/issues">the list of open issues</a>.</p>
 </div>
+<section id="interacting-with-an-smtp-server">
+<h2>Interacting with an SMTP server<a class="headerlink" href="#interacting-with-an-smtp-server" title="Link to this heading">#</a></h2>
+<p>The Simple Mail Transfer Protocol (SMTP) is, as the name suggests, a simple protocol through which mail clients can connect to a server to send mail to recipients.
+A <a class="reference external" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">typical interaction with an SMTP server</a> <code class="docutils literal notranslate"><span class="pre">smtp.example.com</span></code>, sending a mail from <code class="docutils literal notranslate"><span class="pre">bob&#64;example.org</span></code> to <code class="docutils literal notranslate"><span class="pre">alice&#64;example.com</span></code>, is illustrated below:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    SMTP Client-&gt;&gt;SMTP Server: (connect)
+    SMTP Server-&gt;&gt;SMTP Client: 220 smtp.example.com ESMTP Postfix
+    SMTP Client-&gt;&gt;SMTP Server: HELO relay.example.org
+    SMTP Server-&gt;&gt;SMTP Client: 250 Hello relay.example.org, glad to meet you
+    SMTP Client-&gt;&gt;SMTP Server: MAIL FROM:&lt;bob&#64;example.org&gt;
+    SMTP Server-&gt;&gt;SMTP Client: 250 Ok
+    SMTP Client-&gt;&gt;SMTP Server: RCPT TO:&lt;alice&#64;example.com&gt;
+    SMTP Server-&gt;&gt;SMTP Client: 250 Ok
+    SMTP Client-&gt;&gt;SMTP Server: DATA
+    SMTP Server-&gt;&gt;SMTP Client: 354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+    SMTP Client-&gt;&gt;SMTP Server: From: &quot;Bob Example&quot; &lt;bob&#64;example.org&gt;
+    SMTP Client-&gt;&gt;SMTP Server: To: &quot;Alice Example&quot; &lt;alice&#64;example.com&gt;
+    SMTP Client-&gt;&gt;SMTP Server: Subject: Protocol Testing with I/O Grammars
+    SMTP Client-&gt;&gt;SMTP Server: (mail body)
+    SMTP Client-&gt;&gt;SMTP Server: .
+    SMTP Server-&gt;&gt;SMTP Client: 250 Ok: queued as 12345
+    SMTP Client-&gt;&gt;SMTP Server: QUIT
+    SMTP Server-&gt;&gt;SMTP Client: 221 Bye
+    SMTP Server-&gt;&gt;SMTP Client: (closes the connection)
+    </pre><p>Our job will be to <em>automate this interaction</em> using Fandango.
+For this, we need two things:</p>
+<ol class="arabic simple">
+<li><p>An SMTP server to send commands to</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">.fan</span></code> spec that encodes this interaction.</p></li>
+</ol>
+</section>
+<section id="an-smtp-server-for-experiments">
+<h2>An SMTP server for experiments<a class="headerlink" href="#an-smtp-server-for-experiments" title="Link to this heading">#</a></h2>
+<p>For illustrating protocol testing, we need to run an SMTP server, which we will run locally on our machine.
+(No worries - the local SMTP server can not actually send mails across the Internet.)</p>
+<p>The Python <code class="docutils literal notranslate"><span class="pre">aiosmtpd</span></code> server will do the trick:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>aiosmtpd
+</pre></div>
+</div>
+<p>Once installed, we can run the server locally; normally, it runs on port 8025:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>aiosmtpd<span class="w"> </span>-d<span class="w"> </span>-n
+INFO:mail.log:Server<span class="w"> </span>is<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>localhost:8025
+</pre></div>
+</div>
+<p>We can now connect to the server on the given port and send it commands.
+The <code class="docutils literal notranslate"><span class="pre">telnet</span></code> command is handy for this.
+We give it a hostname (<code class="docutils literal notranslate"><span class="pre">localhost</span></code> for our local machine) and a port (8025 for our local SMTP server.)</p>
+<p>Once connected, anything we type into the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> input will automatically be relayed to the given port, and hence to the SMTP server.
+For instance, a <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command (followed by Return) will terminate the connection.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
+Trying<span class="w"> </span>::1...
+Connected<span class="w"> </span>to<span class="w"> </span>localhost.
+Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
+<span class="m">220</span><span class="w"> </span>localhost.example.com<span class="w"> </span>Python<span class="w"> </span>SMTP<span class="w"> </span><span class="m">1</span>.4.6
+QUIT
+<span class="m">221</span><span class="w"> </span>Bye
+Connection<span class="w"> </span>closed<span class="w"> </span>by<span class="w"> </span>foreign<span class="w"> </span>host.
+</pre></div>
+</div>
+<p>Try this for yourself! What happens if you invoke <code class="docutils literal notranslate"><span class="pre">telnet</span></code>, introducing yourself with  <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">client.example.com</span></code>?</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>When sending <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">client.example.com</span></code>, the server replies with its own hostname.
+This is the name of the local computer, in our example <code class="docutils literal notranslate"><span class="pre">localhost.example.com</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
+Trying<span class="w"> </span>::1...
+Connected<span class="w"> </span>to<span class="w"> </span>localhost.
+Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
+<span class="m">220</span><span class="w"> </span>localhost.example.com<span class="w"> </span>Python<span class="w"> </span>SMTP<span class="w"> </span><span class="m">1</span>.4.6
+HELO<span class="w"> </span>client.example.com
+<span class="m">250</span><span class="w"> </span>localhost.example.com
+QUIT
+<span class="m">221</span><span class="w"> </span>Bye
+</pre></div>
+</div>
+</div>
+</section>
+<section id="a-simple-smtp-grammar">
+<h2>A simple SMTP grammar<a class="headerlink" href="#a-simple-smtp-grammar" title="Link to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">telnet</span></code> only for illustrative purposes here; later in this chapter, you will see how to have Fandango directly connect to servers (and clients!)</p>
+</aside>
+<p>With <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">talk</span></code></span></a>, we have seen a Fandango facility that allows us to connect to the standard input and output channels of a given program and interact with it.
+The idea would now be to use the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> program for this very purpose.
+By invoking</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span><span class="m">8025</span>
+</pre></div>
+</div>
+<p>we could interact with the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> program as described above.
+All we now need is a grammar that describes the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> interaction.</p>
+<p>The following grammar has two parts:</p>
+<ol class="arabic simple">
+<li><p>First, we expect some output from the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> program.</p></li>
+<li><p>Then, we interact with the SMTP server - just sending a <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command and then exiting.</p></li>
+</ol>
+<p>A typical interaction thus would be:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    Fandango-&gt;&gt;telnet: (invoke)
+    telnet-&gt;&gt;Fandango: Trying ::1...
+    telnet-&gt;&gt;Fandango: Connected to localhost.
+    telnet-&gt;&gt;Fandango: Escape character is '^]'.
+    SMTP Server (via telnet)-&gt;&gt;Fandango: 220 localhost.example.com Python SMTP 1.4.6
+    Fandango-&gt;&gt;SMTP Server (via telnet): QUIT
+    SMTP Server (via telnet)-&gt;&gt;Fandango: 221 Bye
+    SMTP Server (via telnet)-&gt;&gt;telnet: (closes connection)
+    telnet-&gt;&gt;Fandango: (ends execution)
+    </pre><p>The following I/O grammar <a class="reference download internal" download="" href="_downloads/3ac4d79d5e2ae55784634b97e4fa1c07/smtp-telnet.fan"><span class="xref download myst">smtp-telnet.fan</span></a> implements this interaction via <code class="docutils literal notranslate"><span class="pre">telnet</span></code>:</p>
+<ol class="arabic simple">
+<li><p>First, <code class="docutils literal notranslate"><span class="pre">&lt;telnet-intro&gt;</span></code> lets Fandango expect the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> introduction;</p></li>
+<li><p>Then, <code class="docutils literal notranslate"><span class="pre">&lt;smtp&gt;</span></code> takes care of the actual SMTP interaction.</p></li>
+</ol>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;Out:telnet_intro&gt; &lt;smtp&gt;
+&lt;telnet_intro&gt; ::= \
+    r&quot;Trying.*&quot; &quot;\r\n&quot; \
+    r&quot;Connected.*&quot; &quot;\r\n&quot; \
+    r&quot;Escape.*&quot; &quot;\r\n&quot;
+
+&lt;smtp&gt; ::= &lt;Out:m220&gt; &lt;In:quit&gt; &lt;Out:m221&gt;
+&lt;m220&gt; ::= &quot;220 &quot; r&quot;.*&quot; &quot;\r\n&quot;
+&lt;quit&gt; ::= &quot;QUIT\r\n&quot;
+&lt;m221&gt; ::= &quot;221 &quot; r&quot;.*&quot; &quot;\r\n&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Again, note that <code class="docutils literal notranslate"><span class="pre">In</span></code> and <code class="docutils literal notranslate"><span class="pre">Out</span></code> describe the interaction from the <em>perspective of the program under test</em>; hence, <code class="docutils literal notranslate"><span class="pre">Out</span></code> is what <code class="docutils literal notranslate"><span class="pre">telnet</span></code> and the SMTP server produce, whereas <code class="docutils literal notranslate"><span class="pre">In</span></code> is what the SMTP server (and telnet) get as input.</p>
+</div>
+<p>With this, we can now connect to our (hopefully still running) SMTP server and actually send it a <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span><span class="m">8025</span>
+</pre></div>
+</div>
+<p>To track the data that is actually exchanged, use the verbose <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag.
+The <code class="docutils literal notranslate"><span class="pre">In:</span></code> and <code class="docutils literal notranslate"><span class="pre">Out:</span></code> log messages show the data that is being exchanged.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span><span class="m">8025</span>
+</pre></div>
+</div>
+</section>
+<section id="interacting-as-network-client">
+<h2>Interacting as Network Client<a class="headerlink" href="#interacting-as-network-client" title="Link to this heading">#</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">telnet</span></code> to communicate with servers generally works, but it has a number of drawbacks.
+Most importantly, <code class="docutils literal notranslate"><span class="pre">telnet</span></code> is meant for <em>human</em> interaction.
+Hence, our I/O grammars have to reflect the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> output (which actually might change depending on operating system and configuration); also, <code class="docutils literal notranslate"><span class="pre">telnet</span></code> is not suited for transmitting binary data.</p>
+<p>Fortunately, Fandango offers a means to be invoked <em>directly as a network client</em>, not requiring external programs such as <code class="docutils literal notranslate"><span class="pre">telnet</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">talk</span></code> option <code class="docutils literal notranslate"><span class="pre">--client</span></code> allows Fandango to be used as a network client.
+The argument to <code class="docutils literal notranslate"><span class="pre">--client</span></code> is a network address to connect to.
+In the simplest form, it is just a port number on the local machine.</p>
+<p>Hence, to have Fandango act as an SMTP client for the local server, we can enter</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>SPEC.fan<span class="w"> </span>--client<span class="w"> </span><span class="m">8025</span>
+</pre></div>
+</div>
+<p>Since Fandango directly talks to the SMTP server now, we can also simplify the grammar by removing the <code class="docutils literal notranslate"><span class="pre">&lt;telnet_intro&gt;</span></code> part.
+Also, there is no more <code class="docutils literal notranslate"><span class="pre">In</span></code> and <code class="docutils literal notranslate"><span class="pre">Out</span></code> parties, since we do not interact with the standard input and output of an invoked program.
+Instead,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Client</span></code> is the party representing the <em>client</em>, connecting to an external server on the network.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Server</span></code> is the party representing a <em>server</em> on the network, accepting connections from clients.</p></li>
+</ul>
+<p>Consequently,</p>
+<ul class="simple">
+<li><p>all outputs produced by the <em>client</em> (and processed by the server) are prefixed with <code class="docutils literal notranslate"><span class="pre">Client:</span></code> in the respective nonterminals; and</p></li>
+<li><p>all outputs produced by the <em>server</em> (and processed by the client) are prefixed with <code class="docutils literal notranslate"><span class="pre">Server:</span></code>.</p></li>
+</ul>
+<p>With this, we can reframe and simplify our SMTP grammar, using <code class="docutils literal notranslate"><span class="pre">Client</span></code> and <code class="docutils literal notranslate"><span class="pre">Server</span></code> to describe the respective interactions.
+The spec <a class="reference download internal" download="" href="_downloads/51bfafbc04ca67f0272701151c9e8f7d/smtp-simple.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">smtp-simple.fan</span></code></span></a> reads as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;smtp&gt;
+&lt;smtp&gt; ::= &lt;Server:m220&gt; &lt;Client:quit&gt; &lt;Server:m221&gt;
+&lt;m220&gt; ::= &quot;220 &quot; &lt;hostname&gt; &quot; &quot; r&quot;.*&quot; &quot;\r\n&quot;
+&lt;quit&gt; ::= &quot;QUIT\r\n&quot;
+&lt;m221&gt; ::= &quot;221 &quot; r&quot;.*&quot; &quot;\r\n&quot;
+
+&lt;hostname&gt; ::= r&quot;[-a-zA-Z0-9.:]*&quot; := &quot;host.example.com&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how we added <code class="docutils literal notranslate"><span class="pre">&lt;hostname&gt;</span></code> as additional specification of the hostname that is typically part of the initial server message.</p>
+<p>With this, we have Fandango act as client and connect to the (hopefully still running) server on port 8025:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-simple.fan<span class="w"> </span>--client<span class="w"> </span><span class="m">8025</span>
+</pre></div>
+</div>
+<pre  class="mermaid">
+        sequenceDiagram
+    Fandango-&gt;&gt;SMTP Server: (connect)
+    SMTP Server-&gt;&gt;Fandango: 220 host.example.com &lt;more data&gt;
+    Fandango-&gt;&gt;SMTP Server: QUIT
+    SMTP Server-&gt;&gt;Fandango: 221 &lt;more data&gt;
+    SMTP Server-&gt;&gt;Fandango: (closes connection)
+    </pre><p>From here on, we can have Fandango directly “talk” to network components such as servers.</p>
+</section>
+<section id="interacting-as-network-server">
+<h2>Interacting as Network Server<a class="headerlink" href="#interacting-as-network-server" title="Link to this heading">#</a></h2>
+<p>Obviously, our SMTP specification is still very limited.
+Before we go and extend it, let us first highlight a particular Fandango feature.
+From the same specification, Fandango can act as a <em>client</em> and as a <em>server</em>.
+When invoked with the <code class="docutils literal notranslate"><span class="pre">--server</span></code> option, Fandango will <em>create</em> a server at the given port and accept client connections.
+So if we invoke</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-simple.fan<span class="w"> </span>--server<span class="w"> </span><span class="m">8125</span>
+</pre></div>
+</div>
+<p>we can then connect to our running Fandango “SMTP Server” and interact with it according to the <code class="docutils literal notranslate"><span class="pre">smtp-simple.fan</span></code> spec:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8125</span>
+Trying<span class="w"> </span>::1...
+Connected<span class="w"> </span>to<span class="w"> </span>localhost.
+Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
+<span class="m">220</span><span class="w"> </span>host.example.com<span class="w"> </span><span class="m">26</span>%
+QUIT
+<span class="m">221</span><span class="w"> </span>26yn
+</pre></div>
+</div>
+<p>As server, Fandango produces its own <code class="docutils literal notranslate"><span class="pre">220</span></code> and <code class="docutils literal notranslate"><span class="pre">221</span></code> messages, effectively <em>fuzzing the client</em>.
+Note how the interaction diagram reflects how Fandango is now taking the role of the client:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    SMTP Client (or telnet)-&gt;&gt;Fandango: (connect)
+    Fandango-&gt;&gt;SMTP Client (or telnet): 220 host.example.com &lt;random data&gt;
+    SMTP Client (or telnet)-&gt;&gt;Fandango: QUIT
+    Fandango-&gt;&gt;SMTP Client (or telnet): 221 &lt;random data&gt;
+    Fandango-&gt;&gt;SMTP Client (or telnet): (closes connection)
+    </pre><div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>Fandango can actually create and mock an arbitrary number of clients and servers, all interacting with each other.
+The interface for this is currently under construction.</p>
+</div>
+</section>
+<section id="a-bigger-protocol-spec">
+<h2>A Bigger Protocol Spec<a class="headerlink" href="#a-bigger-protocol-spec" title="Link to this heading">#</a></h2>
+<p>So far, our SMTP server is not great at testing SMTP clients – all it can handle is a single <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command.
+Let us extend it a bit with a few more commands, reflecting the interaction in the introduction:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;connect&gt;
+&lt;connect&gt; ::= &lt;Server:id&gt; &lt;helo&gt;
+
+&lt;id&gt; ::= &#39;220 &#39; &lt;hostname&gt; &#39; ESMTP Postfix\r\n&#39;
+&lt;hostname&gt; ::= r&quot;[-a-zA-Z0-9.:]+&quot; := &quot;host.example.com&quot;
+
+&lt;helo&gt; ::= &lt;Client:HELO&gt; \
+    (&lt;Server:hello&gt; &lt;mail_from&gt; | &lt;Server:error&gt;)
+&lt;HELO&gt; ::= &#39;HELO &#39; &lt;hostname&gt; &#39;\r\n&#39;
+
+&lt;hello&gt; ::= &#39;250 Hello &#39; &lt;hostname&gt; &#39;, glad to meet you\r\n&#39; \
+    &lt;mail_from&gt;
+
+&lt;error&gt; ::= &#39;5&#39; &lt;digit&gt; &lt;digit&gt; &#39; &#39; &lt;error_message&gt; &#39;\r\n&#39;
+&lt;error_message&gt; ::= r&#39;.*&#39; := &quot;Error&quot;
+
+&lt;mail_from&gt; ::= &lt;Client:MAIL_FROM&gt; \
+    (&lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt;)
+
+&lt;MAIL_FROM&gt; ::= &#39;MAIL FROM:&lt;&#39; &lt;email&gt; &#39;&gt;\r\n&#39;
+# Actual email addresses are much more varied
+&lt;email&gt; ::= r&quot;[-a-zA-Z0-9.]+&quot; &#39;@&#39; &lt;hostname&gt; := &quot;alice@example.com&quot;
+
+&lt;ok&gt; ::= &#39;250 Ok\r\n&#39;
+
+&lt;mail_to&gt; ::= &lt;Client:RCPT_TO&gt; \
+    (&lt;Server:ok&gt; &lt;data&gt; | &lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt;)
+
+&lt;RCPT_TO&gt; ::= &#39;RCPT TO:&lt;&#39; &lt;email&gt; &#39;&gt;\r\n&#39;
+
+&lt;data&gt; ::= &lt;Client:DATA&gt; &lt;Server:end_data&gt; &lt;Client:message&gt; \
+    (&lt;Server:ok&gt; &lt;quit&gt; | &lt;Server:error&gt;)
+
+&lt;DATA&gt; ::= &#39;DATA\r\n&#39;
+
+&lt;end_data&gt; ::= &#39;354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;\r\n&#39;
+
+&lt;message&gt; ::= r&#39;[^.\r\n]*\r\n[.]\r\n&#39;
+
+&lt;quit&gt; ::= &lt;Client:QUIT&gt; &lt;Server:bye&gt;
+
+&lt;QUIT&gt; ::= &#39;QUIT\r\n&#39;
+
+&lt;bye&gt; ::= &#39;221 Bye\r\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This spec can actually handle the initial interaction (check it!).
+You may note the following points:</p>
+<p>First, the commands (and replies) follow a particular <em>order</em>, implying the <em>state</em> the server and client are in.
+In the “happy” path (assuming no errors), this is the order of possible commands:</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; 1: ‹connect›
+    1 --&gt; 2: ‹helo›
+    2 --&gt; 3: ‹mail_from›
+    3 --&gt; 3: ‹mail_to›
+    3 --&gt; 4: ‹mail_to›
+    4 --&gt; 5: ‹data›
+    5 --&gt; [*]: ‹quit›
+    </pre><p>Note how the I/O grammar (and the above state diagram) accepts multiple <code class="docutils literal notranslate"><span class="pre">&lt;mail_to&gt;</span></code> interactions, allowing mails to be sent to multiple destinations.</p>
+<p>Second, the spec actually accounts for errors, always entering an <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> state if the client command received cannot be parsed properly.
+Hence, the state diagram induced in the above grammar actually looks like this:</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; 1: ‹connect›
+    1 --&gt; 2: ‹helo›
+    2 --&gt; [*]: ‹error›
+    2 --&gt; 3: ‹mail_from›
+    3 --&gt; [*]: ‹error›
+    3 --&gt; 3: ‹mail_to›
+    3 --&gt; 4: ‹mail_to›
+    4 --&gt; 5: ‹data›
+    4 --&gt; [*]: ‹error›
+    5 --&gt; [*]: ‹quit›
+    5 --&gt; [*]: ‹error›
+    </pre><p>As described in the <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">chapter on checking outputs</span></a>, we can use the <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> command to actually show generated outputs of individual parties:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Client<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
+
+MAIL FROM:&lt;alice@example.com&gt;
+
+RCPT TO:&lt;alice@example.com&gt;
+
+RCPT TO:&lt;alice@example.com&gt;
+
+DATA
+
+S&#39;=,I:oKce6XgJm5z
+
+.
+
+QUIT
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Server<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
+
+567 Error
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it for now. GO and thoroughly test your programs!</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -484,6 +870,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-an-smtp-server">Interacting with an SMTP server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-smtp-server-for-experiments">An SMTP server for experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-smtp-grammar">A simple SMTP grammar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-client">Interacting as Network Client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-server">Interacting as Network Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bigger-protocol-spec">A Bigger Protocol Spec</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

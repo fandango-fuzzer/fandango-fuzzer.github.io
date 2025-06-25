@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +211,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -477,16 +477,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeError: fandango.evolution.algorithm.Fandango() got multiple values for keyword argument &#39;start_symbol&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;fandango fuzz --format=bits -f bits.fan -n 1 --start-symbol=&#39;&lt;format_flag&gt;&#39; --validate&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="ne">AssertionError</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00010110
 </pre></div>
 </div>
 </div>
@@ -502,6 +493,20 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11101100
+11110000
+11000100
+11011110
+11011101
+11010110
+11001100
+11100001
+11010000
+11111000
+</pre></div>
+</div>
+</div>
 </div>
 <p>Fandango strictly follows a “left-to-right” order - that is, the order in which bits and bytes are specified in the grammar, the most significant bit is stored first.</p>
 <p>Hence, we can also easily set the value of the entire <code class="docutils literal notranslate"><span class="pre">brightness</span></code> field using a constraint:</p>
@@ -509,6 +514,11 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10101111
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -519,6 +529,22 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00011111
+01101111
+10011111
+01011111
+00101111
+10001111
+10111111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01001111
+11111111
+00001111
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note how the last four bits (the <code class="docutils literal notranslate"><span class="pre">&lt;brightness&gt;</span></code> field) are always set to <code class="docutils literal notranslate"><span class="pre">1111</span></code> - the number 15.</p>
 <div class="admonition important">
@@ -534,10 +560,25 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 <h2>Parsing Bits<a class="headerlink" href="#parsing-bits" title="Link to this heading">#</a></h2>
 <p>Fandango also supports <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parsing</span></a> inputs with bits.
 This is what happens if we send a byte <code class="docutils literal notranslate"><span class="pre">\xf0</span></code> (the upper four bits set) to the parser:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;\xf0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>bits
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;\xf0&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>bits.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>bits
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: &#39;&lt;stdin&gt;&#39;, position 0x0001 (1): mismatched input b&#39;x&#39;
+FandangoParseError: 1 error(s) during parsing
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;printf &quot;</span><span class="se">\\</span><span class="s1">xf0&quot; | fandango parse -f bits.fan -o - --format=bits --validate&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 <p>We see that the input was properly parsed and decomposed into individual bits.</p>
 <p>This is the resulting parse tree:</p>

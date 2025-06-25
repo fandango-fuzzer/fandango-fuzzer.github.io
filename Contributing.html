@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -507,19 +507,19 @@ articulated in the <a class="reference external" href="https://www.python.org/ps
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>system-dev-tools
 </pre></div>
 </div>
-<p>Install <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code> and other Python tools:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>dev-tools
-</pre></div>
-</div>
-<p>Install <code class="docutils literal notranslate"><span class="pre">pytest</span></code> and required files:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>install-test
-</pre></div>
-</div>
 </section>
 <section id="step-5-install-fandango">
 <span id="sec-pip-install"></span><h3>Step 5: Install Fandango<a class="headerlink" href="#step-5-install-fandango" title="Link to this heading">#</a></h3>
 <p>Install your local copy of Fandango:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>To install additional dependencies for unit tests, code checks, running the evaluation, and building the Fandango book, install Fandango like this (or with the subsection of dependencies you need):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[test,development,evaluation,book]&quot;</span>
+</pre></div>
+</div>
+<p>If you don’t need the (much faster) C++ parser, build Fandango without:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nv">FANDANGO_SKIP_CPP_PARSER</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
 </div>
 <p>Reset the shell PATH cache (not necessary on Windows):</p>
@@ -546,16 +546,15 @@ like this:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest
 </pre></div>
 </div>
-<p>To run tests in parallel, you can use <a class="reference external" href="https://pytest-xdist.readthedocs.io/en/stable/">pytest-xdist</a>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pytest-xdist
-pytest<span class="w"> </span>-n<span class="w"> </span>auto
+<p>To run tests in parallel, you can use <a class="reference external" href="https://pytest-xdist.readthedocs.io/en/stable/">pytest-xdist</a> (installed with the <code class="docutils literal notranslate"><span class="pre">test</span></code> depenendencies):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pytest<span class="w"> </span>-n<span class="w"> </span>auto
 </pre></div>
 </div>
 <section id="pre-commit">
 <h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading">#</a></h3>
 <p>Fandango provides a config file for <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>. To install it, run the following:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
-pre-commit<span class="w"> </span>install
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+$<span class="w"> </span>pre-commit<span class="w"> </span>install
 </pre></div>
 </div>
 <p>This will run code formatting and type checking before every commit.</p>

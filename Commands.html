@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -424,7 +424,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzing">Fuzzing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing">Parsing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting">Converting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting">Interacting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell">Shell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clearing">Clearing</a></li>
 </ul>
             </nav>
         </div>
@@ -445,7 +447,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango [-h] [--version] [--verbose | --quiet]
                 [--parser {python,cpp,legacy,auto}]
-                {fuzz,parse,talk,convert,shell,help,copyright,version} ...
+                {fuzz,parse,talk,convert,clear-cache,shell,help,copyright,version} ...
 
 The access point to the Fandango framework
 
@@ -459,12 +461,13 @@ options:
                         parser code if available, otherwise Python).
 
 commands:
-  {fuzz,parse,talk,convert,shell,help,copyright,version}
+  {fuzz,parse,talk,convert,clear-cache,shell,help,copyright,version}
                         The command to execute.
     fuzz                Produce outputs from .fan files and test programs.
     parse               Parse input file(s) according to .fan spec.
     talk                Interact with programs, clients, and servers.
     convert             Convert given external spec to .fan format.
+    clear-cache         Clear the Fandango parsing cache.
     shell               Run an interactive shell (default).
     help                Show this help and exit.
     copyright           Show copyright.
@@ -718,6 +721,132 @@ Party settings:
 </div>
 </div>
 </section>
+<section id="interacting">
+<h2>Interacting<a class="headerlink" href="#interacting" title="Link to this heading">#</a></h2>
+<p>To <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">have Fandango interact with programs</span></a> and <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">other parties</span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">talk</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango talk [-h] [-f FAN_FILE] [-c CONSTRAINT] [-S START_SYMBOL]
+                     [--max MAXCONSTRAINT] [--min MINCONSTRAINTS] [-I DIR]
+                     [--file-mode {text,binary,auto}] [--no-cache]
+                     [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
+                     [-x FILENAME_EXTENSION]
+                     [--format {string,bits,tree,grammar,value,repr,none}]
+                     [--validate] [-N MAX_GENERATIONS] [--infinite]
+                     [--population-size POPULATION_SIZE]
+                     [--elitism-rate ELITISM_RATE]
+                     [--crossover-rate CROSSOVER_RATE]
+                     [--mutation-rate MUTATION_RATE]
+                     [--random-seed RANDOM_SEED]
+                     [--destruction-rate DESTRUCTION_RATE]
+                     [--max-repetition-rate MAX_REPETITION_RATE]
+                     [--max-repetitions MAX_REPETITIONS]
+                     [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
+                     [-n DESIRED_SOLUTIONS] [--best-effort]
+                     [-i INITIAL_POPULATION] [--warnings-are-errors]
+                     [--client [NAME=][PROTOCOL:][HOST:]PORT]
+                     [--server [NAME=][PROTOCOL:][HOST:]PORT]
+                     [command] ...
+
+positional arguments:
+  command               Optional command to be interacted with.
+  args                  The arguments of the command.
+
+options:
+  -h, --help            show this help message and exit
+  --client [NAME=][PROTOCOL:][HOST:]PORT
+                        Act as a client NAME (default: &#39;Client&#39;) connecting to
+                        PORT on HOST (default: 127.0.0.1; use &#39;[...]&#39; for IPv6
+                        addresses) using PROTOCOL (&#39;tcp&#39; (default)/&#39;udp&#39;).
+  --server [NAME=][PROTOCOL:][HOST:]PORT
+                        Act as a server NAME (default: &#39;Server&#39;) running at
+                        PORT on HOST (default: 127.0.0.1; use &#39;[...]&#39; for IPv6
+                        addresses) using PROTOCOL (&#39;tcp&#39; (default)/&#39;udp&#39;).
+
+Fandango file settings:
+  -f, --fandango-file FAN_FILE
+                        Fandango file (.fan, .py) to be processed. Can be
+                        given multiple times. Use &#39;-&#39; for stdin.
+  -c, --constraint CONSTRAINT
+                        Define an additional constraint CONSTRAINT. Can be
+                        given multiple times.
+  -S, --start-symbol START_SYMBOL
+                        The grammar start symbol (default: &#39;&lt;start&gt;&#39;).
+  --max, --maximize MAXCONSTRAINT
+                        Define an additional constraint MAXCONSTRAINT to be
+                        maximized. Can be given multiple times.
+  --min, --minimize MINCONSTRAINTS
+                        Define an additional constraint MINCONSTRAINT to be
+                        minimized. Can be given multiple times.
+  -I, --include-dir DIR
+                        Specify a directory DIR to search for included
+                        Fandango files.
+  --file-mode {text,binary,auto}
+                        Mode in which to open and write files (default is
+                        &#39;auto&#39;: &#39;binary&#39; if grammar has bits or bytes, &#39;text&#39;
+                        otherwise).
+  --no-cache            Do not cache parsed Fandango files.
+  --no-stdlib           Do not include the standard Fandango library.
+
+Output settings:
+  -s, --separator SEPARATOR
+                        Output SEPARATOR between individual inputs. (default:
+                        newline).
+  -d, --directory DIRECTORY
+                        Create individual output files in DIRECTORY.
+  -x, --filename-extension FILENAME_EXTENSION
+                        Extension of generated file names (default: &#39;.txt&#39;).
+  --format {string,bits,tree,grammar,value,repr,none}
+                        Produce output(s) as string (default), as a bit
+                        string, as a derivation tree, as a grammar, as a
+                        Python value, in internal representation, or none.
+  --validate            Run internal consistency checks for debugging.
+
+Generation settings:
+  -N, --max-generations MAX_GENERATIONS
+                        Maximum number of generations to run the algorithm
+                        (ignored if --infinite is set).
+  --infinite            Run the algorithm indefinitely.
+  --population-size POPULATION_SIZE
+                        Size of the population.
+  --elitism-rate ELITISM_RATE
+                        Rate of individuals preserved in the next generation.
+  --crossover-rate CROSSOVER_RATE
+                        Rate of individuals that will undergo crossover.
+  --mutation-rate MUTATION_RATE
+                        Rate of individuals that will undergo mutation.
+  --random-seed RANDOM_SEED
+                        Random seed to use for the algorithm.
+  --destruction-rate DESTRUCTION_RATE
+                        Rate of individuals that will be randomly destroyed in
+                        every generation.
+  --max-repetition-rate MAX_REPETITION_RATE
+                        Rate at which the number of maximal repetitions should
+                        be increased.
+  --max-repetitions MAX_REPETITIONS
+                        Maximal value the number of repetitions can be
+                        increased to.
+  --max-node-rate MAX_NODE_RATE
+                        Rate at which the maximal number of nodes in a tree is
+                        increased.
+  --max-nodes MAX_NODES
+                        Maximal value, the number of nodes in a tree can be
+                        increased to.
+  -n, --desired-solutions, --num-outputs DESIRED_SOLUTIONS
+                        Number of outputs to produce.
+  --best-effort         Produce a &#39;best effort&#39; population (may not satisfy
+                        all constraints).
+  -i, --initial-population INITIAL_POPULATION
+                        Directory or ZIP archive with initial population.
+
+General settings:
+  --warnings-are-errors
+                        Treat warnings as errors.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="shell">
 <h2>Shell<a class="headerlink" href="#shell" title="Link to this heading">#</a></h2>
 <p>To <a class="reference internal" href="Shell.html#sec-shell"><span class="std std-ref">enter commands in <code class="docutils literal notranslate"><span class="pre">fandango</span></code></span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">shell</span></code> or just <code class="docutils literal notranslate"><span class="pre">fandango</span></code>:</p>
@@ -727,6 +856,22 @@ Party settings:
 
 options:
   -h, --help  show this help message and exit
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="clearing">
+<h2>Clearing<a class="headerlink" href="#clearing" title="Link to this heading">#</a></h2>
+<p>To <a class="reference internal" href="Including.html#sec-caching"><span class="std std-ref">have Fandango clear its parser cache</span></a>, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">clear-cache</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: fandango clear-cache [-h] [-n]
+
+options:
+  -h, --help     show this help message and exit
+  -n, --dry-run  Just output the action to be performed; do not actually clear
+                 the cache.
 </pre></div>
 </div>
 </div>
@@ -802,7 +947,9 @@ options:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzzing">Fuzzing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing">Parsing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting">Converting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting">Interacting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell">Shell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clearing">Clearing</a></li>
 </ul>
   </nav></div>
 

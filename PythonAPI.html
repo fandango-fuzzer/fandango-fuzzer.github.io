@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'PythonAPI';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Fandango Include Reference" href="Including.html" />
+    <link rel="next" title="Fandango File Locations" href="Including.html" />
     <link rel="prev" title="Derivation Tree Reference" href="DerivationTree.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -600,16 +600,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linda Johnson,91
-Timothy Love,9
-Gina Jenkins,78
-Mackenzie Middleton,26
-Jared Williams,95
-Anne Smith,93
-Erik Holland,97
-Joshua Garcia,80
-Derrick Ross,8
-Seth Wright,499
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kent Sanchez,09
+Tina Taylor,47
+Rachel Carpenter,04
+Michael Boyd,14
+Aaron Johnson,9
+Gina Hernandez,75
+Cristian Knight,82
+Andrea Le,957
+Valerie Morrison,27
+Julie Miller,89
 </pre></div>
 </div>
 </div>
@@ -636,7 +636,7 @@ Seth Wright,499
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: &lt;string&gt;: saving spec to cache /home/runner/.cache/fandango/cada249e3412b32451520bf7a1e45035c1c7645280d8ab390b820ec8bd225a96.pickle
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: &lt;string&gt;: saving spec to cache /home/runner/.cache/fandango/d7d2c43b4872f944c5483a92e75e69b5502a504055be02e8d4f1c085354b0331.pickle
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Redefining &lt;start&gt;
@@ -651,7 +651,7 @@ Seth Wright,499
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.01 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.02 seconds
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
@@ -663,15 +663,15 @@ Seth Wright,499
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Generating ----------
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aaba
-bca
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bbb
 bb
-babb
+ab
+abccb
+abc
 c
-cabb
-cab
-a
-cb
+b
+ccb
+abcac
 ca
 </pre></div>
 </div>
@@ -762,7 +762,7 @@ ca
   <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
     <span class="n">fan</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
-  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">326</span> <span class="ow">in</span> <span class="n">parse</span>
+  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">351</span> <span class="ow">in</span> <span class="n">parse</span>
     <span class="k">raise</span> <span class="n">FandangoParseError</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
 
   <span class="n">File</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
@@ -856,7 +856,7 @@ ca
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Fandango Include Reference</p>
+        <p class="prev-next-title">Fandango File Locations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

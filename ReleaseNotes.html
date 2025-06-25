@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -425,10 +425,36 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="release-notes">
 <span id="sec-release-notes"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
 <p>This document lists major changes across releases.</p>
-<dl class="simple myst">
-<dt>Fandango 0.8 (April 10, 2025)</dt><dd><p>First public beta release.</p>
-</dd>
-</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0: </span>(June 26, 2025)</p>
+<ul class="simple">
+<li><p>New command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">talk</span></code> for <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">checking outputs</span></a> and <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">testing protocols</span></a> (beta).</p></li>
+<li><p>Much faster parser for <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files, using C++ code.</p></li>
+<li><p>Support for <a class="reference internal" href="Regexes.html#sec-regexes"><span class="std std-ref">regular expressions</span></a> for producing and parsing.</p></li>
+<li><p>Support for <a class="reference internal" href="Constraints.html#sec-soft-constraints"><span class="std std-ref">soft constraints and optimization</span></a> (<code class="docutils literal notranslate"><span class="pre">maximizing</span></code> / <code class="docutils literal notranslate"><span class="pre">minimizing</span></code>).</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">*</span></code>/<code class="docutils literal notranslate"><span class="pre">**</span></code> expressions for Python-style <a class="reference internal" href="Paths.html#sec-quantifiers"><span class="std std-ref">quantifiers</span></a> is now operational.</p></li>
+<li><p>f-strings in Python code are now supported.</p></li>
+<li><p>Support for <a class="reference internal" href="Fuzzing.html#sec-libfuzzer"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">libfuzzer</span></code> harnesses</span></a>.</p></li>
+<li><p>New command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> for <a class="reference internal" href="Converters.html#sec-converters"><span class="std std-ref">converting ANTLR and other input specifications</span></a>.</p></li>
+<li><p>New command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">clear-cache</span></code> for <a class="reference internal" href="Including.html#sec-including"><span class="std std-ref">clearing the parser cache</span></a>.</p></li>
+<li><p>Improved bit parser.</p></li>
+<li><p>Lots of minor and major improvements and bug fixes across the board.</p></li>
+</ul>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.0: </span></p>
+<ul class="simple">
+<li><p>We now apply Python <a class="reference internal" href="Language.html#sec-language"><span class="std std-ref">end-of-line rules to grammar parsing</span></a>. End continuation lines with <code class="docutils literal notranslate"><span class="pre">\</span></code> or use parentheses.</p></li>
+<li><p>Fuzzing by default is now “infinite”, producing results until stopped. Specify <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">N</span></code> to obtain <code class="docutils literal notranslate"><span class="pre">N</span></code> outputs.</p></li>
+</ul>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.8: </span>(April 10, 2025)</p>
+<ul class="simple">
+<li><p>First public beta release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code> and <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">parse</span></code> commands.</p></li>
+</ul>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

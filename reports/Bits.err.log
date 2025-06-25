@@ -36,18 +36,19 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-!fandango fuzz --format=bits -f bits.fan -n 1 --start-symbol='<format_flag>' --validate
+!printf "\xf0" | fandango parse -f bits.fan -o - --format=bits --validate
 assert _exit_code == 0
 ------------------
 
 ----- stdout -----
-TypeError: fandango.evolution.algorithm.Fandango() got multiple values for keyword argument 'start_symbol'
+FandangoParseError: '<stdin>', position 0x0001 (1): mismatched input b'x'
+FandangoParseError: 1 error(s) during parsing
 ------------------
 
 [31m---------------------------------------------------------------------------[39m
 [31mAssertionError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 2[39m
-[32m      1[39m get_ipython().system([33m"[39m[33mfandango fuzz --format=bits -f bits.fan -n 1 --start-symbol=[39m[33m'[39m[33m<format_flag>[39m[33m'[39m[33m --validate[39m[33m"[39m)
+[36mCell[39m[36m [39m[32mIn[6][39m[32m, line 2[39m
+[32m      1[39m get_ipython().system([33m'[39m[33mprintf [39m[33m"[39m[38;5;130;01m\\[39;00m[33mxf0[39m[33m"[39m[33m | fandango parse -f bits.fan -o - --format=bits --validate[39m[33m'[39m)
 [32m----> [39m[32m2[39m [38;5;28;01massert[39;00m _exit_code == [32m0[39m
 
 [31mAssertionError[39m: 

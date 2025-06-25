@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -211,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -220,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -458,7 +458,7 @@ To <em>produce</em> inputs that are also <em>semantically</em> valid, you will o
 <p>All these converters are experimental at this point.</p>
 </div>
 <section id="converting-antlr-specs">
-<h2>Converting ANTLR Specs<a class="headerlink" href="#converting-antlr-specs" title="Link to this heading">#</a></h2>
+<span id="sec-antlr2fan"></span><h2>Converting ANTLR Specs<a class="headerlink" href="#converting-antlr-specs" title="Link to this heading">#</a></h2>
 <p>Fandango allows you to automatically convert ANTLR grammar specifications (<code class="docutils literal notranslate"><span class="pre">.g4</span></code>, <code class="docutils literal notranslate"><span class="pre">.antlr</span></code>) into Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.
 ANTLR is a very popular parser generator; a <a class="reference external" href="https://github.com/antlr/grammars-v4">wide large collections of ANTLR grammars</a> is available.</p>
 <p>Simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the ANTLR file to be converted.</p>
@@ -529,17 +529,18 @@ $<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;WS&gt; defined, but not used
-TypeError: fandango.evolution.algorithm.Fandango() got multiple values for keyword argument &#39;start_symbol&#39;
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;fandango convert -o Calculator.fan ../src/fandango/converters/antlr/Calculator.g4&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;fandango fuzz -f Calculator.fan --start=&#39;&lt;expression&gt;&#39; -n 10&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="ne">AssertionError</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((2079/((8343+10-66/97/4-14))))
+59037*(13)+89-52*12+82*9*87+12/63*79/62
+181
+7158
+(10*21/08*52*66/46/52+20/86+7)/32/88*66*30-6
+706
+184+(14400+4-(10+29*8+52+82))
+79
+((5514))-84/726*54/81/79+60+69
+(7+4*31-45+33-01-45-28)*0*10/28-98+9+4
 </pre></div>
 </div>
 </div>
@@ -558,11 +559,9 @@ These include</p>
 <li><p>Negations (<code class="docutils literal notranslate"><span class="pre">~</span></code>) over complex expressions</p></li>
 </ul>
 </div>
-<!-- Let's do some cleanup --><div class="cell tag_remove-input docutils container">
-</div>
 </section>
 <section id="converting-010-binary-templates">
-<h2>Converting 010 Binary Templates<a class="headerlink" href="#converting-010-binary-templates" title="Link to this heading">#</a></h2>
+<span id="sec-bt2fan"></span><h2>Converting 010 Binary Templates<a class="headerlink" href="#converting-010-binary-templates" title="Link to this heading">#</a></h2>
 <p>Fandango provides some basic support for converting Binary Templates (<code class="docutils literal notranslate"><span class="pre">.bt</span></code>, <code class="docutils literal notranslate"><span class="pre">.010</span></code>) for the 010 Editor.
 A <a class="reference external" href="https://www.sweetscape.com/010editor/repository/templates/">large collection of binary templates for various binary formats</a> is available.</p>
 <p>Again, simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the binary template file to be converted.</p>
@@ -586,7 +585,7 @@ Fandango will recognize a number of common patterns; features that will require 
 </div>
 </section>
 <section id="converting-dtds">
-<h2>Converting DTDs<a class="headerlink" href="#converting-dtds" title="Link to this heading">#</a></h2>
+<span id="sec-dtd2fan"></span><h2>Converting DTDs<a class="headerlink" href="#converting-dtds" title="Link to this heading">#</a></h2>
 <p>A Document Type Definition (DTD, <code class="docutils literal notranslate"><span class="pre">.dtd</span></code>) specifies the format of an XML file.
 Fandango can convert these into <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files, enabling the production of XML files that conform to the DTD.</p>
 <p>Again, simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the binary template file to be converted.</p>
@@ -602,23 +601,326 @@ The DTD by itself does not specify types of individual fields, so we do this her
 <p>If you find that this is long, consider that SVG is actually a very complex format.</p>
 </aside>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;svg.fan&#39;)
+
+# Add standard blurb at top
+&lt;start&gt; ::= (&#39;&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;&#39;
+&#39;&lt;!DOCTYPE svg&gt;&#39; &lt;svg&gt;)
+
+&lt;svg&gt; ::= (&#39;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&#39;
+&#39; width=&#39; &lt;svg_width_value&gt;
+&#39; height=&#39; &lt;svg_height_value&gt;
+&#39; baseProfile=&quot;full&quot; viewBox=&#39; &lt;svg_viewBox_value&gt; &#39;&gt;&#39;
+(&lt;desc&gt; | &lt;title&gt; | &lt;metadata&gt; | &lt;animate&gt; | &lt;set&gt; | &lt;animateMotion&gt; | &lt;animateColor&gt; | &lt;animateTransform&gt; | &lt;svg&gt; | &lt;g&gt; | &lt;defs&gt; | &lt;symbol&gt; | &lt;use&gt; | &lt;switch&gt; | &lt;image&gt; | &lt;style&gt; | &lt;path&gt; | &lt;rect&gt; | &lt;circle&gt; | &lt;line&gt; | &lt;ellipse&gt; | &lt;polyline&gt; | &lt;polygon&gt; | &lt;text&gt; | &lt;altGlyphDef&gt; | &lt;marker&gt; | &lt;color_profile&gt; | &lt;linearGradient&gt; | &lt;radialGradient&gt; | &lt;pattern&gt; | &lt;clipPath&gt; | &lt;mask&gt; | &lt;filter&gt; | &lt;cursor&gt; | &lt;a&gt; | &lt;view&gt; | &lt;script&gt; | &lt;font&gt; | &lt;font_face&gt; | &lt;foreignObject&gt;){10} &#39;&lt;/svg&gt;&#39;)
+
+# Standard data types
+&lt;cdata&gt; ::= &lt;qint&gt; | &lt;string&gt;
+&lt;qnat&gt; ::= &lt;q&gt; &lt;nat&gt; &lt;q&gt;
+&lt;nat&gt; ::= r&#39;[1-9]&#39; &lt;digit&gt;* | &#39;0&#39;
+&lt;qint&gt; ::= &lt;q&gt; &lt;int&gt; &lt;q&gt;
+&lt;int&gt; ::= r&#39;[1-9]&#39; &lt;digit&gt;* | &#39;-&#39; r&#39;[1-9]&#39; &lt;digit&gt;* | &#39;0&#39;
+&lt;string&gt; ::= &#39;&quot;&#39; &lt;char&gt;* &#39;&quot;&#39; | &quot;&#39;&quot; &lt;char&gt;* &quot;&#39;&quot;
+&lt;char&gt; ::= r&#39;[0-9a-zA-Z_-]+&#39;
+&lt;id&gt; ::= &lt;q&gt; &lt;ascii_letter&gt; (&lt;ascii_letter&gt; | &lt;digit&gt; | &#39;_&#39;)* &lt;q&gt;
+&lt;nmtoken&gt; ::= &lt;id&gt;
+&lt;pcdata&gt; ::= &lt;cdata&gt;
+&lt;url&gt; ::= &lt;q&gt; &#39;https://cispa.de&#39; &lt;q&gt;
+&lt;qpercentage&gt; ::= &lt;q&gt; &lt;percentage&gt; &lt;q&gt;
+&lt;percentage&gt; ::= (&quot;0&quot; | r&quot;[1-9][0-9]?&quot; | &quot;100&quot;)
+
+# SVG-specific data types
+&lt;Coordinate_datatype&gt; ::= &lt;qint&gt; := &quot;&#39;100&#39;&quot;
+&lt;Length_datatype&gt; ::= &lt;qnat&gt;
+&lt;FontFamilyValue_datatype&gt; ::= &lt;string&gt; := &#39;&quot;sans-serif&quot;&#39;
+&lt;FontSizeValue_datatype&gt; ::= &lt;qnat&gt; := &quot;&#39;12&#39;&quot;
+&lt;FontSizeAdjustValue_datatype&gt; ::= &lt;qnat&gt; := &quot;&#39;0&#39;&quot;
+&lt;GlyphOrientationHorizontalValue_datatype&gt; ::= &lt;qint&gt; := &quot;&#39;0&#39;&quot;
+&lt;GlyphOrientationVerticalValue_datatype&gt; ::= &lt;qint&gt; := &quot;&#39;0&#39;&quot;
+&lt;Number_datatype&gt; ::= &lt;qint&gt;
+&lt;NumberOptionalNumber_datatype&gt; ::= &lt;qint&gt;
+&lt;OpacityValue_datatype&gt; ::= &lt;qpercentage&gt; := &quot;&#39;100&#39;&quot;
+&lt;PathData_datatype&gt; ::= &lt;q&gt; (&lt;int&gt; &lt;ws&gt;)+ &lt;q&gt;
+&lt;Text_datatype&gt; ::= &lt;string&gt;
+&lt;Script_datatype&gt; ::= &lt;string&gt;
+&lt;SVGColor_datatype&gt; ::= &lt;q&gt; &#39;#&#39; (&lt;hexdigit&gt;{3} | &lt;hexdigit&gt;{6}) &lt;q&gt;
+
+# Mappings of attributes to data types
+&lt;accent_height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;alphabetic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;amplitude_value&gt; ::= &lt;Number_datatype&gt;
+&lt;arabic_form_value&gt; ::= &lt;cdata&gt;
+&lt;arcrole_value&gt; ::= &lt;cdata&gt;
+&lt;ascent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;attributeName_value&gt; ::= &lt;cdata&gt;
+&lt;attributeType_value&gt; ::= &lt;cdata&gt;
+&lt;azimuth_value&gt; ::= &lt;Number_datatype&gt;
+&lt;baseFrequency_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;baseProfile_value&gt; ::= &lt;Text_datatype&gt;
+&lt;base_value&gt; ::= &lt;cdata&gt;
+&lt;baseline_shift_value&gt; ::= &lt;cdata&gt;
+&lt;bbox_value&gt; ::= &lt;cdata&gt;
+&lt;begin_value&gt; ::= &lt;cdata&gt;
+&lt;bias_value&gt; ::= &lt;Number_datatype&gt;
+&lt;by_value&gt; ::= &lt;cdata&gt;
+&lt;cap_height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;class_value&gt; ::= &lt;cdata&gt;
+&lt;clip_path_value&gt; ::= &lt;cdata&gt;
+&lt;clip_value&gt; ::= &lt;cdata&gt;
+&lt;color_profile_value&gt; ::= &lt;cdata&gt;
+&lt;color_value&gt; ::= &lt;cdata&gt;
+&lt;contentScriptType_value&gt; ::= &lt;cdata&gt;
+&lt;contentStyleType_value&gt; ::= &lt;cdata&gt;
+&lt;cursor_value&gt; ::= &lt;cdata&gt;
+&lt;cx_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;cy_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;d_value&gt; ::= &lt;PathData_datatype&gt;
+&lt;descent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;diffuseConstant_value&gt; ::= &lt;Number_datatype&gt;
+&lt;divisor_value&gt; ::= &lt;Number_datatype&gt;
+&lt;dur_value&gt; ::= &lt;cdata&gt;
+&lt;dx_value&gt; ::= &lt;Number_datatype&gt;
+&lt;dy_value&gt; ::= &lt;Number_datatype&gt;
+&lt;elevation_value&gt; ::= &lt;Number_datatype&gt;
+&lt;enable_background_value&gt; ::= &lt;cdata&gt;
+&lt;end_value&gt; ::= &lt;cdata&gt;
+&lt;exponent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fePointLight_z_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fePointLight_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fePointLight_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;feSpotLight_z_value&gt; ::= &lt;Number_datatype&gt;
+&lt;feSpotLight_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;feSpotLight_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fill_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;fill_value&gt; ::= &lt;cdata&gt;
+&lt;filterRes_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;filter_value&gt; ::= &lt;cdata&gt;
+&lt;flood_color_value&gt; ::= &lt;SVGColor_datatype&gt;
+&lt;flood_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;font_family_value&gt; ::= &lt;FontFamilyValue_datatype&gt;
+&lt;font_size_adjust_value&gt; ::= &lt;FontSizeAdjustValue_datatype&gt;
+&lt;font_size_value&gt; ::= &lt;FontSizeValue_datatype&gt;
+&lt;font_stretch_value&gt; ::= &lt;cdata&gt;
+&lt;font_style_value&gt; ::= &lt;cdata&gt;
+&lt;font_variant_value&gt; ::= &lt;cdata&gt;
+&lt;font_weight_value&gt; ::= &lt;cdata&gt;
+&lt;format_value&gt; ::= &lt;cdata&gt;
+&lt;from_value&gt; ::= &lt;cdata&gt;
+&lt;fx_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;fy_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;g1_value&gt; ::= &lt;cdata&gt;
+&lt;g2_value&gt; ::= &lt;cdata&gt;
+&lt;glyphRef_value&gt; ::= &lt;cdata&gt;
+&lt;glyph_name_value&gt; ::= &lt;cdata&gt;
+&lt;glyph_orientation_horizontal_value&gt; ::= &lt;GlyphOrientationHorizontalValue_datatype&gt;
+&lt;glyph_orientation_vertical_value&gt; ::= &lt;GlyphOrientationVerticalValue_datatype&gt;
+&lt;gradientTransform_value&gt; ::= &lt;cdata&gt;
+&lt;hanging_value&gt; ::= &lt;Number_datatype&gt;
+&lt;height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;horiz_adv_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;horiz_origin_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;horiz_origin_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;href_value&gt; ::= &lt;url&gt;
+&lt;id_value&gt; ::= &lt;id&gt;
+&lt;ideographic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;in2_value&gt; ::= &lt;cdata&gt;
+&lt;in_value&gt; ::= &lt;cdata&gt;
+&lt;intercept_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k1_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k2_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k3_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k4_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k_value&gt; ::= &lt;Number_datatype&gt;
+&lt;kernelMatrix_value&gt; ::= &lt;cdata&gt;
+&lt;kernelUnitLength_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;kerning_value&gt; ::= &lt;cdata&gt;
+&lt;keyPoints_value&gt; ::= &lt;cdata&gt;
+&lt;keySplines_value&gt; ::= &lt;cdata&gt;
+&lt;keyTimes_value&gt; ::= &lt;cdata&gt;
+&lt;lang_value&gt; ::= &lt;nmtoken&gt;
+&lt;letter_spacing_value&gt; ::= &lt;cdata&gt;
+&lt;lighting_color_value&gt; ::= &lt;SVGColor_datatype&gt;
+&lt;limitingConeAngle_value&gt; ::= &lt;Number_datatype&gt;
+&lt;local_value&gt; ::= &lt;cdata&gt;
+&lt;markerHeight_value&gt; ::= &lt;Length_datatype&gt;
+&lt;markerWidth_value&gt; ::= &lt;Length_datatype&gt;
+&lt;marker_end_value&gt; ::= &lt;cdata&gt;
+&lt;marker_mid_value&gt; ::= &lt;cdata&gt;
+&lt;marker_start_value&gt; ::= &lt;cdata&gt;
+&lt;mask_value&gt; ::= &lt;cdata&gt;
+&lt;mathematical_value&gt; ::= &lt;Number_datatype&gt;
+&lt;max_value&gt; ::= &lt;cdata&gt;
+&lt;media_value&gt; ::= &lt;cdata&gt;
+&lt;min_value&gt; ::= &lt;cdata&gt;
+&lt;name_value&gt; ::= &lt;cdata&gt;
+&lt;numOctaves_value&gt; ::= &lt;cdata&gt;
+&lt;offset_value&gt; ::= &lt;Number_datatype&gt;
+&lt;onabort_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onactivate_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onbegin_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onclick_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onend_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onerror_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onfocusin_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onfocusout_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onload_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmousedown_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmousemove_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmouseout_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmouseover_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmouseup_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onrepeat_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onresize_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onscroll_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onunload_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onzoom_value&gt; ::= &lt;Script_datatype&gt;
+&lt;opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;order_value&gt; ::= &lt;Number_datatype&gt;
+&lt;orient_value&gt; ::= &lt;cdata&gt;
+&lt;orientation_value&gt; ::= &lt;cdata&gt;
+&lt;origin_value&gt; ::= &lt;cdata&gt;
+&lt;overline_position_value&gt; ::= &lt;Number_datatype&gt;
+&lt;overline_thickness_value&gt; ::= &lt;Number_datatype&gt;
+&lt;panose_1_value&gt; ::= &lt;cdata&gt;
+&lt;pathLength_value&gt; ::= &lt;Number_datatype&gt;
+&lt;path_value&gt; ::= &lt;cdata&gt;
+&lt;patternTransform_value&gt; ::= &lt;cdata&gt;
+&lt;pointsAtX_value&gt; ::= &lt;Number_datatype&gt;
+&lt;pointsAtY_value&gt; ::= &lt;Number_datatype&gt;
+&lt;pointsAtZ_value&gt; ::= &lt;Number_datatype&gt;
+&lt;points_value&gt; ::= &lt;cdata&gt;
+&lt;preserveAspectRatio_value&gt; ::= &lt;cdata&gt;
+&lt;r_value&gt; ::= &lt;Length_datatype&gt;
+&lt;radius_value&gt; ::= &lt;Number_datatype&gt;
+&lt;refX_value&gt; ::= &lt;cdata&gt;
+&lt;refY_value&gt; ::= &lt;cdata&gt;
+&lt;repeatCount_value&gt; ::= &lt;cdata&gt;
+&lt;repeatDur_value&gt; ::= &lt;cdata&gt;
+&lt;requiredExtensions_value&gt; ::= &lt;cdata&gt;
+&lt;requiredFeatures_value&gt; ::= &lt;cdata&gt;
+&lt;result_value&gt; ::= &lt;cdata&gt;
+&lt;role_value&gt; ::= &lt;cdata&gt;
+&lt;rotate_value&gt; ::= &lt;cdata&gt;
+&lt;rx_value&gt; ::= &lt;Length_datatype&gt;
+&lt;ry_value&gt; ::= &lt;Length_datatype&gt;
+&lt;scale_value&gt; ::= &lt;Number_datatype&gt;
+&lt;seed_value&gt; ::= &lt;Number_datatype&gt;
+&lt;slope_value&gt; ::= &lt;Number_datatype&gt;
+&lt;specularConstant_value&gt; ::= &lt;Number_datatype&gt;
+&lt;specularExponent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;startOffset_value&gt; ::= &lt;Length_datatype&gt;
+&lt;stdDeviation_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;stemh_value&gt; ::= &lt;Number_datatype&gt;
+&lt;stemv_value&gt; ::= &lt;Number_datatype&gt;
+&lt;stop_color_value&gt; ::= &lt;SVGColor_datatype&gt;
+&lt;stop_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;strikethrough_position_value&gt; ::= &lt;Number_datatype&gt;
+&lt;strikethrough_thickness_value&gt; ::= &lt;Number_datatype&gt;
+&lt;string_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_dasharray_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_dashoffset_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_miterlimit_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;stroke_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_width_value&gt; ::= &lt;Number_datatype&gt;
+&lt;style_value&gt; ::= &lt;cdata&gt;
+&lt;surfaceScale_value&gt; ::= &lt;Number_datatype&gt;
+&lt;systemLanguage_value&gt; ::= &lt;cdata&gt;
+&lt;tableValues_value&gt; ::= &lt;cdata&gt;
+&lt;targetX_value&gt; ::= &lt;cdata&gt;
+&lt;targetY_value&gt; ::= &lt;cdata&gt;
+&lt;target_value&gt; ::= &lt;nmtoken&gt;
+&lt;textLength_value&gt; ::= &lt;Length_datatype&gt;
+&lt;text_decoration_value&gt; ::= &lt;cdata&gt;
+&lt;title_value&gt; ::= &lt;Text_datatype&gt;
+&lt;to_value&gt; ::= &lt;cdata&gt;
+&lt;transform_value&gt; ::= &lt;cdata&gt;
+&lt;type_value&gt; ::= &lt;cdata&gt;
+&lt;u1_value&gt; ::= &lt;cdata&gt;
+&lt;u2_value&gt; ::= &lt;cdata&gt;
+&lt;underline_position_value&gt; ::= &lt;Number_datatype&gt;
+&lt;underline_thickness_value&gt; ::= &lt;Number_datatype&gt;
+&lt;unicode_range_value&gt; ::= &lt;cdata&gt;
+&lt;unicode_value&gt; ::= &lt;cdata&gt;
+&lt;units_per_em_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_alphabetic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_hanging_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_ideographic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_mathematical_value&gt; ::= &lt;Number_datatype&gt;
+&lt;values_value&gt; ::= &lt;cdata&gt;
+&lt;vert_adv_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;vert_origin_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;vert_origin_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;viewBox_value&gt; ::= &lt;q&gt; &lt;int&gt; &lt;ws&gt; &lt;int&gt; &lt;ws&gt; &lt;int&gt; &lt;ws&gt; &lt;int&gt; &lt;q&gt;
+&lt;viewTarget_value&gt; ::= &lt;cdata&gt;
+&lt;width_value&gt; ::= &lt;Number_datatype&gt;
+&lt;widths_value&gt; ::= &lt;cdata&gt;
+&lt;word_spacing_value&gt; ::= &lt;cdata&gt;
+&lt;x1_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;x2_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;x_height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;x_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;y1_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;y2_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;y_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;z_value&gt; ::= &lt;Coordinate_datatype&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Once this is all set, we can use this to test SVGs with extreme values, as in this <a class="reference download internal" download="" href="_downloads/27b85a80865562974c43dd5394b3653d/svgextreme.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svgextreme.fan</span></code></span></a> example:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;svg11.fan&#39;)
+
+# where (int(&lt;width_value&gt;) &gt; 1e8 or int(&lt;height_value&gt;) &gt; 1e8)
+
+# Check with extreme number values
+where &lt;Number_datatype&gt; == &quot;&#39;1000000&#39;&quot;
+
+# Ensure we have a minimum of children
+where len(&lt;svg&gt;) &gt; 20
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="converting-fan-files">
-<h2>Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#converting-fan-files" title="Link to this heading">#</a></h2>
+<span id="sec-fan2fan"></span><h2>Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#converting-fan-files" title="Link to this heading">#</a></h2>
 <p>With <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, you can also “convert” <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.
 This results in a “normalized” format, where all comments and blank lines have been removed.
 If we send this input to <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># A fine file to produce person names
+from faker import Faker
+fake = Faker()
+
+include(&#39;persons.fan&#39;)
+
+&lt;first_name&gt; ::= &lt;name&gt; := fake.first_name()
+&lt;last_name&gt; ::= &lt;name&gt; := fake.last_name()
+</pre></div>
+</div>
+</div>
 </div>
 <p>then we get</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>persons-faker.fan
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;persons-faker.fan&#39;.
+#
+from faker import Faker
+fake = Faker()
+include(&#39;persons.fan&#39;)
+
+&lt;first_name&gt; ::= &lt;name&gt; := fake.first_name()
+&lt;last_name&gt; ::= &lt;name&gt; := fake.last_name()
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

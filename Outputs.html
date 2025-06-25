@@ -122,7 +122,7 @@ window.addEventListener("load", () => mermaid.run());
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -219,7 +219,7 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -228,11 +228,11 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -434,6 +434,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oracles">Oracles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-complex-interactions">More Complex Interactions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-strategies">Testing Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-interactions">Troubleshooting Interactions</a></li>
 </ul>
             </nav>
         </div>
@@ -489,6 +490,10 @@ Hence, a nonterminal <code class="docutils literal notranslate"><span class="pre
 <li><p><code class="docutils literal notranslate"><span class="pre">Out</span></code> refers to the standard output of the program under test.</p></li>
 </ul>
 <p>Hence, in a Fandango spec, <code class="docutils literal notranslate"><span class="pre">&lt;In:id&gt;</span></code> refers to an <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> element that is <em>received</em> (or input) by the program, and <code class="docutils literal notranslate"><span class="pre">&lt;Out:result&gt;</span></code> is a <code class="docutils literal notranslate"><span class="pre">&lt;result&gt;</span></code> element that is <em>sent</em> (or output) by the program.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Remember that <code class="docutils literal notranslate"><span class="pre">In</span></code> and <code class="docutils literal notranslate"><span class="pre">Out</span></code> describe the interaction from the <em>perspective of the program under test</em>.</p>
+</div>
 <p>With this, we can already write a first specification.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -523,6 +528,11 @@ The remainder of the command line is the program to be tested (possibly with arg
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Fandango IO will only return a single solution for now, manually set with -n 1 to hide this warning
+</pre></div>
+</div>
+</div>
 </div>
 <p>This command does not issue any outputs (all of them are being sent to <code class="docutils literal notranslate"><span class="pre">cat</span></code>), but here is what is happening behind the scenes:</p>
 <ul class="simple">
@@ -577,6 +587,11 @@ where str(&lt;input&gt;) == str(&lt;output&gt;)
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Fandango IO will only return a single solution for now, manually set with -n 1 to hide this warning
+</pre></div>
+</div>
+</div>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -612,7 +627,7 @@ Using our earlier <a class="reference internal" href="Recursive.html#sec-recursi
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;expr.fan&#39;)
 
-&lt;start&gt; ::= &lt;interaction&gt;{10}
+&lt;start&gt; ::= &lt;interaction&gt;
 &lt;interaction&gt; ::= &lt;In:input&gt; &lt;Out:output&gt;
 &lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
 &lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
@@ -643,6 +658,9 @@ How would one do this? (Hint: use the Python <code class="docutils literal notra
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RecursionError: maximum recursion depth exceeded
+</pre></div>
+</div>
 </div>
 </div>
 <p>To ensure complete testing, we need to</p>
@@ -670,6 +688,106 @@ While Fandango makes it easy to <em>produce</em> inputs and to <em>decompose</em
 <div class="attention admonition">
 <p class="admonition-title">Under Construction</p>
 <p>Future versions of this tutorial will further detail these strategies and how to integrate them into Fandango.</p>
+</div>
+</section>
+<section id="troubleshooting-interactions">
+<h2>Troubleshooting Interactions<a class="headerlink" href="#troubleshooting-interactions" title="Link to this heading">#</a></h2>
+<p>Since interactions are always being sent to some party, and since the party outputs are being processed by Fandango, it may not always be easy to track which data is being sent, and where.</p>
+<p>However, you can also make use of interaction specs in the regular <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> and <code class="docutils literal notranslate"><span class="pre">parse</span></code> commands.
+The special <code class="docutils literal notranslate"><span class="pre">--party=PARTY</span></code> option allows you to produce outputs or parse inputs for just one given party <code class="docutils literal notranslate"><span class="pre">PARTY</span></code> in the interaction.
+The effect of <code class="docutils literal notranslate"><span class="pre">--party</span></code> is that it <em>excludes</em> all other parties from the interaction, allowing to produce or parse strings for just one party.</p>
+<p>As an example, consider again our <a class="reference download internal" download="" href="_downloads/89e68e60c610cc6ffd457bbbb72c10cf/bc.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">bc.fan</span></code></span></a> example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;expr.fan&#39;)
+
+&lt;start&gt; ::= &lt;interaction&gt;
+&lt;interaction&gt; ::= &lt;In:input&gt; &lt;Out:output&gt;
+&lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
+&lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the effect of <code class="docutils literal notranslate"><span class="pre">--party=In</span></code>.
+See how the <code class="docutils literal notranslate"><span class="pre">Out:</span></code> part of the interaction has been excluded, also excluding <code class="docutils literal notranslate"><span class="pre">&lt;output&gt;</span></code> from production:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>These are actually produced using <a class="reference internal" href="Converters.html#sec-fan2fan"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code></span></a> with the <code class="docutils literal notranslate"><span class="pre">--party</span></code> option.</p>
+</aside>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;bc.fan&#39;.
+#
+include(&#39;expr.fan&#39;)
+
+&lt;start&gt; ::= &lt;interaction&gt;
+&lt;interaction&gt; ::= &lt;In:input&gt;
+&lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
+&lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the effect of <code class="docutils literal notranslate"><span class="pre">--party=Out</span></code>, excluding the <code class="docutils literal notranslate"><span class="pre">In</span></code> part, and consequently, <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;bc.fan&#39;.
+#
+include(&#39;expr.fan&#39;)
+
+&lt;start&gt; ::= &lt;interaction&gt;
+&lt;interaction&gt; ::= &lt;Out:output&gt;
+&lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
+&lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Typically, you provide such a <code class="docutils literal notranslate"><span class="pre">--party</span></code> option directly as part of some <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> or <code class="docutils literal notranslate"><span class="pre">parse</span></code> command.
+To see what typical inputs to <code class="docutils literal notranslate"><span class="pre">bc</span></code> look like, use:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--format=value</span></code> option makes the strings readable.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>bc.fan<span class="w"> </span>--party<span class="o">=</span>In<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>--format<span class="o">=</span>value
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;-(+-099 * (48)) / 98 - 45\n&#39;
+&#39;0 / +(9107 * 5) + 73\n&#39;
+&#39;17 / ((68 / 56 / 9 + 97)) * 59\n&#39;
+&#39;+(-+593 - 53) * 5 * 1 - 73\n&#39;
+&#39;(-(28862) + 43) + 76\n&#39;
+&#39;5441 / --+-47\n&#39;
+&#39;0 * 00 / --(68) - 74\n&#39;
+&#39;-(((96 / 13 * 15)) + 96) + 21\n&#39;
+&#39;417 / (46 / 11 / 73) / 67 * 67 + 6\n&#39;
+&#39;--+512 - 39 - 16\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Conversely, to see what typical outputs from <code class="docutils literal notranslate"><span class="pre">bc</span></code> would be expected, use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>bc.fan<span class="w"> </span>--party<span class="o">=</span>Out<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>--format<span class="o">=</span>value
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;64\n&#39;
+&#39;8\n&#39;
+&#39;403\n&#39;
+&#39;00734\n&#39;
+&#39;7030\n&#39;
+&#39;36\n&#39;
+&#39;0\n&#39;
+&#39;16\n&#39;
+&#39;68\n&#39;
+&#39;6060\n&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -744,6 +862,7 @@ While Fandango makes it easy to <em>produce</em> inputs and to <em>decompose</em
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oracles">Oracles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-complex-interactions">More Complex Interactions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-strategies">Testing Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-interactions">Troubleshooting Interactions</a></li>
 </ul>
   </nav></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fandango Include Reference &#8212; Fuzzing with Fandango</title>
+    <title>Fandango File Locations &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Including';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fandango Language Server" href="LanguageServer.html" />
     <link rel="prev" title="Python API Reference" href="PythonAPI.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -113,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for 26 June&nbsp;2025.</p></div>
+  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>.  Fandango&nbsp;1.0 will be released on 26&nbsp;June&nbsp;2025.</p></div>
 </aside>
 
   
@@ -210,7 +211,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Protocol Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
@@ -219,11 +220,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Include Reference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -409,7 +410,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fandango Include Reference</h1>
+    <h1>Fandango File Locations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -420,6 +421,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-fandango-look-for-included-specs">Where Does Fandango Look for Included Specs?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-fandango-store-parsed-files">Where Does Fandango Store Parsed Files?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-fandango-installed">Where is Fandango installed?</a></li>
 </ul>
             </nav>
         </div>
@@ -431,10 +434,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fandango-include-reference">
-<span id="sec-including"></span><h1>Fandango Include Reference<a class="headerlink" href="#fandango-include-reference" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="fandango-file-locations">
+<span id="sec-file-locations"></span><h1>Fandango File Locations<a class="headerlink" href="#fandango-file-locations" title="Link to this heading">#</a></h1>
 <section id="where-does-fandango-look-for-included-specs">
-<h2>Where Does Fandango Look for Included Specs?<a class="headerlink" href="#where-does-fandango-look-for-included-specs" title="Link to this heading">#</a></h2>
+<span id="sec-including"></span><h2>Where Does Fandango Look for Included Specs?<a class="headerlink" href="#where-does-fandango-look-for-included-specs" title="Link to this heading">#</a></h2>
 <p>In a Fandango spec, <a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">the <code class="docutils literal notranslate"><span class="pre">include()</span></code> function</span></a> searches for Fandango files in a number of locations.
 The actual rules for where Fandango searches are complex, versatile, and adhere to common standards.
 Specifically, when including a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file using <code class="docutils literal notranslate"><span class="pre">include()</span></code>, Fandango searches for <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files in the following locations, in this order:</p>
@@ -463,6 +466,47 @@ Specifically, when including a <code class="docutils literal notranslate"><span 
 </div>
 <p>Finally, keep in mind that <code class="docutils literal notranslate"><span class="pre">include()</span></code> is a Python function, so in principle, your spec can compute the file name and location in any way you like.
 The simplest solution, however, is to use one of the “standard” locations as listed above.</p>
+</section>
+<section id="where-does-fandango-store-parsed-files">
+<span id="sec-caching"></span><h2>Where Does Fandango Store Parsed Files?<a class="headerlink" href="#where-does-fandango-store-parsed-files" title="Link to this heading">#</a></h2>
+<p>Fandango maintains a <em>cache</em> for parsed <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files in order to retrieve them faster.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">clear-cache</span> <span class="pre">-n</span></code> to retrieve its location:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>clear-cache<span class="w"> </span>-n
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Would clear /home/runner/.cache/fandango
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to reclaim space, or if there is some incompatibility between parsed and cached files, use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">clear-cache</span></code> to clear the cache:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>clear-cache
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clearing /home/runner/.cache/fandango
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="where-is-fandango-installed">
+<span id="sec-fandango-location"></span><h2>Where is Fandango installed?<a class="headerlink" href="#where-is-fandango-installed" title="Link to this heading">#</a></h2>
+<p>This depends on your Python installation.
+You can query the location using</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>show<span class="w"> </span>fandango-fuzzer<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Location
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Location: /opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -505,6 +549,15 @@ The simplest solution, however, is to use one of the “standard” locations as
         <p class="prev-next-title">Python API Reference</p>
       </div>
     </a>
+    <a class="right-next"
+       href="LanguageServer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fandango Language Server</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -522,6 +575,8 @@ The simplest solution, however, is to use one of the “standard” locations as
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-fandango-look-for-included-specs">Where Does Fandango Look for Included Specs?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-fandango-store-parsed-files">Where Does Fandango Store Parsed Files?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-fandango-installed">Where is Fandango installed?</a></li>
 </ul>
   </nav></div>
 
