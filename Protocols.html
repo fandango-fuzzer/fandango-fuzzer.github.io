@@ -712,7 +712,7 @@ Let us extend it a bit with a few more commands, reflecting the interaction in t
     &lt;mail_from&gt;
 
 &lt;error&gt; ::= &#39;5&#39; &lt;digit&gt; &lt;digit&gt; &#39; &#39; &lt;error_message&gt; &#39;\r\n&#39;
-&lt;error_message&gt; ::= r&#39;.*&#39; := &quot;Error&quot;
+&lt;error_message&gt; ::= r&#39;[^\r]*&#39; := &quot;Error&quot;
 
 &lt;mail_from&gt; ::= &lt;Client:MAIL_FROM&gt; \
     (&lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt;)
@@ -787,11 +787,9 @@ MAIL FROM:&lt;alice@example.com&gt;
 
 RCPT TO:&lt;alice@example.com&gt;
 
-RCPT TO:&lt;alice@example.com&gt;
-
 DATA
 
-S&#39;=,I:oKce6XgJm5z
+#ShL9 R_B!hQ
 
 .
 
@@ -807,7 +805,7 @@ QUIT
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
 
-567 Error
+537 Error
 </pre></div>
 </div>
 </div>
