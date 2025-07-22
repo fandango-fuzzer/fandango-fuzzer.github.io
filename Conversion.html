@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -529,6 +529,9 @@ Assume we have a <code class="docutils literal notranslate"><span class="pre">&l
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ29Nyhg=
 </pre></div>
 </div>
@@ -545,15 +548,18 @@ Sources become visible as soon as the input is shown as a grammar:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ29Nyhg=&#39;
-  &lt;item&gt; ::= b&#39;RmFuZGFuZ29Nyhg=&#39; := f(&lt;data&gt;)  # Position 0x0006 (6)
-    &lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt;  # Position 0x0000 (0); b&#39;FandangoM\xca\x18&#39;
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;M&#39;  # Position 0x0008 (8)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;\xca&#39;  # Position 0x0009 (9)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;\x18&#39;  # Position 0x000a (10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= Terminal(b&#39;Data: &#39;) Symbol(&#39;&lt;item&gt;&#39;)  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ29Nyhg=&#39;
+  &lt;item&gt; ::= Terminal(b&#39;RmFuZGFuZ29Nyhg=&#39;) := f(Symbol(&#39;&lt;data&gt;&#39;))  # Position 0x0006 (6)
+    &lt;data&gt; ::= Terminal(b&#39;Fandango&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;)  # Position 0x0000 (0); b&#39;FandangoM\xca\x18&#39;
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;M&#39;)  # Position 0x0008 (8)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;\xca&#39;)  # Position 0x0009 (9)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;\x18&#39;)  # Position 0x000a (10)
 </pre></div>
 </div>
 </div>
@@ -573,7 +579,8 @@ For instance, we can produce a string with specific values for <code class="docu
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ28gYXV0aG9y
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
+Data: RmFuZGFuZ28gYXV0aG9y
 </pre></div>
 </div>
 </div>
@@ -591,7 +598,8 @@ Our <code class="docutils literal notranslate"><span class="pre">encode.fan</spa
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoValueError: &lt;data&gt;: Missing converter from &lt;item&gt; (&lt;data&gt; ::= ... := f(&lt;item&gt;))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
+KeyError: &quot;str() not implemented for &lt;class &#39;fandango.language.symbol.non_terminal.NonTerminal&#39;&gt;, use specific function&quot;
 FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
@@ -644,23 +652,24 @@ In our case, this is the <code class="docutils literal notranslate"><span class=
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;
-  &lt;item&gt; ::= b&#39;RmFuZGFuZ28gYXV0aG9y&#39; := f(&lt;data&gt;)  # Position 0x0006 (6)
-    &lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt;  # Position 0x0000 (0); b&#39;Fandango author&#39;
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39; &#39;  # Position 0x0008 (8)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;a&#39;  # Position 0x0009 (9)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;u&#39;  # Position 0x000a (10)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;t&#39;  # Position 0x000b (11)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;h&#39;  # Position 0x000c (12)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;o&#39;  # Position 0x000d (13)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;r&#39;  # Position 0x000e (14)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
+&lt;start&gt; ::= Terminal(b&#39;Data: &#39;) Symbol(&#39;&lt;item&gt;&#39;)  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;
+  &lt;item&gt; ::= Terminal(b&#39;RmFuZGFuZ28gYXV0aG9y&#39;) := f(Symbol(&#39;&lt;data&gt;&#39;))  # Position 0x0006 (6)
+    &lt;data&gt; ::= Terminal(b&#39;Fandango&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;) Symbol(&#39;&lt;byte&gt;&#39;)  # Position 0x0000 (0); b&#39;Fandango author&#39;
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39; &#39;)  # Position 0x0008 (8)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;a&#39;)  # Position 0x0009 (9)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;u&#39;)  # Position 0x000a (10)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;t&#39;)  # Position 0x000b (11)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;h&#39;)  # Position 0x000c (12)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;o&#39;)  # Position 0x000d (13)
+      &lt;byte&gt; ::= Symbol(&#39;&lt;_byte&gt;&#39;)
+        &lt;_byte&gt; ::= Terminal(b&#39;r&#39;)  # Position 0x000e (14)
 </pre></div>
 </div>
 </div>
@@ -677,6 +686,11 @@ This is what the parsed derivation tree looks like:</p>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
+</pre></div>
+</div>
+</div>
 </div>
 <p>We get no error - so the parse was successful, and that all constraints hold.</p>
 </section>
@@ -732,16 +746,16 @@ has the same effect as the original <a class="reference download internal" downl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7162274684700107
-2756561261954823
-5558399123595267
-8017334976445186
-4580730444239075
-7812008219792591
-5782723116525213
-5178029336325562
-4890982326216110
-4050172249710342
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1266786667244181
+3733096537522720
+6614608180737103
+3743583089460225
+2999171081440735
+7094453510526059
+3857921578067568
+3297085083369634
+7165719801716623
+4331113275437799
 </pre></div>
 </div>
 </div>

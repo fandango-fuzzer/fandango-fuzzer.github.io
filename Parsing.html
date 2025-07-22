@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -479,7 +479,7 @@ FandangoParseError: 1 error(s) during parsing
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoError: &#39;&lt;stdin&gt;&#39;: constraint is_valid_iso8601datetime(str(NonTerminal(&#39;&lt;iso8601datetime&gt;&#39;))) not satisfied
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RuntimeError: Not implemented, use method specific to your usecase
 FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
@@ -549,17 +549,17 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(&#39;&lt;start&gt;&#39;, Tree(&#39;&lt;iso8601datetime&gt;&#39;, Tree(&#39;&lt;iso8601date&gt;&#39;, Tree(&#39;&lt;iso8601calendardate&gt;&#39;,
-  Tree(&#39;&lt;iso8601year&gt;&#39;,
-    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
-    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;0&#39;))),
-    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;2&#39;))),
-    Tree(&#39;&lt;digit&gt;&#39;, Tree(&#39;&lt;_digit&gt;&#39;, Tree(&#39;5&#39;)))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(Symbol(&#39;&lt;start&gt;&#39;), Tree(Symbol(&#39;&lt;iso8601datetime&gt;&#39;), Tree(Symbol(&#39;&lt;iso8601date&gt;&#39;), Tree(Symbol(&#39;&lt;iso8601calendardate&gt;&#39;),
+  Tree(Symbol(&#39;&lt;iso8601year&gt;&#39;),
+    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;2&#39;)))),
+    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;0&#39;)))),
+    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;2&#39;)))),
+    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;5&#39;))))
   ),
-  Tree(&#39;-&#39;),
-  Tree(&#39;&lt;iso8601month&gt;&#39;, Tree(&#39;10&#39;)),
-  Tree(&#39;-&#39;),
-  Tree(&#39;&lt;iso8601day&gt;&#39;, Tree(&#39;27&#39;))
+  Tree(Terminal(&#39;-&#39;)),
+  Tree(Symbol(&#39;&lt;iso8601month&gt;&#39;), Tree(Terminal(&#39;10&#39;))),
+  Tree(Terminal(&#39;-&#39;)),
+  Tree(Symbol(&#39;&lt;iso8601day&gt;&#39;), Tree(Terminal(&#39;27&#39;)))
 ))))
 </pre></div>
 </div>
@@ -582,21 +582,21 @@ This is useful for debugging, but also for creating a grammar from a sample file
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;iso8601datetime&gt;
-  &lt;iso8601datetime&gt; ::= &lt;iso8601date&gt;
-    &lt;iso8601date&gt; ::= &lt;iso8601calendardate&gt;
-      &lt;iso8601calendardate&gt; ::= &lt;iso8601year&gt; &#39;-&#39; &lt;iso8601month&gt; &#39;-&#39; &lt;iso8601day&gt;  # Position 0x0000 (0); &#39;2025-10-27&#39;
-        &lt;iso8601year&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # &#39;2025&#39;
-          &lt;digit&gt; ::= &lt;_digit&gt;
-            &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0002 (2)
-          &lt;digit&gt; ::= &lt;_digit&gt;
-            &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x0003 (3)
-          &lt;digit&gt; ::= &lt;_digit&gt;
-            &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0004 (4)
-          &lt;digit&gt; ::= &lt;_digit&gt;
-            &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x0005 (5)
-        &lt;iso8601month&gt; ::= &#39;10&#39;  # Position 0x0006 (6)
-        &lt;iso8601day&gt; ::= &#39;27&#39;  # Position 0x0008 (8)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= Symbol(&#39;&lt;iso8601datetime&gt;&#39;)
+  &lt;iso8601datetime&gt; ::= Symbol(&#39;&lt;iso8601date&gt;&#39;)
+    &lt;iso8601date&gt; ::= Symbol(&#39;&lt;iso8601calendardate&gt;&#39;)
+      &lt;iso8601calendardate&gt; ::= Symbol(&#39;&lt;iso8601year&gt;&#39;) Terminal(&#39;-&#39;) Symbol(&#39;&lt;iso8601month&gt;&#39;) Terminal(&#39;-&#39;) Symbol(&#39;&lt;iso8601day&gt;&#39;)  # Position 0x0000 (0); &#39;2025-10-27&#39;
+        &lt;iso8601year&gt; ::= Symbol(&#39;&lt;digit&gt;&#39;) Symbol(&#39;&lt;digit&gt;&#39;) Symbol(&#39;&lt;digit&gt;&#39;) Symbol(&#39;&lt;digit&gt;&#39;)  # &#39;2025&#39;
+          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
+            &lt;_digit&gt; ::= Terminal(&#39;2&#39;)  # Position 0x0002 (2)
+          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
+            &lt;_digit&gt; ::= Terminal(&#39;0&#39;)  # Position 0x0003 (3)
+          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
+            &lt;_digit&gt; ::= Terminal(&#39;2&#39;)  # Position 0x0004 (4)
+          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
+            &lt;_digit&gt; ::= Terminal(&#39;5&#39;)  # Position 0x0005 (5)
+        &lt;iso8601month&gt; ::= Terminal(&#39;10&#39;)  # Position 0x0006 (6)
+        &lt;iso8601day&gt; ::= Terminal(&#39;27&#39;)  # Position 0x0008 (8)
 </pre></div>
 </div>
 </div>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -453,16 +453,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-40
-841
-3
-99
-82
-7250
-7934
-19178
-4596
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+26
+415
+2
+6458
+081
+491
+5023
+94
+8392
 </pre></div>
 </div>
 </div>
@@ -512,8 +512,8 @@ For instance, these are all the options supported by <code class="docutils liter
                      [--max-repetitions MAX_REPETITIONS]
                      [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
                      [-n DESIRED_SOLUTIONS] [--best-effort]
-                     [-i INITIAL_POPULATION] [--warnings-are-errors]
-                     [--party PARTY] [-o OUTPUT]
+                     [-i INITIAL_POPULATION] [--progress-bar {on,off,auto}]
+                     [--warnings-are-errors] [--party PARTY] [-o OUTPUT]
                      [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
@@ -596,6 +596,9 @@ Generation settings:
                         all constraints).
   -i, --initial-population INITIAL_POPULATION
                         Directory or ZIP archive with initial population.
+  --progress-bar {on,off,auto}
+                        Whether to show the progress bar. &#39;auto&#39; (default)
+                        shows the progress bar only if stderr is a terminal.
 
 General settings:
   --warnings-are-errors

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -500,8 +500,8 @@ See https://fandango-fuzzer.github.io/ for more information.
                      [--max-repetitions MAX_REPETITIONS]
                      [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
                      [-n DESIRED_SOLUTIONS] [--best-effort]
-                     [-i INITIAL_POPULATION] [--warnings-are-errors]
-                     [--party PARTY] [-o OUTPUT]
+                     [-i INITIAL_POPULATION] [--progress-bar {on,off,auto}]
+                     [--warnings-are-errors] [--party PARTY] [-o OUTPUT]
                      [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
@@ -584,6 +584,9 @@ Generation settings:
                         all constraints).
   -i, --initial-population INITIAL_POPULATION
                         Directory or ZIP archive with initial population.
+  --progress-bar {on,off,auto}
+                        Whether to show the progress bar. &#39;auto&#39; (default)
+                        shows the progress bar only if stderr is a terminal.
 
 General settings:
   --warnings-are-errors
@@ -740,7 +743,8 @@ Party settings:
                      [--max-repetitions MAX_REPETITIONS]
                      [--max-node-rate MAX_NODE_RATE] [--max-nodes MAX_NODES]
                      [-n DESIRED_SOLUTIONS] [--best-effort]
-                     [-i INITIAL_POPULATION] [--warnings-are-errors]
+                     [-i INITIAL_POPULATION] [--progress-bar {on,off,auto}]
+                     [--warnings-are-errors]
                      [--client [NAME=][PROTOCOL:][HOST:]PORT]
                      [--server [NAME=][PROTOCOL:][HOST:]PORT]
                      [command] ...
@@ -835,6 +839,9 @@ Generation settings:
                         all constraints).
   -i, --initial-population INITIAL_POPULATION
                         Directory or ZIP archive with initial population.
+  --progress-bar {on,off,auto}
+                        Whether to show the progress bar. &#39;auto&#39; (default)
+                        shows the progress bar only if stderr is a terminal.
 
 General settings:
   --warnings-are-errors

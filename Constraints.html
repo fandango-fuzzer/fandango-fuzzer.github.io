@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -422,6 +422,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-and-derivationtree-types">Constraints and <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-on-the-command-line">Constraints on the Command Line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-fandango-solves-constraints">How Fandango Solves Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fandango-progress-bar">The Fandango Progress Bar</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraints-and-optimization">Soft Constraints and Optimization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-constraints-cannot-be-solved">When Constraints Cannot be Solved</a></li>
 </ul>
@@ -487,16 +488,16 @@ where int(&lt;age&gt;) &lt; 50
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qc Oiz,39
-Nlmw Tkxpse,5
-Izlhbz Zdjzv,1
-Hve Efzde,2
-Xllm Fkh,022
-Fx Eorxv,42
-Oxtmf Wc,9
-Ukaitp Ubylv,0
-Mhhsej Qnlya,0
-Bdvzyd Bswje,37
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scpa Nqeujr,000
+Lff Oxnm,3
+Zbjcl Noyri,27
+Mshkne Hvwsd,47
+Bdzxl Fd,4
+Vej Mbp,1
+Rsxb Tsqgo,7
+Murij Mzhem,7
+Qnxruo Wkwrj,02
+Sbwj Si,2
 </pre></div>
 </div>
 </div>
@@ -515,18 +516,18 @@ Be sure, though, to leave spaces around <code class="docutils literal notranslat
 <p>and we obtain these inputs:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vlotcw Rb,042
-Ugnie Oum,039
-Drnmuy Cay,43
-Cqay Sedlyo,43
-Oar Atkv,41
-Shnzct Akaos,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nkd Xr,30
+Xrk Zbmrv,41
+Osfq Vd,41
+Carnm Vxyb,39
+Uf Hy,34
+Qucux Pal,029
+Qrxw Ozsns,45
+Hdzzgr Zlnob,42
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jqgb Sedlyo,43
-Vblvjs Oum,039
-Drnmuy Cay,30
-Shnzct Akaos,43
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qsj Vd,41
+Qrxw Bk,45
 </pre></div>
 </div>
 </div>
@@ -534,16 +535,16 @@ Shnzct Akaos,43
 <p>Start with <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> and add a constraint such that we generate people whose age is a multiple of 7, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vanbq Odol,0
-Ezvtgg Uzksq,0
-Nqosc Ovszar,0
-Vda Ohha,0
-Ejtbd Tmg,56
-Mg Pdnbd,0
-Qwmsh Bc,98
-Je Iw,0
-Lhp Ghecmj,0
-Mjuctd Zqrbq,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jweoa Itnscx,70
+Snn Iwc,0
+Kbj Uphwuf,0
+Gkm Avks,0
+Scm Fbwwi,0
+Yn Xs,0
+If Nmn,0
+Hvb Fatrj,0
+Xutjlo Amus,7
+Smkj Ugmolg,0
 </pre></div>
 </div>
 </div>
@@ -636,10 +637,16 @@ The <code class="docutils literal notranslate"><span class="pre">-v</span></code
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
-fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/9268aff94d034cf8a1951e11902d6244784141c3abfc9f6283c9e5b684505438.pickle
-fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/d199031ea3b3c2b5abf8a88f6f034c226ab726c7fa9e2313f26046521334f5c8.pickle
-fandango:INFO: &lt;string&gt;: loading cached spec from /home/runner/.cache/fandango/f2a18b683b211b7a5a5592fd0a43a49d3ca23e32b9ebf8a4e42ad7b6474c74ea.pickle
-fandango:INFO: int(&lt;age&gt;) % 7 == 0: loading cached spec from /home/runner/.cache/fandango/aedac1242c05687dbb18b4fc00dc96d416b9f8a1a98ee9161ede9d724f13d6fb.pickle
+fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/1c0c2feeb75034990e348cbe6b07277d38ed78efe49d568fe0bc8c337a53d893.pickle
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: &lt;stdlib&gt;: saving spec to cache /home/runner/.cache/fandango/1c0c2feeb75034990e348cbe6b07277d38ed78efe49d568fe0bc8c337a53d893.pickle
+fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/c691ec5140c1b871985f1b75f6a6e48f2242694e8cc369934e94dbf8d7862c2f.pickle
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: persons.fan: saving spec to cache /home/runner/.cache/fandango/c691ec5140c1b871985f1b75f6a6e48f2242694e8cc369934e94dbf8d7862c2f.pickle
+fandango:INFO: &lt;string&gt;: loading cached spec from /home/runner/.cache/fandango/6d0b537d17e45021f8968ae7b30860e78637f7bb07a627304e9cfb918e761706.pickle
+fandango:INFO: int(&lt;age&gt;) % 7 == 0: loading cached spec from /home/runner/.cache/fandango/3a318034dddb16d0582cfd38789aca2b81f298877ac3a66663dad62830ee37be.pickle
 fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
@@ -650,26 +657,26 @@ fandango:INFO: Generating (additional) initial population (size: 100)...
 fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: Generating 10 solutions
 fandango:INFO: ---------- Generating  for 500 generations----------
-Nmzl Bcbtu,0
-Fopo Elqx,0
-Xfh Rxu,0
-Ydrp Lpk,0
-Htrb Bod,0
-Ruuora Pyere,7
-Fhk Doiq,0
-Uytlx Ghozp,0
-Ten Ivai,0
-Urxo Ttyv,35
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0000.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0001.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0002.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0003.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0004.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0005.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0006.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0007.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0008.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0009.txt&#39;
+Ymlvs Kf,0
+Vmc Pada,0
+Zoz Kf,0
+Jd Xi,0
+Oapss Dtdmd,0
+Menn Rkuzyg,0
+Kjmch Qcqyc,0
+Gd Duampi,0
+Jbxk Mcyv,0
+Fuvsw Llv,0
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0000.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0001.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0002.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0003.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0004.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0005.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0006.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0007.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0008.txt&#39;
+fandango:INFO: Parsing &#39;/tmp/tmpuplxmd8r/fandango-0009.txt&#39;
 </pre></div>
 </div>
 </div>
@@ -677,6 +684,32 @@ fandango:INFO: Parsing &#39;/tmp/tmpmsnh377a/fandango-0009.txt&#39;
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-v</span></code> option comes right after <code class="docutils literal notranslate"><span class="pre">fandango</span></code> (and not after <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code>), as <code class="docutils literal notranslate"><span class="pre">-v</span></code> affects all commands (and not just <code class="docutils literal notranslate"><span class="pre">fuzz</span></code>).</p>
+</div>
+</section>
+<section id="the-fandango-progress-bar">
+<span id="sec-progress-bar"></span><h2>The Fandango Progress Bar<a class="headerlink" href="#the-fandango-progress-bar" title="Link to this heading">#</a></h2>
+<p>While Fandango is solving constraints, you may see a <em>progress bar</em> in the terminal.
+The progress bar looks like this:</p>
+<p><img alt="progress-bar" src="_images/progress-bar.png" /></p>
+<p>The progress bar is composed of three parts.
+On the leftmost side, we have the <em>Fandango logo</em> (“💃 Fandango”), followed by a <em>generation counter</em> (“6/500”) showing how often (6) the population has evolved (out of a maximum 500).</p>
+<p>Most of the line, however, is filled by a <em>fitness visualization</em> illustrating how the fitness is distributed across the inputs in the population.
+Each fraction of the line corresponds to an equal fraction of individual inputs.
+Hence, a 1/70 of the line (typically one character) stands for 1/70 of the population.</p>
+<p>The <em>color</em> of each fraction how <em>fit</em> the inputs in the fraction are - on a scale from <em>bright green</em> (perfect fitness, fulfilling the given constraints) to <em>dark red</em> (very little fitness, far away from fulfilling the constraints).
+Depending on its capabilities, your terminal may also show shades between these colors.
+Inputs that do not satisfy the constraints at all (zero fitness) are shown in gray.</p>
+<p>In the above example, we can see that Fandango already has produces a few inputs that satisfy the constraints; a few more are close and may get there through further evolution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the progress bar only shows up if</p>
+<ul class="simple">
+<li><p>Fandango’s standard error is a terminal;</p></li>
+<li><p>Fandango is not run within Jupyter notebook (Jupyter cannot interpret the terminal escape sequences); and</p></li>
+<li><p>Fandango logging is turned off (it also writes to standard error).</p></li>
+</ul>
+<p>The option <code class="docutils literal notranslate"><span class="pre">--progress-bar=on</span></code> turns on the progress bar even if the above conditions are not met.
+The option <code class="docutils literal notranslate"><span class="pre">--progress-bar=off</span></code> turns the progress bar off.</p>
 </div>
 </section>
 <section id="soft-constraints-and-optimization">
@@ -699,22 +732,20 @@ These “soft” constraints come in two forms:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Whxuw Ghhfmm,20
-Lyr Noq,043
-Gui Odlmn,7937
-Wy Pusauu,52845
-Zn Ncc,92409
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Av Yaedmh,000
+Ar Nog,215
+Cfsoet Oya,7650
+Xy Injtk,55031
+Jxmo Asoy,56104
+Oxwp Twsk,98866
+Ar Twsk,98866
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qc Mfpcmu,93813
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cl Twsk,98866
+Ar Twek,98866
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Omkicjks Hhu,839628
-Tnwsgtta Rfsq,1142176
-Mjk Maj,6439635
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pc Spjmfldx,7137641
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mupga Bgdm,931593
 </pre></div>
 </div>
 </div>
@@ -725,24 +756,18 @@ Mjk Maj,6439635
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pzcx Yhvtny,1
-Elxfre Erk,1
-Elxfre Cx,1
-Mcbee Ewkbq,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Awny Gceqdz,268
+Tmfooj Yos,6
+Zozhyf Gtqpr,5
+Tw Afxc,4
+Fuuib Chc,0
+Cazl Hbni,0
+Dcndbp Bdqx,0
+Nhivc Ytx,0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Es Svcoao,0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ddfvlo Wprdcsj,0
-Jujqvrg Yggpti,0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jykrf Xx,0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Es Ziwrot,0
-Xdegzjiyp Gkhr,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wf Uxhz,0
+Tsn Fad,0
 </pre></div>
 </div>
 </div>
@@ -768,16 +793,620 @@ Then, Fandango will aim to maximize (or minimize) its value.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yy Wtrn,46680
-Xmtxq Bhhvt,585
-Tuzpv Pyclkp,60
-Gpzq Cbd,50
-Da Vbhq,5899
-Rbugh Xmg,9633
-Iz Cobk,83
-Tfc Jviv,038
-Ztyvb Hff,5
-Qrk Jyygoq,86
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+AttributeError: &#39;DerivationTree&#39; object has no attribute &#39;startswith&#39;
+  Evaluation failed: ___fandango_140343372858704_0___.startswith(&#39;A&#39;)
+  Convert &lt;symbol&gt; to the expected type, say &#39;str(&lt;symbol&gt;)&#39;, &#39;int(&lt;symbol&gt;)&#39;, or &#39;bytes(&lt;symbol&gt;)&#39;
+Ejumc Rkdu,07
+Cbfdm Aid,580
+Rz Ivdlo,640
+Ud Ve,379
+Gmh Lxeco,2870
+Yk Wtfok,2176
+Bw Ewbr,482
+Xjhzfw Shdu,69
+Vi Vvma,8661
+Ngvv Dmte,55203
 </pre></div>
 </div>
 </div>
@@ -800,20 +1429,28 @@ We can see this if we specify <code class="docutils literal notranslate"><span c
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
-fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/9268aff94d034cf8a1951e11902d6244784141c3abfc9f6283c9e5b684505438.pickle
-fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/d199031ea3b3c2b5abf8a88f6f034c226ab726c7fa9e2313f26046521334f5c8.pickle
-fandango:INFO: &lt;string&gt;: loading cached spec from /home/runner/.cache/fandango/f2a18b683b211b7a5a5592fd0a43a49d3ca23e32b9ebf8a4e42ad7b6474c74ea.pickle
+fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/1c0c2feeb75034990e348cbe6b07277d38ed78efe49d568fe0bc8c337a53d893.pickle
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: False: saving spec to cache /home/runner/.cache/fandango/852280ca9d7d792967d9a8c27b6aee7545a48c626d9318c89824b481990a6cb2.pickle
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: &lt;stdlib&gt;: saving spec to cache /home/runner/.cache/fandango/1c0c2feeb75034990e348cbe6b07277d38ed78efe49d568fe0bc8c337a53d893.pickle
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/c691ec5140c1b871985f1b75f6a6e48f2242694e8cc369934e94dbf8d7862c2f.pickle
+fandango:INFO: persons.fan: saving spec to cache /home/runner/.cache/fandango/c691ec5140c1b871985f1b75f6a6e48f2242694e8cc369934e94dbf8d7862c2f.pickle
+fandango:INFO: &lt;string&gt;: loading cached spec from /home/runner/.cache/fandango/6d0b537d17e45021f8968ae7b30860e78637f7bb07a627304e9cfb918e761706.pickle
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: False: saving spec to cache /home/runner/.cache/fandango/120453227d408831f9e29886d512d34f3fb1e39c455f6a7512005a1f51b512ff.pickle
 fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
 fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.07 seconds
-fandango:INFO: ---------- Done initializing base population ----------
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.08 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: Generating 10 solutions
 fandango:INFO: ---------- Generating  for 50 generations----------
 fandango:INFO: Generation 1 - Average Fitness: 0.02
@@ -824,9 +1461,7 @@ fandango:INFO: Generation 1: Increasing crossover rate from 0.80 to 0.84
 fandango:INFO: Generation 1: Increasing MAX_REPETITION from 5 to 7
 fandango:INFO: Generation 1: Increasing Fuzzing Budget from 50 to 75
 fandango:INFO: Generation 1 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 2 - Average Fitness: 0.02
+fandango:INFO: Generation 2 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 2: Increasing mutation rate from 0.22 to 0.24
@@ -884,14 +1519,14 @@ fandango:INFO: Generation 9 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 9: Increasing mutation rate from 0.43 to 0.47
 fandango:INFO: Generation 9: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 9: Increasing MAX_REPETITION from 109 to 163
-fandango:INFO: Generation 9 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 10 - Average Fitness: 0.02
+fandango:INFO: Generation 9 stats -- Best fitness: 0.02, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 10 - Average Fitness: 0.01
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 10: Increasing mutation rate from 0.47 to 0.52
 fandango:INFO: Generation 10: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 10: Increasing MAX_REPETITION from 163 to 244
-fandango:INFO: Generation 10 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 10 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 11 - Average Fitness: 0.02
 </pre></div>
 </div>
@@ -905,25 +1540,23 @@ fandango:INFO: Generation 12 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 12: Increasing mutation rate from 0.57 to 0.63
 fandango:INFO: Generation 12: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 12: Increasing MAX_REPETITION from 366 to 549
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 12 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 12 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 13 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13: Increasing mutation rate from 0.63 to 0.69
 fandango:INFO: Generation 13: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 13: Increasing MAX_REPETITION from 549 to 823
-fandango:INFO: Generation 13 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14 - Average Fitness: 0.02
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 14 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14: Increasing mutation rate from 0.69 to 0.76
 fandango:INFO: Generation 14: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 14: Increasing MAX_REPETITION from 823 to 1234
-fandango:INFO: Generation 14 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 14 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 15 - Average Fitness: 0.02
 </pre></div>
 </div>
@@ -951,54 +1584,52 @@ fandango:INFO: Generation 18 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 18: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 18: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 18: Increasing MAX_REPETITION from 4164 to 6246
-fandango:INFO: Generation 18 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 18 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 19 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 19: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 19: Increasing MAX_REPETITION from 6246 to 9369
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 19 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 20 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 20: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 20: Increasing MAX_REPETITION from 9369 to 14053
-fandango:INFO: Generation 20 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 21 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 21: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 21: Increasing MAX_REPETITION from 14053 to 21079
-fandango:INFO: Generation 21 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 21 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 22 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 22: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 22: Increasing MAX_REPETITION from 21079 to 31618
-fandango:INFO: Generation 22 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 22 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 23 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 23: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 23: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 23: Increasing MAX_REPETITION from 31618 to 47427
-fandango:INFO: Generation 23 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 23 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 24 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 24: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 24: Increasing MAX_REPETITION from 47427 to 71140
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24 stats -- Best fitness: 0.02, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 25 - Average Fitness: 0.01
+fandango:INFO: Generation 24 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 25 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 25: Increasing mutation rate from 1.00 to 1.00
@@ -1011,14 +1642,16 @@ fandango:INFO: Generation 26 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 26: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 26: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 26: Increasing MAX_REPETITION from 106710 to 160065
-fandango:INFO: Generation 26 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 26 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 27 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 27: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 27: Increasing MAX_REPETITION from 160065 to 240097
-fandango:INFO: Generation 27 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 27 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 28 - Average Fitness: 0.02
 </pre></div>
 </div>
@@ -1048,44 +1681,44 @@ fandango:INFO: Generation 31 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 31: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 31: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 31: Increasing MAX_REPETITION from 810325 to 1215487
-fandango:INFO: Generation 31 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 31 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 32 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 32: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 32: Increasing MAX_REPETITION from 1215487 to 1823230
-fandango:INFO: Generation 32 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 32 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 33 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 33: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 33: Increasing MAX_REPETITION from 1823230 to 2734845
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 33 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 34 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 34: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 34: Increasing MAX_REPETITION from 2734845 to 4102267
-fandango:INFO: Generation 34 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 35 - Average Fitness: 0.02
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34 stats -- Best fitness: 0.02, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 35 - Average Fitness: 0.01
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 35: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 35: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 35: Increasing MAX_REPETITION from 4102267 to 6153400
-fandango:INFO: Generation 35 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 35 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 36 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 36: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 36: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 36: Increasing MAX_REPETITION from 6153400 to 9230100
-fandango:INFO: Generation 36 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 36 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 37 - Average Fitness: 0.02
 </pre></div>
 </div>
@@ -1099,21 +1732,27 @@ fandango:INFO: Generation 38 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 38: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 38: Increasing MAX_REPETITION from 13845150 to 20767725
-fandango:INFO: Generation 38 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 39 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 39: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 39: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 39: Increasing MAX_REPETITION from 20767725 to 31151587
-fandango:INFO: Generation 39 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 40 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 39 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 40 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 40: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 40: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 40: Increasing MAX_REPETITION from 31151587 to 46727380
-fandango:INFO: Generation 40 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 40 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 41 - Average Fitness: 0.02
 </pre></div>
 </div>
@@ -1127,7 +1766,7 @@ fandango:INFO: Generation 42 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 42: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 42: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 42: Increasing MAX_REPETITION from 70091070 to 105136605
-fandango:INFO: Generation 42 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 42 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 43 - Average Fitness: 0.02
 </pre></div>
 </div>
@@ -1141,52 +1780,62 @@ fandango:INFO: Generation 44 - Average Fitness: 0.02
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 44: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 44: Increasing MAX_REPETITION from 157704907 to 236557360
-fandango:INFO: Generation 44 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 45 - Average Fitness: 0.02
+fandango:INFO: Generation 44 stats -- Best fitness: 0.02, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 45 - Average Fitness: 0.01
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 45: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 45: Increasing MAX_REPETITION from 236557360 to 354836040
-fandango:INFO: Generation 45 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 46 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 46: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 46: Increasing MAX_REPETITION from 354836040 to 532254060
-fandango:INFO: Generation 46 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 47 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 47: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 47: Increasing MAX_REPETITION from 532254060 to 798381090
-fandango:INFO: Generation 47 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Generation 48 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 48: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 48: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 48: Increasing MAX_REPETITION from 798381090 to 1197571635
-fandango:INFO: Generation 48 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 49 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 48 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 49 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 49: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 49: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 49: Increasing MAX_REPETITION from 1197571635 to 1796357452
-fandango:INFO: Generation 49 stats -- Best fitness: 0.02, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 50 - Average Fitness: 0.01
+fandango:INFO: Generation 49 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+fandango:INFO: Generation 50 - Average Fitness: 0.02
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 50: Increasing mutation rate from 1.00 to 1.00
 fandango:INFO: Generation 50: Increasing crossover rate from 0.90 to 0.90
 fandango:INFO: Generation 50: Increasing MAX_REPETITION from 1796357452 to 2694536178
-fandango:INFO: Generation 50 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 50 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
 fandango:INFO: Average fitness of population: 0.02
 fandango:INFO: ---------- Done generating  for 50 generations----------
-fandango:INFO: Time taken: 14.68 seconds
+fandango:INFO: Time taken: 21.11 seconds
 fandango:ERROR: Population did not converge to a perfect population
 fandango:ERROR: Only found 0 perfect solutions, instead of the required 10
 </pre></div>
@@ -1271,6 +1920,7 @@ Of course, if the constraint is <code class="docutils literal notranslate"><span
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-and-derivationtree-types">Constraints and <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-on-the-command-line">Constraints on the Command Line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-fandango-solves-constraints">How Fandango Solves Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fandango-progress-bar">The Fandango Progress Bar</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraints-and-optimization">Soft Constraints and Optimization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-constraints-cannot-be-solved">When Constraints Cannot be Solved</a></li>
 </ul>

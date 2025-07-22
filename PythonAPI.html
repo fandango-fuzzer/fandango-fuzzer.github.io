@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -597,16 +597,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jason Dunn,3719
-Garrett Holt,49
-Jeffrey Craig,47
-Abigail Davis,71
-Paula Brown,781
-Andrew Myers,42
-Erica Owens,46
-Ethan Johnson,67
-Shelley Miller,26
-Courtney Smith,83
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matthew Smith,86
+Mark Waters,438
+Scott Brown,2
+Jimmy Mills,232
+George Booth,20
+Valerie Ortiz,12
+Cynthia Oliver,42
+Kristina West,65
+Chad Odonnell,7
+Ashley Oneal,56
 </pre></div>
 </div>
 </div>
@@ -633,7 +633,7 @@ Courtney Smith,83
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: &lt;string&gt;: saving spec to cache /home/runner/.cache/fandango/d508a3b8b1e65cb6b1ac005eee4ad47614ef9aa9b5fe6b1cb822d6d495962b7e.pickle
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: &lt;string&gt;: saving spec to cache /home/runner/.cache/fandango/9f112923e44e071e9a3cb131d3d7f3128dca9bc76abc65c3b2c4729688d9b23c.pickle
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Redefining &lt;start&gt;
@@ -648,7 +648,7 @@ Courtney Smith,83
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.01 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.02 seconds
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
@@ -660,16 +660,16 @@ Courtney Smith,83
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Generating ----------
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aa
-bcbb
-a
-cbbaa
-c
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c
+babac
+abac
+accaa
+ac
+baa
 b
-cbc
-cbba
-abba
-bbba
+cacaa
+acb
+abbab
 </pre></div>
 </div>
 </div>
@@ -698,7 +698,7 @@ bbba
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tree = &#39;abc&#39;
-&lt;start&gt; ::= &#39;a&#39; &#39;b&#39; &#39;c&#39;  # Position 0x0000 (0); &#39;abc&#39;
+&lt;start&gt; ::= Terminal(&#39;a&#39;) Terminal(&#39;b&#39;) Terminal(&#39;c&#39;)  # Position 0x0000 (0); &#39;abc&#39;
 </pre></div>
 </div>
 </div>
@@ -728,7 +728,7 @@ bbba
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tree = &#39;ab&#39;
-&lt;start&gt; ::= &#39;a&#39; &#39;b&#39;  # Position 0x0000 (0); &#39;ab&#39;
+&lt;start&gt; ::= Terminal(&#39;a&#39;) Terminal(&#39;b&#39;)  # Position 0x0000 (0); &#39;ab&#39;
 </pre></div>
 </div>
 </div>
@@ -759,7 +759,7 @@ bbba
   <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
     <span class="n">fan</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
-  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">351</span> <span class="ow">in</span> <span class="n">parse</span>
+  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">352</span> <span class="ow">in</span> <span class="n">parse</span>
     <span class="k">raise</span> <span class="n">FandangoParseError</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
 
   <span class="n">File</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
@@ -793,7 +793,10 @@ bbba
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Syntax error at &#39;e&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Syntax error at
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> &#39;e&#39;
 </pre></div>
 </div>
 </div>
