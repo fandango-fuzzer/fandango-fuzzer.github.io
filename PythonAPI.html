@@ -597,16 +597,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matthew Smith,86
-Mark Waters,438
-Scott Brown,2
-Jimmy Mills,232
-George Booth,20
-Valerie Ortiz,12
-Cynthia Oliver,42
-Kristina West,65
-Chad Odonnell,7
-Ashley Oneal,56
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>James Hull,71
+Sydney James,53
+Lori Martinez,79
+Timothy Marsh,94
+Melissa Sherman,94
+Daniel Chung,58
+Dean Hayes,383
+Melinda Graham,97
+Sharon Fitzgerald,81
+Jeremy Wallace,6
 </pre></div>
 </div>
 </div>
@@ -648,7 +648,7 @@ Ashley Oneal,56
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.02 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.05 seconds
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
@@ -660,16 +660,16 @@ Ashley Oneal,56
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Generating ----------
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c
-babac
-abac
-accaa
-ac
-baa
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aaccb
+aaba
+abcba
+ba
+bcb
+bbbac
 b
-cacaa
-acb
-abbab
+baab
+a
+aacc
 </pre></div>
 </div>
 </div>
@@ -751,19 +751,7 @@ abbab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-
-  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.13.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">IPython</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">interactiveshell</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3699</span> <span class="ow">in</span> <span class="n">run_code</span>
-    <span class="n">exec</span><span class="p">(</span><span class="n">code_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_global_ns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
-
-  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
-    <span class="n">fan</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-
-  <span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fandango</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">352</span> <span class="ow">in</span> <span class="n">parse</span>
-    <span class="k">raise</span> <span class="n">FandangoParseError</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
-
-  <span class="n">File</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
-<span class="ne">FandangoParseError</span>: Parse error at position 3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7ff68c6b2df0&gt;
 </pre></div>
 </div>
 </div>
@@ -789,14 +777,6 @@ abbab
 <span class="k">except</span> <span class="n">FandangoParseError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
     <span class="n">error_position</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">position</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Syntax error at&quot;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">invalid_word</span><span class="p">[</span><span class="n">error_position</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Syntax error at
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> &#39;e&#39;
 </pre></div>
 </div>
 </div>

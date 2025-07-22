@@ -464,7 +464,10 @@ document.write(`
       &lt;Width&gt; ::= Terminal(b&#39;\x01&#39;) Terminal(b&#39;\x00&#39;)  # Position 0x0006 (6); b&#39;\x01\x00&#39;
       &lt;Height&gt; ::= Terminal(b&#39;\x01&#39;) Terminal(b&#39;\x00&#39;)  # Position 0x0008 (8); b&#39;\x01\x00&#39;
       &lt;PackedFields&gt; ::= Symbol(&#39;&lt;LOGICALSCREENDESCRIPTOR_PACKEDFIELDS&gt;&#39;)
-        &lt;LOGICALSCREENDESCRIPTOR_PACKEDFIELDS&gt; ::= Symbol(&#39;&lt;GlobalColorTableFlag&gt;&#39;) Symbol(&#39;&lt;ColorResolution&gt;&#39;) Symbol(&#39;&lt;SortFlag&gt;&#39;) Symbol(&#39;&lt;SizeOfGlobalColorTable&gt;&#39;)  # None + bits: 10000000
+        &lt;LOGICALSCREENDESCRIPTOR_PACKEDFIELDS&gt; ::= Symbol(&#39;&lt;GlobalColo
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rTableFlag&gt;&#39;) Symbol(&#39;&lt;ColorResolution&gt;&#39;) Symbol(&#39;&lt;SortFlag&gt;&#39;) Symbol(&#39;&lt;SizeOfGlobalColorTable&gt;&#39;)  # None + bits: 10000000
           &lt;GlobalColorTableFlag&gt; ::= Terminal(None + bits: 1)  # Position 0x000a (10), bit 7
           &lt;ColorResolution&gt; ::= Terminal(None + bits: 0) Terminal(None + bits: 0) Terminal(None + bits: 0)  # Position 0x000a (10), bits 6-4; None + bits: 000
           &lt;SortFlag&gt; ::= Symbol(&#39;&lt;bit&gt;&#39;)
