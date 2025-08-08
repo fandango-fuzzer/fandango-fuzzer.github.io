@@ -525,11 +525,6 @@ The remainder of the command line is the program to be tested (possibly with arg
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Fandango IO will only return a single solution for now, manually set with -n 1 to hide this warning
-</pre></div>
-</div>
-</div>
 </div>
 <p>This command does not issue any outputs (all of them are being sent to <code class="docutils literal notranslate"><span class="pre">cat</span></code>), but here is what is happening behind the scenes:</p>
 <ul class="simple">
@@ -571,9 +566,10 @@ In our case, this simple constraint would suffice:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;In:input&gt; &lt;Out:output&gt;
-&lt;input&gt; ::= &lt;line&gt;
-&lt;output&gt; ::= &lt;line&gt;
-&lt;line&gt; ::= r&#39;[.*\n]+&#39;
+&lt;input&gt; ::= &lt;lines&gt;
+&lt;output&gt; ::= &lt;lines&gt;
+&lt;lines&gt; ::= &lt;line&gt;+
+&lt;line&gt; ::= r&#39;.*\n&#39;
 where str(&lt;input&gt;) == str(&lt;output&gt;)
 </pre></div>
 </div>
@@ -584,11 +580,6 @@ where str(&lt;input&gt;) == str(&lt;output&gt;)
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Fandango IO will only return a single solution for now, manually set with -n 1 to hide this warning
-</pre></div>
-</div>
-</div>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -651,14 +642,6 @@ How would one do this? (Hint: use the Python <code class="docutils literal notra
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoFailedError: (FandangoFailedError(...), &#39;Timed out while waiting for message from remote party. Expected message from party: Out&#39;)
-</pre></div>
-</div>
-</div>
 </div>
 <p>To ensure complete testing, we need to</p>
 <ul class="simple">
@@ -752,18 +735,25 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;31\n&#39;
-&#39;52 * 17 + 33\n&#39;
-&#39;+79 / 23 - 43\n&#39;
-&#39;----48 + 611\n&#39;
-&#39;-51 * 6 + 416\n&#39;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;+80 / 00 + 06\n&#39;
-&#39;98 * 61 + 6\n&#39;
-&#39;---263 + -6\n&#39;
-&#39;(++28) + 4\n&#39;
-&#39;94 / 76 - 44\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--8 - (-+68)
+
++--69 + ++34
+
+++-803 - -70
+
+9
+
+++--75
+
+++23 * 16 / 95
+
+-64 * 76 - 6
+
++95049 * +3
+
++9 * -40 - -35
+
+(--81) + 6
 </pre></div>
 </div>
 </div>
@@ -774,16 +764,25 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;7199\n&#39;
-&#39;2669\n&#39;
-&#39;6689\n&#39;
-&#39;7579\n&#39;
-&#39;37351\n&#39;
-&#39;39032\n&#39;
-&#39;26825\n&#39;
-&#39;79880\n&#39;
-&#39;377\n&#39;
-&#39;7182\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8572
+
+5
+
+188
+
+93
+
+0
+
+6
+
+32577
+
+428
+
+410
+
+1
 </pre></div>
 </div>
 </div>

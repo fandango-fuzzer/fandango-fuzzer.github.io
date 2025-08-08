@@ -549,17 +549,17 @@ The <code class="docutils literal notranslate"><span class="pre">-o</span> <span
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(Symbol(&#39;&lt;start&gt;&#39;), Tree(Symbol(&#39;&lt;iso8601datetime&gt;&#39;), Tree(Symbol(&#39;&lt;iso8601date&gt;&#39;), Tree(Symbol(&#39;&lt;iso8601calendardate&gt;&#39;),
-  Tree(Symbol(&#39;&lt;iso8601year&gt;&#39;),
-    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;2&#39;)))),
-    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;0&#39;)))),
-    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;2&#39;)))),
-    Tree(Symbol(&#39;&lt;digit&gt;&#39;), Tree(Symbol(&#39;&lt;_digit&gt;&#39;), Tree(Terminal(&#39;5&#39;))))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(&lt;start&gt;, Tree(&lt;iso8601datetime&gt;, Tree(&lt;iso8601date&gt;, Tree(&lt;iso8601calendardate&gt;,
+  Tree(&lt;iso8601year&gt;,
+    Tree(&lt;digit&gt;, Tree(&lt;_digit&gt;, Tree(&#39;2&#39;))),
+    Tree(&lt;digit&gt;, Tree(&lt;_digit&gt;, Tree(&#39;0&#39;))),
+    Tree(&lt;digit&gt;, Tree(&lt;_digit&gt;, Tree(&#39;2&#39;))),
+    Tree(&lt;digit&gt;, Tree(&lt;_digit&gt;, Tree(&#39;5&#39;)))
   ),
-  Tree(Terminal(&#39;-&#39;)),
-  Tree(Symbol(&#39;&lt;iso8601month&gt;&#39;), Tree(Terminal(&#39;10&#39;))),
-  Tree(Terminal(&#39;-&#39;)),
-  Tree(Symbol(&#39;&lt;iso8601day&gt;&#39;), Tree(Terminal(&#39;27&#39;)))
+  Tree(&#39;-&#39;),
+  Tree(&lt;iso8601month&gt;, Tree(&#39;10&#39;)),
+  Tree(&#39;-&#39;),
+  Tree(&lt;iso8601day&gt;, Tree(&#39;27&#39;))
 ))))
 </pre></div>
 </div>
@@ -582,21 +582,21 @@ This is useful for debugging, but also for creating a grammar from a sample file
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= Symbol(&#39;&lt;iso8601datetime&gt;&#39;)
-  &lt;iso8601datetime&gt; ::= Symbol(&#39;&lt;iso8601date&gt;&#39;)
-    &lt;iso8601date&gt; ::= Symbol(&#39;&lt;iso8601calendardate&gt;&#39;)
-      &lt;iso8601calendardate&gt; ::= Symbol(&#39;&lt;iso8601year&gt;&#39;) Terminal(&#39;-&#39;) Symbol(&#39;&lt;iso8601month&gt;&#39;) Terminal(&#39;-&#39;) Symbol(&#39;&lt;iso8601day&gt;&#39;)  # Position 0x0000 (0); &#39;2025-10-27&#39;
-        &lt;iso8601year&gt; ::= Symbol(&#39;&lt;digit&gt;&#39;) Symbol(&#39;&lt;digit&gt;&#39;) Symbol(&#39;&lt;digit&gt;&#39;) Symbol(&#39;&lt;digit&gt;&#39;)  # &#39;2025&#39;
-          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
-            &lt;_digit&gt; ::= Terminal(&#39;2&#39;)  # Position 0x0002 (2)
-          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
-            &lt;_digit&gt; ::= Terminal(&#39;0&#39;)  # Position 0x0003 (3)
-          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
-            &lt;_digit&gt; ::= Terminal(&#39;2&#39;)  # Position 0x0004 (4)
-          &lt;digit&gt; ::= Symbol(&#39;&lt;_digit&gt;&#39;)
-            &lt;_digit&gt; ::= Terminal(&#39;5&#39;)  # Position 0x0005 (5)
-        &lt;iso8601month&gt; ::= Terminal(&#39;10&#39;)  # Position 0x0006 (6)
-        &lt;iso8601day&gt; ::= Terminal(&#39;27&#39;)  # Position 0x0008 (8)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;iso8601datetime&gt;
+  &lt;iso8601datetime&gt; ::= &lt;iso8601date&gt;
+    &lt;iso8601date&gt; ::= &lt;iso8601calendardate&gt;
+      &lt;iso8601calendardate&gt; ::= &lt;iso8601year&gt; &#39;-&#39; &lt;iso8601month&gt; &#39;-&#39; &lt;iso8601day&gt;  # Position 0x0000 (0); 2025-10-27
+        &lt;iso8601year&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # 2025
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0002 (2)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x0003 (3)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0004 (4)
+          &lt;digit&gt; ::= &lt;_digit&gt;
+            &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x0005 (5)
+        &lt;iso8601month&gt; ::= &#39;10&#39;  # Position 0x0006 (6)
+        &lt;iso8601day&gt; ::= &#39;27&#39;  # Position 0x0008 (8)
 </pre></div>
 </div>
 </div>

@@ -422,10 +422,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-tree-structure">Derivation Tree Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-derivation-trees">Evaluating Derivation Trees</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-derivationtree-functions">General <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converters">Converters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-children">Accessing Children</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-descendants">Accessing Descendants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-parents">Accessing Parents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-sources">Accessing Sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparisons">Comparisons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-specific-functions">Type-Specific Functions</a></li>
 </ul>
             </nav>
         </div>
@@ -442,7 +448,7 @@ document.write(`
 <p>Fandango constraints make use of <em>symbols</em> (anything enclosed in <code class="docutils literal notranslate"><span class="pre">&lt;...&gt;</span></code>) to express desired or required properties of generated inputs.
 During evaluation, any <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> returns a <em>derivation tree</em> representing the composition of the produced or parsed string.</p>
 <p>This derivation tree has a type of <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>, as do all subtrees.
-<code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects support <em><span class="output text_plain">182</span> functions, methods, and operators</em> directly; after converting <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>, the entire Python ecosystem is available.</p>
+<code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects support <em><span class="output text_plain">265</span> functions, methods, and operators</em> directly; after converting <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>, the entire Python ecosystem is available.</p>
 <section id="derivation-tree-structure">
 <span id="sec-derivation-tree-structure"></span><h2>Derivation Tree Structure<a class="headerlink" href="#derivation-tree-structure" title="Link to this heading">#</a></h2>
 <p>Let’s have a look at the structure of a derivation tree. Consider this derivation tree from the <a class="reference internal" href="ISO8601.html"><span class="std std-doc">ISO 8601 date and time grammar</span></a>:</p>
@@ -477,26 +483,40 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 <section id="evaluating-derivation-trees">
 <h2>Evaluating Derivation Trees<a class="headerlink" href="#evaluating-derivation-trees" title="Link to this heading">#</a></h2>
 <p>To write constraints, you may want to serialize derivation trees into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>ings, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, or <code class="docutils literal notranslate"><span class="pre">int</span></code>s. To do so, simply call <code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes(&lt;SYMBOL&gt;)</span></code>, or <code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code> respectively.</p>
-<p>Internally, the serialization is done in <code class="docutils literal notranslate"><span class="pre">str</span></code> objects as long as the sub-tree only contains string values, and in <code class="docutils literal notranslate"><span class="pre">bytes</span></code> otherwise. During concatenation, strings are converted to bytes in with <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> encoding, for conversion from bytes to strings, <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> is used to prevent breaking non-utf-8 strings. If you would like to convert them using utf-8, you can call <code class="docutils literal notranslate"><span class="pre">bytes(&lt;SYMBOL&gt;).decode(&quot;utf-8&quot;)</span></code>.</p>
+<p>Internally, the serialization is done in <code class="docutils literal notranslate"><span class="pre">str</span></code> objects as long as the sub-tree only contains string values, and in <code class="docutils literal notranslate"><span class="pre">bytes</span></code> otherwise. During concatenation, strings are converted to bytes in with <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> encoding, for conversion from bytes to strings, <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> is used to prevent breaking non-utf-8 strings. If you would like to convert them using utf-8, you can call <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_string(&quot;utf-8&quot;)</span></code>.</p>
 <p>Concatenation of non-bit types with bit types always triggers Fandango to convert the remaining trailing bits into <code class="docutils literal notranslate"><span class="pre">bytes</span></code> (with the first bit being the most significant). If the number of trailing bits isn’t a multiple of 8, Fandango will throw an error.</p>
-<p><code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code> on a subtree consisting only of strings will attempt to parse the string as a number. If the tree consists of bits only, it will be converted to a number with the first bit being the most significant. Bytes are converted to numbers as if they were bits, in big-endian.</p>
+<p><code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code> on a subtree consisting only of strings will attempt to parse the string as a number. If the tree consists of bits only, it will be converted to a number with the first bit being the most significant. Bytes are converted to strings and then treated accordingly.</p>
 <p>Previous versions of Fandango automatically converted certain values — this no longer works to prevent accidental mistakes while writing constraints.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is generally unwise to rely on the type of the internal representation of linearized <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> values as these may change with future expansions of Fandango. Use functions directly implemented on them (<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.startswith(&quot;Hello&quot;)</span></code>), or explicitly convert them to a base type in Python instead (<code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code>).</p>
+</div>
 </section>
 <section id="general-derivationtree-functions">
 <h2>General <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> Functions<a class="headerlink" href="#general-derivationtree-functions" title="Link to this heading">#</a></h2>
-<p>These functions are available for all <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects, regardless of their internal type.</p>
+<p>These functions are available for all <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects, regardless of the type they evaluate into.</p>
+<section id="converters">
+<h3>Converters<a class="headerlink" href="#converters" title="Link to this heading">#</a></h3>
+<p>Since any <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> has the type <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>, one must convert it first into a standard Python type before passing it as argument to a standard Python function.</p>
 <dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a Unicode string. Byte strings in <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> are converted using <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> encoding.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_string(encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">&quot;latin-1&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>More flexible alternative to <code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code></p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bytes(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">bytes</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into a byte string. Unicode strings in <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> are converted using <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> encoding.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_bytes(encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">bytes</span></code></dt><dd><p>More flexible alternative to <code class="docutils literal notranslate"><span class="pre">bytes(&lt;SYMBOL&gt;)</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code></dt><dd><p>Convert <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> into an integer, like the Python <code class="docutils literal notranslate"><span class="pre">int()</span></code> function.
+<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> must be exclusively bits, or a Unicode string or byte string representing an integer literal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_int(encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code></dt><dd><p>More flexible alternative to <code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code></p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.should_be_serialized_to_bytes()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the sub-tree contains bits or bytes and thus is natively serialized to bytes</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.contains_bits()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the sub-tree contains bits</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.contains_bytes()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></dt><dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the sub-tree contains bytes</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_int(encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code></dt><dd><p>More flexible alternative to <code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code></p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_bits(encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code></dt><dd><p>Provides a bitwise representation of the input, in a string of <code class="docutils literal notranslate"><span class="pre">0</span></code>s  and <code class="docutils literal notranslate"><span class="pre">1</span></code>s</p>
 </dd>
@@ -505,6 +525,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.is_nonterminal()</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></dt><dd><p>True if <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> is a nonterminal node.</p>
 </dd>
 </dl>
+</section>
 <section id="accessing-children">
 <h3>Accessing Children<a class="headerlink" href="#accessing-children" title="Link to this heading">#</a></h3>
 <dl class="simple myst">
@@ -513,7 +534,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 </dl>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To access the length of the <em>string</em> or <em>bytes</em> represented by <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, use <code class="docutils literal notranslate"><span class="pre">len(str(&lt;SYMBOL&gt;))</span></code> or <code class="docutils literal notranslate"><span class="pre">len(bytes(&lt;SYMBOL&gt;))</span></code> respectively.</p>
+<p>To access the length of the <em>string</em> represented by <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, use <code class="docutils literal notranslate"><span class="pre">len(str(&lt;SYMBOL&gt;))</span></code>.</p>
 </div>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;[n]</span> <span class="pre">-&gt;</span> <span class="pre">DerivationTree</span></code></dt><dd><p>Access the <code class="docutils literal notranslate"><span class="pre">n</span></code>th child of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, as a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>. <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;[0]</span></code> is the first child; <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;[-1]</span></code> is the last child.</p>
@@ -533,7 +554,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Each element of the list can have a different type, depending on the type of the sub-nodes of each child. Convert them into standard Python objects with <code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes()</span></code>, or <code class="docutils literal notranslate"><span class="pre">int().</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">TreeValue</span></code> objects can be converted into standard Python objects with <code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes()</span></code>, or <code class="docutils literal notranslate"><span class="pre">int().</span></code> Alternatively, use the same base functionality from <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, and <code class="docutils literal notranslate"><span class="pre">int</span></code> on them directly that is <a class="reference internal" href="#sec-derivation-tree-direct-access-functions"><span class="std std-ref">implemented on entire <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>s</span></a>.</p>
 </div>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL_1&gt;</span> <span class="pre">in</span> <span class="pre">&lt;SYMBOL_2&gt;</span></code></dt><dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL_1&gt;</span> <span class="pre">==</span> <span class="pre">CHILD</span></code> for any of the children of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL_2&gt;</span></code>.</p>
@@ -552,18 +573,25 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Each element of the list can have a different type, depending on the type of the sub-nodes of each child. Convert them into standard Python objects with <code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes()</span></code>, or `int().```</p>
-<h3 class="rubric" id="accessing-parents">Accessing Parents</h3>
+<p><code class="docutils literal notranslate"><span class="pre">TreeValue</span></code> objects can be converted into standard Python objects with <code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes()</span></code>, or <code class="docutils literal notranslate"><span class="pre">int().</span></code> Alternatively, use the same base functionality from <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, and <code class="docutils literal notranslate"><span class="pre">int</span></code> on them directly that is <a class="reference internal" href="#sec-derivation-tree-direct-access-functions"><span class="std std-ref">implemented on entire <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>s</span></a>.</p>
+</div>
+</section>
+<section id="accessing-parents">
+<h3>Accessing Parents<a class="headerlink" href="#accessing-parents" title="Link to this heading">#</a></h3>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.parent()</span> <span class="pre">-&gt;</span> <span class="pre">DerivationTree</span> <span class="pre">|</span> <span class="pre">None</span></code></dt><dd><p>Return the parent of the current node, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for the root node.</p>
 </dd>
 </dl>
-<h3 class="rubric" id="accessing-sources">Accessing Sources</h3>
+</section>
+<section id="accessing-sources">
+<h3>Accessing Sources<a class="headerlink" href="#accessing-sources" title="Link to this heading">#</a></h3>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.sources()</span> <span class="pre">-&gt;</span> <span class="pre">list[DerivationTree]</span></code></dt><dd><p>Return a list containing all sources of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>. Sources are symbols used in generator expressions out of which the value of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> was created; see <a class="reference internal" href="Conversion.html#sec-conversion"><span class="std std-ref">the section on data conversions</span></a> for details.</p>
 </dd>
 </dl>
-<h3 class="rubric" id="comparisons">Comparisons</h3>
+</section>
+<section id="comparisons">
+<h3>Comparisons<a class="headerlink" href="#comparisons" title="Link to this heading">#</a></h3>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL_1&gt;</span> <span class="pre">==</span> <span class="pre">&lt;SYMBOL_2&gt;</span></code></dt><dd><p>Returns True if both trees have the same structure and all nodes have the same values.</p>
 </dd>
@@ -575,7 +603,9 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 </dd>
 </dl>
 <p>To compare values with <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, etc., explicitly convert them to the type you would like to use for comparison first.</p>
-<h3 class="rubric" id="debugging">Debugging</h3>
+</section>
+<section id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h3>
 <p>See the <a class="reference internal" href="Parsing.html#sec-formats"><span class="std std-ref">section on output formats</span></a> for details on these representations.</p>
 <dl class="simple myst">
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_bits()</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>Return a bit representation (<code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> characters) of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>.</p>
@@ -584,9 +614,19 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_tree()</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>Return a tree representation of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, using <code class="docutils literal notranslate"><span class="pre">Tree(...)</span></code> constructors.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">repr(&lt;SYMBOL&gt;)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code></dt><dd><p>Return the internal representation of <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code>, as a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> constructor that can be evaluated as a Python expression.</p>
+</dd>
 </dl>
-</div>
 </section>
+</section>
+<section id="type-specific-functions">
+<span id="sec-derivation-tree-direct-access-functions"></span><h2>Type-Specific Functions<a class="headerlink" href="#type-specific-functions" title="Link to this heading">#</a></h2>
+<p>The bulk of available functions comes from the Python standard library. The vast majority of methods implemented on <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, and <code class="docutils literal notranslate"><span class="pre">int</span></code> are also implemented on <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>s:</p>
+<ul class="simple">
+<li><p>If a method is only implemented on one of the three base types, the <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> internally is first transformed into that type (using <code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code> etc.).</p></li>
+<li><p>If a method is implemented on multiple base types, but they always have different signatures (such as <code class="docutils literal notranslate"><span class="pre">.startswith</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">str</span></code> if called on a <code class="docutils literal notranslate"><span class="pre">str</span></code>, and <code class="docutils literal notranslate"><span class="pre">bytes</span></code> if called on <code class="docutils literal notranslate"><span class="pre">bytes</span></code>), the <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> is transformed into the appropriate base type.</p></li>
+<li><p>If a method is implemented on multiple base types, and there is no way to distinguish based on the signatures, the method is envoked on the underlying type. This is not recommended as these methods rely on knowledge of the type of the internal representation (which may change in the future). Simply convert the tree to the desired base type first (<code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;).upper()</span></code>).</p></li>
+</ul>
 </section>
 </section>
 
@@ -657,10 +697,16 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-tree-structure">Derivation Tree Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-derivation-trees">Evaluating Derivation Trees</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-derivationtree-functions">General <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converters">Converters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-children">Accessing Children</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-descendants">Accessing Descendants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-parents">Accessing Parents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-sources">Accessing Sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparisons">Comparisons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-specific-functions">Type-Specific Functions</a></li>
 </ul>
   </nav></div>
 
