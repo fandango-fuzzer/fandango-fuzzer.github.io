@@ -1,5 +1,13 @@
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
     ~~~~~~~~~^
         nb,
@@ -9,58 +17,33 @@ Traceback (most recent call last):
         ^^^^^^^^^
     )
     ^
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
     return loop.run_until_complete(inner)
            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
     return future.result()
            ~~~~~~~~~~~~~^^
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
         cell, index, execution_count=self.code_cells_executed + 1
     )
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-!fandango fuzz -f binfinity.fan -n 10 --validate
-assert _exit_code == 0
-------------------
-
------ stdout -----
-b':q=J!'
-b'G@o g'
-b']TYaF'
-b'*Z^b\\'
-b'<G!p.'
-b'4xBzm'
-b'jA[U/'
-b'N+PO%'
-b'R$@$v'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0001.txt', position 0x0001 (1): mismatched input b'q'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0002.txt', position 0x0001 (1): mismatched input b'@'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0003.txt', position 0x0001 (1): mismatched input b'T'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0004.txt', position 0x0001 (1): mismatched input b'Z'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0005.txt', position 0x0001 (1): mismatched input b'G'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0006.txt', position 0x0001 (1): mismatched input b'x'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0007.txt', position 0x0001 (1): mismatched input b'A'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0008.txt', position 0x0001 (1): mismatched input b'+'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0009.txt', position 0x0001 (1): mismatched input b'$'
-SyntaxError: '/tmp/tmpxlokg_sd/fandango-0010.txt', position 0x0001 (1): mismatched input b'"'
-ValueError: 10 error(s) during validation
-b'E"0QR'
-------------------
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mAssertionError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[8], line 2[0m
-[1;32m      1[0m get_ipython()[38;5;241m.[39msystem([38;5;124m'[39m[38;5;124mfandango fuzz -f binfinity.fan -n 10 --validate[39m[38;5;124m'[39m)
-[0;32m----> 2[0m [38;5;28;01massert[39;00m _exit_code [38;5;241m==[39m [38;5;241m0[39m
-
-[0;31mAssertionError[0m: 
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/nbclient/client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/nbclient/client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.13.5/x64/lib/python3.13/site-packages/nbclient/client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+        "Cell execution timed out", timeout, cell
+    )
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 300 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+! fandango fuzz -n 1 -f binary-rep.fan -o - | hexdump -C
+-------------------
 
