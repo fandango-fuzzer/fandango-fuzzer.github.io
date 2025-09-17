@@ -572,9 +572,7 @@ For instance, we can produce a string with specific values for <code class="docu
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data: RmFuZGFuZ28gYXV0aG9y
+Data: RmFuZGFuZ28gYXV0aG9y
 </pre></div>
 </div>
 </div>
@@ -593,8 +591,15 @@ Our <code class="docutils literal notranslate"><span class="pre">encode.fan</spa
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
-FandangoValueError: &lt;data&gt;: Missing converter from &lt;item&gt; (&lt;data&gt; ::= ... := f(&lt;item&gt;))
-FandangoParseError: 1 error(s) during parsing
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;echo -n &#39;Data: RmFuZGFuZ28gYXV0aG9y&#39; | fandango parse -f encode.fan&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="ne">AssertionError</span>: 
 </pre></div>
 </div>
 </div>
@@ -603,25 +608,11 @@ FandangoParseError: 1 error(s) during parsing
 As the error message suggests, we need to add a generator for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> - a decoder that converts <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> elements into <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>.</p>
 <p>We can achieve this by providing a generator for <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> that builds on <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+ := base64.b64decode(bytes(&lt;item&gt;))
-</pre></div>
-</div>
-</div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">base64.b64decode(bytes(&lt;item&gt;))</span></code> takes an <code class="docutils literal notranslate"><span class="pre">&lt;item&gt;</span></code> (which is previously parsed) and decodes it.
 The decoded result is parsed and placed in <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code>.</p>
 <p>The resulting <a class="reference download internal" download="" href="_downloads/9a8bcacb6a6ca5e89847e1f01e9dc4a1/encode-decode.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">encode-decode.fan</span></code></span></a> file now looks like this:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>import base64
-
-&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;
-&lt;item&gt; ::= rb&#39;.*&#39; := base64.b64encode(bytes(&lt;data&gt;))
-&lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt;+ := base64.b64decode(bytes(&lt;item&gt;))
-</pre></div>
-</div>
-</div>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -645,46 +636,16 @@ In our case, this is the <code class="docutils literal notranslate"><span class=
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
-&lt;start&gt; ::= b&#39;Data: &#39; &lt;item&gt;  # Position 0x0000 (0); b&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;
-  &lt;item&gt; ::= b&#39;RmFuZGFuZ28gYXV0aG9y&#39; := f(&lt;data&gt;)  # Position 0x0006 (6)
-    &lt;data&gt; ::= b&#39;Fandango&#39; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt; &lt;byte&gt;  # Position 0x0000 (0); b&#39;Fandango author&#39;
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39; &#39;  # Position 0x0008 (8)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;a&#39;  # Position 0x0009 (9)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;u&#39;  # Position 0x000a (10)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;t&#39;  # Position 0x000b (11)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;h&#39;  # Position 0x000c (12)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;o&#39;  # Position 0x000d (13)
-      &lt;byte&gt; ::= &lt;_byte&gt;
-        &lt;_byte&gt; ::= b&#39;r&#39;  # Position 0x000e (14)
-</pre></div>
-</div>
-</div>
 </div>
 <p>We see that the <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> element contains the <code class="docutils literal notranslate"><span class="pre">&quot;Fandango</span> <span class="pre">author&quot;</span></code> string we provided as a constraint during generation.
 This is what the parsed derivation tree looks like:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/393f5c4681e7a7da5dd1f79f31c93c7b7ae0dc41f480035734c9ad9258f77baf.png" src="_images/393f5c4681e7a7da5dd1f79f31c93c7b7ae0dc41f480035734c9ad9258f77baf.png" />
-</div>
 </div>
 <p>With a constraint, we can check that the decoded string is correct:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;Data: RmFuZGFuZ28gYXV0aG9y&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>encode-decode.fan<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;data&gt; == b&quot;Fandango author&quot;&#39;</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;data&gt; defined, but not used
-</pre></div>
-</div>
-</div>
 </div>
 <p>We get no error - so the parse was successful, and that all constraints hold.</p>
 </section>
@@ -705,15 +666,6 @@ And if the encoding or compression can be inverted, you can also use it to <em>p
 <p>Since converters (and generally, generators) can do anything, they can be used for any purpose, including producing solutions that normally would come from <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a>.</p>
 <p>As an example, consider the credit card grammar from the <a class="reference internal" href="Binary.html#sec-binary"><span class="std std-ref">chapter on binary inputs</span></a>:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt;              ::= &lt;credit_card_number&gt;
-&lt;credit_card_number&gt; ::= &lt;number&gt; &lt;check_digit&gt;
-&lt;number&gt;             ::= &lt;digit&gt;{15}  # for 16-digit numbers
-&lt;check_digit&gt;        ::= &lt;digit&gt;
-where &lt;check_digit&gt; == credit_card_check_digit(str(&lt;number&gt;))
-</pre></div>
-</div>
-</div>
 </div>
 <p>Instead of having a constraint (<code class="docutils literal notranslate"><span class="pre">where</span></code>) that expresses the relationship between <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;check_digit&gt;</span></code>, we can easily enhance the grammar with converters between <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;credit_card_number&gt;</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">credit_card_number</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">check_digit</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="n">add_check_digit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">))</span>
@@ -739,20 +691,6 @@ has the same effect as the original <a class="reference download internal" downl
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1522049254674223
-6397507757315660
-7095220528365401
-4654981569039177
-5821324744182528
-4632764080265431
-0214628462319740
-1318685805215087
-6736506050198484
-0446392069374877
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now, these two functions <code class="docutils literal notranslate"><span class="pre">add_check_digit()</span></code> and <code class="docutils literal notranslate"><span class="pre">strip_check_digit()</span></code> are definitely longer than our original constraint</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="o">&lt;</span><span class="n">check_digit</span><span class="o">&gt;</span> <span class="o">==</span> <span class="n">credit_card_check_digit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">))</span>

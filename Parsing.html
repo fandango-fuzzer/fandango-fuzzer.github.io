@@ -467,7 +467,7 @@ This holds for <em>syntactically</em> invalid inputs:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: &#39;&lt;stdin&gt;&#39;, line 1, column 4: mismatched input &#39;2&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RuntimeError: Generator hasn&#39;t been fully executed yet. The return value is only available after complete iteration.
 FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>
@@ -479,7 +479,7 @@ FandangoParseError: 1 error(s) during parsing
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RuntimeError: Not implemented, use method specific to your usecase
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: Did not match the following constraints: is_valid_iso8601datetime(str(&lt;iso8601datetime&gt;))
 FandangoParseError: 1 error(s) during parsing
 </pre></div>
 </div>

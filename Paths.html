@@ -547,7 +547,7 @@ As an example, here is how to print a derivation tree from <code class="docutils
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;  # Position 0x0000 (0); Sklyi Zzfrxt,05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;  # Position 0x0000 (0); Sklyi Zzfrxt,0588
   &lt;person_name&gt; ::= &lt;first_name&gt; &#39; &#39; &lt;last_name&gt;  # Position 0x0001 (1); Sklyi Zzfrxt
     &lt;first_name&gt; ::= &lt;name&gt;
       &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Sklyi
@@ -575,11 +575,15 @@ As an example, here is how to print a derivation tree from <code class="docutils
           &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x000b (11)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
           &lt;_ascii_lowercase_letter&gt; ::= &#39;t&#39;  # Position 0x000c (12)
-  &lt;age&gt; ::= &lt;digit&gt; &lt;digit&gt;  # 05
+  &lt;age&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # 0588
     &lt;digit&gt; ::= &lt;_digit&gt;
       &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x000d (13)
     &lt;digit&gt; ::= &lt;_digit&gt;
       &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x000e (14)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;8&#39;  # Position 0x000f (15)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;8&#39;  # Position 0x0010 (16)
 </pre></div>
 </div>
 </div>
@@ -634,24 +638,22 @@ For instance, if we want to refer to a <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nudhxx Bxisz,36
-Dx Vyh,42629
-Oux Yqr,305
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oimx Xtb,778
+Qqox Sghp,9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ffjxsx Dzfy,919
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vtmvtx Hzbyr,68
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mpx Djlzth,7899
-Rhx Nbyol,343
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oimx Xtb,774
+Qqox Zkeqe,521
+Vtmvtx Hzbyr,66
+Htmvtx Hzbyr,68
+Jbx Uemiv,3940
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zx Hxbwe,6528
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rhx Nbyol,6528
-Zx Hxbwe,343
-Dx Vyh,72629
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dx Uwihg,725
+Xx Nyik,10
 </pre></div>
 </div>
 </div>
@@ -681,30 +683,32 @@ This is useful, for instance, if you want to compare several children against a 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Chan,3
-Chelsea Christian,44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,321939156679573527880119286452283980780410559235
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chelsea Christian,25748
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Christian,690808802021694563157869031205541948749316222
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Chan,70389010429686317671931680119033659
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,321939156679573527880119276452283980780410559235
+Christina Christian,690808802021694563157869031205541948849316222
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Chan,1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Charles,152766593590909290144092350233725872728204846
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chelsea Chan,7270822037356487938706255770790268336948565958728385
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chapman,665979384088865371180772929561662524053994038
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chen,1274827252504378668629079679748998163503360008222677084
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Choi,96427759405764422485554732472537182331263529557417
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Chan,70389010429646317671931680119033659
-Chelsea Christian,48
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Choi,96427759405764422485554732472537182331263524557417
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chen,5127902948169206686325506124186304190706336518242749605
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Choi,96427759405764422485554732472537182331263524557447
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,7189353940439118096998432633881495031440244800
 </pre></div>
 </div>
 </div>
@@ -727,28 +731,32 @@ Hence, <code class="docutils literal notranslate"><span class="pre">&lt;start&gt
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Jackson,74
-Christine Meyer,83
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chris Koch,9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Nguyen,567
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Ellis,06130
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Byrd,37
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Irwin,4934
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Diaz,4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Morgan,62745
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chloe Love,67
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Williams,39
+Christine Peterson,864
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Rivera,5
-Christopher Thompson,55
-Christy Harrington,7828
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Choi,415
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Patterson,0539
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Jackson,0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Watson,4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Flores,397
 </pre></div>
 </div>
 </div>
@@ -784,20 +792,26 @@ This allows you to express the earlier constraint in a possibly more readable fo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zzwyx Whqlxf,27
-Tosx Qeqk,729
-Ix Unjjre,078
-Tox Uxvhgk,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nbx Zi,42
+Bygqx Olsmac,7914
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max Kdk,7147
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ldwlqx Brcwf,8
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tosx Qexk,729
-Zzwyx Whqlqf,27
-Tosx Dwup,15343
-Lyoux Qeyrly,8
-Yycx Zf,82416
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xstiox Rasvq,3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gxrlax Bnux,9
+Grsx Yiichv,8356
+Fx Nlfjr,94
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wvx Wblzb,49
+Sx Kknd,5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bygqx Olsmac,49
 </pre></div>
 </div>
 </div>
@@ -841,18 +855,18 @@ A simpler way to think about <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xkfies Cpukv,00
-Xqqw Pcaf,772
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xfoxo Wcnkt,63712
+Xupi Ib,8465
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xijws Tyl,2
-Xykgs Ll,59
-Xph Pvbfp,543
-Xxw Eoj,069
-Xck Lw,39644
-Xllass Df,81294
-Xf Ukh,6888
-Xjxhht Kt,243
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xd Qq,48
+Xs Dy,2
+Xvvqe Ockas,695
+Xru Ctg,39
+Xsqh Jimzq,9030
+Xvutv Rxy,3
+Xck Xve,6
+Xn Yfpfa,18
 </pre></div>
 </div>
 </div>
@@ -877,16 +891,16 @@ What would the expression <code class="docutils literal notranslate"><span class
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mc Rxx,53379
-Hzjpuy Px,375
-Cnn Nxxx,3
-Czdb Bx,4
-Oqlzp Cxxxxx,0
-Wy Gxxxxx,88
-Opuyi Vxx,4463
-Wr Vxx,35
-Nrrkc Qxxxxx,18
-Epqmln Uxxxx,18
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fjpev Ex,3
+Ufzw Oxxx,98414
+Uhvhy Cxxxx,9
+Nxt Zx,5052
+Lwkvw Nx,4
+Msm Fxx,28071
+Gmxwj Oxxxxx,363
+Ikpxf Yxxx,5255
+Bho Txxx,3
+Nzyxf Sxxxx,9
 </pre></div>
 </div>
 </div>
@@ -943,20 +957,20 @@ For instance, we can have a constraint check whether a particular element is in 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fdawjh Ak,764
-Atvvs Mslc,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Abtjyq Ewelky,7496
+Ay Oxtghv,216
+Maferr Awbvt,46
+Sfhhny Amtca,58
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aj Sfijzx,2655
-Ajehtp Gbvjs,71
-Hyvoab Aejku,5
-Qbma Am,7
-Ayy Kpmpcc,9623
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aszshx Izow,05
+Ahaixf Apjcc,499
+Aav Ycudf,41
+Adagky Eo,4
+Ardaow Egm,7192
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aasvql Ao,21738
-Ayy Krta,9623
-Hyvoab Aejku,44391
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Abtjyq Ewelky,7696
 </pre></div>
 </div>
 </div>
@@ -987,18 +1001,18 @@ Here we use the Python <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ia Vvxi,229
-Wa Ni,025
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xa Nmcbe,3470
+Zaaaa Yjaf,874
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oaaaaa Pqjwg,4
-Taaaaa Pa,4253
-Zaaaa Nvqptm,76
-Oa Yep,0534
-Baaaa Xi,10
-Wa Id,65
-Qaaa Hda,35
-Daaaaa Ofg,370
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kaaaa Nhirow,3
+Raaaaa Znwg,60
+Oaaaa Mbwpx,2
+Faaaaa Vrao,13310
+Oa Swqobx,6
+Oaaaa Yyirp,5580
+Naaaa Lnsgio,56
+Faaaaa Rddq,0455
 </pre></div>
 </div>
 </div>

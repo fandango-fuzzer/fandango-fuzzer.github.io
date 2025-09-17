@@ -453,16 +453,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>551
-0371
-157
-2567
-5
-759
-7370
-73
-4
-8197
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67
+899
+760
+98
+823
+17132
+888
+95980
+210
+1563
 </pre></div>
 </div>
 </div>
@@ -574,7 +574,9 @@ Generation settings:
   --mutation-rate MUTATION_RATE
                         Rate of individuals that will undergo mutation.
   --random-seed RANDOM_SEED
-                        Random seed to use for the algorithm.
+                        Random seed to use for the algorithm. You probably
+                        also want to specify &#39;PYTHONHASHSEED=&lt;some-value&gt;&#39; to
+                        achieve full reproducability.
   --destruction-rate DESTRUCTION_RATE
                         Rate of individuals that will be randomly destroyed in
                         every generation.
