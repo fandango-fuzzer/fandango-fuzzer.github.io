@@ -642,6 +642,49 @@ How would one do this? (Hint: use the Python <code class="docutils literal notra
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoFailedError: (FandangoFailedError(...), &#39;Timed out while waiting for message from remote party. Expected message from party: Out&#39;)
+Traceback (most recent call last):
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File <span class=" -Color -Color-Magenta">&quot;/opt/hostedtoolcache/Python/3.13.7/x64/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">7</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+    sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
+             <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">main</span>
+    last_status = run(command, args)
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">464</span>, in <span class=" -Color -Color-Magenta">run</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">462</span>, in <span class=" -Color -Color-Magenta">run</span>
+    <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
+    <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">332</span>, in <span class=" -Color -Color-Magenta">talk_command</span>
+    <span class=" -Color -Color-Red">fandango.fuzz</span><span class=" -Color -Color-Bold -Color-Bold-Red">(</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">solution_callback=solutions_callback,</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+    ...&lt;4 lines&gt;...
+        <span class=" -Color -Color-Bold -Color-Bold-Red">**settings,</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">)</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">422</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
+    for s in <span class=" -Color -Color-Bold -Color-Bold-Red">generator</span>:
+             <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">292</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
+    yield from self.fandango.generate(max_generations=max_generations, mode=mode)
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm.py&quot;</span>, line <span class=" -Color -Color-Magenta">359</span>, in <span class=" -Color -Color-Magenta">generate</span>
+    yield from self._generate_io(max_generations=max_generations)
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm.py&quot;</span>, line <span class=" -Color -Color-Magenta">555</span>, in <span class=" -Color -Color-Magenta">_generate_io</span>
+    raise FandangoFailedError(
+        f&quot;Timed out while waiting for message from remote party. Expected message from party: {&#39;, &#39;.join(forecast.get_msg_parties())}&quot;
+    )
+<span class=" -Color -Color-Bold -Color-Bold-Magenta">fandango.errors.FandangoFailedError</span>: <span class=" -Color -Color-Magenta">(FandangoFailedError(...), &#39;Timed out while waiting for message from remote party. Expected message from party: Out&#39;)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>To ensure complete testing, we need to</p>
 <ul class="simple">
@@ -735,27 +778,27 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5122 - --95237
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74 * 00279 * 488 * (-(-+5) * 2949 + +--96443 * +--0 + (16)) * +3 * -31 * -75 - +9
+
+-+51222 / +3218
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+77 * -+((--7) * --+(--+-91 * 65 / -04 * 83 / +1) * (+2) + -+51) + ---1) * -867 + +24
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+95 / (+(+-46443 / -(+(+-60931 + 219 / 03 / 69 + 21) * 437) - --03) * +-0 / -97)
 
-09
+-19 * -208 + +0214 / (-153 - ++--(++---+5 + ++0) / +67 * -2381 / 190 + 69) + --68
 
-+(+-9619 + 6499 * (165 / 92 / 69 / 45 * 15) / -81 * 24 - 53) / 82 / -222 * 06 - +52
+-+(++((-+---(706 / 83 * 68) - (+52)) * +18 / 09 + -45) * +34 * -8 * +53 / 99) + -184
 
-((-(+(((-+60) / -13 * -0 * 664 / 68 / 7 / 21 + -70)) - (+5)) + -8) - -4 / -3) - +034
+(++-+0 - (3 * (614 * +88703 * -+22) * -+55 - 478) * -6 * +4 * 838 - -89) / +8 - 300
 
-++-9 / +(-+((++-++-+77 * +37 * +72 * +4 / +10 / 9 * +06 - 576) * +9) / -+84 * +5) * --46
+-(-((++++-++-++1 + 9894 / +-+-(-61 / 8) * +0 / 59978)) / -+05) * -66 / -5 / 622 - +8
 
-71 * 43
-
-+4887 * 7 + (-((+-+((+46 + -39)) / +358 - +91) / 8 + --67) / --1 / +33 + -73) / 0
-
-+6410 / 454 * (--((68 / (69 / 1 + -67) + --50) + ++8) * (60) / -2 * +37 + -22) * 37
++-(-(-13039 * (+-(36 / 94 / 49 - +04) / +12 / +4 - 217)) / ++90 + 8) / +8 + 11 + 66
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+50649 / ((--+711 * +8813 - -+51 * 1 / -22) / 722 + 401) * 3 * 659 * -7 * 568 - -2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57 + 2 - ((-+4 - 4096 - -9929 * --(0 / +7554 + -60) + +--3) / (89) - +87) - ++13
+
+74
 </pre></div>
 </div>
 </div>
@@ -766,25 +809,25 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30444
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17837
 
-22120
+9198
 
-33332
+02
+
+53243
+
+461
+
+9289
 
 8
 
-3
+0
 
-5
+63
 
-8105
-
-240
-
-001
-
-57
+042
 </pre></div>
 </div>
 </div>
