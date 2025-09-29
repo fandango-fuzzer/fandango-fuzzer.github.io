@@ -427,6 +427,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-libfuzzer-style-harness-directly">Calling a libFuzzer style harness directly</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fandango-in-libafl">Using Fandango in LibAFL</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-fan-files">Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-fuzzing-campaigns">Running Fuzzing Campaigns</a></li>
 </ul>
@@ -490,16 +491,16 @@ The full definition looks like this:</p>
 <p>Your output will look like this:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ehrztl Vcgj,65
-Waurs Bpnj,21
-Fwe Esnwd,68955
-Jweo At,552
-Lvz Raa,49
-Yyroqq Veaj,12
-Fmflov Dbo,42
-Rrwh Gmkho,78259
-Bn Uudbtu,104
-Wn Fxdzi,072
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Il Xv,441
+Mn Emgo,3458
+Vbasc Rt,894
+Vwomoy Ngqmv,6583
+Aswk Edbi,45
+Qbmx Opq,9941
+Xuktsf Xg,6
+We Wsvx,2427
+Totc Wrk,99946
+Skuick Ufwnc,6985
 </pre></div>
 </div>
 </div>
@@ -579,11 +580,20 @@ For this, use the <code class="docutils literal notranslate"><span class="pre">-
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fandango fuzz -f persons.fan -n 10 --input-method=libfuzzer --file-mode=binary ./harness.{so,dylib}
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your target crashes when using the libFuzzer interface, the fuzzer process will exit as well, losing the input if not otherwise specified. Consider using the <a class="reference internal" href="#sec-libafl"><span class="std std-ref">LibAFL integration</span></a> for much more robust target and fuzzing process handling.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The libFuzzer interface is untested on Windows so far due to a lack of hardware. If you would like to test it, try un-skipping <code class="docutils literal notranslate"><span class="pre">test_output_with_libfuzzer_harness</span></code> in <code class="docutils literal notranslate"><span class="pre">test_cli.py</span></code>. You may need to adjust how the C file is compiled.</p>
 </div>
 </section>
+</section>
+<section id="using-fandango-in-libafl">
+<span id="sec-libafl"></span><h2>Using Fandango in LibAFL<a class="headerlink" href="#using-fandango-in-libafl" title="Link to this heading">#</a></h2>
+<p>With libafl-fandango-pyo3 (<a class="reference external" href="https://crates.io/crates/libafl-fandango-pyo3">crates.io</a>, <a class="reference external" href="https://github.com/riesentoaster/libafl-fandango-pyo3">repository</a>), it is possible to use Fandango in conjunction with the <a class="reference external" href="https://github.com/aflplusplus/libafl">LibAFL</a> ecosystem. This makes target handling and evaluation much more flexible.</p>
+<p>Refer to the <a class="reference external" href="https://github.com/riesentoaster/libafl-fandango-pyo3">documentation of libafl-fandango-pyo3</a> for instructions on how to use it and a couple of example fuzzers showing how to integrate it into LibAFL-based fuzzers.</p>
 </section>
 <section id="executable-fan-files">
 <h2>Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#executable-fan-files" title="Link to this heading">#</a></h2>
@@ -606,7 +616,7 @@ $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ocpld Zxvga,7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kom Oybmz,6214
 </pre></div>
 </div>
 </div>
@@ -708,6 +718,7 @@ $<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-libfuzzer-style-harness-directly">Calling a libFuzzer style harness directly</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fandango-in-libafl">Using Fandango in LibAFL</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-fan-files">Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-fuzzing-campaigns">Running Fuzzing Campaigns</a></li>
 </ul>

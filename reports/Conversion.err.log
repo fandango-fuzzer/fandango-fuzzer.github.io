@@ -40,9 +40,6 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 assert _exit_code == 1
 ------------------
 
------ stdout -----
-fandango:WARNING: Symbol <data> defined, but not used
-------------------
 
 [31m---------------------------------------------------------------------------[39m
 [31mAssertionError[39m                            Traceback (most recent call last)
