@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Converting ANTLR and Other Input Specs &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Converters';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Covering Specs and Code" href="Diversity.html" />
+    <link rel="prev" title="Accessing Input Elements" href="Paths.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FConverters.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Converters.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Converting ANTLR and Other Input Specs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-antlr-specs">Converting ANTLR Specs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-010-binary-templates">Converting 010 Binary Templates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dtds">Converting DTDs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-fan-files">Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="converting-antlr-and-other-input-specs">
+<span id="sec-converters"></span><h1>Converting ANTLR and Other Input Specs<a class="headerlink" href="#converting-antlr-and-other-input-specs" title="Link to this heading">#</a></h1>
+<p>Often, you may already have an input format specification available, but not (yet) in Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> format.
+Fandango’s <code class="docutils literal notranslate"><span class="pre">convert</span></code> command allows you automatically translate common input specifications into <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files - at least most of it.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>For instance, <em>executable code</em> in ANTLR and 010 specs can only be partially converted at best.</p>
+</aside>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>All these converters are <em>lossy</em> - that is, some features of the original specifications may not be converted into Fandango.
+Hence, the idea is that you use converted formats as a base for further manual editing and checking.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All these formats define the <em>syntax</em> of input files, typically for the purpose of <em>parsing</em>.
+To <em>produce</em> inputs that are also <em>semantically</em> valid, you will often have to augment the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files with <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a> to make them semantically valid, too.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>All these converters are experimental at this point.</p>
+</div>
+<section id="converting-antlr-specs">
+<span id="sec-antlr2fan"></span><h2>Converting ANTLR Specs<a class="headerlink" href="#converting-antlr-specs" title="Link to this heading">#</a></h2>
+<p>Fandango allows you to automatically convert ANTLR grammar specifications (<code class="docutils literal notranslate"><span class="pre">.g4</span></code>, <code class="docutils literal notranslate"><span class="pre">.antlr</span></code>) into Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.
+ANTLR is a very popular parser generator; a <a class="reference external" href="https://github.com/antlr/grammars-v4">wide large collections of ANTLR grammars</a> is available.</p>
+<p>Simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the ANTLR file to be converted.</p>
+<p>As an example, consider this simple <a class="reference download internal" download="" href="_downloads/aa7c9b40a09b1bd90d3a5c73474b1403/Calculator.g4"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">Calculator.g4</span></code></span></a> ANTLR file:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>// https://www.inovex.de/de/blog/building-a-simple-calculator-with-antlr-in-python/
+
+grammar Calculator;
+
+expression 
+    : NUMBER                        # Number
+    | &#39;(&#39; expression &#39;)&#39;            # Parentheses
+    | expression TIMES expression   # Multiplication
+    | expression DIV expression     # Division
+    | expression PLUS expression    # Addition
+    | expression MINUS expression   # Subtraction
+;
+
+PLUS : &#39;+&#39;;
+MINUS: &#39;-&#39;;
+TIMES: &#39;*&#39;;
+DIV  : &#39;/&#39;;
+NUMBER : [0-9]+;
+WS : [ \r\n\t]+ -&gt; skip;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Invoking <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> produces an (almost) equivalent Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> command determines the spec language from the file extension:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.antlr</span></code> and <code class="docutils literal notranslate"><span class="pre">.g4</span></code> - ANTLR</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.bt</span></code> and <code class="docutils literal notranslate"><span class="pre">.010</span></code> - 010 Binary Templates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.dtd</span></code> - DTDs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.fan</span></code> - <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</p></li>
+</ul>
+<p>If your file has another file name, you can use the <code class="docutils literal notranslate"><span class="pre">--from</span></code> option (say, <code class="docutils literal notranslate"><span class="pre">--from=antlr</span></code>) to specify a specific format.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>Calculator.g4
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;../src/fandango/converters/antlr/Calculator.g4&#39;.
+#
+# Calculator
+&lt;expression&gt; ::= &lt;NUMBER&gt; | &#39;(&#39; &lt;expression&gt; &#39;)&#39; | &lt;expression&gt; &lt;TIMES&gt; &lt;expression&gt; | &lt;expression&gt; &lt;DIV&gt; &lt;expression&gt; | &lt;expression&gt; &lt;PLUS&gt; &lt;expression&gt; | &lt;expression&gt; &lt;MINUS&gt; &lt;expression&gt;
+&lt;PLUS&gt; ::= &#39;+&#39;
+&lt;MINUS&gt; ::= &#39;-&#39;
+&lt;TIMES&gt; ::= &#39;*&#39;
+&lt;DIV&gt; ::= &#39;/&#39;
+&lt;NUMBER&gt; ::= r&#39;[0-9]&#39;+
+&lt;WS&gt; ::= r&#39;[ \r\n\t]&#39;+  # NOTE: was &#39;-&gt; skip&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">NOTE</span></code> comment at the bottom: The ANTLR lexer action <code class="docutils literal notranslate"><span class="pre">skip</span></code> has no equivalent in Fandango; hence <code class="docutils literal notranslate"><span class="pre">WS</span></code> elements will neither be skipped nor generated.</p>
+<p>Still, we can use this grammar to produce expressions.
+Note the usage of the <code class="docutils literal notranslate"><span class="pre">-o</span></code> option to specify an output file and the <code class="docutils literal notranslate"><span class="pre">--start</span></code> option to specify a start symbol.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>-o<span class="w"> </span>Calculator.fan<span class="w"> </span>Calculator.g4
+$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>Calculator.fan<span class="w"> </span>--start<span class="o">=</span><span class="s1">&#39;&lt;expression&gt;&#39;</span><span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Symbol &lt;WS&gt; defined, but not used
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((37411-((5483933204)+4+9-934/4444*3182+4110+2005)/35616+7070+8721*8114/689+3))*(86829)*99040+7238/9150/8946
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1165301678926550704/(46)-(((6962084063945355))-((629321-4))*324581910/0501/7181+884+8*(5419))-2982)/6*5654614*17899-4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4257670214*((79505392077859+07253651446925964342/600981/9/0*64-7559+9900+243091752)+03811815)*26131-9121+4750+934-4-(800)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9877021)+(298488780*(2387925)/0247333405188655884+(6820482897019/8)+8+375-(060)-75221712102693019777-91615/2413)+35319332052-970422
+3128823370236784
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1249740299571
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26591+2575952+(258830583444009*1748517133371836356+3)*(2672)+81330-1349+8656*1256+2033+4171*9173+2100*3984+3131
+24628-(2538)/1753392059166612*690655865144389085+9074613470099650729-(483570/59447230/19996053886+4/3*(671171)+16858)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>876277408902591458-542960900672959700/(199707-45/0+7/((017)))*81621649+9911*11/505464+76/230461*8233*057/2-28480397
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(08119846-8467761863-(((2+07259+1244-8573)))/5140627+5768-6791+6735+9863-8519/190)/69575-1*3581871-39/47/(8545)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most features of ANTLR that cannot be represented in Fandango will be marked by <code class="docutils literal notranslate"><span class="pre">NOTE</span></code> comments.
+These include</p>
+<ul class="simple">
+<li><p>Actions</p></li>
+<li><p>Modifiers</p></li>
+<li><p>Clauses such as <code class="docutils literal notranslate"><span class="pre">return</span></code> or <code class="docutils literal notranslate"><span class="pre">throws</span></code></p></li>
+<li><p>Exceptions</p></li>
+<li><p>Predicate options</p></li>
+<li><p>Element options</p></li>
+<li><p>Negations (<code class="docutils literal notranslate"><span class="pre">~</span></code>) over complex expressions</p></li>
+</ul>
+</div>
+</section>
+<section id="converting-010-binary-templates">
+<span id="sec-bt2fan"></span><h2>Converting 010 Binary Templates<a class="headerlink" href="#converting-010-binary-templates" title="Link to this heading">#</a></h2>
+<p>Fandango provides some basic support for converting Binary Templates (<code class="docutils literal notranslate"><span class="pre">.bt</span></code>, <code class="docutils literal notranslate"><span class="pre">.010</span></code>) for the 010 Editor.
+A <a class="reference external" href="https://www.sweetscape.com/010editor/repository/templates/">large collection of binary templates for various binary formats</a> is available.</p>
+<p>Again, simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the binary template file to be converted.</p>
+<p>Our <a class="reference internal" href="Gif.html#sec-gif"><span class="std std-ref">GIF example</span></a> is automatically created from a GIF binary template.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>010 Binary Templates can contain <em>arbitrary code</em> that will be executed during parsing.
+Fandango will recognize a number of common patterns; features that will require manual work include</p>
+<ul class="simple">
+<li><p>Checksums</p></li>
+<li><p>Complex length encodings</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> command provides two options to specify <em>bit orderings</em>, should the <code class="docutils literal notranslate"><span class="pre">.bt</span></code> file not already do so.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--endianness=(little|big)</span></code> and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--bitfield-order=(left-to-right|right-to-left)</span></code></p></li>
+</ul>
+</div>
+</section>
+<section id="converting-dtds">
+<span id="sec-dtd2fan"></span><h2>Converting DTDs<a class="headerlink" href="#converting-dtds" title="Link to this heading">#</a></h2>
+<p>A Document Type Definition (DTD, <code class="docutils literal notranslate"><span class="pre">.dtd</span></code>) specifies the format of an XML file.
+Fandango can convert these into <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files, enabling the production of XML files that conform to the DTD.</p>
+<p>Again, simply use the command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, followed by the binary template file to be converted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As with Binary Templates, Fandango will recognize a number of common patterns, but not all.</p>
+</div>
+<p>In the generated <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, you can customize every single element in its context.
+As an example, consider this <a class="reference download internal" download="" href="_downloads/bbae7f950a3e4262f21e216b8f01c1ef/svg11.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svg11.fan</span></code></span></a> file which specializes individual elements of a <a class="reference download internal" download="" href="_downloads/bbae7f950a3e4262f21e216b8f01c1ef/svg11.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svg.fan</span></code></span></a> file generated from an <a class="reference download internal" download="" href="_downloads/76e5fa9ecfe5a326117fc3d6f403879d/svg11-flat-20110816.dtd"><span class="xref download myst">SVG DTD</span></a>.
+The DTD by itself does not specify types of individual fields, so we do this here:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>If you find that this is long, consider that SVG is actually a very complex format.</p>
+</aside>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;svg.fan&#39;)
+
+# Add standard blurb at top
+&lt;start&gt; ::= (&#39;&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;&#39;
+&#39;&lt;!DOCTYPE svg&gt;&#39; &lt;svg&gt;)
+
+&lt;svg&gt; ::= (&#39;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&#39;
+&#39; width=&#39; &lt;svg_width_value&gt;
+&#39; height=&#39; &lt;svg_height_value&gt;
+&#39; baseProfile=&quot;full&quot; viewBox=&#39; &lt;svg_viewBox_value&gt; &#39;&gt;&#39;
+(&lt;desc&gt; | &lt;title&gt; | &lt;metadata&gt; | &lt;animate&gt; | &lt;set&gt; | &lt;animateMotion&gt; | &lt;animateColor&gt; | &lt;animateTransform&gt; | &lt;svg&gt; | &lt;g&gt; | &lt;defs&gt; | &lt;symbol&gt; | &lt;use&gt; | &lt;switch&gt; | &lt;image&gt; | &lt;style&gt; | &lt;path&gt; | &lt;rect&gt; | &lt;circle&gt; | &lt;line&gt; | &lt;ellipse&gt; | &lt;polyline&gt; | &lt;polygon&gt; | &lt;text&gt; | &lt;altGlyphDef&gt; | &lt;marker&gt; | &lt;color_profile&gt; | &lt;linearGradient&gt; | &lt;radialGradient&gt; | &lt;pattern&gt; | &lt;clipPath&gt; | &lt;mask&gt; | &lt;filter&gt; | &lt;cursor&gt; | &lt;a&gt; | &lt;view&gt; | &lt;script&gt; | &lt;font&gt; | &lt;font_face&gt; | &lt;foreignObject&gt;){10} &#39;&lt;/svg&gt;&#39;)
+
+# Standard data types
+&lt;cdata&gt; ::= &lt;qint&gt; | &lt;string&gt;
+&lt;qnat&gt; ::= &lt;q&gt; &lt;nat&gt; &lt;q&gt;
+&lt;nat&gt; ::= r&#39;[1-9]&#39; &lt;digit&gt;* | &#39;0&#39;
+&lt;qint&gt; ::= &lt;q&gt; &lt;int&gt; &lt;q&gt;
+&lt;int&gt; ::= r&#39;[1-9]&#39; &lt;digit&gt;* | &#39;-&#39; r&#39;[1-9]&#39; &lt;digit&gt;* | &#39;0&#39;
+&lt;string&gt; ::= &#39;&quot;&#39; &lt;char&gt;* &#39;&quot;&#39; | &quot;&#39;&quot; &lt;char&gt;* &quot;&#39;&quot;
+&lt;char&gt; ::= r&#39;[0-9a-zA-Z_-]+&#39;
+&lt;id&gt; ::= &lt;q&gt; &lt;ascii_letter&gt; (&lt;ascii_letter&gt; | &lt;digit&gt; | &#39;_&#39;)* &lt;q&gt;
+&lt;nmtoken&gt; ::= &lt;id&gt;
+&lt;pcdata&gt; ::= &lt;cdata&gt;
+&lt;url&gt; ::= &lt;q&gt; &#39;https://cispa.de&#39; &lt;q&gt;
+&lt;qpercentage&gt; ::= &lt;q&gt; &lt;percentage&gt; &lt;q&gt;
+&lt;percentage&gt; ::= (&quot;0&quot; | r&quot;[1-9][0-9]?&quot; | &quot;100&quot;)
+
+# SVG-specific data types
+&lt;Coordinate_datatype&gt; ::= &lt;qint&gt; := &quot;&#39;100&#39;&quot;
+&lt;Length_datatype&gt; ::= &lt;qnat&gt;
+&lt;FontFamilyValue_datatype&gt; ::= &lt;string&gt; := &#39;&quot;sans-serif&quot;&#39;
+&lt;FontSizeValue_datatype&gt; ::= &lt;qnat&gt; := &quot;&#39;12&#39;&quot;
+&lt;FontSizeAdjustValue_datatype&gt; ::= &lt;qnat&gt; := &quot;&#39;0&#39;&quot;
+&lt;GlyphOrientationHorizontalValue_datatype&gt; ::= &lt;qint&gt; := &quot;&#39;0&#39;&quot;
+&lt;GlyphOrientationVerticalValue_datatype&gt; ::= &lt;qint&gt; := &quot;&#39;0&#39;&quot;
+&lt;Number_datatype&gt; ::= &lt;qint&gt;
+&lt;NumberOptionalNumber_datatype&gt; ::= &lt;qint&gt;
+&lt;OpacityValue_datatype&gt; ::= &lt;qpercentage&gt; := &quot;&#39;100&#39;&quot;
+&lt;PathData_datatype&gt; ::= &lt;q&gt; (&lt;int&gt; &lt;ws&gt;)+ &lt;q&gt;
+&lt;Text_datatype&gt; ::= &lt;string&gt;
+&lt;Script_datatype&gt; ::= &lt;string&gt;
+&lt;SVGColor_datatype&gt; ::= &lt;q&gt; &#39;#&#39; (&lt;hexdigit&gt;{3} | &lt;hexdigit&gt;{6}) &lt;q&gt;
+
+# Mappings of attributes to data types
+&lt;accent_height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;alphabetic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;amplitude_value&gt; ::= &lt;Number_datatype&gt;
+&lt;arabic_form_value&gt; ::= &lt;cdata&gt;
+&lt;arcrole_value&gt; ::= &lt;cdata&gt;
+&lt;ascent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;attributeName_value&gt; ::= &lt;cdata&gt;
+&lt;attributeType_value&gt; ::= &lt;cdata&gt;
+&lt;azimuth_value&gt; ::= &lt;Number_datatype&gt;
+&lt;baseFrequency_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;baseProfile_value&gt; ::= &lt;Text_datatype&gt;
+&lt;base_value&gt; ::= &lt;cdata&gt;
+&lt;baseline_shift_value&gt; ::= &lt;cdata&gt;
+&lt;bbox_value&gt; ::= &lt;cdata&gt;
+&lt;begin_value&gt; ::= &lt;cdata&gt;
+&lt;bias_value&gt; ::= &lt;Number_datatype&gt;
+&lt;by_value&gt; ::= &lt;cdata&gt;
+&lt;cap_height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;class_value&gt; ::= &lt;cdata&gt;
+&lt;clip_path_value&gt; ::= &lt;cdata&gt;
+&lt;clip_value&gt; ::= &lt;cdata&gt;
+&lt;color_profile_value&gt; ::= &lt;cdata&gt;
+&lt;color_value&gt; ::= &lt;cdata&gt;
+&lt;contentScriptType_value&gt; ::= &lt;cdata&gt;
+&lt;contentStyleType_value&gt; ::= &lt;cdata&gt;
+&lt;cursor_value&gt; ::= &lt;cdata&gt;
+&lt;cx_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;cy_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;d_value&gt; ::= &lt;PathData_datatype&gt;
+&lt;descent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;diffuseConstant_value&gt; ::= &lt;Number_datatype&gt;
+&lt;divisor_value&gt; ::= &lt;Number_datatype&gt;
+&lt;dur_value&gt; ::= &lt;cdata&gt;
+&lt;dx_value&gt; ::= &lt;Number_datatype&gt;
+&lt;dy_value&gt; ::= &lt;Number_datatype&gt;
+&lt;elevation_value&gt; ::= &lt;Number_datatype&gt;
+&lt;enable_background_value&gt; ::= &lt;cdata&gt;
+&lt;end_value&gt; ::= &lt;cdata&gt;
+&lt;exponent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fePointLight_z_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fePointLight_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fePointLight_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;feSpotLight_z_value&gt; ::= &lt;Number_datatype&gt;
+&lt;feSpotLight_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;feSpotLight_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;fill_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;fill_value&gt; ::= &lt;cdata&gt;
+&lt;filterRes_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;filter_value&gt; ::= &lt;cdata&gt;
+&lt;flood_color_value&gt; ::= &lt;SVGColor_datatype&gt;
+&lt;flood_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;font_family_value&gt; ::= &lt;FontFamilyValue_datatype&gt;
+&lt;font_size_adjust_value&gt; ::= &lt;FontSizeAdjustValue_datatype&gt;
+&lt;font_size_value&gt; ::= &lt;FontSizeValue_datatype&gt;
+&lt;font_stretch_value&gt; ::= &lt;cdata&gt;
+&lt;font_style_value&gt; ::= &lt;cdata&gt;
+&lt;font_variant_value&gt; ::= &lt;cdata&gt;
+&lt;font_weight_value&gt; ::= &lt;cdata&gt;
+&lt;format_value&gt; ::= &lt;cdata&gt;
+&lt;from_value&gt; ::= &lt;cdata&gt;
+&lt;fx_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;fy_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;g1_value&gt; ::= &lt;cdata&gt;
+&lt;g2_value&gt; ::= &lt;cdata&gt;
+&lt;glyphRef_value&gt; ::= &lt;cdata&gt;
+&lt;glyph_name_value&gt; ::= &lt;cdata&gt;
+&lt;glyph_orientation_horizontal_value&gt; ::= &lt;GlyphOrientationHorizontalValue_datatype&gt;
+&lt;glyph_orientation_vertical_value&gt; ::= &lt;GlyphOrientationVerticalValue_datatype&gt;
+&lt;gradientTransform_value&gt; ::= &lt;cdata&gt;
+&lt;hanging_value&gt; ::= &lt;Number_datatype&gt;
+&lt;height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;horiz_adv_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;horiz_origin_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;horiz_origin_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;href_value&gt; ::= &lt;url&gt;
+&lt;id_value&gt; ::= &lt;id&gt;
+&lt;ideographic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;in2_value&gt; ::= &lt;cdata&gt;
+&lt;in_value&gt; ::= &lt;cdata&gt;
+&lt;intercept_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k1_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k2_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k3_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k4_value&gt; ::= &lt;Number_datatype&gt;
+&lt;k_value&gt; ::= &lt;Number_datatype&gt;
+&lt;kernelMatrix_value&gt; ::= &lt;cdata&gt;
+&lt;kernelUnitLength_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;kerning_value&gt; ::= &lt;cdata&gt;
+&lt;keyPoints_value&gt; ::= &lt;cdata&gt;
+&lt;keySplines_value&gt; ::= &lt;cdata&gt;
+&lt;keyTimes_value&gt; ::= &lt;cdata&gt;
+&lt;lang_value&gt; ::= &lt;nmtoken&gt;
+&lt;letter_spacing_value&gt; ::= &lt;cdata&gt;
+&lt;lighting_color_value&gt; ::= &lt;SVGColor_datatype&gt;
+&lt;limitingConeAngle_value&gt; ::= &lt;Number_datatype&gt;
+&lt;local_value&gt; ::= &lt;cdata&gt;
+&lt;markerHeight_value&gt; ::= &lt;Length_datatype&gt;
+&lt;markerWidth_value&gt; ::= &lt;Length_datatype&gt;
+&lt;marker_end_value&gt; ::= &lt;cdata&gt;
+&lt;marker_mid_value&gt; ::= &lt;cdata&gt;
+&lt;marker_start_value&gt; ::= &lt;cdata&gt;
+&lt;mask_value&gt; ::= &lt;cdata&gt;
+&lt;mathematical_value&gt; ::= &lt;Number_datatype&gt;
+&lt;max_value&gt; ::= &lt;cdata&gt;
+&lt;media_value&gt; ::= &lt;cdata&gt;
+&lt;min_value&gt; ::= &lt;cdata&gt;
+&lt;name_value&gt; ::= &lt;cdata&gt;
+&lt;numOctaves_value&gt; ::= &lt;cdata&gt;
+&lt;offset_value&gt; ::= &lt;Number_datatype&gt;
+&lt;onabort_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onactivate_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onbegin_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onclick_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onend_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onerror_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onfocusin_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onfocusout_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onload_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmousedown_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmousemove_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmouseout_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmouseover_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onmouseup_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onrepeat_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onresize_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onscroll_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onunload_value&gt; ::= &lt;Script_datatype&gt;
+&lt;onzoom_value&gt; ::= &lt;Script_datatype&gt;
+&lt;opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;order_value&gt; ::= &lt;Number_datatype&gt;
+&lt;orient_value&gt; ::= &lt;cdata&gt;
+&lt;orientation_value&gt; ::= &lt;cdata&gt;
+&lt;origin_value&gt; ::= &lt;cdata&gt;
+&lt;overline_position_value&gt; ::= &lt;Number_datatype&gt;
+&lt;overline_thickness_value&gt; ::= &lt;Number_datatype&gt;
+&lt;panose_1_value&gt; ::= &lt;cdata&gt;
+&lt;pathLength_value&gt; ::= &lt;Number_datatype&gt;
+&lt;path_value&gt; ::= &lt;cdata&gt;
+&lt;patternTransform_value&gt; ::= &lt;cdata&gt;
+&lt;pointsAtX_value&gt; ::= &lt;Number_datatype&gt;
+&lt;pointsAtY_value&gt; ::= &lt;Number_datatype&gt;
+&lt;pointsAtZ_value&gt; ::= &lt;Number_datatype&gt;
+&lt;points_value&gt; ::= &lt;cdata&gt;
+&lt;preserveAspectRatio_value&gt; ::= &lt;cdata&gt;
+&lt;r_value&gt; ::= &lt;Length_datatype&gt;
+&lt;radius_value&gt; ::= &lt;Number_datatype&gt;
+&lt;refX_value&gt; ::= &lt;cdata&gt;
+&lt;refY_value&gt; ::= &lt;cdata&gt;
+&lt;repeatCount_value&gt; ::= &lt;cdata&gt;
+&lt;repeatDur_value&gt; ::= &lt;cdata&gt;
+&lt;requiredExtensions_value&gt; ::= &lt;cdata&gt;
+&lt;requiredFeatures_value&gt; ::= &lt;cdata&gt;
+&lt;result_value&gt; ::= &lt;cdata&gt;
+&lt;role_value&gt; ::= &lt;cdata&gt;
+&lt;rotate_value&gt; ::= &lt;cdata&gt;
+&lt;rx_value&gt; ::= &lt;Length_datatype&gt;
+&lt;ry_value&gt; ::= &lt;Length_datatype&gt;
+&lt;scale_value&gt; ::= &lt;Number_datatype&gt;
+&lt;seed_value&gt; ::= &lt;Number_datatype&gt;
+&lt;slope_value&gt; ::= &lt;Number_datatype&gt;
+&lt;specularConstant_value&gt; ::= &lt;Number_datatype&gt;
+&lt;specularExponent_value&gt; ::= &lt;Number_datatype&gt;
+&lt;startOffset_value&gt; ::= &lt;Length_datatype&gt;
+&lt;stdDeviation_value&gt; ::= &lt;NumberOptionalNumber_datatype&gt;
+&lt;stemh_value&gt; ::= &lt;Number_datatype&gt;
+&lt;stemv_value&gt; ::= &lt;Number_datatype&gt;
+&lt;stop_color_value&gt; ::= &lt;SVGColor_datatype&gt;
+&lt;stop_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;strikethrough_position_value&gt; ::= &lt;Number_datatype&gt;
+&lt;strikethrough_thickness_value&gt; ::= &lt;Number_datatype&gt;
+&lt;string_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_dasharray_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_dashoffset_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_miterlimit_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_opacity_value&gt; ::= &lt;OpacityValue_datatype&gt;
+&lt;stroke_value&gt; ::= &lt;cdata&gt;
+&lt;stroke_width_value&gt; ::= &lt;Number_datatype&gt;
+&lt;style_value&gt; ::= &lt;cdata&gt;
+&lt;surfaceScale_value&gt; ::= &lt;Number_datatype&gt;
+&lt;systemLanguage_value&gt; ::= &lt;cdata&gt;
+&lt;tableValues_value&gt; ::= &lt;cdata&gt;
+&lt;targetX_value&gt; ::= &lt;cdata&gt;
+&lt;targetY_value&gt; ::= &lt;cdata&gt;
+&lt;target_value&gt; ::= &lt;nmtoken&gt;
+&lt;textLength_value&gt; ::= &lt;Length_datatype&gt;
+&lt;text_decoration_value&gt; ::= &lt;cdata&gt;
+&lt;title_value&gt; ::= &lt;Text_datatype&gt;
+&lt;to_value&gt; ::= &lt;cdata&gt;
+&lt;transform_value&gt; ::= &lt;cdata&gt;
+&lt;type_value&gt; ::= &lt;cdata&gt;
+&lt;u1_value&gt; ::= &lt;cdata&gt;
+&lt;u2_value&gt; ::= &lt;cdata&gt;
+&lt;underline_position_value&gt; ::= &lt;Number_datatype&gt;
+&lt;underline_thickness_value&gt; ::= &lt;Number_datatype&gt;
+&lt;unicode_range_value&gt; ::= &lt;cdata&gt;
+&lt;unicode_value&gt; ::= &lt;cdata&gt;
+&lt;units_per_em_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_alphabetic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_hanging_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_ideographic_value&gt; ::= &lt;Number_datatype&gt;
+&lt;v_mathematical_value&gt; ::= &lt;Number_datatype&gt;
+&lt;values_value&gt; ::= &lt;cdata&gt;
+&lt;vert_adv_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;vert_origin_x_value&gt; ::= &lt;Number_datatype&gt;
+&lt;vert_origin_y_value&gt; ::= &lt;Number_datatype&gt;
+&lt;viewBox_value&gt; ::= &lt;q&gt; &lt;int&gt; &lt;ws&gt; &lt;int&gt; &lt;ws&gt; &lt;int&gt; &lt;ws&gt; &lt;int&gt; &lt;q&gt;
+&lt;viewTarget_value&gt; ::= &lt;cdata&gt;
+&lt;width_value&gt; ::= &lt;Number_datatype&gt;
+&lt;widths_value&gt; ::= &lt;cdata&gt;
+&lt;word_spacing_value&gt; ::= &lt;cdata&gt;
+&lt;x1_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;x2_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;x_height_value&gt; ::= &lt;Number_datatype&gt;
+&lt;x_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;y1_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;y2_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;y_value&gt; ::= &lt;Coordinate_datatype&gt;
+&lt;z_value&gt; ::= &lt;Coordinate_datatype&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once this is all set, we can use this to test SVGs with extreme values, as in this <a class="reference download internal" download="" href="_downloads/27b85a80865562974c43dd5394b3653d/svgextreme.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">svgextreme.fan</span></code></span></a> example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>include(&#39;svg11.fan&#39;)
+
+# where (int(&lt;width_value&gt;) &gt; 1e8 or int(&lt;height_value&gt;) &gt; 1e8)
+
+# Check with extreme number values
+where &lt;Number_datatype&gt; == &quot;&#39;1000000&#39;&quot;
+
+# Ensure we have a minimum of children
+where len(&lt;svg&gt;) &gt; 20
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-fan-files">
+<span id="sec-fan2fan"></span><h2>Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#converting-fan-files" title="Link to this heading">#</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>, you can also “convert” <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.
+This results in a “normalized” format, where all comments and blank lines have been removed.
+If we send this input to <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># A fine file to produce person names
+from faker import Faker
+fake = Faker()
+
+include(&#39;persons.fan&#39;)
+
+&lt;first_name&gt; ::= &lt;name&gt; := fake.first_name()
+&lt;last_name&gt; ::= &lt;name&gt; := fake.last_name()
+</pre></div>
+</div>
+</div>
+</div>
+<p>then we get</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>persons-faker.fan
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;persons-faker.fan&#39;.
+#
+from faker import Faker
+fake = Faker()
+
+&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;
+&lt;person_name&gt; ::= &lt;first_name&gt; &#39; &#39; &lt;last_name&gt;
+&lt;first_name&gt; ::= &lt;name&gt; := fake.first_name()
+&lt;last_name&gt; ::= &lt;name&gt; := fake.last_name()
+&lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt;+
+&lt;age&gt; ::= &lt;digit&gt;+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature can be useful to detect semantic changes in <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Paths.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Accessing Input Elements</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Diversity.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Covering Specs and Code</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-antlr-specs">Converting ANTLR Specs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-010-binary-templates">Converting 010 Binary Templates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-dtds">Converting DTDs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-fan-files">Converting <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

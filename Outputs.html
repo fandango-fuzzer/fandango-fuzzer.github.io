@@ -57,19 +57,376 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-    <script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
-window.addEventListener("load", () => mermaid.run());
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
 </script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Outputs';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Generating Binary Inputs" href="Binary.html" />
-    <link rel="prev" title="Parsing Inputs" href="Parsing.html" />
+    <link rel="next" title="Testing Protocols" href="Protocols.html" />
+    <link rel="prev" title="Parsing Strings" href="Parsing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,7 +507,7 @@ window.addEventListener("load", () => mermaid.run());
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -182,7 +539,7 @@ window.addEventListener("load", () => mermaid.run());
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -194,30 +551,46 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -228,6 +601,7 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
@@ -349,9 +723,9 @@ window.addEventListener("load", () => mermaid.run());
       
       
       <li>
-<button onclick="window.print()"
+<a href="_static/fandango.pdf" target="_blank"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Download PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -360,7 +734,7 @@ window.addEventListener("load", () => mermaid.run());
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</button>
+</a>
 </li>
       
   </ul>
@@ -452,25 +826,26 @@ document.write(`
 </ol>
 <p>For this purpose, Fandango provides a means to combine both input and output in a <em>single specification</em>, used by the Fandango <code class="docutils literal notranslate"><span class="pre">talk</span></code> command.
 Let us see how this works.</p>
-<div class="attention admonition">
-<p class="admonition-title">Under Construction</p>
-<p>Checking outputs is currently in beta.
-Check out <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/issues">the list of open issues</a>.</p>
-</div>
 <section id="interaction-testing">
 <h2>Interaction Testing<a class="headerlink" href="#interaction-testing" title="Link to this heading">#</a></h2>
 <p>So far, we have only considered two settings.
 In <em>fuzzing</em>, Fandango sends a synthesized input to the program under test:</p>
 <pre  class="mermaid">
         sequenceDiagram
+    participant Fandango
+    participant Program under Test
     Fandango-&gt;&gt;Program under Test: Some input
     </pre><p>During <em>parsing</em>, Fandango accepts and processes <em>outputs</em> from the program under test:</p>
 <pre  class="mermaid">
         sequenceDiagram
+    participant Fandango
+    participant Program under Test
     Program under Test--&gt;&gt;Fandango: Some output
     </pre><p>What we want, though, is an <em>interaction</em> - a means to <em>first</em> send an input to the program, and then parse its output to check it:</p>
 <pre  class="mermaid">
         sequenceDiagram
+    participant Fandango
+    participant Program under Test
     Fandango-&gt;&gt;Program under Test: Some input
     Program under Test--&gt;&gt;Fandango: Some output
     </pre><p>For this, we need to specify which parts of the interaction are supposed to be <em>sent</em> or <em>received</em> by which <em>party</em> in the interaction.</p>
@@ -643,45 +1018,7 @@ How would one do this? (Hint: use the Python <code class="docutils literal notra
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoFailedError: (FandangoFailedError(...), &#39;Timed out while waiting for message from remote party. Expected message from party: Out&#39;)
-Traceback (most recent call last):
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File <span class=" -Color -Color-Magenta">&quot;/opt/hostedtoolcache/Python/3.13.7/x64/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">7</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
-    sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
-             <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">main</span>
-    last_status = run(command, args)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">464</span>, in <span class=" -Color -Color-Magenta">run</span>
-    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
-    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
-    raise e
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">462</span>, in <span class=" -Color -Color-Magenta">run</span>
-    <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
-    <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">332</span>, in <span class=" -Color -Color-Magenta">talk_command</span>
-    <span class=" -Color -Color-Red">fandango.fuzz</span><span class=" -Color -Color-Bold -Color-Bold-Red">(</span>
-    <span class=" -Color -Color-Red">~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
-        <span class=" -Color -Color-Bold -Color-Bold-Red">solution_callback=solutions_callback,</span>
-        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-    ...&lt;4 lines&gt;...
-        <span class=" -Color -Color-Bold -Color-Bold-Red">**settings,</span>
-        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^</span>
-    <span class=" -Color -Color-Bold -Color-Bold-Red">)</span>
-    <span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">422</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
-    for s in <span class=" -Color -Color-Bold -Color-Bold-Red">generator</span>:
-             <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">292</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
-    yield from self.fandango.generate(max_generations=max_generations, mode=mode)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm.py&quot;</span>, line <span class=" -Color -Color-Magenta">359</span>, in <span class=" -Color -Color-Magenta">generate</span>
-    yield from self._generate_io(max_generations=max_generations)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm.py&quot;</span>, line <span class=" -Color -Color-Magenta">555</span>, in <span class=" -Color -Color-Magenta">_generate_io</span>
-    raise FandangoFailedError(
-        f&quot;Timed out while waiting for message from remote party. Expected message from party: {&#39;, &#39;.join(forecast.get_msg_parties())}&quot;
-    )
-<span class=" -Color -Color-Bold -Color-Bold-Magenta">fandango.errors.FandangoFailedError</span>: <span class=" -Color -Color-Magenta">(FandangoFailedError(...), &#39;Timed out while waiting for message from remote party. Expected message from party: Out&#39;)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(FandangoFailedError(...), &#39;Timed out while waiting for message from remote party. Expected message from party: Out&#39;)
 </pre></div>
 </div>
 </div>
@@ -742,10 +1079,12 @@ See how the <code class="docutils literal notranslate"><span class="pre">Out:</s
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;bc.fan&#39;.
 #
-include(&#39;expr.fan&#39;)
-
 &lt;start&gt; ::= &lt;interaction&gt;
-&lt;interaction&gt; ::= &lt;In:&lt;input&gt;
+&lt;expr&gt; ::= (&lt;term&gt; &#39; + &#39; &lt;expr&gt; | &lt;term&gt; &#39; - &#39; &lt;expr&gt; | &lt;term&gt;)
+&lt;term&gt; ::= (&lt;term&gt; &#39; * &#39; &lt;factor&gt; | &lt;term&gt; &#39; / &#39; &lt;factor&gt; | &lt;factor&gt;)
+&lt;factor&gt; ::= (&#39;+&#39; &lt;factor&gt; | &#39;-&#39; &lt;factor&gt; | &#39;(&#39; &lt;expr&gt; &#39;)&#39; | &lt;int&gt;)
+&lt;int&gt; ::= &lt;digit&gt;+
+&lt;interaction&gt; ::= &lt;In:input&gt;
 &lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
 &lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
 </pre></div>
@@ -757,10 +1096,12 @@ include(&#39;expr.fan&#39;)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;bc.fan&#39;.
 #
-include(&#39;expr.fan&#39;)
-
 &lt;start&gt; ::= &lt;interaction&gt;
-&lt;interaction&gt; ::= &lt;Out:&lt;output&gt;
+&lt;expr&gt; ::= (&lt;term&gt; &#39; + &#39; &lt;expr&gt; | &lt;term&gt; &#39; - &#39; &lt;expr&gt; | &lt;term&gt;)
+&lt;term&gt; ::= (&lt;term&gt; &#39; * &#39; &lt;factor&gt; | &lt;term&gt; &#39; / &#39; &lt;factor&gt; | &lt;factor&gt;)
+&lt;factor&gt; ::= (&#39;+&#39; &lt;factor&gt; | &#39;-&#39; &lt;factor&gt; | &#39;(&#39; &lt;expr&gt; &#39;)&#39; | &lt;int&gt;)
+&lt;int&gt; ::= &lt;digit&gt;+
+&lt;interaction&gt; ::= &lt;Out:output&gt;
 &lt;input&gt; ::= &lt;expr&gt; &#39;\n&#39;
 &lt;output&gt; ::= &lt;int&gt; &#39;\n&#39;
 </pre></div>
@@ -778,27 +1119,32 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74 * 00279 * 488 * (-(-+5) * 2949 + +--96443 * +--0 + (16)) * +3 * -31 * -75 - +9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+++(+((3935623 / 80 * 12 - 30) / 438 * 86 / 05 - +9) * +-9 * +52 * -4 / -87) - -+34
 
--+51222 / +3218
+(52459817904 / +((++----7 - ++-77) / 046 + -95) * 647 / 75 / 91 / 72 - +04) / +2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+95 / (+(+-46443 / -(+(+-60931 + 219 / 03 / 69 + 21) * 437) - --03) * +-0 / -97)
-
--19 * -208 + +0214 / (-153 - ++--(++---+5 + ++0) / +67 * -2381 / 190 + 69) + --68
-
--+(++((-+---(706 / 83 * 68) - (+52)) * +18 / 09 + -45) * +34 * -8 * +53 / 99) + -184
-
-(++-+0 - (3 * (614 * +88703 * -+22) * -+55 - 478) * -6 * +4 * 838 - -89) / +8 - 300
-
--(-((++++-++-++1 + 9894 / +-+-(-61 / 8) * +0 / 59978)) / -+05) * -66 / -5 / 622 - +8
-
-+-(-(-13039 * (+-(36 / 94 / 49 - +04) / +12 / +4 - 217)) / ++90 + 8) / +8 + 11 + 66
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((-+71577061550 / -(--+((221) - -36) / +191 * 10)) * -+4 + +-06) * -16 / 28 / 91
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57 + 2 - ((-+4 - 4096 - -9929 * --(0 / +7554 + -60) + +--3) / (89) - +87) - ++13
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71673146 - (+(---+5516693 * +(977 - -77) / 867 * 50 + 627) - +58) / 980 - 57
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-(-((917253138213794095 * 0 / 57 / +4 * +21)) * -93 * 21 / 34 / -1 * 267 + 18)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9344156872423638169 + 03821159598 * -29 * (--000733 + -+9) * 7377 + -5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53393508115150 / ---(-(+-85027826336829932012 - (++8) / 105 - -08))
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16158 * +((47554094280) / ++36537 * -6 * 091 * -1 * -84 / 37 / 99 - 656) + --3
 
-74
+178612635 * +(++--+(5588803659059 + 53) * +--6 / -+1 - 9184) * +22 / 59 - +01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+508914286 / 9233774064307 - +72 * -9 / 894 / 32 / 26 * 85 - 99) * +91 - 742
 </pre></div>
 </div>
 </div>
@@ -809,29 +1155,31 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17837
-
-9198
-
-02
-
-53243
-
-461
-
-9289
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>671
 
 8
 
-0
+04
 
-63
+574779161
 
-042
+5645238762
+
+535779694156165511
+
+080299268
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6629892302021206
+
+956363011
+
+2986427623398486
 </pre></div>
 </div>
 </div>
 </div>
+<p>We make use of such interactions extensively in the next part on <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">Testing protocols</span></a>.</p>
 </section>
 </section>
 
@@ -871,15 +1219,15 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Parsing Inputs</p>
+        <p class="prev-next-title">Parsing Strings</p>
       </div>
     </a>
     <a class="right-next"
-       href="Binary.html"
+       href="Protocols.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Generating Binary Inputs</p>
+        <p class="prev-next-title">Testing Protocols</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -920,7 +1268,7 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -930,7 +1278,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

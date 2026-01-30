@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Paths';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Case Study: ISO 8601 Date + Time" href="ISO8601.html" />
+    <link rel="next" title="Converting ANTLR and Other Input Specs" href="Converters.html" />
     <link rel="prev" title="Complex Input Structures" href="Recursive.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -174,7 +174,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -186,30 +186,46 @@
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Input Elements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -220,6 +236,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
@@ -341,9 +358,9 @@
       
       
       <li>
-<button onclick="window.print()"
+<a href="_static/fandango.pdf" target="_blank"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Download PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +369,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</button>
+</a>
 </li>
       
   </ul>
@@ -433,6 +450,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#star-expressions">Star Expressions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#existential-quantification">Existential Quantification</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-quantification">Universal Quantification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#old-style-quantifiers">Old-Style Quantifiers</a></li>
 </ul>
 </li>
 </ul>
@@ -547,43 +565,121 @@ As an example, here is how to print a derivation tree from <code class="docutils
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;  # Position 0x0000 (0); Sklyi Zzfrxt,0588
-  &lt;person_name&gt; ::= &lt;first_name&gt; &#39; &#39; &lt;last_name&gt;  # Position 0x0001 (1); Sklyi Zzfrxt
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;  # Position 0x0000 (0); Hqwlsxsvunuqlykmguykt Yxvrkmdcyviqthymndxy,6053337261160
+  &lt;person_name&gt; ::= &lt;first_name&gt; &#39; &#39; &lt;last_name&gt;  # Position 0x0001 (1); Hqwlsxsvunuqlykmguykt Yxvrkmdcyviqthymndxy
     &lt;first_name&gt; ::= &lt;name&gt;
-      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Sklyi
+      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Hqwlsxsvunuqlykmguykt
         &lt;ascii_uppercase_letter&gt; ::= &lt;_ascii_uppercase_letter&gt;
-          &lt;_ascii_uppercase_letter&gt; ::= &#39;S&#39;  # Position 0x0002 (2)
+          &lt;_ascii_uppercase_letter&gt; ::= &#39;H&#39;  # Position 0x0002 (2)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;k&#39;  # Position 0x0003 (3)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;q&#39;  # Position 0x0003 (3)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;l&#39;  # Position 0x0004 (4)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;w&#39;  # Position 0x0004 (4)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;y&#39;  # Position 0x0005 (5)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;l&#39;  # Position 0x0005 (5)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;i&#39;  # Position 0x0006 (6)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;s&#39;  # Position 0x0006 (6)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x0007 (7)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;s&#39;  # Position 0x0008 (8)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;v&#39;  # Position 0x0009 (9)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;u&#39;  # Position 0x000a (10)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;n&#39;  # Position 0x000b (11)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;u&#39;  # Position 0x000c (12)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;q&#39;  # Position 0x000d (13)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;l&#39;  # Position 0x000e (14)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;y&#39;  # Position 0x000f (15)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;k&#39;  # Position 0x0010 (16)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;m&#39;  # Position 0x0011 (17)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;g&#39;  # Position 0x0012 (18)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;u&#39;  # Position 0x0013 (19)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;y&#39;  # Position 0x0014 (20)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;k&#39;  # Position 0x0015 (21)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;t&#39;  # Position 0x0016 (22)
     &lt;last_name&gt; ::= &lt;name&gt;
-      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Zzfrxt
+      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Yxvrkmdcyviqthymndxy
         &lt;ascii_uppercase_letter&gt; ::= &lt;_ascii_uppercase_letter&gt;
-          &lt;_ascii_uppercase_letter&gt; ::= &#39;Z&#39;  # Position 0x0007 (7)
+          &lt;_ascii_uppercase_letter&gt; ::= &#39;Y&#39;  # Position 0x0017 (23)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;z&#39;  # Position 0x0008 (8)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x0018 (24)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;f&#39;  # Position 0x0009 (9)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;v&#39;  # Position 0x0019 (25)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;r&#39;  # Position 0x000a (10)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;r&#39;  # Position 0x001a (26)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x000b (11)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;k&#39;  # Position 0x001b (27)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;t&#39;  # Position 0x000c (12)
-  &lt;age&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # 0588
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;m&#39;  # Position 0x001c (28)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;d&#39;  # Position 0x001d (29)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;c&#39;  # Position 0x001e (30)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;y&#39;  # Position 0x001f (31)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;v&#39;  # Position 0x0020 (32)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;i&#39;  # Position 0x0021 (33)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;q&#39;  # Position 0x0022 (34)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;t&#39;  # Position 0x0023 (35)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;h&#39;  # Position 0x0024 (36)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;y&#39;  # Position 0x0025 (37)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;m&#39;  # Position 0x0026 (38)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;n&#39;  # Position 0x0027 (39)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;d&#39;  # Position 0x0028 (40)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x0029 (41)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;y&#39;  # Position 0x002a (42)
+  &lt;age&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # 6053337261160
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x000d (13)
+      &lt;_digit&gt; ::= &#39;6&#39;  # Position 0x002b (43)
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x000e (14)
+      &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x002c (44)
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;8&#39;  # Position 0x000f (15)
+      &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x002d (45)
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;8&#39;  # Position 0x0010 (16)
+      &lt;_digit&gt; ::= &#39;3&#39;  # Position 0x002e (46)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;3&#39;  # Position 0x002f (47)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;3&#39;  # Position 0x0030 (48)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;7&#39;  # Position 0x0031 (49)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;2&#39;  # Position 0x0032 (50)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;6&#39;  # Position 0x0033 (51)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;1&#39;  # Position 0x0034 (52)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;1&#39;  # Position 0x0035 (53)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;6&#39;  # Position 0x0036 (54)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x0037 (55)
 </pre></div>
 </div>
 </div>
@@ -593,7 +689,7 @@ As an example, here is how to print a derivation tree from <code class="docutils
 <p>What is the full string represented by the above derivation tree?</p>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Solution</p>
-<p>It’s <code class="docutils literal notranslate"><span class="pre">'Pl</span> <span class="pre">Seov,5150'</span></code>, as you can find on the right-hand side of the first line.</p>
+<p>You can find on the right-hand side of the first line.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -638,28 +734,30 @@ For instance, if we want to refer to a <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mpzxx Amflv,1
-Jxvx Rnqpmu,10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fnax Zgtlo,03190806636704217691
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zvkx Yoz,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fljpkqmitjx Gqidd,50237752823705228
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jx Qz,260
-Wodexx Drflhl,7116
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cllgwlkagfgjceojx Cklbzmi,1492629787
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Niox Ri,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tqzxx Jf,6
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jxvx Mmhbm,10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fnax Zgtlo,03190806636704217693
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Noxhmcstx Rjhyuzyteltt,9008050683
-Iqjpernx Gklmugke,4545594188
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fljpkqmitjx Gqidd,9161668668822769
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pvksugebdogcx Xchnqiipnqb,65026731237
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fljpkqmitjx Eposwdmvpqgzbyuujt,50237752823705228
+Cllgwlkagfgjceojx Cklbzmi,6
+Tqzxx Jf,1492629787
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cllgwlkagfgjceojx Cklbzmi,1392629787
 </pre></div>
 </div>
 </div>
@@ -689,34 +787,30 @@ This is useful, for instance, if you want to compare several children against a 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chavez,17230432147844936842763409310951574130700439855580316
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,02455973083952
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chambers,48970145445902431245135609507181798505204689
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,842015790968230
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christian Chandler,0114828291586749565540414906269956981296363474
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,41971
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christian Chandler,88655699715614927302999150754066433638366
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Cherry,762269663
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Church,1085857420005322740848010361964800133151830902
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Cherry,48971
+Christopher Chen,48971
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Church,8107811096268421419204075395057681032962228422
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,00455973083952
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Chan,70170017204875942853352888224368790058095022233547
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,02455970083952
+Christopher Cherry,3814868266890683
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chase,25652972481666085204136400897672718378358169000
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chase,1085857420005322740848010361964800133151830902
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chavez,6119709680254971229469133674935431015981770313
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chen,411706572275677445
 </pre></div>
 </div>
 </div>
@@ -739,28 +833,28 @@ Hence, <code class="docutils literal notranslate"><span class="pre">&lt;start&gt
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Rivera,78
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Jackson,907985817117640836
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheryl Perry,600
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Greer,521252494718749
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Morrison,5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Long,80830439477
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Davis,008
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Long,80830439407
+Charles Long,1201030766813437835
+Charles Long,80830439377
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Molina,27
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Long,90830439477
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Ochoa,5
-Charles Castro,27
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheyenne Jackson,96
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Wilson,27
-Christopher Roach,24
-Christopher Mills,6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Greer,521252494718749
+Christopher Long,80830439477
 </pre></div>
 </div>
 </div>
@@ -796,28 +890,30 @@ This allows you to express the earlier constraint in a possibly more readable fo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Krkvfx Eqpy,36
-Dnsx Gnoxq,43513
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zqbtwudmrmbyjqx Nnrykcpmbleya,4550277463458112
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iix Hfka,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Egugtgskijraxpmwnx Vjvaatvyzlhh,07816752738311
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ux Kddr,53405
-Mxqx Volzm,6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ilwdilx Twyqzpjqxsyrylnjqhys,034911
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nvfex Vygzkv,95503
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iwzudldqdppuejuoxpx Cdbiinzccfmozxvcnd,4845685931075517
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iix Ux,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ilwdilx Twyqzpjqxsyrylnjqhys,62482282108
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iix Hcka,3
-Ustax Jacmeseny,9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ilwdilx Cjyx,36654463979960732
+Zqbtwudmrmbyjqx Lprtahsceuztq,4550277463458112
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Teaolcjx Pix,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flwdilx Twyqzpjqxsyrylnjqhys,034911
+Egugtgskijraxpmwnx Jqqklrnrctigxwb,07816752738311
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Egugtgskijraxpmwnx Xwelhz,07816752738311
 </pre></div>
 </div>
 </div>
@@ -861,16 +957,22 @@ A simpler way to think about <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xaqr Ly,755
-Xk Ys,6
-Xuksjb Ugjh,53807
-Xaxow Nspwg,0974
-Xxcj Szcnpa,690
-Xkqf Aqbmsa,239
-Xwue Rs,7424
-Xisw Rfa,44219
-Xrm Dknm,9916
-Xqeb Weqg,133
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xd Nejawikpecr,16057329741
+Xalc Ekjsgeugojvzwvlmqcv,62707292207810
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xt Axqqofphlqlxp,01
+Xnoettsorwfsmutsn Ulyptlopivbglq,9414748
+Xouxkrgprzjg Ixqztrplrwr,00482
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xlngony Jznetd,380980
+Xtnjablkpgudvyqn Koztixa,3136387838683724236
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xrdcxnjynduvai Tnybpusucof,154399146235159334
+Xfnzh Exwyoeagcvinbzxlvhv,76714224476969608520
+Xajpiqrq Ypplamwpyofvg,772043102876
 </pre></div>
 </div>
 </div>
@@ -895,16 +997,26 @@ What would the expression <code class="docutils literal notranslate"><span class
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nuxsi Vxxxxx,0
-Lmaseq Lxxxx,208
-Dajc Bxxx,9
-Vytrrw Cxxx,1
-Raj Tx,7125
-Ezsuf Kxx,28597
-Rrtpd Cxxx,7673
-Tomncz Exxxx,7618
-Uvp Tx,8
-Uhzejo Qxxxxx,4310
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fvghcxbvifwdblxhuou Axxxxxxxxxx,55274
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rqcpairaiiwmrsm Txxxxxxx,30319117246561940
+Sxrpkhrpoxxqygoxy Jxxxxxxx,25132320834167671408
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fyhpuwknoxihialmf Axxxxxxxxxxxxxxxx,06126
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jqwgzefpksuzsisumysqn Gxxxxxxxxxxxxxxxxxx,56710
+Zlcmikbsxbnuxdubwv Cxxxxxxxxxx,16
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bxccyzluyuykaytfdmiy Ixxxxxxxxxxxxxxxxxxx,0402
+Zonolc Rx,1
+Wszh Pxxxxxxxx,581521
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dujwocsoonl Zxxxxxxxxxxx,1240
 </pre></div>
 </div>
 </div>
@@ -961,18 +1073,30 @@ For instance, we can have a constraint check whether a particular element is in 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Afvr Pfot,425
-Kzia Asx,7835
-Hu Avyn,98
-Akzcrv Fnovi,23
-Acxfo Sddghr,07
-Ambiw Usj,18
-Aj Jdxts,21
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aybfrmedtfhuiihdhfen Uwqd,56022810997
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acxvo Sddghr,07
-Akzcrv Fnofi,23
-Enzdr Axasp,08092
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wbjmcytlsrowonkmdoe Aihjxaxyiedxc,2246230395069638738
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wpkemfzvbkdnzibqjo Ahomxjsnylijfmpnbhx,887019
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atollbtyovvqwn Ohsbdahxmirldobvi,335217864554029353
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfevgujqxwvbsxqbkx Aimatcqaezsrjppgd,423056
+Azkyjiglnprr Jwzsmbmlhdg,7853368306754016172
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Objmcytlsrowonkmdoe Aihjxaxyiedxc,2246230395069638738
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfevgujqdwvbsxqbkx Aimatcqaezsrjppgd,423056
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Azkyjiglnprr Jwzsmbmlhdg,887019
+Wpkemfzvbkdnzibqjo Ahomxjsnylijfmpnbhx,7853368306754016172
 </pre></div>
 </div>
 </div>
@@ -1003,16 +1127,26 @@ Here we use the Python <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jaa Albply,85
-Maaa Yp,53165
-Aaaaaa Rgx,4
-Saaaaa Lj,414
-Iaa Pd,34370
-Saaaa Zxnh,229
-Gaa Gf,7562
-Za By,1349
-Raaaaa Po,247
-Ua Gyep,276
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xaaaaaaaaaaaaaaaaa Ltqnwpvufjqfl,068979
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saaaaaaaaaaa Ezqrwcqiybyubiyfuyf,28453290515981497
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uaaaaaaaaaa Lnaacivswlwyityooccfj,412831991589
+Saaaaaaaaaa Ojsqvlek,489763645407877689
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xaaaaaaaaaaaaaaaaaa Uaohstgibu,152318562686
+Ka Smvoccqgs,9285679693527976220
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Haaaaa Zmepiiunferj,20105152062077718555
+Faaaaaaaaaaaaaaaa Aakawwuunmpk,73285253458875869
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Paaaaaaaaaa Ufozbdahuunmoj,3
+Daaaaaaa Conqnvqjsexvfwqac,0106603781
 </pre></div>
 </div>
 </div>
@@ -1026,6 +1160,62 @@ This is what we do here with <code class="docutils literal notranslate"><span cl
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;&lt;first_name&gt;..&lt;ascii_lowercase_letter&gt; == &quot;a&quot;&#39;</span>
 </pre></div>
 </div>
+</div>
+</section>
+<section id="old-style-quantifiers">
+<span id="sec-old-quantifiers"></span><h3>Old-Style Quantifiers<a class="headerlink" href="#old-style-quantifiers" title="Link to this heading">#</a></h3>
+<p>Prior to version 1.0, Fandango supported another style of quantifiers:</p>
+<ul class="simple">
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">SYMBOL</span> <span class="pre">in</span> <span class="pre">EXPRESSION:</span> <span class="pre">CONSTRAINT</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">all(CONSTRAINT</span> <span class="pre">for</span> <span class="pre">ELEM</span> <span class="pre">in</span> <span class="pre">*EXPRESSION:</span> <span class="pre">)</span></code></p></li>
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">exists</span> <span class="pre">SYMBOL</span> <span class="pre">in</span> <span class="pre">EXPRESSION:</span> <span class="pre">CONSTRAINT</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">any(CONSTRAINT</span> <span class="pre">for</span> <span class="pre">ELEM</span> <span class="pre">in</span> <span class="pre">*EXPRESSION:</span> <span class="pre">)</span></code></p></li>
+</ul>
+<p>with <code class="docutils literal notranslate"><span class="pre">SYMBOL</span></code> being a symbol (in <code class="docutils literal notranslate"><span class="pre">&lt;...&gt;</span></code>, so not a Python object) which can be referred to in <code class="docutils literal notranslate"><span class="pre">CONSTRAINT</span></code>.</p>
+<p>To express that at least one letter in <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> should be <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, write</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exists</span> <span class="o">&lt;</span><span class="n">c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">first_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">c</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;exists &lt;c&gt; in &lt;ascii_lowercase_letter&gt;: str(&lt;c&gt;) == &quot;a&quot;&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Asmhbuuheebskjsf Lvgopvxjqilqdkwajzi,57707606
+Aaaaaauhaebsaasa Laaaavajaaaqakaajai,57707606
+Naaaa Haa,505756132035339976
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gaaaaaaapht Uaaaa,907031938349421199
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rsfrybfkibquathcg Heftpslkkw,1312527427998706968
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;forall &lt;c&gt; in &lt;ascii_lowercase_letter&gt;: str(&lt;c&gt;) == &quot;a&quot;&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Faaaaaaa Ca,48185
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vaaaaaaaaa Oa,715
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caaaa Ca,48185
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Faaaaaaa Ka,48185
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fa Iaaaaa,41825054078218
+</pre></div>
+</div>
+</div>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>Old-style quantifiers will be deprecated in a future Fandango version. Use <a class="reference internal" href="#sec-quantifiers"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">all()</span></code> and <code class="docutils literal notranslate"><span class="pre">any()</span></code></span></a> instead.</p>
 </div>
 </section>
 </section>
@@ -1071,11 +1261,11 @@ This is what we do here with <code class="docutils literal notranslate"><span cl
       </div>
     </a>
     <a class="right-next"
-       href="ISO8601.html"
+       href="Converters.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Case Study: ISO 8601 Date + Time</p>
+        <p class="prev-next-title">Converting ANTLR and Other Input Specs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1111,6 +1301,7 @@ This is what we do here with <code class="docutils literal notranslate"><span cl
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#star-expressions">Star Expressions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#existential-quantification">Existential Quantification</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-quantification">Universal Quantification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#old-style-quantifiers">Old-Style Quantifiers</a></li>
 </ul>
 </li>
 </ul>
@@ -1127,7 +1318,7 @@ This is what we do here with <code class="docutils literal notranslate"><span cl
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -1137,7 +1328,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

@@ -57,19 +57,378 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-    <script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
-window.addEventListener("load", () => mermaid.run());
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
 </script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Protocols';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hatching Specs" href="Hatching.html" />
-    <link rel="prev" title="Data Converters" href="Conversion.html" />
+    <link rel="next" title="Customizing Party Communication" href="Parties.html" />
+    <link rel="prev" title="Checking Outputs" href="Outputs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,7 +509,7 @@ window.addEventListener("load", () => mermaid.run());
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -182,7 +541,7 @@ window.addEventListener("load", () => mermaid.run());
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -194,30 +553,46 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -228,6 +603,7 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
@@ -349,9 +725,9 @@ window.addEventListener("load", () => mermaid.run());
       
       
       <li>
-<button onclick="window.print()"
+<a href="_static/fandango.pdf" target="_blank"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Download PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -360,7 +736,7 @@ window.addEventListener("load", () => mermaid.run());
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</button>
+</a>
 </li>
       
   </ul>
@@ -431,6 +807,18 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-client">Interacting as Network Client</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-server">Interacting as Network Server</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bigger-protocol-spec">A Bigger Protocol Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-state-diagrams-to-grammars">From State Diagrams to Grammars</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-state-diagrams-to-grammars">Converting State Diagrams to Grammars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-errors">Modeling Errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-state-diagrams">Extracting State Diagrams</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-state-diagrams-with-mermaid">Visualizing State Diagrams with Mermaid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-state-diagrams-with-graphviz-dot">Visualizing State Diagrams with Graphviz (DOT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-state-diagrams-as-plain-text">Extracting State Diagrams as Plain Text</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-individual-parties">Simulating Individual Parties</a></li>
 </ul>
             </nav>
         </div>
@@ -444,21 +832,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="testing-protocols">
 <span id="sec-protocols"></span><h1>Testing Protocols<a class="headerlink" href="#testing-protocols" title="Link to this heading">#</a></h1>
-<p>In <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">the chapter on checking outputs</span></a>, we already have seen how to interact with external programs.
-In this chapter, we will extend this concept to full <em>protocol testing</em> across networks.
-This includes:</p>
-<ul class="simple">
-<li><p>Acting as a network <em>client</em> and interacting with network servers  using generated inputs</p></li>
-<li><p>Acting as a network <em>server</em> and interacting with network clients using generated inputs.</p></li>
-</ul>
-<div class="attention admonition">
-<p class="admonition-title">Under Construction</p>
-<p>Protocol testing is currently in beta.
-Check out <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/issues">the list of open issues</a>.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-flex-row-reverse docutils">
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-5 sd-col-md-5 sd-col-lg-5 docutils">
+<a class="sd-m-auto reference internal image-reference" href="_images/FandangoIO.png"><img alt="_images/FandangoIO.png" class="sd-m-auto" src="_images/FandangoIO.png" style="width: 300px;" />
+</a>
 </div>
+<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-7 sd-col-md-7 sd-col-lg-7 sd-align-major-justify sd-fs-5 docutils">
+<p>In <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">the chapter on checking outputs</span></a>, we already have seen how to interact with external programs.
+In this chapter, we will extend this concept to full <em>protocol testing</em> across networks.</p>
+</div>
+</div>
+</div>
+<p>Fandango can test protocols.
+In particular, it can</p>
+<ul class="simple">
+<li><p>act as a network <em>client</em> and interact with network <em>servers</em>; and</p></li>
+<li><p>act as a network <em>server</em> and interact with network <em>clients</em>.</p></li>
+</ul>
 <section id="interacting-with-an-smtp-server">
 <h2>Interacting with an SMTP server<a class="headerlink" href="#interacting-with-an-smtp-server" title="Link to this heading">#</a></h2>
-<p>The Simple Mail Transfer Protocol (SMTP) is, as the name suggests, a simple protocol through which mail clients can connect to a server to send mail to recipients.
+<p>Let us start with a simple example.
+The <a class="reference external" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">Simple Mail Transfer Protocol</a> (SMTP, <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc821">RFC 821</a>) is a protocol through which mail clients can connect to a server to send mail to recipients.
 A <a class="reference external" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">typical interaction with an SMTP server</a> <code class="docutils literal notranslate"><span class="pre">smtp.example.com</span></code>, sending a mail from <code class="docutils literal notranslate"><span class="pre">bob&#64;example.org</span></code> to <code class="docutils literal notranslate"><span class="pre">alice&#64;example.com</span></code>, is illustrated below:</p>
 <pre  class="mermaid">
         sequenceDiagram
@@ -496,42 +891,58 @@ For this, we need two things:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>aiosmtpd
 </pre></div>
 </div>
-<p>Once installed, we can run the server locally; normally, it runs on port 8025:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>aiosmtpd<span class="w"> </span>-d<span class="w"> </span>-n
-INFO:mail.log:Server<span class="w"> </span>is<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>localhost:8025
+<p>Once installed, we can run the server locally.
+Normally, it runs on port 8025:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>aiosmtpd<span class="w"> </span>-d<span class="w"> </span>-n<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <p>We can now connect to the server on the given port and send it commands.
 The <code class="docutils literal notranslate"><span class="pre">telnet</span></code> command is handy for this.
 We give it a hostname (<code class="docutils literal notranslate"><span class="pre">localhost</span></code> for our local machine) and a port (8025 for our local SMTP server.)</p>
 <p>Once connected, anything we type into the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> input will automatically be relayed to the given port, and hence to the SMTP server.
-For instance, a <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command (followed by Return) will terminate the connection.</p>
+For instance, entering a <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command (followed by Return) into telnet will be forwarded to the SMTP server, which will terminate the connection:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
-Trying<span class="w"> </span>::1...
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
+Connected to localhost.
+Escape character is &#39;^]&#39;.
+220 smtp.example.com.dtj4yddoao4ujjevhu1asbapuf.cx.internal.cloudapp.net Python SMTP 1.4.6
+QUIT
+221 Bye
+Connection closed by foreign host.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try this for yourself!
+What happens if you invoke <code class="docutils literal notranslate"><span class="pre">telnet</span></code>, introducing yourself with <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">client.example.org</span></code>?</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>When sending <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">client.example.org</span></code>, the server replies with its own hostname.
+This is the name of the local computer, in our example <code class="docutils literal notranslate"><span class="pre">smtp.example.com</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
+Trying<span class="w"> </span>localhost...
 Connected<span class="w"> </span>to<span class="w"> </span>localhost.
 Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
-<span class="m">220</span><span class="w"> </span>localhost.example.com<span class="w"> </span>Python<span class="w"> </span>SMTP<span class="w"> </span><span class="m">1</span>.4.6
+<span class="m">220</span><span class="w"> </span>smtp.example.com<span class="w"> </span>Python<span class="w"> </span>SMTP<span class="w"> </span><span class="m">1</span>.4.6
+HELO<span class="w"> </span>client.example.org
+<span class="m">250</span><span class="w"> </span>smtp.example.com
 QUIT
 <span class="m">221</span><span class="w"> </span>Bye
 Connection<span class="w"> </span>closed<span class="w"> </span>by<span class="w"> </span>foreign<span class="w"> </span>host.
 </pre></div>
 </div>
-<p>Try this for yourself! What happens if you invoke <code class="docutils literal notranslate"><span class="pre">telnet</span></code>, introducing yourself with  <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">client.example.com</span></code>?</p>
-<div class="tip dropdown admonition">
-<p class="admonition-title">Solution</p>
-<p>When sending <code class="docutils literal notranslate"><span class="pre">HELO</span> <span class="pre">client.example.com</span></code>, the server replies with its own hostname.
-This is the name of the local computer, in our example <code class="docutils literal notranslate"><span class="pre">localhost.example.com</span></code>.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
-Trying<span class="w"> </span>::1...
-Connected<span class="w"> </span>to<span class="w"> </span>localhost.
-Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
-<span class="m">220</span><span class="w"> </span>localhost.example.com<span class="w"> </span>Python<span class="w"> </span>SMTP<span class="w"> </span><span class="m">1</span>.4.6
-HELO<span class="w"> </span>client.example.com
-<span class="m">250</span><span class="w"> </span>localhost.example.com
-QUIT
-<span class="m">221</span><span class="w"> </span>Bye
-</pre></div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To interrupt a telnet session, type the escape character (<code class="docutils literal notranslate"><span class="pre">CTRL</span> <span class="pre">+</span> <span class="pre">]</span></code>).
+At the <code class="docutils literal notranslate"><span class="pre">telnet&gt;</span></code> prompt, enter <code class="docutils literal notranslate"><span class="pre">help</span></code> for possible commands;
+<code class="docutils literal notranslate"><span class="pre">quit</span></code> exits the telnet program.</p>
 </div>
 </section>
 <section id="a-simple-smtp-grammar">
@@ -543,7 +954,7 @@ QUIT
 <p>With <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">talk</span></code></span></a>, we have seen a Fandango facility that allows us to connect to the standard input and output channels of a given program and interact with it.
 The idea would now be to use the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> program for this very purpose.
 By invoking</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span><span class="m">8025</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
 </pre></div>
 </div>
 <p>we could interact with the <code class="docutils literal notranslate"><span class="pre">telnet</span></code> program as described above.
@@ -560,7 +971,7 @@ All we now need is a grammar that describes the <code class="docutils literal no
     telnet-&gt;&gt;Fandango: Trying ::1...
     telnet-&gt;&gt;Fandango: Connected to localhost.
     telnet-&gt;&gt;Fandango: Escape character is '^]'.
-    SMTP Server (via telnet)-&gt;&gt;Fandango: 220 localhost.example.com Python SMTP 1.4.6
+    SMTP Server (via telnet)-&gt;&gt;Fandango: 220 smtp.example.com Python SMTP 1.4.6
     Fandango-&gt;&gt;SMTP Server (via telnet): QUIT
     SMTP Server (via telnet)-&gt;&gt;Fandango: 221 Bye
     SMTP Server (via telnet)-&gt;&gt;telnet: (closes connection)
@@ -574,14 +985,14 @@ All we now need is a grammar that describes the <code class="docutils literal no
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;Out:telnet_intro&gt; &lt;smtp&gt;
 &lt;telnet_intro&gt; ::= \
-    r&quot;Trying.*&quot; &quot;\r\n&quot; \
-    r&quot;Connected.*&quot; &quot;\r\n&quot; \
-    r&quot;Escape.*&quot; &quot;\r\n&quot;
+    r&quot;Trying.*&quot; &quot;\n&quot; \
+    r&quot;Connected.*&quot; &quot;\n&quot; \
+    r&quot;Escape.*&quot; &quot;\n&quot;
 
 &lt;smtp&gt; ::= &lt;Out:m220&gt; &lt;In:quit&gt; &lt;Out:m221&gt;
-&lt;m220&gt; ::= &quot;220 &quot; r&quot;.*&quot; &quot;\r\n&quot;
-&lt;quit&gt; ::= &quot;QUIT\r\n&quot;
-&lt;m221&gt; ::= &quot;221 &quot; r&quot;.*&quot; &quot;\r\n&quot;
+&lt;m220&gt; ::= &quot;220 &quot; r&quot;.*&quot; &quot;\n&quot;
+&lt;quit&gt; ::= &quot;QUIT\n&quot;
+&lt;m221&gt; ::= &quot;221 &quot; r&quot;.*&quot; &quot;\n&quot;
 </pre></div>
 </div>
 </div>
@@ -591,13 +1002,70 @@ All we now need is a grammar that describes the <code class="docutils literal no
 <p>Again, note that <code class="docutils literal notranslate"><span class="pre">In</span></code> and <code class="docutils literal notranslate"><span class="pre">Out</span></code> describe the interaction from the <em>perspective of the program under test</em>; hence, <code class="docutils literal notranslate"><span class="pre">Out</span></code> is what <code class="docutils literal notranslate"><span class="pre">telnet</span></code> and the SMTP server produce, whereas <code class="docutils literal notranslate"><span class="pre">In</span></code> is what the SMTP server (and telnet) get as input.</p>
 </div>
 <p>With this, we can now connect to our (hopefully still running) SMTP server and actually send it a <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span><span class="m">8025</span>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">1</span></code> option limits fuzzing to one interaction.
+Without <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">1</span></code>, Fandango keeps on generating inputs until <a class="reference internal" href="Diversity.html#sec-diversity"><span class="std std-ref">grammar coverage</span></a> is achieved.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
 </pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+</pre></div>
+</div>
+</div>
 </div>
 <p>To track the data that is actually exchanged, use the verbose <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag.
 The <code class="docutils literal notranslate"><span class="pre">In:</span></code> and <code class="docutils literal notranslate"><span class="pre">Out:</span></code> log messages show the data that is being exchanged.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>telnet<span class="w"> </span><span class="m">8025</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-telnet.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8025</span>
 </pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
+fandango:INFO: ---------- Initializing base population ----------
+fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
+fandango:INFO: ---------- Done initializing base population ----------
+fandango:INFO: ---------- Generating  for 500 generations----------
+fandango:INFO: Generating (additional) initial population (size: 100)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+fandango:INFO: Initial population generated in 0.05 seconds
+fandango:INFO: Current coverage: 1.96%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
+fandango:INFO: Current coverage: 29.41%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmkj6or.dtj4yddoao4ujjevhu1asbapuf.cx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+fandango:INFO: Current coverage: 60.78%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
+fandango:INFO: Current coverage: 74.51%
+fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
+fandango:INFO: Current coverage: 100.00%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.1: </span>As of version 1.1, Fandango by default</p>
+<ul class="simple">
+<li><p>keeps on generating interactions until stopped (or limited by the <code class="docutils literal notranslate"><span class="pre">-n</span></code> option)</p></li>
+<li><p>aims for <a class="reference internal" href="Diversity.html#sec-diversity"><span class="std std-ref">grammar coverage</span></a>, thus covering states and message alternatives</p></li>
+</ul>
 </div>
 </section>
 <section id="interacting-as-network-client">
@@ -608,11 +1076,9 @@ Hence, our I/O grammars have to reflect the <code class="docutils literal notran
 <p>Fortunately, Fandango offers a means to be invoked <em>directly as a network client</em>, not requiring external programs such as <code class="docutils literal notranslate"><span class="pre">telnet</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">talk</span></code> option <code class="docutils literal notranslate"><span class="pre">--client</span></code> allows Fandango to be used as a network client.
 The argument to <code class="docutils literal notranslate"><span class="pre">--client</span></code> is a network address to connect to.
-In the simplest form, it is just a port number on the local machine.</p>
-<p>Hence, to have Fandango act as an SMTP client for the local server, we can enter</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>SPEC.fan<span class="w"> </span>--client<span class="w"> </span><span class="m">8025</span>
-</pre></div>
-</div>
+In the simplest form, it is just a port number on the local machine.
+Hence, to have Fandango act as an SMTP client for the local server, we would use
+the option <code class="docutils literal notranslate"><span class="pre">--client</span> <span class="pre">8025</span></code>.</p>
 <p>Since Fandango directly talks to the SMTP server now, we can also simplify the grammar by removing the <code class="docutils literal notranslate"><span class="pre">&lt;telnet_intro&gt;</span></code> part.
 Also, there is no more <code class="docutils literal notranslate"><span class="pre">In</span></code> and <code class="docutils literal notranslate"><span class="pre">Out</span></code> parties, since we do not interact with the standard input and output of an invoked program.
 Instead,</p>
@@ -642,13 +1108,20 @@ The spec <a class="reference download internal" download="" href="_downloads/51b
 </div>
 <p>Note how we added <code class="docutils literal notranslate"><span class="pre">&lt;hostname&gt;</span></code> as additional specification of the hostname that is typically part of the initial server message.</p>
 <p>With this, we have Fandango act as client and connect to the (hopefully still running) server on port 8025:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-simple.fan<span class="w"> </span>--client<span class="w"> </span><span class="m">8025</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-simple.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>--client<span class="w"> </span><span class="m">8025</span>
 </pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+</pre></div>
+</div>
+</div>
 </div>
 <pre  class="mermaid">
         sequenceDiagram
     Fandango-&gt;&gt;SMTP Server: (connect)
-    SMTP Server-&gt;&gt;Fandango: 220 host.example.com &lt;more data&gt;
+    SMTP Server-&gt;&gt;Fandango: 220 smtp.example.com &lt;more data&gt;
     Fandango-&gt;&gt;SMTP Server: QUIT
     SMTP Server-&gt;&gt;Fandango: 221 &lt;more data&gt;
     SMTP Server-&gt;&gt;Fandango: (closes connection)
@@ -661,177 +1134,193 @@ Before we go and extend it, let us first highlight a particular Fandango feature
 From the same specification, Fandango can act as a <em>client</em> and as a <em>server</em>.
 When invoked with the <code class="docutils literal notranslate"><span class="pre">--server</span></code> option, Fandango will <em>create</em> a server at the given port and accept client connections.
 So if we invoke</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-simple.fan<span class="w"> </span>--server<span class="w"> </span><span class="m">8125</span>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">100</span></code> ensures the server will run for 100 interactions.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>smtp-simple.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>--server<span class="w"> </span><span class="m">8125</span>
 </pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <p>we can then connect to our running Fandango “SMTP Server” and interact with it according to the <code class="docutils literal notranslate"><span class="pre">smtp-simple.fan</span></code> spec:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8125</span>
-Trying<span class="w"> </span>::1...
-Connected<span class="w"> </span>to<span class="w"> </span>localhost.
-Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
-<span class="m">220</span><span class="w"> </span>host.example.com<span class="w"> </span><span class="m">26</span>%
-QUIT
-<span class="m">221</span><span class="w"> </span>26yn
 </pre></div>
 </div>
-<p>As server, Fandango produces its own <code class="docutils literal notranslate"><span class="pre">220</span></code> and <code class="docutils literal notranslate"><span class="pre">221</span></code> messages, effectively <em>fuzzing the client</em>.
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ConnectionRefusedError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">minitelnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">telnet</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">telnet</span><span class="p">([</span><span class="s2">&quot;QUIT</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">port</span><span class="o">=</span><span class="mi">8125</span><span class="p">)</span>
+
+<span class="nn">File ~/work/fandango/fandango/docs/minitelnet.py:21,</span> in <span class="ni">telnet</span><span class="nt">(commands, port, host)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trying </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">21</span> <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Escape character is &#39;^]&#39;.&quot;</span><span class="p">)</span>
+
+<span class="ne">ConnectionRefusedError</span>: [Errno 111] Connection refused
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that as server, Fandango produces its own <code class="docutils literal notranslate"><span class="pre">220</span></code> and <code class="docutils literal notranslate"><span class="pre">221</span></code> messages, effectively <em>fuzzing the client</em>.
 Note how the interaction diagram reflects how Fandango is now taking the role of the client:</p>
 <pre  class="mermaid">
         sequenceDiagram
     SMTP Client (or telnet)-&gt;&gt;Fandango: (connect)
-    Fandango-&gt;&gt;SMTP Client (or telnet): 220 host.example.com &lt;random data&gt;
+    Fandango-&gt;&gt;SMTP Client (or telnet): 220 smtp.example.com &lt;random data&gt;
     SMTP Client (or telnet)-&gt;&gt;Fandango: QUIT
     Fandango-&gt;&gt;SMTP Client (or telnet): 221 &lt;random data&gt;
     Fandango-&gt;&gt;SMTP Client (or telnet): (closes connection)
-    </pre><div class="attention admonition">
-<p class="admonition-title">Under Construction</p>
-<p>Fandango can actually create and mock an arbitrary number of clients and servers, all interacting with each other.
-The interface for this is currently under construction.</p>
-</div>
-</section>
+    </pre></section>
 <section id="a-bigger-protocol-spec">
-<h2>A Bigger Protocol Spec<a class="headerlink" href="#a-bigger-protocol-spec" title="Link to this heading">#</a></h2>
+<span id="sec-smtp-extended"></span><h2>A Bigger Protocol Spec<a class="headerlink" href="#a-bigger-protocol-spec" title="Link to this heading">#</a></h2>
 <p>So far, our SMTP server is not great at testing SMTP clients – all it can handle is a single <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command.
 Let us extend it a bit with a few more commands, reflecting the interaction in the introduction:</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;connect&gt;
-&lt;connect&gt; ::= &lt;Server:id&gt; &lt;helo&gt;
-
-&lt;id&gt; ::= &#39;220 &#39; &lt;hostname&gt; &#39; ESMTP Postfix\r\n&#39;
-&lt;hostname&gt; ::= r&quot;[-a-zA-Z0-9.:]+&quot; := &quot;host.example.com&quot;
-
-&lt;helo&gt; ::= &lt;Client:HELO&gt; \
-    (&lt;Server:hello&gt; &lt;mail_from&gt; | &lt;Server:error&gt;)
-&lt;HELO&gt; ::= &#39;HELO &#39; &lt;hostname&gt; &#39;\r\n&#39;
-
-&lt;hello&gt; ::= &#39;250 Hello &#39; &lt;hostname&gt; &#39;, glad to meet you\r\n&#39; \
-    &lt;mail_from&gt;
-
-&lt;error&gt; ::= &#39;5&#39; &lt;digit&gt; &lt;digit&gt; &#39; &#39; &lt;error_message&gt; &#39;\r\n&#39;
-&lt;error_message&gt; ::= r&#39;[^\r]*&#39; := &quot;Error&quot;
-
-&lt;mail_from&gt; ::= &lt;Client:MAIL_FROM&gt; \
-    (&lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt;)
-
-&lt;MAIL_FROM&gt; ::= &#39;MAIL FROM:&lt;&#39; &lt;email&gt; &#39;&gt;\r\n&#39;
-# Actual email addresses are much more varied
-&lt;email&gt; ::= r&quot;[-a-zA-Z0-9.]+&quot; &#39;@&#39; &lt;hostname&gt; := &quot;alice@example.com&quot;
-
-&lt;ok&gt; ::= &#39;250 Ok\r\n&#39;
-
-&lt;mail_to&gt; ::= &lt;Client:RCPT_TO&gt; \
-    (&lt;Server:ok&gt; &lt;data&gt; | &lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt;)
-
-&lt;RCPT_TO&gt; ::= &#39;RCPT TO:&lt;&#39; &lt;email&gt; &#39;&gt;\r\n&#39;
-
-&lt;data&gt; ::= &lt;Client:DATA&gt; &lt;Server:end_data&gt; &lt;Client:message&gt; \
-    (&lt;Server:ok&gt; &lt;quit&gt; | &lt;Server:error&gt;)
-
-&lt;DATA&gt; ::= &#39;DATA\r\n&#39;
-
-&lt;end_data&gt; ::= &#39;354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;\r\n&#39;
-
-&lt;message&gt; ::= r&#39;[^.\r\n]*\r\n[.]\r\n&#39;
-
-&lt;quit&gt; ::= &lt;Client:QUIT&gt; &lt;Server:bye&gt;
-
-&lt;QUIT&gt; ::= &#39;QUIT\r\n&#39;
-
-&lt;bye&gt; ::= &#39;221 Bye\r\n&#39;
+</div>
+<p>This spec can actually handle the initial interaction (check it!).</p>
+</section>
+<section id="from-state-diagrams-to-grammars">
+<h2>From State Diagrams to Grammars<a class="headerlink" href="#from-state-diagrams-to-grammars" title="Link to this heading">#</a></h2>
+<p>In the <a class="reference internal" href="#sec-smtp-extended"><span class="std std-ref">extended SMTP spec</span></a>, you may note that the interactions follow a particular <em>order</em>, implying the <em>state</em> the server and client are in.
+In the “happy” path (assuming no errors), the order of possible states and interactions can be visualized as a <em>state diagram</em>:</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; #lt;connect#gt;
+    #lt;connect#gt; --&gt; #lt;helo#gt;: #lt;Server#colon;id#gt;
+    #lt;helo#gt; --&gt; #lt;mail_from#gt;: #lt;Client#colon;HELO#gt; #lt;Server#colon;hello#gt;
+    #lt;mail_from#gt; --&gt; #lt;mail_to#gt;: #lt;Client#colon;MAIL_FROM#gt; #lt;Server#colon;ok#gt;
+    #lt;mail_to#gt; --&gt; #lt;data#gt;: #lt;Client#colon;RCPT_TO#gt; #lt;Server#colon;ok#gt;
+    #lt;mail_to#gt; --&gt; #lt;mail_to#gt;: #lt;Client#colon;RCPT_TO#gt; #lt;Server#colon;ok#gt;
+    #lt;data#gt; --&gt; #lt;quit#gt;: #lt;Client#colon;DATA#gt; #lt;Server#colon;end_data#gt; #lt;Client#colon;message#gt;
+    #lt;quit#gt; --&gt; [*]: #lt;Client#colon;QUIT#gt; #lt;Server#colon;bye#gt;
+    </pre><p>In this state diagram,</p>
+<ul class="simple">
+<li><p>every <em>rounded rectangle</em> stands for a <em>state</em>;</p></li>
+<li><p><em>arrows</em> denote possible <em>transitions</em> between these states;</p></li>
+<li><p><em>labels</em> on the transitions denote the interactions that take place when transitioning from one state to another; and</p></li>
+<li><p>any <em>path</em> through the state diagram indicates a valid sequence of states (and hence a valid sequence of interactions).</p></li>
+</ul>
+<p>State diagrams often contain <em>loops</em>.
+Both the SMTP grammar (and the above state diagram) accepts multiple <code class="docutils literal notranslate"><span class="pre">&lt;mail_to&gt;</span></code> interactions, allowing mails to be sent to multiple destinations.</p>
+<p>Note how the set of paths through the state diagram corresponds to the possible sequence of productions in the SMTP specification.
+Both the state diagram and the grammar effectively specify the same sequence of interactions; the grammar on top also specifies the syntax of individual messages.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Fandango, you can apply <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraints</span></a> to all nonterminals, whether they stand for states, interactions, messages, or parts thereof.</p>
+</div>
+<section id="converting-state-diagrams-to-grammars">
+<h3>Converting State Diagrams to Grammars<a class="headerlink" href="#converting-state-diagrams-to-grammars" title="Link to this heading">#</a></h3>
+<p>Often, a protocol specification is already given in the form of such a state diagram, also known as a <em>labeled transition system</em> (LTS) or as a  <em>finite state automaton</em> (FSA).
+You can convert these into Fandango grammars as follows:</p>
+<ol class="arabic simple">
+<li><p>Every <em>state</em> <span class="math notranslate nohighlight">\(S\)</span> in the diagram becomes a <em>nonterminal</em> <span class="math notranslate nohighlight">\(S\)</span> in the grammar.</p></li>
+<li><p>Every <em>transition</em> <span class="math notranslate nohighlight">\(A \rightarrow B\)</span> in the diagram becomes an <em>expansion</em> of <span class="math notranslate nohighlight">\(A\)</span> into <span class="math notranslate nohighlight">\(B\)</span>, or <span class="math notranslate nohighlight">\(A ::= B\)</span>.</p></li>
+<li><p>If there are multiple <em>alternatives</em> outgoing from <span class="math notranslate nohighlight">\(A\)</span>, each of them becomes a separate alternative for the expansion of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+<p>The animation below illustrates how this conversion works applied on the first states of the SMTP protocol.</p>
+<img alt="_images/lts2grammar.gif" src="_images/lts2grammar.gif" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apply these rules to the SMTP state diagram, above, and check how they correspond to the Fandango SMTP spec.</p>
+</div>
+</section>
+<section id="modeling-errors">
+<h3>Modeling Errors<a class="headerlink" href="#modeling-errors" title="Link to this heading">#</a></h3>
+<p>Our SMTP spec above actually accounts for <em>errors</em>, always having the server enter an <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> state if the client command received cannot be parsed properly.
+Hence, the state diagram induced by the above grammar actually looks like this:</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; #lt;start#gt;
+    #lt;start#gt; --&gt; #lt;connect#gt;
+    #lt;connect#gt; --&gt; #lt;helo#gt;: #lt;Server#colon;id#gt;
+    #lt;helo#gt; --&gt; #lt;mail_from#gt;: #lt;Client#colon;HELO#gt; #lt;Server#colon;hello#gt;
+    #lt;helo#gt; --&gt; #lt;end#gt;: #lt;Client#colon;HELO#gt; #lt;Server#colon;error#gt;
+    #lt;mail_from#gt; --&gt; #lt;mail_to#gt;: #lt;Client#colon;MAIL_FROM#gt; #lt;Server#colon;ok#gt;
+    #lt;mail_from#gt; --&gt; #lt;end#gt;: #lt;Client#colon;MAIL_FROM#gt; #lt;Server#colon;error#gt;
+    #lt;mail_to#gt; --&gt; #lt;data#gt;: #lt;Client#colon;RCPT_TO#gt; #lt;Server#colon;ok#gt;
+    #lt;mail_to#gt; --&gt; #lt;mail_to#gt;: #lt;Client#colon;RCPT_TO#gt; #lt;Server#colon;ok#gt;
+    #lt;mail_to#gt; --&gt; #lt;end#gt;: #lt;Client#colon;RCPT_TO#gt; #lt;Server#colon;error#gt;
+    #lt;data#gt; --&gt; #lt;quit#gt;: #lt;Client#colon;DATA#gt; #lt;Server#colon;end_data#gt; #lt;Client#colon;message#gt; #lt;Server#colon;ok#gt;
+    #lt;data#gt; --&gt; #lt;end#gt;: #lt;Client#colon;DATA#gt; #lt;Server#colon;end_data#gt; #lt;Client#colon;message#gt; #lt;Server#colon;error#gt;
+    #lt;quit#gt; --&gt; #lt;end#gt;: #lt;Client#colon;QUIT#gt; #lt;Server#colon;bye#gt;
+    #lt;end#gt; --&gt; [*]
+    </pre><p>Having such <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> transitions as part of the spec allows Fandango to also cover and trigger these.</p>
+</section>
+</section>
+<section id="extracting-state-diagrams">
+<span id="sec-extracting-state-diagrams"></span><h2>Extracting State Diagrams<a class="headerlink" href="#extracting-state-diagrams" title="Link to this heading">#</a></h2>
+<p>You can use Fandango to <em>automatically extract state diagrams</em> such as the above.
+Such a visualization can be helpful for debugging.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span> <span class="pre">--to=mermaid</span></code> produces input for the <a class="reference external" href="https://mermaid.ai/open-source/intro/">Mermaid</a> visualizer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span> <span class="pre">--to=dot</span></code> produces an input in DOT format for the <a class="reference external" href="https://graphviz.org">Graphviz</a> visualizer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span> <span class="pre">--to=state</span></code> produces a generic textual representation.</p></li>
+</ul>
+<p>This assumes the grammar actually embeds a state diagram - the last nonterminal in each expansion is supposed to be a new state, and the nonterminals next to last will become part of the transition.</p>
+<section id="visualizing-state-diagrams-with-mermaid">
+<h3>Visualizing State Diagrams with Mermaid<a class="headerlink" href="#visualizing-state-diagrams-with-mermaid" title="Link to this heading">#</a></h3>
+<p>To produce the above state diagram for SMTP as an SVG file <a class="reference download internal" download="" href="_downloads/b4a35014be1bedeb748dcfede405388a/smtp-mermaid.svg"><span class="xref download myst">smtp-mermaid.svg</span></a>,
+use the <a class="reference external" href="https://github.com/mermaid-js/mermaid-cli">Mermaid <code class="docutils literal notranslate"><span class="pre">mmdc</span></code> command-line interface</a>:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">mmdc</span> <span class="pre">--help</span></code> to see how to control formats, sizes, and themes.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>--to<span class="o">=</span>mermaid<span class="w"> </span>smtp-extended.fan<span class="w"> </span><span class="p">|</span><span class="w"> </span>mmdc<span class="w"> </span>-i<span class="w"> </span>-<span class="w"> </span>-o<span class="w"> </span>smtp-mermaid.svg
 </pre></div>
 </div>
+<p>The resulting SVG image is the same as embedded above:</p>
+<img alt="_images/smtp-mermaid.svg" src="_images/smtp-mermaid.svg" />
+</section>
+<section id="visualizing-state-diagrams-with-graphviz-dot">
+<h3>Visualizing State Diagrams with Graphviz (DOT)<a class="headerlink" href="#visualizing-state-diagrams-with-graphviz-dot" title="Link to this heading">#</a></h3>
+<p>To produce a similar SVG file <a class="reference download internal" download="" href="_downloads/6bd370561ae710e29b3fdcacdc8f6048/smtp-dot.svg"><span class="xref download myst">smtp-dot.svg</span></a> using Graphviz,
+use the <a class="reference external" href="https://graphviz.org/doc/info/command.html"><code class="docutils literal notranslate"><span class="pre">dot</span></code> command-line interface</a>:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Besides <code class="docutils literal notranslate"><span class="pre">svg</span></code>, Graphviz supports <a class="reference external" href="https://graphviz.org/docs/outputs/">dozens of output formats</a>, including <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, and many more.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>--to<span class="o">=</span>dot<span class="w"> </span>smtp-extended.fan<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>-T<span class="w"> </span>svg<span class="w"> </span>-o<span class="w"> </span>smtp-dot.svg
+</pre></div>
 </div>
-</div>
-<p>This spec can actually handle the initial interaction (check it!).
-You may note the following points:</p>
-<p>First, the commands (and replies) follow a particular <em>order</em>, implying the <em>state</em> the server and client are in.
-In the “happy” path (assuming no errors), this is the order of possible commands:</p>
-<pre  class="mermaid">
-        stateDiagram
-    [*] --&gt; 1: ‹connect›
-    1 --&gt; 2: ‹helo›
-    2 --&gt; 3: ‹mail_from›
-    3 --&gt; 3: ‹mail_to›
-    3 --&gt; 4: ‹mail_to›
-    4 --&gt; 5: ‹data›
-    5 --&gt; [*]: ‹quit›
-    </pre><p>Note how the I/O grammar (and the above state diagram) accepts multiple <code class="docutils literal notranslate"><span class="pre">&lt;mail_to&gt;</span></code> interactions, allowing mails to be sent to multiple destinations.</p>
-<p>Second, the spec actually accounts for errors, always entering an <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> state if the client command received cannot be parsed properly.
-Hence, the state diagram induced in the above grammar actually looks like this:</p>
-<pre  class="mermaid">
-        stateDiagram
-    [*] --&gt; 1: ‹connect›
-    1 --&gt; 2: ‹helo›
-    2 --&gt; [*]: ‹error›
-    2 --&gt; 3: ‹mail_from›
-    3 --&gt; [*]: ‹error›
-    3 --&gt; 3: ‹mail_to›
-    3 --&gt; 4: ‹mail_to›
-    4 --&gt; 5: ‹data›
-    4 --&gt; [*]: ‹error›
-    5 --&gt; [*]: ‹quit›
-    5 --&gt; [*]: ‹error›
-    </pre><p>As described in the <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">chapter on checking outputs</span></a>, we can use the <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> command to actually show generated outputs of individual parties:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Client<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan
+<p>This is the resulting SVG image:</p>
+<img alt="_images/smtp-dot.svg" src="_images/smtp-dot.svg" />
+<p>Which one is nicer? Pick your favorite.</p>
+</section>
+<section id="extracting-state-diagrams-as-plain-text">
+<h3>Extracting State Diagrams as Plain Text<a class="headerlink" href="#extracting-state-diagrams-as-plain-text" title="Link to this heading">#</a></h3>
+<p>If you want to read or further process the diagram, a simple textual representation is available as well:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>convert<span class="w"> </span>--to<span class="o">=</span>state<span class="w"> </span>smtp-extended.fan
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
-
-MAIL FROM:&lt;alice@example.com&gt;
-
-RCPT TO:&lt;alice@example.com&gt;
-
-RCPT TO:&lt;alice@example.com&gt;
-
-RCPT TO:&lt;alice@example.com&gt;
-
-RCPT TO:&lt;alice@example.com&gt;
-
-RCPT TO:&lt;alice@example.com&gt;
-
-RCPT TO:&lt;alice@example.com&gt;
-
-DATA
-
-lgun6
-
-.
-
-QUIT
-</pre></div>
 </div>
-</div>
-</div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Server<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan
+</section>
+</section>
+<section id="simulating-individual-parties">
+<h2>Simulating Individual Parties<a class="headerlink" href="#simulating-individual-parties" title="Link to this heading">#</a></h2>
+<p>As described in the <a class="reference internal" href="Outputs.html#sec-outputs"><span class="std std-ref">chapter on checking outputs</span></a>, we can use the <code class="docutils literal notranslate"><span class="pre">fuzz</span></code> command to actually show generated outputs of individual parties:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Client<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-
-250 Hello host.example.com, glad to meet you
-
-250 Ok
-
-502 Error
-
-250 Ok
-
-250 Ok
-
-354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
-
-250 Ok
-
-221 Bye
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Server<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
-</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <p>That’s it for now. GO and thoroughly test your programs!</p>
+<div class="cell tag_remove-input docutils container">
+</div>
 </section>
 </section>
 
@@ -866,20 +1355,20 @@ QUIT
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Conversion.html"
+       href="Outputs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Converters</p>
+        <p class="prev-next-title">Checking Outputs</p>
       </div>
     </a>
     <a class="right-next"
-       href="Hatching.html"
+       href="Parties.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hatching Specs</p>
+        <p class="prev-next-title">Customizing Party Communication</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -905,6 +1394,18 @@ QUIT
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-client">Interacting as Network Client</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-as-network-server">Interacting as Network Server</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bigger-protocol-spec">A Bigger Protocol Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-state-diagrams-to-grammars">From State Diagrams to Grammars</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-state-diagrams-to-grammars">Converting State Diagrams to Grammars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-errors">Modeling Errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-state-diagrams">Extracting State Diagrams</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-state-diagrams-with-mermaid">Visualizing State Diagrams with Mermaid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-state-diagrams-with-graphviz-dot">Visualizing State Diagrams with Graphviz (DOT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-state-diagrams-as-plain-text">Extracting State Diagrams as Plain Text</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-individual-parties">Simulating Individual Parties</a></li>
 </ul>
   </nav></div>
 
@@ -919,7 +1420,7 @@ QUIT
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -929,7 +1430,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

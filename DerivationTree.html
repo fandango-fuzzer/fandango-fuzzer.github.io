@@ -59,6 +59,371 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'DerivationTree';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -144,7 +509,7 @@
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -176,7 +541,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -188,30 +553,46 @@
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -222,6 +603,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
@@ -343,9 +725,9 @@
       
       
       <li>
-<button onclick="window.print()"
+<a href="_static/fandango.pdf" target="_blank"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Download PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -354,7 +736,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</button>
+</a>
 </li>
       
   </ul>
@@ -448,8 +830,37 @@ document.write(`
 <p>Fandango constraints make use of <em>symbols</em> (anything enclosed in <code class="docutils literal notranslate"><span class="pre">&lt;...&gt;</span></code>) to express desired or required properties of generated inputs.
 During evaluation, any <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;</span></code> returns a <em>derivation tree</em> representing the composition of the produced or parsed string.</p>
 <p>This derivation tree has a type of <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code>, as do all subtrees.
-<code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects support <em><span class="output text_plain">264</span> functions, methods, and operators</em> directly; after converting <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>, the entire Python ecosystem is available.</p>
-<section id="derivation-tree-structure">
+<code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects support <em><span class="output text_plain">265</span> functions, methods, and operators</em> directly; after converting <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>, the entire Python ecosystem is available.</p>
+<pre  class="mermaid">
+        classDiagram
+    class DerivationTree{
+      to_string(encoding: str = &quot;latin-1&quot;) str
+      bytes() str
+      to_bytes(encoding: str = &quot;utf-8&quot;) str
+      to_int(encoding: str = &quot;utf-8&quot;) str
+      should_be_serialized() bool
+      contains_bits() bool
+      to_bits(encoding: str = &quot;utf-8&quot;) str
+      is_terminal() bool
+      is_nonterminal() bool
+      getitem(n: int) DerivationTree
+      getitem(n: int, s: slice) DerivationTree
+      children() list[DerivationTree]
+      children_values() list[TreeValue]
+      descendants() list[DerivationTree]
+      descendant_values() list[TreeValue]
+      parent() DerivationTree | None,
+      sources() list[DerivationTree]
+      __eq__(DerivationTree | str | bytes | int) bool
+      __ne__(DerivationTree | str | bytes | int) bool
+      to_bits() str
+      to_grammar() str
+      to_tree() str
+      __repr__() str
+      __str__() str
+    }
+    click DerivationTree href &quot;#&quot; &quot;Fandango DerivationTree class&quot;
+    </pre><section id="derivation-tree-structure">
 <span id="sec-derivation-tree-structure"></span><h2>Derivation Tree Structure<a class="headerlink" href="#derivation-tree-structure" title="Link to this heading">#</a></h2>
 <p>Let’s have a look at the structure of a derivation tree. Consider this derivation tree from the <a class="reference internal" href="ISO8601.html"><span class="std std-doc">ISO 8601 date and time grammar</span></a>:</p>
 <aside class="margin sidebar">
@@ -483,10 +894,12 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 <section id="evaluating-derivation-trees">
 <h2>Evaluating Derivation Trees<a class="headerlink" href="#evaluating-derivation-trees" title="Link to this heading">#</a></h2>
 <p>To write constraints, you may want to serialize derivation trees into standard Python types such as <code class="docutils literal notranslate"><span class="pre">str</span></code>ings, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, or <code class="docutils literal notranslate"><span class="pre">int</span></code>s. To do so, simply call <code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes(&lt;SYMBOL&gt;)</span></code>, or <code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code> respectively.</p>
-<p>Internally, the serialization is done in <code class="docutils literal notranslate"><span class="pre">str</span></code> objects as long as the sub-tree only contains string values, and in <code class="docutils literal notranslate"><span class="pre">bytes</span></code> otherwise. During concatenation, strings are converted to bytes in with <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> encoding, for conversion from bytes to strings, <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> is used to prevent breaking non-utf-8 strings. If you would like to convert them using utf-8, you can call <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_string(&quot;utf-8&quot;)</span></code>.</p>
+<p>Internally, the serialization is done in <code class="docutils literal notranslate"><span class="pre">str</span></code> objects as long as the subtree only contains string values, and in <code class="docutils literal notranslate"><span class="pre">bytes</span></code> otherwise. During concatenation, strings are converted to bytes in with <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> encoding, for conversion from bytes to strings, <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> is used to prevent breaking non-utf-8 strings. If you would like to convert them using utf-8, you can call <code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.to_string(&quot;utf-8&quot;)</span></code>.</p>
 <p>Concatenation of non-bit types with bit types always triggers Fandango to convert the remaining trailing bits into <code class="docutils literal notranslate"><span class="pre">bytes</span></code> (with the first bit being the most significant). If the number of trailing bits isn’t a multiple of 8, Fandango will throw an error.</p>
 <p><code class="docutils literal notranslate"><span class="pre">int(&lt;SYMBOL&gt;)</span></code> on a subtree consisting only of strings will attempt to parse the string as a number. If the tree consists of bits only, it will be converted to a number with the first bit being the most significant. Bytes are converted to strings and then treated accordingly.</p>
-<p>Previous versions of Fandango automatically converted certain values — this no longer works to prevent accidental mistakes while writing constraints.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>Previous versions of Fandango automatically converted certain values — this no longer works to prevent accidental mistakes while writing constraints.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>It is generally unwise to rely on the type of the internal representation of linearized <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> values as these may change with future expansions of Fandango. Use functions directly implemented on them (<code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.startswith(&quot;Hello&quot;)</span></code>), or explicitly convert them to a base type in Python instead (<code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code>).</p>
@@ -579,7 +992,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 <section id="accessing-parents">
 <h3>Accessing Parents<a class="headerlink" href="#accessing-parents" title="Link to this heading">#</a></h3>
 <dl class="simple myst">
-<dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.parent()</span> <span class="pre">-&gt;</span> <span class="pre">DerivationTree</span> <span class="pre">|</span> <span class="pre">None</span></code></dt><dd><p>Return the parent of the current node, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for the root node.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;SYMBOL&gt;.parent()</span> <span class="pre">-&gt;</span> <span class="pre">Optional[DerivationTree]</span></code></dt><dd><p>Return the parent of the current node, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for the root node.</p>
 </dd>
 </dl>
 </section>
@@ -625,7 +1038,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
 <ul class="simple">
 <li><p>If a method is only implemented on one of the three base types, the <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> internally is first transformed into that type (using <code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;)</span></code> etc.).</p></li>
 <li><p>If a method is implemented on multiple base types, but they always have different signatures (such as <code class="docutils literal notranslate"><span class="pre">.startswith</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">str</span></code> if called on a <code class="docutils literal notranslate"><span class="pre">str</span></code>, and <code class="docutils literal notranslate"><span class="pre">bytes</span></code> if called on <code class="docutils literal notranslate"><span class="pre">bytes</span></code>), the <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> is transformed into the appropriate base type.</p></li>
-<li><p>If a method is implemented on multiple base types, and there is no way to distinguish based on the signatures, the method is envoked on the underlying type. This is not recommended as these methods rely on knowledge of the type of the internal representation (which may change in the future). Simply convert the tree to the desired base type first (<code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;).upper()</span></code>).</p></li>
+<li><p>If a method is implemented on multiple base types, and there is no way to distinguish based on the signatures, the method is invoked on the underlying type. This is not recommended as these methods rely on knowledge of the type of the internal representation (which may change in the future). Simply convert the tree to the desired base type first (<code class="docutils literal notranslate"><span class="pre">str(&lt;SYMBOL&gt;).upper()</span></code>).</p></li>
 </ul>
 </section>
 </section>
@@ -721,7 +1134,7 @@ During evaluation, any <code class="docutils literal notranslate"><span class="p
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -731,7 +1144,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

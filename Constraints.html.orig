@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -113,9 +113,6 @@
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-<aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for June&nbsp;2025.</p></div>
-</aside>
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
@@ -145,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -177,7 +174,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -189,27 +186,46 @@
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -217,11 +233,12 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -422,6 +439,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-and-derivationtree-types">Constraints and <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-on-the-command-line">Constraints on the Command Line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-fandango-solves-constraints">How Fandango Solves Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fandango-progress-bar">The Fandango Progress Bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraints-and-optimization">Soft Constraints and Optimization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-constraints-cannot-be-solved">When Constraints Cannot be Solved</a></li>
 </ul>
             </nav>
@@ -486,16 +505,26 @@ where int(&lt;age&gt;) &lt; 50
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hs Mn,8
-Qmsbe Ozif,4
-Huip Vftnwy,45
-Gz Kcw,033
-Dcd Tfqf,0
-Mvcula Lsmjoi,25
-Fxums Eary,2
-Kkc Pqinzy,035
-Cgz Goepk,8
-Lkro Ihipgz,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heqslqpviwvokoxnhq Mxw,24
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Follgxycliibrpqj Vx,11
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sjoogsnfl Mvugdpvrrlwka,19
+Zakh Oakxwiqdyzjor,4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gjcsszfavxrcgaopmori Ipguzlbbrtzd,30
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Keiv Mnir,4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zakh Oakxwiqdyzjoe,4
+Gjcsszfavxrcgaopmori Gpguzlbbrtzd,30
+Sjoogsnfl Mvugdpvrrlwka,4
+Zakh Oakxwiqdyzjor,19
 </pre></div>
 </div>
 </div>
@@ -514,16 +543,26 @@ Be sure, though, to leave spaces around <code class="docutils literal notranslat
 <p>and we obtain these inputs:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gktd Qiihyz,44
-Nk Evcf,32
-Rhjc Ksj,34
-Vvyboe Pjsba,39
-Tlrv Jwqsy,29
-Exe Noszu,38
-Izopk Fvbxch,25
-Twxoc Wpck,40
-Izopk Hvbxch,25
-Msfyjo Exdac,36
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ownx Bdjglojefcha,33
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ddhm Kttcbjge,42
+Mdbtypsezsbrwdqb Dulotvrjikiujfibpan,44
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dpb Wpuovbgugqoiuxj,43
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mdbtypsezsbrwdqb Byrjw,44
+Tviwlvmgf Byrjw,42
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sqfamncojvsugnpvshrhu Ibobztzzg,33
+Xbqcqmashpqpafjtggm Jl,44
+Ddhm Httcbjge,42
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bxtuuualcvyiqqry Xrkutbbablfgjfjo,44
 </pre></div>
 </div>
 </div>
@@ -531,16 +570,28 @@ Msfyjo Exdac,36
 <p>Start with <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> and add a constraint such that we generate people whose age is a multiple of 7, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Axgx Fwxx,406
-Mw Fvmw,525
-Dvc Xzzlw,609
-Bjafez Zs,84
-Jujone Nsyyt,35
-Jfbym Xpict,0
-Vjryd Wfkev,63
-Kt Tlkn,497
-Sbsx Jmt,9359
-Aydalu Vstbdb,49
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rqamvdnwno Wetmynzzpbaxddcsimtg,9035344227
+Kcrqu Tboj,09507335870270
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ipmbfgaqscogsz Gtacrfy,0164446138929050069
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exmlhpy Anhg,7
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jlioksk Qedyyhvergxwndccybwl,24572793966106795199
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pgulzyoyehmgmtobxh Mgpoczceqgluzuh,4008868439303342111
+Crhgzgndg Tbwucjexq,7368995480609
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nwplskr Jbbrmlgsmcudxwirc,97713
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uyeqw Roeoumlnlgfu,45391211433764
+Abfzjhiggkvvqq Vq,949150470115925
 </pre></div>
 </div>
 </div>
@@ -561,24 +612,20 @@ Aydalu Vstbdb,49
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">age</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span>
 </pre></div>
 </div>
-<p>the type of <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span></code> is actually not a string, but a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> object - <a class="reference internal" href="Paths.html#sec-paths"><span class="std std-ref">a tree representing the structure of the output.</span></a>.
-For now, you can use <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects almost as if they were strings:</p>
+<p>the type of <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span></code> is actually not a string, but a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> object - <a class="reference internal" href="Paths.html#sec-paths"><span class="std std-ref">a tree representing the structure of the output.</span></a>. You can use <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> objects as other basic python data types by converting them using (<code class="docutils literal notranslate"><span class="pre">int(&lt;age&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">str(&lt;age&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes(&lt;age&gt;)</span></code>).</p>
 <ul class="simple">
-<li><p>You can <em>convert</em> them to other basic data types with (<code class="docutils literal notranslate"><span class="pre">int(&lt;age&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">float(&lt;age&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">str(&lt;age&gt;)</span></code>)</p></li>
-<li><p>You can invoke <em>string methods</em> on them (`<age>.startswith(‘0’))</p></li>
+<li><p>You can then invoke most <em>string, bytes and int methods</em> on them (<code class="docutils literal notranslate"><span class="pre">&lt;age&gt;.startswith('0')</span></code>) (see <a class="reference internal" href="DerivationTree.html#sec-derivation-tree-direct-access-functions"><span class="std std-ref">Details</span></a>)</p></li>
 <li><p>You can <em>compare</em> them against each other (<code class="docutils literal notranslate"><span class="pre">&lt;age_1&gt;</span> <span class="pre">==</span> <span class="pre">&lt;age_2&gt;</span></code>) as well as against other strings (<code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span> <span class="pre">!=</span> <span class="pre">&quot;19&quot;</span></code>)</p></li>
-<li><p>You can <em>print</em> them, using implicit string conversions (<code class="docutils literal notranslate"><span class="pre">print(&lt;age&gt;)</span></code>, which invokes <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;.__str__()</span></code>)</p></li>
 </ul>
-<p>One thing you <em>cannot</em> do, though, is <em>passing them directly as arguments to functions</em> that do not expect a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> type.
-This applies to the vast majority of Python functions.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p>One thing you <em>cannot</em> do, though, is <em>passing them directly as arguments to functions</em> that do not expect a <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> type. This applies to the vast majority of Python functions.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>If you want to pass a symbol as a function argument, convert it to the proper type (<code class="docutils literal notranslate"><span class="pre">int(&lt;age&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">float(&lt;age&gt;)</span></code>, <code class="docutils literal notranslate"><span class="pre">str(&lt;age&gt;)</span></code>) first.
 Otherwise, you will likely raise an internal error in that very function.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>On symbols, the <code class="docutils literal notranslate"><span class="pre">[...]</span></code> operator operates differently from strings - it returns a <em>subtree</em> (a substring) of the produced output: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;[0]</span></code> returns the <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> element, not the first character.
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>On symbols, the <code class="docutils literal notranslate"><span class="pre">[...]</span></code> operator operates differently from strings - it returns a <em>subtree</em> of the produced output: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;[0]</span></code> returns the <code class="docutils literal notranslate"><span class="pre">&lt;first_name&gt;</span></code> element, not the first character.
 If you want to access a character (or a range of characters) of a symbol, convert it into a string first, as in <code class="docutils literal notranslate"><span class="pre">str(&lt;name&gt;)[0]</span></code>.</p>
 </div>
 <p>We will learn more about derivation trees, <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> types, and their operators in <a class="reference internal" href="Paths.html#sec-paths"><span class="std std-ref">Accessing Input Elements</span></a>.</p>
@@ -596,8 +643,8 @@ This is done with the <code class="docutils literal notranslate"><span class="pr
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;25 &lt;= int(&lt;age&gt;)&#39;</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;int(&lt;age&gt;) &lt;= 45&#39;</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>On the command line, always put constraints in single quotes (<code class="docutils literal notranslate"><span class="pre">'...'</span></code>), as the angle brackets might otherwise be interpreted as I/O redirection.</p>
 </div>
 <p>When do constraints belong in a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, and when on the command line?
@@ -633,40 +680,42 @@ The <code class="docutils literal notranslate"><span class="pre">-v</span></code
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
-fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/27eed2b9ee24abbcd021e0d4daa0e156de5087a7550590cc7aecc0361ae5b147.pickle
-fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/e312af42371e92ad85d3f9dd2a94f4245e9f604855640a400db51f228854798c.pickle
-fandango:INFO: int(&lt;age&gt;) % 7 == 0: loading cached spec from /home/runner/.cache/fandango/7726403f3bfbc452e6ae427f2860fd610fe6f584ad72b917f26baf314fde2e42.pickle
-fandango:INFO: File mode: text
-fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
-fandango:INFO: Generating initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.07 seconds
-fandango:INFO: ---------- Starting evolution ----------
-fandango:INFO: ---------- Evolution finished ----------
-fandango:INFO: Perfect solutions found: (10)
-fandango:INFO: Fitness of final population: 1.00
-fandango:INFO: Time taken: 0.00 seconds
-Ds Owi,700
-Smwiqt Blwsmm,70
-Qlpejh Jta,2345
-Sju Nckj,7
-Nj Corh,301
-Vc Ezx,6776
-Zaao Fkky,7
-Ckl Ziicmw,5796
-Tym Tzebbq,2205
-Aupaci Izc,63
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0001.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0002.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0003.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0004.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0005.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0006.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0007.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0008.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0009.txt&#39;
-fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0010.txt&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
+fandango:INFO: ---------- Initializing base population ----------
+fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
+fandango:INFO: ---------- Done initializing base population ----------
+fandango:INFO: ---------- Generating  for 500 generations----------
+fandango:INFO: Generating (additional) initial population (size: 100)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Htpekdadztak Pnsqarebjm,0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imk Mr,72847292
+Qntjtktkcl Unjluqhlvlogag,54103
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mwkunfegkpyp Qolmai,98
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lghymyed Vawsifv,350
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cshakwlfqliy Ppujteesmscwpp,0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fvwfnnybqu Cdyhbt,3459078159010436095
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dvzmxwwar Sdtwstxsppvnkzucrwvh,758180290787724287
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pnbtyr Pcadorkx,01638
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xpoteubywrvbrd Dltitkzkf,0
 </pre></div>
 </div>
 </div>
@@ -675,6 +724,163 @@ fandango:INFO: Parsing &#39;/tmp/tmppnqc_1rk/fandango-0010.txt&#39;
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-v</span></code> option comes right after <code class="docutils literal notranslate"><span class="pre">fandango</span></code> (and not after <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code>), as <code class="docutils literal notranslate"><span class="pre">-v</span></code> affects all commands (and not just <code class="docutils literal notranslate"><span class="pre">fuzz</span></code>).</p>
 </div>
+</section>
+<section id="the-fandango-progress-bar">
+<span id="sec-progress-bar"></span><h2>The Fandango Progress Bar<a class="headerlink" href="#the-fandango-progress-bar" title="Link to this heading">#</a></h2>
+<p>While Fandango is solving constraints, you may see a <em>progress bar</em> in the terminal.
+The progress bar looks like this:</p>
+<p><img alt="progress-bar" src="_images/progress-bar.png" /></p>
+<p>The progress bar is composed of three parts.
+On the leftmost side, we have the <em>Fandango logo</em> (“💃 Fandango”), followed by a <em>generation counter</em> (“6/500”) showing how often (6) the population has evolved (out of a maximum 500).</p>
+<p>Most of the line, however, is filled by a <em>fitness visualization</em> illustrating how the fitness is distributed across the inputs in the population.
+Each fraction of the line corresponds to an equal fraction of individual inputs.
+Hence, a 1/70 of the line (typically one character) stands for 1/70 of the population.</p>
+<p>The <em>color</em> of each fraction how <em>fit</em> the inputs in the fraction are - on a scale from <em>bright green</em> (perfect fitness, fulfilling the given constraints) to <em>dark red</em> (very little fitness, far away from fulfilling the constraints).
+Depending on its capabilities, your terminal may also show shades between these colors.
+Inputs that do not satisfy the constraints at all (zero fitness) are shown in gray.</p>
+<p>In the above example, we can see that Fandango already has produces a few inputs that satisfy the constraints; a few more are close and may get there through further evolution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the progress bar only shows up if</p>
+<ul class="simple">
+<li><p>Fandango’s standard error is a terminal;</p></li>
+<li><p>Fandango is not run within Jupyter notebook (Jupyter cannot interpret the terminal escape sequences); and</p></li>
+<li><p>Fandango logging is turned off (it also writes to standard error).</p></li>
+</ul>
+<p>The option <code class="docutils literal notranslate"><span class="pre">--progress-bar=on</span></code> turns on the progress bar even if the above conditions are not met.
+The option <code class="docutils literal notranslate"><span class="pre">--progress-bar=off</span></code> turns the progress bar off.</p>
+</div>
+</section>
+<section id="soft-constraints-and-optimization">
+<span id="sec-soft-constraints"></span><h2>Soft Constraints and Optimization<a class="headerlink" href="#soft-constraints-and-optimization" title="Link to this heading">#</a></h2>
+<p>So far, we have seen constraints that <em>have</em> to be satisfied for Fandango to produce a string.
+On top, Fandango also supports so-called “soft” constraints that Fandango <em>aims</em> to satisfy as good as it can.
+These “soft” constraints come in two forms:</p>
+<ul class="simple">
+<li><p><strong>maximizing</strong> constraints: These constraints specify an <em>expression</em> whose value should be as <em>high</em> as possible</p></li>
+<li><p><strong>minimizing</strong> constraints: These constraints specify an expression whose value should be as <em>low</em> as possible.</p></li>
+</ul>
+<p>Such soft constraints are specified</p>
+<ul class="simple">
+<li><p>on the command line, using <code class="docutils literal notranslate"><span class="pre">--maximizing</span> <span class="pre">EXPR</span></code> and <code class="docutils literal notranslate"><span class="pre">--minimizing</span> <span class="pre">EXPR</span></code>, respectively; or</p></li>
+<li><p>in the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, introducing them with <code class="docutils literal notranslate"><span class="pre">minimizing</span></code> and <code class="docutils literal notranslate"><span class="pre">maximizing</span></code> (instead of <code class="docutils literal notranslate"><span class="pre">where</span></code>), respectively.</p></li>
+</ul>
+<p>If, for instance, you want Fandango to maximize the <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span></code> field, you write</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>--maximize<span class="w"> </span><span class="s1">&#39;int(&lt;age&gt;)&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Srnjcbemg Rdyiwtblbmbqsyz,9211720742296785637
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yctisibbxhnymn Zllx,44678210736366829210
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ibjyvdmbjawwls Qsjsqnjdifnkeqrl,47924215803343350810
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfwvc Whzskfssddwd,70474466639108754851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfwvc Jhzskfssddwd,70474466639108754851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfwvc Fhzskfssddwd,70474466639108754851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lfwvc Whzskfssddwd,70474466639108754851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dtzwhusvfwyo Kijptclhcpcxswkn,70474466639108754851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfwvc Shzskfssddwd,70474466639108754851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pfwvc Fhzskfssddwd,70474466639108754451
+</pre></div>
+</div>
+</div>
+</div>
+<p>Conversely, minimizing the <code class="docutils literal notranslate"><span class="pre">&lt;age&gt;</span></code> field yields</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>--minimize<span class="w"> </span><span class="s1">&#39;int(&lt;age&gt;)&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Utmfjh Yjjxqphkudvu,51220
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kzn Yworexunjyghapogst,5297
+Teijranvoxlei Ylfrd,05267
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bgyjokkbjbvxkxvdqql Svlwbhiezk,8
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flc Ysjdpcrmkfkn,6
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Itswyipylnsodibbil Gabnjuxlneqbgvjiamvyd,00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bgyjokkbjbvxkxvdqql Svlwbhiezk,0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jgyjokkbjbvxkxvdqql Svlwbhiezk,0
+Tgyjokkbjbvxkxvdqql Svlwbhiezk,00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hdwsbngzqubgrxkv Gabnjuxlneqbgvjiamvyd,00
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively, you could also add to the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maximizing</span> <span class="nb">int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">age</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">minimizing</span> <span class="nb">int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">age</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>respectively.</p>
+<p>To express optional goals (i.e., real “soft” constraints), simply use a <em>Boolean</em> expressions as the expressions for <code class="docutils literal notranslate"><span class="pre">--maximize</span></code> or <code class="docutils literal notranslate"><span class="pre">--minimize</span></code>.
+Then, Fandango will aim to maximize (or minimize) its value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that in Python <code class="docutils literal notranslate"><span class="pre">True</span></code> is equivalent to 1, and <code class="docutils literal notranslate"><span class="pre">False</span></code> is equivalent to 0; therefore, “maximizing” a Boolean value means that Fandango will aim to solve it.</p>
+</div>
+<p>Here is an example of a “soft” Boolean constraints, aiming to obtain names that start with “F”:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>--maximize<span class="w"> </span><span class="s1">&#39;&lt;name&gt;.startswith(&quot;A&quot;)&#39;</span><span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gpidfzo Jtmhngufbxllfjfbs,8779726
+Bczdprsjjlnjgrrdpa Fbnfgnjagzryqumz,51643277
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mtnzeebaiqrwptt Wh,05883298086502350038
+Gtoszvdninnol Nwwonkhnegfmusfwd,53324374
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yugpphlqvzr Qtgvgsx,65092217868
+Xksncxlnirrginuabx Cfvjinnrunhowyyfsu,84318181609339361427
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rwdljfksmk Gknirlkolggzytzkvch,713030161299
+Hzidakkdyu Nuvioopyrim,2425671292256894126
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zzgwqlsxeijeaeljilsk Ibuijrquumbacy,76860047192
+Jvbcj Mmptatw,906288751734066564
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you see, “soft” constraints are truly optional :-)</p>
 </section>
 <section id="when-constraints-cannot-be-solved">
 <h2>When Constraints Cannot be Solved<a class="headerlink" href="#when-constraints-cannot-be-solved" title="Link to this heading">#</a></h2>
@@ -692,382 +898,386 @@ We can see this if we specify <code class="docutils literal notranslate"><span c
 <div class="cell tag_remove-input tag_scroll-output docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Parsing FANDANGO content ----------
-fandango:INFO: &lt;stdlib&gt;: loading cached spec from /home/runner/.cache/fandango/27eed2b9ee24abbcd021e0d4daa0e156de5087a7550590cc7aecc0361ae5b147.pickle
-fandango:INFO: persons.fan: loading cached spec from /home/runner/.cache/fandango/e312af42371e92ad85d3f9dd2a94f4245e9f604855640a400db51f228854798c.pickle
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: False: saving spec to cache /home/runner/.cache/fandango/62dcc8eaac67fff5ff083ac28c7be390e720ac19cab768072a439a797d3eb7c4.pickle
-fandango:INFO: File mode: text
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
+fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
-fandango:INFO: Generating initial population (size: 100)...
+fandango:INFO: ---------- Done initializing base population ----------
+fandango:INFO: ---------- Generating  for 50 generations----------
+fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 0.07 seconds
-fandango:INFO: ---------- Starting evolution ----------
-fandango:INFO: Generation 1 - Fitness: 0.02 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 1.74 seconds
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1: Increasing mutation rate from 0.20 to 0.22
-fandango:INFO: Generation 1: Increasing crossover rate from 0.80 to 0.84
-fandango:INFO: Generation 1: Increasing MAX_REPETITION from 5 to 7
-fandango:INFO: Generation 1: Increasing Fuzzing Budget from 50 to 75
-fandango:INFO: Generation 1 stats -- Best fitness: 0.03, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 2 - Fitness: 0.02 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 2: Increasing mutation rate from 0.22 to 0.24
-fandango:INFO: Generation 2: Increasing crossover rate from 0.84 to 0.88
-fandango:INFO: Generation 2: Increasing MAX_REPETITION from 7 to 10
-fandango:INFO: Generation 2: Increasing Fuzzing Budget from 75 to 112
-fandango:INFO: Generation 2 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 3 - Fitness: 0.02 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1: Increasing mutation rate from 0.200 to 0.220
+fandango:INFO: Generation 1: Decreasing crossover rate from 0.800 to 0.760
+fandango:INFO: Generation 1: Increasing MAX_REPETITION from 20 to 30
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 3: Increasing mutation rate from 0.24 to 0.27
-fandango:INFO: Generation 3: Increasing crossover rate from 0.88 to 0.93
-fandango:INFO: Generation 3: Increasing MAX_REPETITION from 10 to 15
-fandango:INFO: Generation 3: Increasing Fuzzing Budget from 112 to 168
-fandango:INFO: Generation 3 stats -- Best fitness: 0.02, Avg fitness: 0.02, Avg diversity: 0.02, Population size: 100
-fandango:INFO: Generation 4 - Fitness: 0.02 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 2 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 4: Increasing mutation rate from 0.27 to 0.29
-fandango:INFO: Generation 4: Increasing crossover rate from 0.93 to 0.97
-fandango:INFO: Generation 4: Increasing MAX_REPETITION from 15 to 22
-fandango:INFO: Generation 4: Increasing Fuzzing Budget from 168 to 200
-fandango:INFO: Generation 4 stats -- Best fitness: 0.02, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 5 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 2: Increasing mutation rate from 0.220 to 0.242
+fandango:INFO: Generation 2: Decreasing crossover rate from 0.760 to 0.722
+fandango:INFO: Generation 2: Increasing MAX_REPETITION from 30 to 45
+fandango:INFO: Generation 2 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 3 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 5: Increasing mutation rate from 0.29 to 0.32
-fandango:INFO: Generation 5: Increasing crossover rate from 0.97 to 1.00
-fandango:INFO: Generation 5: Increasing MAX_REPETITION from 22 to 33
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 3: Increasing mutation rate from 0.242 to 0.266
+fandango:INFO: Generation 3: Decreasing crossover rate from 0.722 to 0.686
+fandango:INFO: Generation 3: Increasing MAX_REPETITION from 45 to 68
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 3 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 4 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 4: Increasing mutation rate from 0.266 to 0.293
+fandango:INFO: Generation 4: Decreasing crossover rate from 0.686 to 0.652
+fandango:INFO: Generation 4: Increasing MAX_REPETITION from 68 to 102
+fandango:INFO: Generation 4 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 5 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 5: Increasing mutation rate from 0.293 to 0.322
+fandango:INFO: Generation 5: Decreasing crossover rate from 0.652 to 0.619
+fandango:INFO: Generation 5: Increasing MAX_REPETITION from 102 to 153
 fandango:INFO: Generation 5 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 6 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 6 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 6: Increasing mutation rate from 0.32 to 0.35
-fandango:INFO: Generation 6: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 6: Increasing MAX_REPETITION from 33 to 49
-fandango:INFO: Generation 6 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 7 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 6: Increasing mutation rate from 0.322 to 0.354
+fandango:INFO: Generation 6: Decreasing crossover rate from 0.619 to 0.588
+fandango:INFO: Generation 6: Increasing MAX_REPETITION from 153 to 230
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 7: Increasing mutation rate from 0.35 to 0.39
-fandango:INFO: Generation 7: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 7: Increasing MAX_REPETITION from 49 to 73
-fandango:INFO: Generation 7 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 8 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 6 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 7 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 8: Increasing mutation rate from 0.39 to 0.43
-fandango:INFO: Generation 8: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 8: Increasing MAX_REPETITION from 73 to 109
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 7: Increasing mutation rate from 0.354 to 0.390
+fandango:INFO: Generation 7: Decreasing crossover rate from 0.588 to 0.559
+fandango:INFO: Generation 7: Increasing MAX_REPETITION from 230 to 345
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 7 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 8 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 8: Increasing mutation rate from 0.390 to 0.429
+fandango:INFO: Generation 8: Decreasing crossover rate from 0.559 to 0.531
+fandango:INFO: Generation 8: Increasing MAX_REPETITION from 345 to 518
 fandango:INFO: Generation 8 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 9 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 9 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 9: Increasing mutation rate from 0.43 to 0.47
-fandango:INFO: Generation 9: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 9: Increasing MAX_REPETITION from 109 to 163
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 9: Increasing mutation rate from 0.429 to 0.472
+fandango:INFO: Generation 9: Decreasing crossover rate from 0.531 to 0.504
+fandango:INFO: Generation 9: Increasing MAX_REPETITION from 518 to 777
 fandango:INFO: Generation 9 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 10 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 10 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 10: Increasing mutation rate from 0.47 to 0.52
-fandango:INFO: Generation 10: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 10: Increasing MAX_REPETITION from 163 to 244
-fandango:INFO: Generation 10 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 11 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 10: Increasing mutation rate from 0.472 to 0.519
+fandango:INFO: Generation 10: Decreasing crossover rate from 0.504 to 0.479
+fandango:INFO: Generation 10: Increasing MAX_REPETITION from 777 to 1000
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 11: Increasing mutation rate from 0.52 to 0.57
-fandango:INFO: Generation 11: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 11: Increasing MAX_REPETITION from 244 to 366
-fandango:INFO: Generation 11 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 12 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 10 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 11 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 12: Increasing mutation rate from 0.57 to 0.63
-fandango:INFO: Generation 12: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 12: Increasing MAX_REPETITION from 366 to 549
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 11: Increasing mutation rate from 0.519 to 0.571
+fandango:INFO: Generation 11: Decreasing crossover rate from 0.479 to 0.455
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 11 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 12 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 12: Increasing mutation rate from 0.571 to 0.628
+fandango:INFO: Generation 12: Decreasing crossover rate from 0.455 to 0.432
 fandango:INFO: Generation 12 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 13 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 13 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13: Increasing mutation rate from 0.63 to 0.69
-fandango:INFO: Generation 13: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 13: Increasing MAX_REPETITION from 549 to 823
-fandango:INFO: Generation 13 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 14 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13: Increasing mutation rate from 0.628 to 0.690
+fandango:INFO: Generation 13: Decreasing crossover rate from 0.432 to 0.411
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14: Increasing mutation rate from 0.69 to 0.76
-fandango:INFO: Generation 14: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 14: Increasing MAX_REPETITION from 823 to 1234
-fandango:INFO: Generation 14 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 15 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 14 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 15: Increasing mutation rate from 0.76 to 0.84
-fandango:INFO: Generation 15: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 15: Increasing MAX_REPETITION from 1234 to 1851
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14: Increasing mutation rate from 0.690 to 0.759
+fandango:INFO: Generation 14: Decreasing crossover rate from 0.411 to 0.390
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 15 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 15: Increasing mutation rate from 0.759 to 0.835
+fandango:INFO: Generation 15: Decreasing crossover rate from 0.390 to 0.371
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 15 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 16 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 16 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 16: Increasing mutation rate from 0.84 to 0.92
-fandango:INFO: Generation 16: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 16: Increasing MAX_REPETITION from 1851 to 2776
-fandango:INFO: Generation 16 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 17 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 16: Increasing mutation rate from 0.835 to 0.919
+fandango:INFO: Generation 16: Decreasing crossover rate from 0.371 to 0.352
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 17: Increasing mutation rate from 0.92 to 1.00
-fandango:INFO: Generation 17: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 17: Increasing MAX_REPETITION from 2776 to 4164
-fandango:INFO: Generation 17 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 18 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 16 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 17 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 18: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 18: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 18: Increasing MAX_REPETITION from 4164 to 6246
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 17: Increasing mutation rate from 0.919 to 1.000
+fandango:INFO: Generation 17: Decreasing crossover rate from 0.352 to 0.334
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 17 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 18 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 18: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 18: Decreasing crossover rate from 0.334 to 0.318
 fandango:INFO: Generation 18 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 19 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 19 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 19: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 19: Increasing MAX_REPETITION from 6246 to 9369
-fandango:INFO: Generation 19 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 20 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 19: Decreasing crossover rate from 0.318 to 0.302
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 20: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 20: Increasing MAX_REPETITION from 9369 to 14053
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 20 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 20: Decreasing crossover rate from 0.302 to 0.287
 fandango:INFO: Generation 20 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 21 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 21 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 21: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 21: Increasing MAX_REPETITION from 14053 to 21079
-fandango:INFO: Generation 21 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 22 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 21: Decreasing crossover rate from 0.287 to 0.272
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 22: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 22: Increasing MAX_REPETITION from 21079 to 31618
-fandango:INFO: Generation 22 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 23 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 22 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 23: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 23: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 23: Increasing MAX_REPETITION from 31618 to 47427
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 22: Decreasing crossover rate from 0.272 to 0.259
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 23 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 23: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 23: Decreasing crossover rate from 0.259 to 0.246
 fandango:INFO: Generation 23 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 24 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 24 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 24: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 24: Increasing MAX_REPETITION from 47427 to 71140
-fandango:INFO: Generation 24 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 25 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 24: Decreasing crossover rate from 0.246 to 0.234
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 25: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 25: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 25: Increasing MAX_REPETITION from 71140 to 106710
-fandango:INFO: Generation 25 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 26 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 25 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 26: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 26: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 26: Increasing MAX_REPETITION from 106710 to 160065
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 25: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 25: Decreasing crossover rate from 0.234 to 0.222
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 25 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 26 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 26: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 26: Decreasing crossover rate from 0.222 to 0.211
 fandango:INFO: Generation 26 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 27 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 27 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 27: Increasing crossover rate from 1.00 to 1.00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 27: Decreasing crossover rate from 0.211 to 0.200
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27: Increasing MAX_REPETITION from 160065 to 240097
-fandango:INFO: Generation 27 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 28 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 28 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 28: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 28: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 28: Increasing MAX_REPETITION from 240097 to 360145
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 28: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 28: Decreasing crossover rate from 0.200 to 0.190
 fandango:INFO: Generation 28 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 29 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 29 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 29: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 29: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 29: Increasing MAX_REPETITION from 360145 to 540217
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 29: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 29: Decreasing crossover rate from 0.190 to 0.181
 fandango:INFO: Generation 29 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 30 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 30 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 30: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 30: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 30: Increasing MAX_REPETITION from 540217 to 810325
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 30: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 30: Decreasing crossover rate from 0.181 to 0.172
 fandango:INFO: Generation 30 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 31 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 31 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 31: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 31: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 31: Increasing MAX_REPETITION from 810325 to 1215487
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 31: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 31: Decreasing crossover rate from 0.172 to 0.163
 fandango:INFO: Generation 31 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 32 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 32 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 32: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 32: Increasing MAX_REPETITION from 1215487 to 1823230
-fandango:INFO: Generation 32 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 33 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 32: Decreasing crossover rate from 0.163 to 0.155
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 33: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 33: Increasing MAX_REPETITION from 1823230 to 2734845
-fandango:INFO: Generation 33 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 34 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 33 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 34: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 34: Increasing MAX_REPETITION from 2734845 to 4102267
-fandango:INFO: Generation 34 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 35 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 33: Decreasing crossover rate from 0.155 to 0.147
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 35: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 35: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 35: Increasing MAX_REPETITION from 4102267 to 6153400
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 34 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 34: Decreasing crossover rate from 0.147 to 0.140
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 35 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 35: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 35: Decreasing crossover rate from 0.140 to 0.133
 fandango:INFO: Generation 35 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 36 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 36 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 36: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 36: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 36: Increasing MAX_REPETITION from 6153400 to 9230100
-fandango:INFO: Generation 36 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 37 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 36: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 36: Decreasing crossover rate from 0.133 to 0.126
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 37: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 37: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 37: Increasing MAX_REPETITION from 9230100 to 13845150
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 36 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 37 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 37: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 37: Decreasing crossover rate from 0.126 to 0.120
 fandango:INFO: Generation 37 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 38 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 38 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 38: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 38: Increasing MAX_REPETITION from 13845150 to 20767725
-fandango:INFO: Generation 38 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 39 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 38: Decreasing crossover rate from 0.120 to 0.114
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 39: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 39: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 39: Increasing MAX_REPETITION from 20767725 to 31151587
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 39 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 39: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 39: Decreasing crossover rate from 0.114 to 0.108
 fandango:INFO: Generation 39 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 40 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 40 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 40: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 40: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 40: Increasing MAX_REPETITION from 31151587 to 46727380
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 40: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 40: Decreasing crossover rate from 0.108 to 0.103
 fandango:INFO: Generation 40 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 41 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 41 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 41: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 41: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 41: Increasing MAX_REPETITION from 46727380 to 70091070
-fandango:INFO: Generation 41 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 42 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 41: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 41: Decreasing crossover rate from 0.103 to 0.100
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 42: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 42: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 42: Increasing MAX_REPETITION from 70091070 to 105136605
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 41 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 42 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 42: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 42: Decreasing crossover rate from 0.100 to 0.100
 fandango:INFO: Generation 42 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 43 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 43 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 43: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 43: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 43: Increasing MAX_REPETITION from 105136605 to 157704907
-fandango:INFO: Generation 43 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 44 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 43: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 43: Decreasing crossover rate from 0.100 to 0.100
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 44: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 44: Increasing MAX_REPETITION from 157704907 to 236557360
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 43 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 44 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 45 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 44: Decreasing crossover rate from 0.100 to 0.100
+fandango:INFO: Generation 44 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 45 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 45: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 45: Increasing MAX_REPETITION from 236557360 to 354836040
-fandango:INFO: Generation 45 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 46 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 45: Decreasing crossover rate from 0.100 to 0.100
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 46: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 46: Increasing MAX_REPETITION from 354836040 to 532254060
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 46 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 46: Decreasing crossover rate from 0.100 to 0.100
 fandango:INFO: Generation 46 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 47 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 47 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 47: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 47: Increasing MAX_REPETITION from 532254060 to 798381090
-fandango:INFO: Generation 47 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 48 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 47: Decreasing crossover rate from 0.100 to 0.100
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 48: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 48: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 48: Increasing MAX_REPETITION from 798381090 to 1197571635
-fandango:INFO: Generation 48 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 49 - Fitness: 0.01 - #solutions found: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 48 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 49: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 49: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 49: Increasing MAX_REPETITION from 1197571635 to 1796357452
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 48: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 48: Decreasing crossover rate from 0.100 to 0.100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 48 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 49 - Average Fitness: 0.01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 49: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 49: Decreasing crossover rate from 0.100 to 0.100
 fandango:INFO: Generation 49 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 50 - Fitness: 0.01 - #solutions found: 0
+fandango:INFO: Generation 50 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 50: Increasing mutation rate from 1.00 to 1.00
-fandango:INFO: Generation 50: Increasing crossover rate from 1.00 to 1.00
-fandango:INFO: Generation 50: Increasing MAX_REPETITION from 1796357452 to 2694536178
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 50: Increasing mutation rate from 1.000 to 1.000
+fandango:INFO: Generation 50: Decreasing crossover rate from 0.100 to 0.100
 fandango:INFO: Generation 50 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: ---------- Evolution finished ----------
-fandango:INFO: Perfect solutions found: (0)
-fandango:INFO: Fitness of final population: 0.01
-fandango:INFO: Time taken: 11.49 seconds
+fandango:INFO: Average fitness of population: 0.01
+fandango:INFO: ---------- Done generating  for 50 generations----------
+fandango:INFO: Time taken: 158.80 seconds
 fandango:ERROR: Population did not converge to a perfect population
 fandango:ERROR: Only found 0 perfect solutions, instead of the required 10
 </pre></div>
@@ -1152,6 +1362,8 @@ Of course, if the constraint is <code class="docutils literal notranslate"><span
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-and-derivationtree-types">Constraints and <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints-on-the-command-line">Constraints on the Command Line</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-fandango-solves-constraints">How Fandango Solves Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fandango-progress-bar">The Fandango Progress Bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraints-and-optimization">Soft Constraints and Optimization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-constraints-cannot-be-solved">When Constraints Cannot be Solved</a></li>
 </ul>
   </nav></div>
@@ -1167,7 +1379,7 @@ Of course, if the constraint is <code class="docutils literal notranslate"><span
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -1177,7 +1389,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

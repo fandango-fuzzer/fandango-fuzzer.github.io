@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -174,7 +174,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -186,30 +186,46 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -220,6 +236,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
@@ -427,10 +444,10 @@ document.write(`
 </dd>
 </dl>
 <dl class="simple myst">
-<dt>Where would one get Fandango grammars and constraints from?</dt><dd><p>Besides writing them manually, one can use <a class="reference internal" href="Converters.html#sec-converters"><span class="std std-ref">converters</span></a> to generate them from other formal specifications such as ANTLR. Recent research has shown various methods to extract grammars from existing programs (<span id="id1">[<a class="reference internal" href="About.html#id11" title="Leon Bettscheider and Andreas Zeller. Look ma, no input samples! mining input grammars from code with symbolic parsing. In Companion Proceedings of the 32nd ACM International Conference on the Foundations of Software Engineering, FSE 2024, 522–526. New York, NY, USA, 2024. Association for Computing Machinery. URL: https://doi.org/10.1145/3663529.3663790, doi:10.1145/3663529.3663790.">BZ24</a>]</span>,
-<span id="id2">[<a class="reference internal" href="About.html#id12" title="Rahul Gopinath, Björn Mathis, and Andreas Zeller. Mining input grammars from dynamic control flow. In Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering, ESEC/FSE 2020, 172–183. New York, NY, USA, 2020. Association for Computing Machinery. URL: https://doi.org/10.1145/3368089.3409679, doi:10.1145/3368089.3409679.">GMZ20</a>]</span>,
-<span id="id3">[<a class="reference internal" href="About.html#id13" title="Michael Schröder and Jürgen Cito. Grammars for free: toward grammar inference for ad hoc parsers. In Proceedings of the ACM/IEEE 44th International Conference on Software Engineering: New Ideas and Emerging Results, ICSE-NIER '22, 41–45. New York, NY, USA, 2022. Association for Computing Machinery. URL: https://doi.org/10.1145/3510455.3512787, doi:10.1145/3510455.3512787.">SchroderC22</a>]</span>,
-<span id="id4">[<a class="reference internal" href="About.html#id14" title="Neil Kulkarni, Caroline Lemieux, and Koushik Sen. Learning highly recursive input grammars. In Proceedings of the 36th IEEE/ACM International Conference on Automated Software Engineering, ASE '21, 456–467. IEEE Press, 2022. URL: https://doi.org/10.1109/ASE51524.2021.9678879, doi:10.1109/ASE51524.2021.9678879.">KLS22</a>]</span>)
+<dt>Where would one get Fandango grammars and constraints from?</dt><dd><p>Besides writing them manually, one can use <a class="reference internal" href="Converters.html#sec-converters"><span class="std std-ref">converters</span></a> to generate them from other formal specifications such as ANTLR. Recent research has shown various methods to extract grammars from existing programs (<span id="id1">[<a class="reference internal" href="About.html#id10" title="Leon Bettscheider and Andreas Zeller. Look ma, no input samples! mining input grammars from code with symbolic parsing. In Companion Proceedings of the 32nd ACM International Conference on the Foundations of Software Engineering, FSE 2024, 522–526. New York, NY, USA, 2024. Association for Computing Machinery. URL: https://doi.org/10.1145/3663529.3663790, doi:10.1145/3663529.3663790.">BZ24</a>]</span>,
+<span id="id2">[<a class="reference internal" href="About.html#id11" title="Rahul Gopinath, Björn Mathis, and Andreas Zeller. Mining input grammars from dynamic control flow. In Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering, ESEC/FSE 2020, 172–183. New York, NY, USA, 2020. Association for Computing Machinery. URL: https://doi.org/10.1145/3368089.3409679, doi:10.1145/3368089.3409679.">GMZ20</a>]</span>,
+<span id="id3">[<a class="reference internal" href="About.html#id12" title="Michael Schröder and Jürgen Cito. Grammars for free: toward grammar inference for ad hoc parsers. In Proceedings of the ACM/IEEE 44th International Conference on Software Engineering: New Ideas and Emerging Results, ICSE-NIER '22, 41–45. New York, NY, USA, 2022. Association for Computing Machinery. URL: https://doi.org/10.1145/3510455.3512787, doi:10.1145/3510455.3512787.">SchroderC22</a>]</span>,
+<span id="id4">[<a class="reference internal" href="About.html#id13" title="Neil Kulkarni, Caroline Lemieux, and Koushik Sen. Learning highly recursive input grammars. In Proceedings of the 36th IEEE/ACM International Conference on Automated Software Engineering, ASE '21, 456–467. IEEE Press, 2022. URL: https://doi.org/10.1109/ASE51524.2021.9678879, doi:10.1109/ASE51524.2021.9678879.">KLS22</a>]</span>)
 In a few years, we expect that LLMs will be able to help with writing input specifications just like they help in synthesizing code - and then, Fandango will be there to leverage your specs.</p>
 </dd>
 <dt>Why not use Python (or any program) to generate outputs in the first place?</dt><dd><p>Regular programs either <em>parse</em> or <em>produce</em> inputs.
@@ -515,7 +532,7 @@ On the other hand, the constraints used by Fandango do not preclude coverage gui
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -525,7 +542,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

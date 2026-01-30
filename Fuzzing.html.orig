@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -113,9 +113,6 @@
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-<aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><p>💃 Fandango is currently in public beta; please check the <a href="https://github.com/fandango-fuzzer/fandango/issues"  style="color:white;">list of open issues</a>. A 1.0&nbsp;release is scheduled for June&nbsp;2025.</p></div>
-</aside>
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
@@ -145,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -177,7 +174,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -189,27 +186,46 @@
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing and Checking Inputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -217,11 +233,12 @@
 <li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango Include Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
 
     </div>
@@ -427,7 +444,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-libfuzzer-style-harness-directly">Calling a libFuzzer style harness directly</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fandango-in-libafl">Using Fandango in LibAFL</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-fan-files">Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-fuzzing-campaigns">Running Fuzzing Campaigns</a></li>
 </ul>
             </nav>
         </div>
@@ -463,11 +482,11 @@ These two values would be <em>comma-separated</em>, such that typical inputs wou
 The full definition looks like this:</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>In Fandango specs, symbol names are formed as identifiers in Python - that is, they consist of letters, underscores, and digits.</p>
+<p>In Fandango specs, symbol names are formed like identifiers in Python - that is, they consist of letters, underscores, and digits.</p>
 </aside>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>Future Fandango versions will have shortcuts for specifying character ranges.</p>
+<p>Use <a class="reference internal" href="Regexes.html#sec-regexes"><span class="std std-ref">regular expressions</span></a> to specifying character ranges.</p>
 </aside>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -489,16 +508,24 @@ The full definition looks like this:</p>
 <p>Your output will look like this:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Otlgfy Mctwpj,14
-Cd Ywdp,969
-Mbi Rj,3003
-Wt Vpbmdo,06
-Tcnth Ke,328
-Nm Xqtpd,15
-Zyqgcz Paq,6
-Ore Cbxdkz,750
-Rwfbro Gw,984
-Rqrdi Uempn,615
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ethinrkzo Fyczmflbxzr,712541826434786404
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pequjxoueegs Einaubuxxrfgnapgfmcx,05920879506291
+Hik Lbfhpmoefktjghdrkjca,3
+Fmxeitseee Gqnkfsyufgxdseahg,039
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nlbprgzysh Loqwathzssbirfvqv,646490651
+Mljhrebaqqxdqqucp Fhxi,72078071525700
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ahr Megpbzdgaotfo,391531943798
+Cwligsppnsxxowffqxxw Kbytmopdlnrvlkhi,716985279753318198
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lmuvrudbrrvendf Fptcdiidhsowlgidegou,9853863
+Mjpqvmkf Fjlkrazlaupeyldnjo,027613380752257990
 </pre></div>
 </div>
 </div>
@@ -539,14 +566,14 @@ To store all outputs in a directory named <code class="docutils literal notransl
 <p class="admonition-title">Note</p>
 <p>If the directory is already present, Fandango will use that directory.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
 <p>Fandango will overwrite files <code class="docutils literal notranslate"><span class="pre">Fandango-0001.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Fandango-0002.txt</span></code>, etc., but leave other files in the directory unchanged.</p>
 </div>
 <p>If you want a different file extension (for instance, because <code class="docutils literal notranslate"><span class="pre">.txt</span></code> is not suitable), Fandango provides a <code class="docutils literal notranslate"><span class="pre">--filename-extension</span></code> option to set a different one.</p>
 </section>
 <section id="invoking-programs-directly">
-<h2>Invoking Programs Directly<a class="headerlink" href="#invoking-programs-directly" title="Link to this heading">#</a></h2>
+<span id="sec-invoke-targets"></span><h2>Invoking Programs Directly<a class="headerlink" href="#invoking-programs-directly" title="Link to this heading">#</a></h2>
 <p>You can have Fandango invoke <em>programs directly</em>, and have Fandango feed them the generated inputs.
 The programs are specified as arguments on the command line.</p>
 <p>There are three ways to pass the input into programs, on the command line, via standard input, and in-process to a shared object with a libFuzzer style harness.</p>
@@ -572,13 +599,26 @@ For this, use the <code class="docutils literal notranslate"><span class="pre">-
 <p>The <code class="docutils literal notranslate"><span class="pre">cat</span></code> program is then invoked repeatedly, each time passing a new Fandango-generated input as its standard input.</p>
 </section>
 <section id="calling-a-libfuzzer-style-harness-directly">
-<h3>Calling a libFuzzer style harness directly<a class="headerlink" href="#calling-a-libfuzzer-style-harness-directly" title="Link to this heading">#</a></h3>
+<span id="sec-libfuzzer"></span><h3>Calling a libFuzzer style harness directly<a class="headerlink" href="#calling-a-libfuzzer-style-harness-directly" title="Link to this heading">#</a></h3>
 <p>Fandango further supports calling a libFuzzer style harness directly. If you are able to compile your binary to a shared object (<code class="docutils literal notranslate"><span class="pre">.so</span></code> on Linux or <code class="docutils literal notranslate"><span class="pre">.dylib</span></code> on macOS), Fandango can load the binary and directly call the function. This requires some extra work initially but removes the need to start a new process for each input evaluation, thus improving performance significantly. Fandango will exit on the first crashing input. <code class="docutils literal notranslate"><span class="pre">--input-method=libfuzzer</span></code> is only supported in combination with <code class="docutils literal notranslate"><span class="pre">--file-mode=binary</span></code>, since libFuzzer style harnesses expect binary data.</p>
 <p>Fandango is invoked as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fandango fuzz -f persons.fan -n 10 --input-method=libfuzzer --file-mode=binary ./harness.{so,dylib}
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your target crashes when using the libFuzzer interface, the fuzzer process will exit as well, losing the input if not otherwise specified. Consider using the <a class="reference internal" href="#sec-libafl"><span class="std std-ref">LibAFL integration</span></a> for much more robust target and fuzzing process handling.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The libFuzzer interface is untested on Windows so far due to a lack of hardware. If you would like to test it, try un-skipping <code class="docutils literal notranslate"><span class="pre">test_output_with_libfuzzer_harness</span></code> in <code class="docutils literal notranslate"><span class="pre">test_cli.py</span></code>. You may need to adjust how the C file is compiled.</p>
+</div>
 </section>
+</section>
+<section id="using-fandango-in-libafl">
+<span id="sec-libafl"></span><h2>Using Fandango in LibAFL<a class="headerlink" href="#using-fandango-in-libafl" title="Link to this heading">#</a></h2>
+<p>With libafl-fandango-pyo3 (<a class="reference external" href="https://crates.io/crates/libafl-fandango-pyo3">crates.io</a>, <a class="reference external" href="https://github.com/riesentoaster/libafl-fandango-pyo3">repository</a>), it is possible to use Fandango in conjunction with the <a class="reference external" href="https://github.com/aflplusplus/libafl">LibAFL</a> ecosystem. This makes target handling and evaluation much more flexible.</p>
+<p>Refer to the <a class="reference external" href="https://github.com/riesentoaster/libafl-fandango-pyo3">documentation of libafl-fandango-pyo3</a> for instructions on how to use it and a couple of example fuzzers showing how to integrate it into LibAFL-based fuzzers.</p>
 </section>
 <section id="executable-fan-files">
 <h2>Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files<a class="headerlink" href="#executable-fan-files" title="Link to this heading">#</a></h2>
@@ -601,18 +641,30 @@ $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eqpa Dlb,84093
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wuax Ymwuvvrom,15653597106
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">env</span></code> command varies greatly across Unix flavors and versions.
 If the above does not work on your system, try skipping the <code class="docutils literal notranslate"><span class="pre">-S</span></code> option, such that the first line reads:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env fandango fuzz -f</span>
 </pre></div>
 </div>
+</div>
+</section>
+<section id="running-fuzzing-campaigns">
+<h2>Running Fuzzing Campaigns<a class="headerlink" href="#running-fuzzing-campaigns" title="Link to this heading">#</a></h2>
+<p>So far, we have only produced a limited number of outputs. This can be done in two ways: By limiting the number of generations for the evaluation or by capping the number of solutions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="c1"># to limit the number of solutions</span>
+$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-N<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="c1"># to limit the number of generations</span>
+</pre></div>
+</div>
+<p>To run fuzzing continuously, consider specifying <code class="docutils literal notranslate"><span class="pre">--infinite</span></code> to keep Fandango producing inputs indefinitely. You likely want to combine this with one of the configurations where Fandango <a class="reference internal" href="#sec-invoke-targets"><span class="std std-ref">executes your target directly</span></a> like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>--infinite<span class="w"> </span>--input-method<span class="o">=</span>libfuzzer<span class="w"> </span>--file-mode<span class="o">=</span>binary<span class="w"> </span>./harness.<span class="o">{</span>so,dylib<span class="o">}</span>
+</pre></div>
 </div>
 </section>
 </section>
@@ -691,7 +743,9 @@ If the above does not work on your system, try skipping the <code class="docutil
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-libfuzzer-style-harness-directly">Calling a libFuzzer style harness directly</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fandango-in-libafl">Using Fandango in LibAFL</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-fan-files">Executable <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-fuzzing-campaigns">Running Fuzzing Campaigns</a></li>
 </ul>
   </nav></div>
 
@@ -706,7 +760,7 @@ If the above does not work on your system, try skipping the <code class="docutil
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -716,7 +770,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>

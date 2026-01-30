@@ -1,0 +1,1577 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Case Study: FTP &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'FTP';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Case Study: DNS" href="DNS.html" />
+    <link rel="prev" title="Customizing Party Communication" href="Parties.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FFTP.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/FTP.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<a href="_static/fandango.pdf" target="_blank"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Download PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Case Study: FTP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ftp-parties">The FTP Parties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-parties">Control Parties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-parties">Data Parties</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-to-the-ftp-server">Connecting to the FTP Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in-with-username-and-password">Logging in with username and password</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-to-log-in">Failure to log in</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-logging-in-via-tls-and-ssl">(Not) logging in via TLS and SSL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-ftp-commands">First FTP Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pwd-command">The PWD command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-syst-command">The SYST command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-feat-command">The FEAT command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-opts-utf8-command">The OPTS UTF8 command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-ftp-states">Changing FTP States</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-epsv-command-entering-passive-mode">The EPSV command - entering passive mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-type-command-set-binary-mode">The TYPE command - set binary mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-list-command">The LIST command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quit-command">The QUIT command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interactions">Example Interactions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-client-interaction">A Typical Client Interaction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-server-interaction">A Typical Server Interaction</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="case-study-ftp">
+<span id="sec-ftp"></span><h1>Case Study: FTP<a class="headerlink" href="#case-study-ftp" title="Link to this heading">#</a></h1>
+<p>This Fandango specification allows testing servers and clients for <a class="reference external" href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">File Transfer Protocol</a> (FTP, <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc959">RFC 959</a>).
+It demonstrates</p>
+<ul class="simple">
+<li><p>how a nontrivial protocol with text commands is implemented; and</p></li>
+<li><p>how additional channels (<code class="docutils literal notranslate"><span class="pre">ClientData</span></code> and <code class="docutils literal notranslate"><span class="pre">ServerData</span></code>) are used on demand, based on the ports returned by the FTP server</p></li>
+</ul>
+<p>The FTP spec consists of three parts, all available for download:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/a42b6fb81976be69e77ddca6256c6060/ftp.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">ftp.fan</span></code></span></a> - the core FTP spec without specific party definitions</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/9ad01b7408edf266c6ad79df3bd4db78/ftp_client.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">ftp_client.fan</span></code></span></a> - for using Fandango as an FTP client (includes <code class="docutils literal notranslate"><span class="pre">ftp.fan</span></code>)</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/2595e079bb16e5654993368f052cec8f/ftp_server.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">ftp_server.fan</span></code></span></a> - for using Fandango as an FTP server (includes <code class="docutils literal notranslate"><span class="pre">ftp.fan</span></code>)</p></li>
+</ul>
+<p>To test it, run an FTP server on the local host at port 50100, and invoke Fandango as</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Omit <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">1</span></code> if you want Fandango to test until protocol coverage is achieved.</p>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>ftp_client.fan
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1: </span>These features are available in Fandango 1.1 and later.</p>
+</div>
+<section id="the-ftp-parties">
+<span id="sec-ftp-parties"></span><h2>The FTP Parties<a class="headerlink" href="#the-ftp-parties" title="Link to this heading">#</a></h2>
+<p>In contrast to other (simpler) protocols, FTP maintains <em>two</em> communication channels: one for <em>control</em> (issuing commands and getting responses), and one for <em>data</em> (for transferring data).
+In our spec, we name these <code class="docutils literal notranslate"><span class="pre">ClientControl</span></code> and <code class="docutils literal notranslate"><span class="pre">ClientData</span></code> as well as <code class="docutils literal notranslate"><span class="pre">ServerControl</span></code> and <code class="docutils literal notranslate"><span class="pre">ServerData</span></code>.</p>
+<p>A very simple interaction involving all four, first logging in, and then sending a <code class="docutils literal notranslate"><span class="pre">LIST</span></code> command to get the contents of the current directory, is illustrated below.</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    box Client
+    participant ClientData
+    participant ClientControl
+    end
+    box Server
+    participant ServerControl
+    participant ServerData
+    end
+    ClientControl -&gt;&gt; ServerControl: (connect)
+    ServerControl -&gt;&gt; ClientControl: 220 FTP Server ready.
+    ClientControl -&gt;&gt; ServerControl: USER the_user
+    ServerControl -&gt;&gt; ClientControl: 331 Password required for the_user.
+    ClientControl -&gt;&gt; ServerControl: PASS the_password
+    ServerControl -&gt;&gt; ClientControl: 230 User the_user logged in.
+    ClientControl -&gt;&gt; ServerControl: LIST
+    ServerControl -&gt;&gt; ClientControl: 150 Opening ASCII mode data connection for file list
+    ServerData -&gt;&gt; ClientData: (data)
+    ServerControl -&gt;&gt; ClientControl: 226 Transfer complete.
+    ClientControl -&gt;&gt; ServerControl: (disconnect)
+    </pre><section id="control-parties">
+<h3>Control Parties<a class="headerlink" href="#control-parties" title="Link to this heading">#</a></h3>
+<p>In our setting, we assume that Fandango is acting as <em>client</em> to test an FTP server.
+Fandango connects to a server running on port 25521 on the local host.
+Whenever it receives a <code class="docutils literal notranslate"><span class="pre">150</span></code> message initiating a data transfer, it starts the <code class="docutils literal notranslate"><span class="pre">ClientData</span></code> party.
+Here, we use the <a class="reference internal" href="Parties.html#sec-party-instance"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">instance()</span></code></span></a> method to access and reconfigure the individual parties.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClientControl</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">,</span>
+            <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;tcp://[::1]:25521&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;150&quot;</span><span class="p">):</span>
+            <span class="n">ClientData</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When the server sends a <code class="docutils literal notranslate"><span class="pre">226</span></code> message, this indicates the end of a data transfer;
+so we stop the <code class="docutils literal notranslate"><span class="pre">ServerData</span></code> instance to disconnect.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ServerControl</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">EXTERNAL</span><span class="p">,</span>
+            <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;tcp://[::1]:25522&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">sender</span><span class="o">=</span><span class="s2">&quot;ClientControl&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">DerivationTree</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">recipient</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;226&quot;</span><span class="p">):</span>
+            <span class="n">ServerData</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="data-parties">
+<h3>Data Parties<a class="headerlink" href="#data-parties" title="Link to this heading">#</a></h3>
+<p>In our setting, the FTP data transfer takes place via port 50100 on the local host.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClientData</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">,</span>
+            <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;tcp://[::1]:50100&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">sender</span><span class="o">=</span><span class="s2">&quot;ServerData&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ServerData</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">EXTERNAL</span><span class="p">,</span>
+            <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;tcp://[::1]:50100&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">sender</span><span class="o">=</span><span class="s2">&quot;ClientData&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="connecting-to-the-ftp-server">
+<span id="sec-ftp-connect"></span><h2>Connecting to the FTP Server<a class="headerlink" href="#connecting-to-the-ftp-server" title="Link to this heading">#</a></h2>
+<p>The interaction with an FTP server starts with the server <code class="docutils literal notranslate"><span class="pre">ServerControl</span></code> sending a 220 message <code class="docutils literal notranslate"><span class="pre">&lt;response_server_info&gt;</span></code> to the client <code class="docutils literal notranslate"><span class="pre">ClientControl</span></code>, indicating that it is ready for a new user.
+Afterwards, we are in the state <code class="docutils literal notranslate"><span class="pre">state_logged_out_1</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">state_setup</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">state_setup</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">service_ready</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_logged_out_1</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">service_ready</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_server_info</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">response_server_info</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;(220-(?:[\x20-\x7E]*\r\n))*220 (?:[\x20-\x7E]*)\r\n&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="logging-in">
+<span id="sec-ftp-login"></span><h2>Logging In<a class="headerlink" href="#logging-in" title="Link to this heading">#</a></h2>
+<p>While we’re logged out (in state <code class="docutils literal notranslate"><span class="pre">&lt;state_logged_out_1&gt;</span></code>), we can</p>
+<ul class="simple">
+<li><p>via username and password (<code class="docutils literal notranslate"><span class="pre">&lt;exchange_login_...&gt;</span></code>)</p></li>
+</ul>
+<p>Login with username and password can</p>
+<ul class="simple">
+<li><p>fail (<code class="docutils literal notranslate"><span class="pre">&lt;exchange_login_fail&gt;</span></code>, after which we still stay logged out); or</p></li>
+<li><p>succeed (<code class="docutils literal notranslate"><span class="pre">&lt;exchange_login_ok&gt;</span></code>), then, we are logged in (<code class="docutils literal notranslate"><span class="pre">&lt;state_logged_in&gt;</span></code>).</p></li>
+</ul>
+<p>We only support logging in via username and password, so authentication via</p>
+<ul class="simple">
+<li><p>TLS (<code class="docutils literal notranslate"><span class="pre">&lt;exchange_auth_tls&gt;</span></code>) or</p></li>
+<li><p>SSL (<code class="docutils literal notranslate"><span class="pre">&lt;exchange_auth_ssl&gt;</span></code>)</p></li>
+</ul>
+<p>are never successful, we remain logged out.</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; #lt;state_logged_out_1#gt;
+    #lt;state_logged_out_1#gt; --&gt; state_logged_out_1#gt;: #lt;exchange_auth_tls#gt; | #lt;exchange_auth_ssl#gt; | #lt;exchange_login_fail#gt;
+    #lt;state_logged_out_1#gt; --&gt; #lt;state_logged_in#gt;: #lt;exchange_login_ok
+    </pre><p>In our spec, this is modeled as exchanges followed by the resulting state.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">state_logged_out_1</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">exchange_login_ok</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_logged_in</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="o">&lt;</span><span class="n">exchange_login_fail</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_logged_out_1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">exchange_auth_tls</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_logged_out_1</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="o">&lt;</span><span class="n">exchange_auth_ssl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_logged_out_1</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+<section id="logging-in-with-username-and-password">
+<h3>Logging in with username and password<a class="headerlink" href="#logging-in-with-username-and-password" title="Link to this heading">#</a></h3>
+<p>Our FTP server assumes one user with username <code class="docutils literal notranslate"><span class="pre">the_user</span></code> and a password <code class="docutils literal notranslate"><span class="pre">the_password</span></code>.</p>
+<pre  class="mermaid">
+        sequenceDiagram
+    ClientControl -&gt;&gt; ServerControl: (connect)
+    ServerControl -&gt;&gt; ClientControl: 220 FTP Server ready.
+    ClientControl -&gt;&gt; ServerControl: USER the_user
+    ServerControl -&gt;&gt; ClientControl: 331 Password required for the_user.
+    ClientControl -&gt;&gt; ServerControl: PASS the_password
+    ServerControl -&gt;&gt; ClientControl: 230 User the_user logged in.
+    </pre><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_login_ok</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_user_ok</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_login_user</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_pass_ok</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_login_pass_ok</span><span class="o">&gt;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">request_login_user_ok</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;USER the_user</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_login_user</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;331 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">request_login_pass_ok</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;PASS the_password</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_login_pass_ok</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;230 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="failure-to-log-in">
+<h3>Failure to log in<a class="headerlink" href="#failure-to-log-in" title="Link to this heading">#</a></h3>
+<p>There are two ways logging in can go wrong - an incorrect password (not <code class="docutils literal notranslate"><span class="pre">the_password</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">wrong_user_password</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;^(?!the_password$)([a-zA-Z0-9_]+)&#39;</span>
+</pre></div>
+</div>
+<p>and an incorrect username (not <code class="docutils literal notranslate"><span class="pre">the_user</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">wrong_user_name</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;^(?!the_user$)([a-zA-Z0-9_]+)&#39;</span>
+</pre></div>
+</div>
+<p>Let’s discuss these two options:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_login_fail</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">exchange_wrong_password</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">exchange_wrong_username</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>First, we can have the client send a correct username, but a wrong password.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_wrong_password</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_user_ok</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_login_user</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_pass_fail</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_login_pass_fail</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">request_login_user_ok</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;USER the_user</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">request_login_pass_fail</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;PASS &#39;</span> <span class="o">&lt;</span><span class="n">wrong_user_password</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_login_pass_fail</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;530 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[\x20-\x7E]+&#39;</span>
+</pre></div>
+</div>
+<p>Second, we can have the client send an incorrect username (with a correct or incorrect password).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_wrong_username</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+   <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_user_fail</span><span class="o">&gt;</span>
+   <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_login_user</span><span class="o">&gt;</span>
+     <span class="p">(</span><span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_pass_fail</span><span class="o">&gt;</span> <span class="o">|</span>
+      <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_login_pass_ok</span><span class="o">&gt;</span><span class="p">)</span>
+   <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_login_pass_fail</span><span class="o">&gt;</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">request_login_user_fail</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;USER &#39;</span> <span class="o">&lt;</span><span class="n">wrong_user_name</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>In both cases, we end up staying logged out (<code class="docutils literal notranslate"><span class="pre">&lt;state_logged_out_1&gt;</span></code>).</p>
+</section>
+<section id="not-logging-in-via-tls-and-ssl">
+<h3>(Not) logging in via TLS and SSL<a class="headerlink" href="#not-logging-in-via-tls-and-ssl" title="Link to this heading">#</a></h3>
+<p>We do not support logging in via TLS and SSL and accept a 500 (syntax error) or 530 (not logged in) message from the server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_auth_tls</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_auth_tls</span><span class="o">&gt;&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_auth_tls</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">request_auth_tls</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;AUTH TLS</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_auth_tls</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;(530|500)&#39;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_auth_ssl</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_auth_ssl</span><span class="o">&gt;&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_auth_ssl</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">request_auth_ssl</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;AUTH SSL</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_auth_ssl</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;(530|500)&#39;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="first-ftp-commands">
+<h2>First FTP Commands<a class="headerlink" href="#first-ftp-commands" title="Link to this heading">#</a></h2>
+<p>When the client is logged in, it can send commands to the server.
+In the <code class="docutils literal notranslate"><span class="pre">&lt;state_logged_in&gt;</span></code> state, we support the commands listed in <code class="docutils literal notranslate"><span class="pre">&lt;logged_in_cmds&gt;</span></code>.</p>
+<p>(The <a class="reference internal" href="#sec-ftp-type"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">&lt;exchange_set_type&gt;</span></code></span></a> and <a class="reference internal" href="#sec-ftp-epsv"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">&lt;exchange_set_passive&gt;</span></code></span></a> commands change the FTP state; see <a class="reference internal" href="#sec-ftp-states"><span class="std std-ref">States</span></a> below.)</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; #lt;state_logged_out_1#gt;
+    #lt;state_logged_out_1#gt; --&gt; #lt;state_logged_in#gt;: #lt;exchange_login_ok#gt;
+
+    #lt;state_logged_in#gt; --&gt; #lt;state_logged_in#gt;: #lt;logged_in_cmds#gt;
+    #lt;state_logged_in#gt; --&gt; #lt;state_in_binary#gt;: #lt;exchange_set_type#gt;
+    #lt;state_logged_in#gt; --&gt; #lt;state_in_passive#gt;: #lt;exchange_set_epassive#gt;
+    </pre><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">state_logged_in</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">logged_in_cmds</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_logged_in</span><span class="o">&gt;</span>
+ <span class="o">|</span> <span class="o">&lt;</span><span class="n">exchange_set_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_binary</span><span class="o">&gt;</span>
+ <span class="o">|</span> <span class="o">&lt;</span><span class="n">exchange_set_epassive</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_passive</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">logged_in_cmds</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="n">exchange_pwd</span><span class="o">&gt;</span> <span class="o">|</span> 
+    <span class="o">&lt;</span><span class="n">exchange_syst</span><span class="o">&gt;</span> <span class="o">|</span> 
+    <span class="o">&lt;</span><span class="n">exchange_feat</span><span class="o">&gt;</span> <span class="o">|</span> 
+    <span class="o">&lt;</span><span class="n">exchange_set_utf8</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="the-pwd-command">
+<span id="sec-ftp-pwd"></span><h3>The PWD command<a class="headerlink" href="#the-pwd-command" title="Link to this heading">#</a></h3>
+<p>PWD requests the current working directory. The server answers with a (random) path.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_pwd</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_pwd</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_pwd</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_pwd</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;PWD</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_pwd</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;257 </span><span class="se">\&quot;</span><span class="s1">&#39;</span> <span class="o">&lt;</span><span class="n">directory</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\&quot;</span><span class="s1"> is the current directory</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">directory</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;/&#39;</span> <span class="o">|</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span> <span class="o">&lt;</span><span class="n">filesystem_name</span><span class="o">&gt;</span><span class="p">)</span><span class="o">+</span>
+<span class="o">&lt;</span><span class="n">filesystem_name</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-zA-Z0-9_]+&#39;</span>
+<span class="o">&lt;</span><span class="n">client_name</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-zA-Z0-9]+&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="the-syst-command">
+<span id="sec-ftp-syst"></span><h3>The SYST command<a class="headerlink" href="#the-syst-command" title="Link to this heading">#</a></h3>
+<p>With the <code class="docutils literal notranslate"><span class="pre">SYST</span></code> command, we can request a <code class="docutils literal notranslate"><span class="pre">215</span></code> reply, followed by the server system name.
+We use <code class="docutils literal notranslate"><span class="pre">Linux</span></code> as default.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_syst</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_syst</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_syst</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_syst</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;SYST</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_syst</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;215 &#39;</span> <span class="o">&lt;</span><span class="n">syst_name</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">syst_name</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[\x20-\x7E]+&#39;</span> <span class="o">:=</span> <span class="s1">&#39;Linux&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="the-feat-command">
+<span id="sec-ftp-feat"></span><h3>The FEAT command<a class="headerlink" href="#the-feat-command" title="Link to this heading">#</a></h3>
+<p>The FEAT command returns a list of features that the server supports.
+If Fandango generates the feature list, we return a fixed value - in our model, we only support the <a class="reference internal" href="#sec-ftp-epsv"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">EPSV</span></code></span></a> command.
+When receiving a feature list, we parse it according to the provided regex.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_feat</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_feat</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_feat</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_feat</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;FEAT</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_feat</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;211-Features:</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="o">&lt;</span><span class="n">feat_entry</span><span class="o">&gt;+</span> <span class="s1">&#39;211 End</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="o">:=</span> <span class="n">feat_response</span><span class="p">()</span>
+<span class="o">&lt;</span><span class="n">feat_entry</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39; &#39;</span> <span class="sa">r</span><span class="s1">&#39;[\x20-\x7E]+&#39;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">feat_response</span><span class="p">():</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="s1">&#39;211-Features:</span><span class="se">\r\n</span><span class="s1"> EPSV</span><span class="se">\r\n</span><span class="s1">211 End</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="n">features</span>
+</pre></div>
+</div>
+</section>
+<section id="the-opts-utf8-command">
+<span id="sec-ftp-opts"></span><h3>The OPTS UTF8 command<a class="headerlink" href="#the-opts-utf8-command" title="Link to this heading">#</a></h3>
+<p>We can send a command to set the character set to UTF-8, expecting a <code class="docutils literal notranslate"><span class="pre">200</span></code> (okay) response.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_set_utf8</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+   <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_set_utf8</span><span class="o">&gt;</span>
+   <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_set_utf8</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_set_utf8</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;OPTS UTF8 ON</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_set_utf8</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;200 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="changing-ftp-states">
+<span id="sec-ftp-states"></span><h2>Changing FTP States<a class="headerlink" href="#changing-ftp-states" title="Link to this heading">#</a></h2>
+<p>Let us now explore more states.
+In our model, the FTP server can be in four states:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;state_logged_in&gt;</span></code> - the default state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;state_in_binary&gt;</span></code> - binary mode</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;state_in_passive&gt;</span></code> - passive mode</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;state_in_binary_passive&gt;</span></code> - binary <em>and</em> passive mode</p></li>
+</ol>
+<p>Binary and passive modes are activated via <a class="reference internal" href="#sec-ftp-type"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">&lt;exchange_set_type&gt;</span></code></span></a> and <a class="reference internal" href="#sec-ftp-epsv"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">&lt;exchange_set_epassive&gt;</span></code></span></a> interactions, as shown below.
+We want to be in binary <em>and</em> passive mode, so we can actually retrieve data using <code class="docutils literal notranslate"><span class="pre">LIST</span></code> (<a class="reference internal" href="#sec-ftp-list"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">&lt;exchange_list&gt;</span></code></span></a>) and finally quit (<a class="reference internal" href="#sec-ftp-quit"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">exchange_quit</span></code></span></a>).</p>
+<pre  class="mermaid">
+        stateDiagram
+    [*] --&gt; #lt;state_logged_out_1#gt;
+    #lt;state_logged_out_1#gt; --&gt; #lt;state_logged_in#gt;: #lt;exchange_login_ok#gt;
+    #lt;state_logged_in#gt; --&gt; #lt;state_logged_in#gt;: #lt;logged_in_cmds#gt;
+    #lt;state_logged_in#gt; --&gt; #lt;state_in_binary#gt;: #lt;exchange_set_type#gt;
+    #lt;state_logged_in#gt; --&gt; #lt;state_in_passive#gt;: #lt;exchange_set_epassive#gt;
+    #lt;state_in_passive#gt; --&gt; #lt;state_in_passive#gt;: #lt;logged_in_cmds#gt;
+    #lt;state_in_passive#gt; --&gt; #lt;state_in_binary_passive#gt;: #lt;exchange_set_type#gt;
+    #lt;state_in_binary_passive#gt; --&gt; #lt;state_in_binary_passive#gt;: #lt;logged_in_cmds#gt;
+    #lt;state_in_binary_passive#gt; --&gt; #lt;state_in_binary#gt;: #lt;exchange_list#gt;
+    #lt;state_in_binary_passive#gt; --&gt; #lt;state_finished#gt;: #lt;exchange_quit#gt;
+    #lt;state_in_binary#gt; --&gt; #lt;state_in_binary#gt;: #lt;logged_in_cmds#gt;
+    #lt;state_in_binary#gt; --&gt; #lt;state_in_binary_passive#gt;: #lt;exchange_set_epassive#gt;
+    #lt;state_finished#gt; --&gt; [*]
+    </pre><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">state_in_binary</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">logged_in_cmds</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_binary</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="o">&lt;</span><span class="n">exchange_set_epassive</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_binary_passive</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">state_in_passive</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">logged_in_cmds</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_passive</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="o">&lt;</span><span class="n">exchange_set_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_binary_passive</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">state_in_binary_passive</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">logged_in_cmds</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_binary_passive</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="o">&lt;</span><span class="n">exchange_list</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_in_binary</span><span class="o">&gt;</span> <span class="o">|</span>
+  <span class="o">&lt;</span><span class="n">exchange_quit</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">state_finished</span><span class="o">&gt;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="the-epsv-command-entering-passive-mode">
+<span id="sec-ftp-epsv"></span><h3>The EPSV command - entering passive mode<a class="headerlink" href="#the-epsv-command-entering-passive-mode" title="Link to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>By default, FTP uses “active” mode, in which the FTP server accesses a port on the client machine.
+Since most firewalls block such behavior, “passive” mode is now the typical use.</p>
+</aside>
+<p>The <code class="docutils literal notranslate"><span class="pre">EPSV</span></code> command directs the server to open a port for data transmission.
+With this, we prepare client and server for actual data transfer.
+The server returns the port number by which it can be accessed; we have to get and process it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_set_epassive</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> \
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_set_epassive</span><span class="o">&gt;</span> \
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_set_epassive</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">request_set_epassive</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;EPSV</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_set_epassive</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;229 Entering Extended Passive Mode (|||&#39;</span> <span class="o">&lt;</span><span class="n">open_port</span><span class="o">&gt;</span> <span class="s1">&#39;|)</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>When producing or parsing <code class="docutils literal notranslate"><span class="pre">&lt;open_port&gt;</span></code>, we call the <code class="docutils literal notranslate"><span class="pre">open_data_port()</span></code> generator function to reconfigure the data parties.
+This method gets called both when parsing and producing:</p>
+<ul class="simple">
+<li><p>When <em>producing</em>, Fandango produces a parameter <code class="docutils literal notranslate"><span class="pre">&lt;open_port_param&gt;</span></code>.
+<code class="docutils literal notranslate"><span class="pre">&lt;open_port_param&gt;</span></code> consists of <code class="docutils literal notranslate"><span class="pre">&lt;passive_port&gt;</span></code> and another generator that depends on <code class="docutils literal notranslate"><span class="pre">&lt;open_port&gt;</span></code>.
+This generator does not get executed when generating parameters for the generator from <code class="docutils literal notranslate"><span class="pre">&lt;open_port&gt;</span></code>, such that we do not get caught in an infinite loop between those to generators.
+Instead, we generate <code class="docutils literal notranslate"><span class="pre">&lt;passive_port&gt;</span></code> directly without invoking the generator.</p></li>
+<li><p>When <em>parsing</em> <code class="docutils literal notranslate"><span class="pre">&lt;open_port&gt;</span></code>, Fandango derives the argument <code class="docutils literal notranslate"><span class="pre">&lt;open_port_param&gt;</span></code> used in the generator by executing the generator from <code class="docutils literal notranslate"><span class="pre">&lt;open_port_param&gt;</span></code> which depends on <code class="docutils literal notranslate"><span class="pre">&lt;open_port&gt;</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">open_port</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">passive_port</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="n">open_data_port</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">open_port_param</span><span class="o">&gt;</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">open_port_param</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">passive_port</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="n">open_data_port</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">open_port</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When generating a passive port, we use a generator to randomly generate a port in [50100, 50100]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">passive_port</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[1-9][0-9]{0,4}&#39;</span> <span class="o">:=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">50100</span><span class="p">,</span> <span class="mi">50100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">open_data_port(port)</span></code> is a generator.
+When executed, it returns the value that was given to it and reconfigures the
+data party definitions to use that port.
+Again, we use the <a class="reference internal" href="Parties.html#sec-party-instance"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">instance()</span></code></span></a> method to access and reconfigure the individual parties.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>As we may use the spec file to run with <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code> as server or client, we protect against the fact that the <code class="docutils literal notranslate"><span class="pre">ClientData</span></code> or <code class="docutils literal notranslate"><span class="pre">ServerData</span></code> instances may not have been created.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">open_data_port</span><span class="p">(</span><span class="n">port</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">client_data</span> <span class="o">=</span> <span class="n">ClientData</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+        <span class="n">server_data</span> <span class="o">=</span> <span class="n">ServerData</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="c1"># Party instances not created</span>
+        <span class="k">return</span> <span class="n">port</span>
+
+    <span class="k">if</span> <span class="n">client_data</span><span class="o">.</span><span class="n">port</span> <span class="o">!=</span> <span class="n">port</span><span class="p">:</span>
+        <span class="n">client_data</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">client_data</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+    <span class="k">if</span>  <span class="n">server_data</span><span class="o">.</span><span class="n">port</span> <span class="o">!=</span> <span class="n">port</span><span class="p">:</span>
+        <span class="n">server_data</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">server_data</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+    <span class="n">client_data</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">server_data</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">port</span>
+</pre></div>
+</div>
+</section>
+<section id="the-type-command-set-binary-mode">
+<span id="sec-ftp-type"></span><h3>The TYPE command - set binary mode<a class="headerlink" href="#the-type-command-set-binary-mode" title="Link to this heading">#</a></h3>
+<p>Using the FTP <code class="docutils literal notranslate"><span class="pre">TYPE</span></code> command, we can set the server into binary mode.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_set_type</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_set_type</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_set_type</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_set_type</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;TYPE I</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_set_type</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;200 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="the-list-command">
+<span id="sec-ftp-list"></span><h3>The LIST command<a class="headerlink" href="#the-list-command" title="Link to this heading">#</a></h3>
+<p>Finally, after all these preparations, we can actually retrieve data via FTP.
+The FTP <code class="docutils literal notranslate"><span class="pre">LIST</span></code> command makes the FTP server send the contents of the current directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_list</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_list</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">open_list</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">list_transfer</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_list</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;LIST</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">open_list</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;150 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;list_data&gt;</span></code> gets sent using the data channel.
+Therefore, we use <code class="docutils literal notranslate"><span class="pre">ServerData</span></code> and <code class="docutils literal notranslate"><span class="pre">ClientData</span></code> as sending and receiving parties.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">list_transfer</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">ServerData</span><span class="p">:</span><span class="n">ClientData</span><span class="p">:</span><span class="n">list_data</span><span class="o">&gt;</span><span class="err">?</span><span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">finalize_list</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">finalize_list</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;226 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>The list data itself contains file names, user names, permissions, and dates:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">list_data</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">list_data_file</span><span class="o">&gt;</span><span class="p">)</span><span class="o">+</span>
+<span class="o">&lt;</span><span class="n">list_data_file</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">permissions</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span><span class="o">+</span> <span class="o">&lt;</span><span class="n">link_count</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">user</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span><span class="o">+</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span><span class="o">+</span> <span class="o">&lt;</span><span class="n">file_size</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">date</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[\x20-\x7E]+&#39;</span>
+<span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>      <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]+&#39;</span> <span class="o">:=</span> <span class="nb">str</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">file_size</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span> <span class="o">:=</span> <span class="nb">str</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9999999</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">link_count</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">permissions</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">file_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">perm</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">perm</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">perm</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">file_type</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[-dlcb]&#39;</span>
+<span class="o">&lt;</span><span class="n">perm</span><span class="o">&gt;</span>        <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[r-]&#39;</span> <span class="sa">r</span><span class="s1">&#39;[w-]&#39;</span> <span class="sa">r</span><span class="s1">&#39;[x-]&#39;</span>
+<span class="o">&lt;</span><span class="n">user</span><span class="o">&gt;</span>        <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-zA-Z_\-]+&#39;</span>
+<span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span>       <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-zA-Z_\-]+&#39;</span>
+<span class="o">&lt;</span><span class="n">date</span><span class="o">&gt;</span>        <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">month</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">day</span><span class="o">&gt;</span> <span class="s1">&#39; &#39;</span> <span class="o">&lt;</span><span class="n">time</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">month</span><span class="o">&gt;</span>       <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)&#39;</span>
+<span class="o">&lt;</span><span class="n">day</span><span class="o">&gt;</span>         <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]</span><span class="si">{2}</span><span class="s1">&#39;</span> <span class="o">:=</span> <span class="s2">&quot;</span><span class="si">{:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">time</span><span class="o">&gt;</span>        <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">hour</span><span class="o">&gt;</span> <span class="s1">&#39;:&#39;</span> <span class="o">&lt;</span><span class="n">minute</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">hour</span><span class="o">&gt;</span>        <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]</span><span class="si">{2}</span><span class="s1">&#39;</span> <span class="o">:=</span> <span class="s2">&quot;</span><span class="si">{:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">minute</span><span class="o">&gt;</span>      <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]</span><span class="si">{2}</span><span class="s1">&#39;</span> <span class="o">:=</span> <span class="s2">&quot;</span><span class="si">{:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">59</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This is what a typical generated entry looks like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>ftp_client.fan<span class="w"> </span>--start-symbol<span class="w"> </span><span class="s1">&#39;&lt;list_data&gt;&#39;</span><span class="w"> </span>--party<span class="w"> </span>ServerData<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br-----rwx   610 BjyU6tVPMJGffiPlQMI            1e           3709762 May 19 02:25 ^TW]k2t&quot;%1l9^
+
+-rw--w-rw-           157 EWEepkYSnE7yj_OAE                  OkKN9FO5hLyONeeqb               3899823 Apr 08 03:41 +k/#vBjDxVd&amp;o`xzSn&lt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-quit-command">
+<span id="sec-ftp-quit"></span><h3>The QUIT command<a class="headerlink" href="#the-quit-command" title="Link to this heading">#</a></h3>
+<p>After a number of <code class="docutils literal notranslate"><span class="pre">LIST</span></code> commands, it is time to quit.
+We use the FTP <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command for this purpose.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange_quit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">request_quit</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">ServerControl</span><span class="p">:</span><span class="n">ClientControl</span><span class="p">:</span><span class="n">response_quit</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="o">&lt;</span><span class="n">request_quit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;QUIT</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+<span class="o">&lt;</span><span class="n">response_quit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;221 &#39;</span> <span class="o">&lt;</span><span class="n">command_tail</span><span class="o">&gt;</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>After that, the FTP server enters <code class="docutils literal notranslate"><span class="pre">&lt;state_finished&gt;</span></code>.
+There is no other interaction or state following, so we’re done.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">state_finished</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-interactions">
+<h2>Example Interactions<a class="headerlink" href="#example-interactions" title="Link to this heading">#</a></h2>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span></code> in conjunction with the <code class="docutils literal notranslate"><span class="pre">--party</span></code> option to simulate the messages produced by a single party.</p>
+<section id="a-typical-client-interaction">
+<h3>A Typical Client Interaction<a class="headerlink" href="#a-typical-client-interaction" title="Link to this heading">#</a></h3>
+<p>Here is a valid sequence of commands as issued by a client:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>ftp_client.fan<span class="w"> </span>--party<span class="w"> </span>ClientControl<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
+AUTH TLS
+USER the_user
+PASS 7Evz0
+AUTH SSL
+AUTH SSL
+USER the_user
+PASS the_password
+EPSV
+TYPE I
+LIST
+EPSV
+LIST
+SYST
+EPSV
+QUIT
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-typical-server-interaction">
+<h3>A Typical Server Interaction<a class="headerlink" href="#a-typical-server-interaction" title="Link to this heading">#</a></h3>
+<p>Here is a valid sequence of responses as issued by a server:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>ftp_client.fan<span class="w"> </span>--party<span class="w"> </span>ServerControl<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-Z
+220-
+220 awL%,%eB&amp;
+530 Y@v$2Uf{Y
+331 vq)b1Gyf,[~&#39;P9elO%3
+230 SIg+&gt;pT26*ls!;9
+229 Entering Extended Passive Mode (|||50100|)
+200 4
+150 ;t
+226 HjyW0%&amp;$,!1l&amp;&gt;,Od{N
+229 Entering Extended Passive Mode (|||50100|)
+215 Linux
+150 ]RxU
+226 zQ5=#ZUS
+229 Entering Extended Passive Mode (|||50100|)
+221 vi\)SDKu#%$koP!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now go and try things out for yourself!</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Parties.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Customizing Party Communication</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="DNS.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case Study: DNS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ftp-parties">The FTP Parties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-parties">Control Parties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-parties">Data Parties</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-to-the-ftp-server">Connecting to the FTP Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in-with-username-and-password">Logging in with username and password</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-to-log-in">Failure to log in</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-logging-in-via-tls-and-ssl">(Not) logging in via TLS and SSL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-ftp-commands">First FTP Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pwd-command">The PWD command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-syst-command">The SYST command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-feat-command">The FEAT command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-opts-utf8-command">The OPTS UTF8 command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-ftp-states">Changing FTP States</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-epsv-command-entering-passive-mode">The EPSV command - entering passive mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-type-command-set-binary-mode">The TYPE command - set binary mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-list-command">The LIST command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-quit-command">The QUIT command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interactions">Example Interactions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-client-interaction">A Typical Client Interaction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-server-interaction">A Typical Server Interaction</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

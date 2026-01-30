@@ -1,0 +1,1593 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Case Study: DNS &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'DNS';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fandango Reference" href="Reference.html" />
+    <link rel="prev" title="Case Study: FTP" href="FTP.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FDNS.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/DNS.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Case Study: DNS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dns-exchange">A DNS Exchange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-requests">DNS Requests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-headers">Request Headers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-questions">Request Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-names">Request Names</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-types">Request Types</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-class">Request Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-responses">DNS Responses</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-response-headers">DNS Response Headers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-response-question-section">DNS Response Question Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-response-answer-section">DNS Response Answer Section</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#an-answers">AN Answers</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#type-a-answers">Type A Answers</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#type-cname-answers">Type CNAME Answers</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#type-ns-answers">Type NS Answers</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#au-answers">AU Answers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-answers">OPT Answers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#consistency-in-responses">Consistency in Responses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-decompression">Compression and Decompression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compression">Compression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decompression">Decompression</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="case-study-dns">
+<span id="sec-dns"></span><h1>Case Study: DNS<a class="headerlink" href="#case-study-dns" title="Link to this heading">#</a></h1>
+<p>This Fandango specification allows testing clients and name servers of the Internet <a class="reference external" href="https://en.wikipedia.org/wiki/Domain_Name_System">Domain Name System</a> (DNS, <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc1035">RFC 1035</a>).
+It demonstrates</p>
+<ul class="simple">
+<li><p>how a nontrivial protocol with bit-level <em>binary</em> commands is implemented;</p></li>
+<li><p>how to use constraints to <em>validate</em> responses; and</p></li>
+<li><p>how to embed <em>compression</em> and <em>decompression</em> functions.</p></li>
+</ul>
+<p>The Fandango DNS protocol spec <a class="reference download internal" download="" href="_downloads/bce816cb933f81a9b89ac912092effb0/dns.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">dns.fan</span></code></span></a> is available for download.
+To test it with Fandango as client querying the public Cloudflare DNS server 1.1.1.1 on the default DNS port 53, invoke Fandango as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>dns.fan<span class="w"> </span>--client<span class="w"> </span>udp://1.1.1.1:53
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1: </span>These features are available in Fandango 1.1 and later.</p>
+</div>
+<section id="a-dns-exchange">
+<h2>A DNS Exchange<a class="headerlink" href="#a-dns-exchange" title="Link to this heading">#</a></h2>
+<p>At an abstract level, the DNS <em>protocol</em> is pretty simple.
+A <em>Client</em> sends a DNS request to the server (via UDP, by default on port 53), and gets a DNS response.
+For instance, as of January 2026, the host <code class="docutils literal notranslate"><span class="pre">example.com</span></code> had the IP address <code class="docutils literal notranslate"><span class="pre">104.18.27.120</span></code>:</p>
+<pre  class="mermaid">
+        sequenceDiagram
+Client -&gt;&gt; Server: example.com
+Server -&gt;&gt; Client: 104.18.27.120
+    </pre><p>This is also how the exchange is modeled in <code class="docutils literal notranslate"><span class="pre">dns.fan</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">exchange</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">exchange</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">Client</span><span class="p">:</span><span class="n">dns_req</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Server</span><span class="p">:</span><span class="n">dns_resp</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Alas, the devil is in the details.
+Let’s dig a bit deeper.</p>
+</section>
+<section id="dns-requests">
+<h2>DNS Requests<a class="headerlink" href="#dns-requests" title="Link to this heading">#</a></h2>
+<p>A DNS request consists of a <em>header</em> and a number of <em>questions</em>.
+The actual number of questions is transmitted in a header field <code class="docutils literal notranslate"><span class="pre">&lt;req_qd_count&gt;</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">dns_req</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">header_req</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">question</span><span class="o">&gt;</span><span class="p">{</span><span class="n">byte_to_int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">req_qd_count</span><span class="o">&gt;</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>We decode <code class="docutils literal notranslate"><span class="pre">&lt;req_qd_count&gt;</span></code> using a function <code class="docutils literal notranslate"><span class="pre">byte_to_int()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a 2-byte byte array to an integer</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">byte_to_int</span><span class="p">(</span><span class="n">byte_val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">byte_val</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We do not model DNSSEC and other DNS extensions.</p>
+</div>
+<section id="request-headers">
+<h3>Request Headers<a class="headerlink" href="#request-headers" title="Link to this heading">#</a></h3>
+<p>The header consists of a number of fields as defined below.
+Note the mix of bits and bytes, which is common in DNS messages.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">header_req</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">h_id</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">h_opcode_standard</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">h_rd</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">h_rcode_noerror</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">req_qd_count</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span> <span class="mi">0</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span> <span class="mi">0</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The ID is an identifier of two bytes.
+When sending the request, we choose a random value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h_id</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;&lt;</span><span class="n">byte</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The remaining fields are set to fixed values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h_opcode_standard</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="o">&lt;</span><span class="n">h_rd</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">1</span> <span class="c1"># 0 causes server failure with cname</span>
+<span class="o">&lt;</span><span class="n">req_qd_count</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="o">:=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="request-questions">
+<h3>Request Questions<a class="headerlink" href="#request-questions" title="Link to this heading">#</a></h3>
+<p>Now for the actual DNS questions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">question</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">q_name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">q_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">rr_class</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;q_name&gt;</span></code> is where the host name (say, <code class="docutils literal notranslate"><span class="pre">example.com</span></code>) is sent to the DNS server.</p>
+</div>
+<section id="request-names">
+<h4>Request Names<a class="headerlink" href="#request-names" title="Link to this heading">#</a></h4>
+<p>A request name is terminated by 8 zero bits (i.e., a NUL byte).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">q_name</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">q_name_written</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">{</span><span class="mi">8</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The name is encoded as</p>
+<ul class="simple">
+<li><p>an octet specifying the <em>length</em> of the name,</p></li>
+<li><p>followed by a sequence of bytes holding the actual name.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">q_name_written</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">label_len_octet</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="n">byte_to_int</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">label_len_octet</span><span class="o">&gt;</span><span class="p">))})</span><span class="o">+</span> <span class="o">:=</span> <span class="n">gen_q_name</span><span class="p">()</span>
+<span class="o">&lt;</span><span class="n">label_len_octet</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To generate domain names to query, we either</p>
+<ul class="simple">
+<li><p>use the Faker library to obtain a random host name (which likely is not known to the DNS server),</p></li>
+<li><p>or we use ‘<a class="reference external" href="http://github.com">github.com</a>’ or ‘<a class="reference external" href="http://cispa.de">cispa.de</a>’, which should be known to a DNS server.</p></li>
+</ul>
+<p>The individual parts (say, <code class="docutils literal notranslate"><span class="pre">github</span></code> and <code class="docutils literal notranslate"><span class="pre">com</span></code>) are also length-encoded, i.e. there is a leading byte telling the length of the part, followed by the part.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">faker</span><span class="w"> </span><span class="kn">import</span> <span class="n">Faker</span>
+<span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">gen_q_name</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rand</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">domain_name</span> <span class="o">=</span> <span class="s1">&#39;github.com&#39;</span>
+    <span class="k">elif</span> <span class="n">rand</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">domain_name</span> <span class="o">=</span> <span class="s1">&#39;cispa.de&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">domain_name</span> <span class="o">=</span> <span class="n">fake</span><span class="o">.</span><span class="n">domain_name</span><span class="p">()</span>
+
+    <span class="n">domain_parts</span> <span class="o">=</span> <span class="n">domain_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">domain_parts</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">part</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">part</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;iso8859-1&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are some examples of <code class="docutils literal notranslate"><span class="pre">gen_q_name()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">gen_q_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x0eross-patterson\x03com&#39;,
+ b&#39;\x05cispa\x02de&#39;,
+ b&#39;\x05ellis\x04info&#39;,
+ b&#39;\trobertson\x03com&#39;,
+ b&#39;\x05lopez\x03com&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="request-types">
+<h4>Request Types<a class="headerlink" href="#request-types" title="Link to this heading">#</a></h4>
+<p>We can request the following records from the DNS server:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CNAME</span></code> - return an “official” host name (or a redirect);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code> - return the IP address (the typical use of a DNS server); and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NS</span></code> - return the name server (a DNS server) for the given domain.</p></li>
+</ul>
+<p>These are encoded using bit sequences as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">q_type</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">type_id_cname</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">type_id_a</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">type_id_ns</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">type_id_cname</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">13</span><span class="p">}</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="o">&lt;</span><span class="n">type_id_a</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">15</span><span class="p">}</span> <span class="mi">1</span>
+<span class="o">&lt;</span><span class="n">type_id_ns</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">14</span><span class="p">}</span> <span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="request-class">
+<h4>Request Class<a class="headerlink" href="#request-class" title="Link to this heading">#</a></h4>
+<p>All our DNS requests refer to the class <code class="docutils literal notranslate"><span class="pre">IN</span></code> (Internet).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">rr_class</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">15</span><span class="p">}</span> <span class="mi">1</span> <span class="c1"># Class IN (Internet)</span>
+</pre></div>
+</div>
+<p>With that, the definition of our requests are complete.</p>
+</section>
+</section>
+</section>
+<section id="dns-responses">
+<h2>DNS Responses<a class="headerlink" href="#dns-responses" title="Link to this heading">#</a></h2>
+<p>Now for the responses of the DNS server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">dns_resp</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">header_resp</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">question_section</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">answer_an_section</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">answer_au_section</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">answer_opt_section</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<section id="dns-response-headers">
+<h3>DNS Response Headers<a class="headerlink" href="#dns-response-headers" title="Link to this heading">#</a></h3>
+<p>First, let us have a look at the response header.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">header_resp</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">h_id</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&lt;</span><span class="n">h_opcode_standard</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">h_rd</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">h_ra</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">h_aa</span><span class="o">&gt;</span> <span class="mi">0</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">h_rcode_noerror</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_nxdomain</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">resp_qd_count</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">resp_an_count</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">resp_ns_count</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">resp_ar_count</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Most of these fields have been defined above already, except for these:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h_aa</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span>  <span class="c1"># 1 if authoritative answer</span>
+<span class="o">&lt;</span><span class="n">h_ra</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span>  <span class="c1"># 1 if recursion is available</span>
+</pre></div>
+</div>
+<p>The most interesting part is the return code, telling success (or non-success) of the query:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h_rcode</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">h_rcode_noerror</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_formerr</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_servfail</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_nxdomain</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_notimp</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_refused</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">h_rcode_other</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">h_rcode_noerror</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>  <span class="c1"># NOERROR - no error</span>
+<span class="o">&lt;</span><span class="n">h_rcode_formerr</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span>  <span class="c1"># FORMERR - format error</span>
+<span class="o">&lt;</span><span class="n">h_rcode_servfail</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span>  <span class="c1"># SERVFAIL - server failure</span>
+<span class="o">&lt;</span><span class="n">h_rcode_nxdomain</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>  <span class="c1"># NXDOMAIN - non existent domain</span>
+<span class="o">&lt;</span><span class="n">h_rcode_notimp</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>  <span class="c1"># NOTIMP - not implemented</span>
+<span class="o">&lt;</span><span class="n">h_rcode_refused</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>  <span class="c1"># REFUSED - query refused</span>
+<span class="o">&lt;</span><span class="n">h_rcode_other</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span> <span class="o">|</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is followed by four fields denoting the number of fields that follow.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">resp_qd_count</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span> <span class="o">:=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">resp_an_count</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span> <span class="o">:=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">resp_ns_count</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span> <span class="o">:=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">resp_ar_count</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span> <span class="o">:=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="dns-response-question-section">
+<h3>DNS Response Question Section<a class="headerlink" href="#dns-response-question-section" title="Link to this heading">#</a></h3>
+<p>The DNS server <em>replicates</em> the original request in its response.
+This is necessary as the UDP protocol can drop packets, so the response must clearly specify which request it refers to.
+This has the same format as the original response.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">question_section</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">question</span><span class="o">&gt;</span><span class="p">{</span><span class="n">byte_to_int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">header_req</span><span class="o">&gt;.&lt;</span><span class="n">req_qd_count</span><span class="o">&gt;</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>Note that we refer to the <em>original</em> number of questions from the <code class="docutils literal notranslate"><span class="pre">&lt;header_req&gt;</span></code> request, not the number of questions stated in the response (which is equal anyway).
+This is for efficiency reasons: The original number of questions is already defined, so we do not have to retrieve it from the server response.</p>
+<p>The following constraint ensures that for each request/response pair,</p>
+<ul class="simple">
+<li><p>The recursion desired flag (RD) (<code class="docutils literal notranslate"><span class="pre">&lt;h_rd&gt;</span></code>) match;</p></li>
+<li><p>The DNS message identifier (ID) (<code class="docutils literal notranslate"><span class="pre">&lt;h_id&gt;</span></code>) match;</p></li>
+<li><p>The question that the response aims to answer is the same as the question in the request (<code class="docutils literal notranslate"><span class="pre">&lt;question&gt;</span></code>); and</p></li>
+<li><p>The question count in the response matches the question count in the request (<code class="docutils literal notranslate"><span class="pre">&lt;req_qd_count&gt;</span></code>).</p></li>
+</ul>
+<p>Note that our constraint uses <a class="reference internal" href="Paths.html#sec-old-quantifiers"><span class="std std-ref">old-style quantifiers</span></a> for compatibility with previous Fandango versions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="n">forall</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;.&lt;</span><span class="n">exchange</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_resp</span><span class="o">&gt;.&lt;</span><span class="n">header_resp</span><span class="o">&gt;.&lt;</span><span class="n">h_rd</span><span class="o">&gt;</span> <span class="o">==</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_req</span><span class="o">&gt;.&lt;</span><span class="n">header_req</span><span class="o">&gt;.&lt;</span><span class="n">h_rd</span><span class="o">&gt;</span> <span class="ow">and</span> \
+    <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_resp</span><span class="o">&gt;.&lt;</span><span class="n">header_resp</span><span class="o">&gt;.&lt;</span><span class="n">h_id</span><span class="o">&gt;</span> <span class="o">==</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_req</span><span class="o">&gt;.&lt;</span><span class="n">header_req</span><span class="o">&gt;.&lt;</span><span class="n">h_id</span><span class="o">&gt;</span> <span class="ow">and</span> \
+    <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_resp</span><span class="o">&gt;.&lt;</span><span class="n">question_section</span><span class="o">&gt;.&lt;</span><span class="n">question</span><span class="o">&gt;</span> <span class="o">==</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_req</span><span class="o">&gt;.&lt;</span><span class="n">question</span><span class="o">&gt;</span> <span class="ow">and</span> \
+    <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_resp</span><span class="o">&gt;.&lt;</span><span class="n">header_resp</span><span class="o">&gt;.&lt;</span><span class="n">resp_qd_count</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_req</span><span class="o">&gt;.&lt;</span><span class="n">header_req</span><span class="o">&gt;.&lt;</span><span class="n">req_qd_count</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dns-response-answer-section">
+<h3>DNS Response Answer Section<a class="headerlink" href="#dns-response-answer-section" title="Link to this heading">#</a></h3>
+<p>The actual response is contained in these answers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">answer_an_section</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">answer_an</span><span class="o">&gt;</span><span class="p">{</span><span class="n">byte_to_int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">resp_an_count</span><span class="o">&gt;</span><span class="p">)}</span>
+<span class="o">&lt;</span><span class="n">answer_au_section</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">answer_au</span><span class="o">&gt;</span><span class="p">{</span><span class="n">byte_to_int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">resp_ns_count</span><span class="o">&gt;</span><span class="p">)}</span>
+<span class="o">&lt;</span><span class="n">answer_opt_section</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">answer_opt</span><span class="o">&gt;</span><span class="p">{</span><span class="n">byte_to_int</span><span class="p">(</span><span class="o">&lt;</span><span class="n">resp_ar_count</span><span class="o">&gt;</span><span class="p">)}</span>
+</pre></div>
+</div>
+<section id="an-answers">
+<h4>AN Answers<a class="headerlink" href="#an-answers" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">AN</span></code> answer field <code class="docutils literal notranslate"><span class="pre">&lt;answer_an&gt;</span></code> contains the answer to the DNS question.
+It can return an <code class="docutils literal notranslate"><span class="pre">A</span></code> record, a <code class="docutils literal notranslate"><span class="pre">CNAME</span></code> record, or an <code class="docutils literal notranslate"><span class="pre">NS</span></code> record (see above).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">answer_an</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">q_name_optional</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">answer_an_type</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">q_name_optional</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">q_name_written</span><span class="o">&gt;</span><span class="err">?</span> <span class="mi">0</span><span class="p">{</span><span class="mi">8</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">answer_an_type</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">type_a</span><span class="o">&gt;</span> <span class="o">|&lt;</span><span class="n">type_cname</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">type_ns</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="type-a-answers">
+<h5>Type A Answers<a class="headerlink" href="#type-a-answers" title="Link to this heading">#</a></h5>
+<p>This is the answer to an <code class="docutils literal notranslate"><span class="pre">A</span></code> request querying the IP address of a hostname.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">&lt;type_a&gt;</span></code> answer holds the <code class="docutils literal notranslate"><span class="pre">A</span></code> record of the requested domain.
+The <code class="docutils literal notranslate"><span class="pre">&lt;ip_address&gt;</span></code> field (finally!) holds the requested IP address, as a sequence of four bytes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">type_a</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">type_id_a</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">rr_class</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_ttl</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">{</span><span class="mi">13</span><span class="p">}</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">ip_address</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">type_id_a</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">15</span><span class="p">}</span> <span class="mi">1</span>
+<span class="o">&lt;</span><span class="n">a_ttl</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">7</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">3</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">ip_address</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;ip_address&gt;</span></code> is the place where the IP address (e.g. 104.18.27.120) is sent back.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our DNS server only supports IP version 4.</p>
+</div>
+</section>
+<section id="type-cname-answers">
+<h5>Type CNAME Answers<a class="headerlink" href="#type-cname-answers" title="Link to this heading">#</a></h5>
+<p>This is the answer to a <code class="docutils literal notranslate"><span class="pre">CNAME</span></code> request, asking for an “official” host name. <code class="docutils literal notranslate"><span class="pre">&lt;q_name&gt;</span></code> is the host name returned.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">type_cname</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">type_id_cname</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">rr_class</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_ttl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">q_name</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="o">:=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;type_cname&gt;</span></code> responses must have the correct length in the <code class="docutils literal notranslate"><span class="pre">&lt;a_rd_length&gt;</span></code> field (r data length), which corresponds to the following <code class="docutils literal notranslate"><span class="pre">&lt;q_name&gt;</span></code> field.</p>
+<p>Our constraint uses <a class="reference internal" href="Paths.html#sec-old-quantifiers"><span class="std std-ref">old-style quantifiers</span></a> for compatibility with previous Fandango versions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="n">forall</span> <span class="o">&lt;</span><span class="n">t</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">type_cname</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">t</span><span class="o">&gt;.&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">t</span><span class="o">&gt;.&lt;</span><span class="n">q_name</span><span class="o">&gt;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</section>
+<section id="type-ns-answers">
+<h5>Type NS Answers<a class="headerlink" href="#type-ns-answers" title="Link to this heading">#</a></h5>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">&lt;type_ns&gt;</span></code> is the answer to an <code class="docutils literal notranslate"><span class="pre">NS</span></code> request, returning the name server for the given domain.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">type_ns</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">type_id_ns</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">rr_class</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_ttl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rdata</span><span class="o">&gt;</span><span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])}</span>
+<span class="o">&lt;</span><span class="n">a_rdata</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;</span>  <span class="c1"># We don&#39;t go into further details here.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="au-answers">
+<h4>AU Answers<a class="headerlink" href="#au-answers" title="Link to this heading">#</a></h4>
+<p>An <code class="docutils literal notranslate"><span class="pre">AU</span></code> answer returns the name server for a domain. We don’t go into details here.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">answer_au</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">q_name_optional</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">type_soa</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">type_soa</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">type_id_soa</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">rr_class</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_ttl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rdata</span><span class="o">&gt;</span><span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])}</span>
+<span class="o">&lt;</span><span class="n">type_id_soa</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">13</span><span class="p">}</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="opt-answers">
+<h4>OPT Answers<a class="headerlink" href="#opt-answers" title="Link to this heading">#</a></h4>
+<p>An <code class="docutils literal notranslate"><span class="pre">OPT</span></code> answer returns optional additional details. We don’t go into details here.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">answer_opt</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">q_name_optional</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">type_opt</span><span class="o">&gt;|&lt;</span><span class="n">type_a</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">type_opt</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">type_id_opt</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">udp_payload_size</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_ttl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">a_rdata</span><span class="o">&gt;</span><span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a_rd_length</span><span class="o">&gt;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])}</span>
+<span class="o">&lt;</span><span class="n">type_id_opt</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="mi">0</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="o">&lt;</span><span class="n">udp_payload_size</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bit</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">16</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="consistency-in-responses">
+<h4>Consistency in Responses<a class="headerlink" href="#consistency-in-responses" title="Link to this heading">#</a></h4>
+<p>We check if a DNS response answers the corresponding DNS question using the <code class="docutils literal notranslate"><span class="pre">verify_transitive()</span></code> function.</p>
+<p>The second part of the <code class="docutils literal notranslate"><span class="pre">or</span></code> clause <code class="docutils literal notranslate"><span class="pre">bytes(&lt;a&gt;.&lt;answer_an_type&gt;)[0:2]...</span></code> also checks this, but only for direct answers without allowing transitive response chains.
+This allows Fandango optimizations to be used to generate a valid answer more efficiently.</p>
+<p>Our constraint uses <a class="reference internal" href="Paths.html#sec-old-quantifiers"><span class="std std-ref">old-style quantifiers</span></a> for compatibility with previous Fandango versions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">where</span> <span class="n">forall</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;.&lt;</span><span class="n">exchange</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="n">forall</span> <span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_resp</span><span class="o">&gt;.&lt;</span><span class="n">answer_an_section</span><span class="o">&gt;.&lt;</span><span class="n">answer_an</span><span class="o">&gt;</span><span class="p">:</span>
+        <span class="n">exists</span> <span class="o">&lt;</span><span class="n">q</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_req</span><span class="o">&gt;.&lt;</span><span class="n">question</span><span class="o">&gt;</span><span class="p">:</span>
+            <span class="n">verify_transitive</span><span class="p">(</span><span class="o">&lt;</span><span class="n">q</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">ex</span><span class="o">&gt;.&lt;</span><span class="n">dns_resp</span><span class="o">&gt;</span><span class="p">)</span> <span class="ow">or</span> \
+            <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;.&lt;</span><span class="n">answer_an_type</span><span class="o">&gt;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">q</span><span class="o">&gt;.&lt;</span><span class="n">q_type</span><span class="o">&gt;</span><span class="p">)</span> <span class="ow">and</span> 
+             <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;.&lt;</span><span class="n">q_name_optional</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bytes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">q</span><span class="o">&gt;.&lt;</span><span class="n">q_name</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">verify_transitive()</span></code> function gets a question and the response section of a DNS response and verifies if the response does answer the question.
+This also handles responses that are transitive.
+If, for example the question is</p>
+<ul class="simple">
+<li><p>for a type <code class="docutils literal notranslate"><span class="pre">A</span></code> record for <code class="docutils literal notranslate"><span class="pre">example.com</span></code> and</p></li>
+<li><p>the response contains a <code class="docutils literal notranslate"><span class="pre">CNAME</span></code> record pointing <code class="docutils literal notranslate"><span class="pre">example.com</span></code> to <code class="docutils literal notranslate"><span class="pre">alias.com</span></code> and then an <code class="docutils literal notranslate"><span class="pre">A</span></code> record for <code class="docutils literal notranslate"><span class="pre">alias.com</span></code>,</p></li>
+</ul>
+<p>then <code class="docutils literal notranslate"><span class="pre">verify_transitive()</span></code> will verify that the response correctly answers the original question through the <code class="docutils literal notranslate"><span class="pre">CNAME</span></code> redirection.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">verify_transitive</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+    <span class="n">type_byte</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_type&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">allowed_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])]</span>
+
+    <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_all_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">allowed_names</span><span class="p">):</span>
+            <span class="n">allowed_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span> <span class="c1"># &lt;type_cname&gt;.&lt;q_name&gt;</span>
+
+    <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_all_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_byte</span> <span class="ow">and</span>
+            <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">allowed_names</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="compression-and-decompression">
+<h2>Compression and Decompression<a class="headerlink" href="#compression-and-decompression" title="Link to this heading">#</a></h2>
+<p>The DNS protocol maintains a complex system for compressing requests.
+We implement this by overriding the <code class="docutils literal notranslate"><span class="pre">NetworkParty</span></code> <code class="docutils literal notranslate"><span class="pre">send()</span></code> and <code class="docutils literal notranslate"><span class="pre">receive()</span></code> functions such that</p>
+<ul class="simple">
+<li><p>all sent messages are compressed (<code class="docutils literal notranslate"><span class="pre">compress_msg()</span></code>), and</p></li>
+<li><p>all received messages are decompressed (<code class="docutils literal notranslate"><span class="pre">decompress_msg()</span></code>).</p></li>
+</ul>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>We give the new class the same name <code class="docutils literal notranslate"><span class="pre">NetworkParty</span></code> so we can stick to original party names.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NetworkParty</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">decompress_msg</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">sender</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">compress_msg</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)),</span> <span class="n">recipient</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="compression">
+<h3>Compression<a class="headerlink" href="#compression" title="Link to this heading">#</a></h3>
+<p>When receiving a DNS package, some domain names may occur multiple times.
+To reduce traffic, DNS allows encoding domain names suffixes such that they <em>refer</em> to <em>suffixes</em> of earlier messages.
+For instance, if the first answer contains <code class="docutils literal notranslate"><span class="pre">host.example.com</span></code>, then a subsequent <code class="docutils literal notranslate"><span class="pre">example.com</span></code> can be replaced by a pointer into this answer.
+Such pointers are represented by <em>offsets</em> starting from the first answer.</p>
+<p>We use the function <code class="docutils literal notranslate"><span class="pre">msg_suffix()</span></code> to identify such compressions.
+<code class="docutils literal notranslate"><span class="pre">msg_suffix()</span></code> takes an (encoded) domain name in <code class="docutils literal notranslate"><span class="pre">&lt;q_name&gt;</span></code> format and returns a list of tuples (offset, suffix) for a DNS name.
+Here,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">suffix</span></code> is a possible suffix of <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code> is the number of characters into <code class="docutils literal notranslate"><span class="pre">name</span></code> where <code class="docutils literal notranslate"><span class="pre">suffix</span></code> begins</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">msg_suffix</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">suffixes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">len_idx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prefix_len</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="n">len_idx</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">prefix_len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">suffixes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">len_idx</span><span class="p">,</span> <span class="n">name</span><span class="p">[</span><span class="n">len_idx</span><span class="p">:]))</span>
+        <span class="n">len_idx</span> <span class="o">=</span> <span class="n">len_idx</span> <span class="o">+</span> <span class="n">prefix_len</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">prefix_len</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="n">len_idx</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">suffixes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is an example of <code class="docutils literal notranslate"><span class="pre">msg_suffix()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x07</span><span class="s1">example</span><span class="se">\x03</span><span class="s1">com</span><span class="se">\x00</span><span class="s1">&#39;</span>
+<span class="n">msg_suffix</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, b&#39;\x07example\x03com\x00&#39;), (8, b&#39;\x03com\x00&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The returned suffix <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">b'\x03com\x00')</span></code> starts 8 bytes into the passed <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;\x03com\x00&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We apply the DNS name compression algorithm to a DNS name starting at <code class="docutils literal notranslate"><span class="pre">curr_idx</span></code> within the uncompressed message.
+<code class="docutils literal notranslate"><span class="pre">suffix_dict</span></code> is a dictionary mapping a known DNS suffix names to their offsets within the already analyzed compressed part of the message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="n">len_reduction</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compress a single name in a DNS message.</span>
+<span class="sd">    :param: uncompressed - the message before compression</span>
+<span class="sd">    :param: curr_idx - the current index in `compress_msg()` (see below)</span>
+<span class="sd">    :param: len_reduction - how many bytes we already have compressed</span>
+<span class="sd">    :param: suffix_dict - the suffixes encoded so far</span>
+<span class="sd">    :return: a tuple (new_name, length, len_reduction) - the compressed name, its length, the new length reduction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name_len</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="o">+</span> <span class="n">name_len</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">name_len</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="o">+</span> <span class="n">name_len</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">name_len</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">b_name</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:(</span><span class="n">curr_idx</span><span class="o">+</span><span class="n">name_len</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">name_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b_name</span><span class="p">,</span> <span class="n">name_len</span><span class="p">,</span> <span class="n">len_reduction</span>
+
+    <span class="k">for</span> <span class="n">n_offset</span><span class="p">,</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">msg_suffix</span><span class="p">(</span><span class="n">b_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">suffix_dict</span><span class="p">:</span>
+            <span class="n">cpr_ptr</span> <span class="o">=</span> <span class="n">suffix_dict</span><span class="p">[</span><span class="n">suffix</span><span class="p">]</span>
+            <span class="n">bin_ptr</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">192</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">cpr_ptr</span><span class="p">)</span>
+            <span class="n">new_name</span> <span class="o">=</span> <span class="n">b_name</span><span class="p">[:</span><span class="n">n_offset</span><span class="p">]</span> <span class="o">+</span> <span class="n">bin_ptr</span>
+            <span class="n">len_reduction</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b_name</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">new_name</span><span class="p">,</span> <span class="n">name_len</span><span class="p">,</span> <span class="n">len_reduction</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">offset_name_start</span> <span class="o">=</span> <span class="n">curr_idx</span>
+            <span class="n">suffix_dict</span><span class="p">[</span><span class="n">suffix</span><span class="p">]</span> <span class="o">=</span> <span class="n">offset_name_start</span> <span class="o">+</span> <span class="n">n_offset</span> <span class="o">-</span> <span class="n">len_reduction</span>
+            <span class="k">return</span> <span class="n">b_name</span><span class="p">,</span> <span class="n">name_len</span><span class="p">,</span> <span class="n">len_reduction</span>
+</pre></div>
+</div>
+<p>Now for the actual compression.
+<code class="docutils literal notranslate"><span class="pre">compress_msg()</span></code> compresses a full DNS message applying the DNS name compression algorithm to all names present in the message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compress_msg</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compress a single DNS message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qd_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">an_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+    <span class="n">ns_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+    <span class="n">ar_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span>
+    <span class="n">compressed</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>
+    <span class="n">curr_idx</span> <span class="o">=</span> <span class="mi">12</span>
+
+    <span class="n">suffix_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">len_reduction</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qd_count</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">)</span>
+        <span class="n">compressed</span> <span class="o">=</span> <span class="n">compressed</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">decompressed_len</span>
+        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">4</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">an_count</span> <span class="o">+</span> <span class="n">ns_count</span> <span class="o">+</span> <span class="n">ar_count</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">)</span>
+        <span class="n">compressed</span> <span class="o">=</span> <span class="n">compressed</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">decompressed_len</span>
+        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">rr_type</span>
+        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">rr_type</span><span class="p">)</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">6</span>
+        <span class="n">r_data_len</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
+
+        <span class="k">if</span> <span class="n">rr_type</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span> <span class="c1"># If CNAME entry</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">)</span>
+            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="n">compressed</span> <span class="o">=</span> <span class="n">compressed</span> <span class="o">+</span> <span class="n">name</span>
+            <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">decompressed_len</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">curr_idx</span><span class="p">]</span>
+            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="n">r_data_len</span><span class="p">]</span>
+            <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">r_data_len</span>
+
+    <span class="k">return</span> <span class="n">compressed</span>
+</pre></div>
+</div>
+</section>
+<section id="decompression">
+<h3>Decompression<a class="headerlink" href="#decompression" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">decompress_name()</span></code> decompresses a DNS name starting at <code class="docutils literal notranslate"><span class="pre">name_idx</span></code> within the compressed message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">name_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decompress the package `compressed` at the current index `name_idx` of a name.</span>
+<span class="sd">    :param: compressed - the package to be decompressed</span>
+<span class="sd">    :param: name_idx - the index of a name in `compressed`</span>
+<span class="sd">    :returns: a pair (decompressed, length) - the decompressed package and its length increase</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">segment_len</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span><span class="p">]</span>
+    <span class="n">compressed_len</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">decompressed</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+    <span class="k">while</span> <span class="n">segment_len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># If first two bits are 1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">segment_len</span> <span class="o">&amp;</span> <span class="mi">192</span><span class="p">)</span> <span class="o">==</span> <span class="mi">192</span><span class="p">:</span>
+            <span class="n">name_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">segment_len</span> <span class="o">&amp;</span> <span class="mi">63</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span>
+            <span class="n">name_ptr</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">name_ptr</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">decompressed</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">segment_len</span><span class="p">])</span>
+        <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">segment_len</span><span class="p">]</span>
+        <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">compressed_len</span> <span class="o">+</span> <span class="n">segment_len</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">name_idx</span> <span class="o">=</span> <span class="n">name_idx</span> <span class="o">+</span> <span class="n">segment_len</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">segment_len</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span><span class="p">]</span>
+
+    <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">decompressed</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Conversely, <code class="docutils literal notranslate"><span class="pre">decompress_msg()</span></code> decompresses a full DNS message applying the DNS name decompression algorithm to all names present in the message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">decompress_msg</span><span class="p">(</span><span class="n">compressed</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decompress the DNS message `compressed`.</span>
+<span class="sd">    :param: compressed - the compressed DNS message</span>
+<span class="sd">    :returns: the decompressed DNS message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">count_header</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>
+    <span class="n">qd_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">count_header</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">an_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">count_header</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">ns_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">count_header</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">ar_count</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">count_header</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+    <span class="n">decompressed</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>
+    <span class="n">curr_idx</span> <span class="o">=</span> <span class="mi">12</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qd_count</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">)</span>
+        <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">compressed_len</span>
+        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">4</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">an_count</span> <span class="o">+</span> <span class="n">ns_count</span> <span class="o">+</span> <span class="n">ar_count</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">)</span>
+        <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">compressed_len</span>
+        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">rr_type</span>
+        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">rr_type</span><span class="p">)</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">6</span>
+        <span class="n">r_data_len</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">rr_type</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span> <span class="c1">#If CNAME entry</span>
+            <span class="n">c_name</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">)</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_name</span><span class="p">))</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">c_name</span>
+            <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">compressed_len</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">curr_idx</span><span class="p">]</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="n">r_data_len</span><span class="p">]</span>
+            <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">r_data_len</span>
+
+    <span class="k">return</span> <span class="n">decompressed</span>
+</pre></div>
+</div>
+<p>That’s all! Now enjoy testing DNS servers :-)</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FTP.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Case Study: FTP</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Reference.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fandango Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dns-exchange">A DNS Exchange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-requests">DNS Requests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-headers">Request Headers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#request-questions">Request Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-names">Request Names</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-types">Request Types</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#request-class">Request Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-responses">DNS Responses</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-response-headers">DNS Response Headers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-response-question-section">DNS Response Question Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dns-response-answer-section">DNS Response Answer Section</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#an-answers">AN Answers</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#type-a-answers">Type A Answers</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#type-cname-answers">Type CNAME Answers</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#type-ns-answers">Type NS Answers</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#au-answers">AU Answers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-answers">OPT Answers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#consistency-in-responses">Consistency in Responses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compression-and-decompression">Compression and Decompression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compression">Compression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decompression">Decompression</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

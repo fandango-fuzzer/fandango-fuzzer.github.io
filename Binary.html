@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Bits and Bit Fields" href="Bits.html" />
-    <link rel="prev" title="Checking Outputs" href="Outputs.html" />
+    <link rel="prev" title="Case Study: ISO 8601 Date + Time" href="ISO8601.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="Intro.html">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -174,7 +174,7 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="Intro.html">
+                <a class="reference internal" href="index.html">
                     Fuzzing with Fandango
                 </a>
             </li>
@@ -186,30 +186,46 @@
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Tutorial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Fandango Tutorial</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -220,6 +236,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
 </ul>
@@ -341,9 +358,9 @@
       
       
       <li>
-<button onclick="window.print()"
+<a href="_static/fandango.pdf" target="_blank"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Download PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -352,7 +369,7 @@
   <i class="fas fa-file-pdf"></i>
   </span>
 <span class="btn__text-container">.pdf</span>
-</button>
+</a>
 </li>
       
   </ul>
@@ -527,18 +544,20 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5195457656360894
-2820526561175579
-2298869973853109
-8328878380770534
-7071171264974179
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0857970525961056
+4079086329399882
+6822194076551005
+4298647886999912
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6781381537021418
-0328996227672981
-3566466612606478
-0564153663510860
-7582819042391924
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1566223870878388
+2081719309719691
+7858371436574167
+8817283199652635
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1135704545884770
+3966856968280215
 </pre></div>
 </div>
 </div>
@@ -552,7 +571,7 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 </div>
 <div class="cell tag_remove-input docutils container">
 </div>
-<p>Adding 1 to this number should make it <em>invalid</em>:</p>
+<p>Adding a <code class="docutils literal notranslate"><span class="pre">1</span></code> digit to this number should make it <em>invalid</em>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4931633575526871</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>credit_card.fan
 </pre></div>
 </div>
@@ -561,27 +580,33 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoParseError: Did not match the following constraints: &lt;check_digit&gt; == credit_card_check_digit(str(&lt;number&gt;))
 FandangoParseError: Did not match the following constraints: &lt;check_digit&gt; == credit_card_check_digit(str(&lt;number&gt;))
 Traceback (most recent call last):
-  File <span class=" -Color -Color-Magenta">&quot;/opt/hostedtoolcache/Python/3.13.7/x64/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">7</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/.venv/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">10</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
     sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
              <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7fa027bfd080&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">main</span>
     last_status = run(command, args)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">464</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7fa0277f9260&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">502</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7fa028958400&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">48</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">462</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">500</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
     <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">269</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.parse_command) at 0x7fa0277f89a0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">275</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7fa028958400&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">48</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">266</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">272</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
     tree = parse_file(fd, args, grammar, constraints, settings)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/utils.py&quot;</span>, line <span class=" -Color -Color-Magenta">329</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.utils.parse_file) at 0x7fa027a3d3a0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">136</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/utils.py&quot;</span>, line <span class=" -Color -Color-Magenta">323</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
     raise FandangoParseError(
         f&quot;Did not match the following constraints: {&#39;, &#39;.join(failed_constraints)}&quot;
     )
@@ -653,16 +678,16 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R5UM4
-yVDAS
-Mgfq%
-3yE):
-;X#7n
-AJGe5
-ItX$&lt;
-b`&gt;7M
-dhn8f
-h?Nn&lt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>YPCo+
+Q.-+@
+(9nR#
+m#uzx
+U#,n]
+\,VJk
+xR!@D
+r#EX:
+Y@zX-
+jE ,6
 </pre></div>
 </div>
 </div>
@@ -712,13 +737,13 @@ The Python method <code class="docutils literal notranslate"><span class="pre">N
 </div>
 <p>Again, all of this goes into a single <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file: <a class="reference download internal" download="" href="_downloads/4c57f6c2c62644bc4b94f1498df6e8f0/binary.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">binary.fan</span></code></span></a> holds the grammar, the <code class="docutils literal notranslate"><span class="pre">uint16()</span></code> definition, and the constraint.
 Let us produce a single output using <code class="docutils literal notranslate"><span class="pre">binary.fan</span></code> and view its (binary) contents, using <code class="docutils literal notranslate"><span class="pre">od</span> <span class="pre">-c</span></code>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary.fan<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  02 00 02 00                                       |....|
-00000004
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  03 00 c2 89 2a c2 9b 0a                           |....*...|
+00000008
 </pre></div>
 </div>
 </div>
@@ -762,13 +787,13 @@ The function <code class="docutils literal notranslate"><span class="pre">from_u
 </div>
 </div>
 <p>With this, we can easily produce length-encoded inputs:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary-rep.fan<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-f<span class="w"> </span>binary-rep.fan<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 a1 9f 88 74                                 |.....t|
-00000006
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 18 4d 7b 58 0a                              |...M{X.|
+00000007
 </pre></div>
 </div>
 </div>
@@ -788,7 +813,7 @@ Using <code class="docutils literal notranslate"><span class="pre">struct</span>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from struct import pack
 
 def uint16(n: int) -&gt; str:
-    return pack(&#39;&lt;H&#39;, n).decode(&#39;iso8859-1&#39;)  # convert to string
+    return pack(&#39;&lt;H&#39;, n) # convert to bytes
 </pre></div>
 </div>
 </div>
@@ -796,38 +821,8 @@ def uint16(n: int) -&gt; str:
 <p>and obtain the same result:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: I/O operation on closed file.
-Traceback (most recent call last):
-  File <span class=" -Color -Color-Magenta">&quot;/opt/hostedtoolcache/Python/3.13.7/x64/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">7</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
-    sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
-             <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">main</span>
-    last_status = run(command, args)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">464</span>, in <span class=" -Color -Color-Magenta">run</span>
-    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
-    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">45</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
-    raise e
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">462</span>, in <span class=" -Color -Color-Magenta">run</span>
-    <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
-    <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">206</span>, in <span class=" -Color -Color-Magenta">fuzz_command</span>
-    <span class=" -Color -Color-Red">output_population</span><span class=" -Color -Color-Bold -Color-Bold-Red">(population, args, file_mode=file_mode, output_on_stdout=False)</span>
-    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/output.py&quot;</span>, line <span class=" -Color -Color-Magenta">78</span>, in <span class=" -Color -Color-Magenta">output_population</span>
-    <span class=" -Color -Color-Red">output_solution</span><span class=" -Color -Color-Bold -Color-Bold-Red">(solution, args, i, file_mode, output_on_stdout=output_on_stdout)</span>
-    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/output.py&quot;</span>, line <span class=" -Color -Color-Magenta">203</span>, in <span class=" -Color -Color-Magenta">output_solution</span>
-    <span class=" -Color -Color-Red">output_solution_to_file</span><span class=" -Color -Color-Bold -Color-Bold-Red">(solution, args, file_mode)</span>
-    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/output.py&quot;</span>, line <span class=" -Color -Color-Magenta">102</span>, in <span class=" -Color -Color-Magenta">output_solution_to_file</span>
-    with <span class=" -Color -Color-Red">open_file</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args.output, file_mode, mode=&quot;a&quot;)</span> as fd:
-         <span class=" -Color -Color-Red">~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-<span class=" -Color -Color-Bold -Color-Bold-Magenta">ValueError</span>: <span class=" -Color -Color-Magenta">I/O operation on closed file.</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 001  \0   5
-0000003
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 006  \0   6   9   4   0   3   0  \n
+0000011
 </pre></div>
 </div>
 </div>
@@ -921,12 +916,12 @@ Traceback (most recent call last):
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Outputs.html"
+       href="ISO8601.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Checking Outputs</p>
+        <p class="prev-next-title">Case Study: ISO 8601 Date + Time</p>
       </div>
     </a>
     <a class="right-next"
@@ -980,7 +975,7 @@ Traceback (most recent call last):
   <div class="footer-item">
     
 <p class="component-author">
-By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
 </p>
 
   </div>
@@ -990,7 +985,7 @@ By José Antonio Zamudio Amaya, Marius Smytzek, and Andreas Zeller
 
   <p class="copyright">
     
-      © Copyright 2024-2025 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
       <br/>
     
   </p>
