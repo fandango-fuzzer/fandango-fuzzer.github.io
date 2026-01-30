@@ -113,6 +113,9 @@
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0rc1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
@@ -1136,20 +1139,18 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9811-W38
-1896W30
-4993-08
-8833141T02
-53860212
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8823
+2387-05-21
+5326W27
+62141210
+91450824
+5512
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6356-155
-3332248
-0820-09-29T050408-13:23
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9111
-9481W27
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9027
+56150816T15:47:23.8+04
+5667297T1644+00
+7233
 </pre></div>
 </div>
 </div>
@@ -1160,28 +1161,28 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19720923
-1972106T04
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1989
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1972-W35-2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1980
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19780923
-19760923
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1989-11-05T132359
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19740923
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1989-01-05T132359
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1978134T21
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1989-04-05T132359
+1988-11-05T132359
+1990
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1972106T15
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1989310
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19780923T124849-15
-1972-W35-2T21
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1989-11-05
+1959-11-05T132359
 </pre></div>
 </div>
 </div>
@@ -1192,16 +1193,18 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00Z
-T00-00
-T00
-00Z
-0015+00
-T0002
-00:49
-0043
-0036:38Z
-002440+00:36
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00
+005332.7409
+00
+T00Z
+T00:4334+00:44
+00:2512,0567107298+00:23
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T0025
+T0040:30
+T00:0650,08588115Z
+T0026:30.8389731
 </pre></div>
 </div>
 </div>

@@ -480,6 +480,9 @@ window.addEventListener("load", load);
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0rc1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
@@ -911,7 +914,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.dtj4yddoao4ujjevhu1asbapuf.cx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.r2y4yq0y4ogehklkrvsptntmwc.yx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1028,10 +1031,10 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
-fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
 fandango:INFO: ---------- Done initializing base population ----------
@@ -1048,13 +1051,13 @@ fandango:INFO: Current coverage: 1.96%
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmkj6or.dtj4yddoao4ujjevhu1asbapuf.cx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmkj6or.r2y4yq0y4ogehklkrvsptntmwc.yx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
+fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
+fandango:INFO: Current coverage: 74.51%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
-fandango:INFO: Current coverage: 74.51%
-fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
 fandango:INFO: Current coverage: 100.00%
 </pre></div>
 </div>

@@ -478,6 +478,9 @@ window.addEventListener("load", load);
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0rc1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
@@ -1333,9 +1336,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br-----rwx   610 BjyU6tVPMJGffiPlQMI            1e           3709762 May 19 02:25 ^TW]k2t&quot;%1l9^
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-r-xrw-r-x      654 yWnjXekEDTDQozk90iNW         hq              2295528 Sep 21 17:49 )grx_D~w2D!VB[4NE5rV
 
--rw--w-rw-           157 EWEepkYSnE7yj_OAE                  OkKN9FO5hLyONeeqb               3899823 Apr 08 03:41 +k/#vBjDxVd&amp;o`xzSn&lt;
+l---r---w-                  863 erc4         Uil           9162501 Oct 13 12:40  J!zA6rTj&gt;rZ[GmB8
 </pre></div>
 </div>
 </div>
@@ -1373,18 +1376,16 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
 AUTH TLS
-USER the_user
-PASS 7Evz0
 AUTH SSL
 AUTH SSL
 USER the_user
 PASS the_password
-EPSV
 TYPE I
-LIST
 EPSV
 LIST
-SYST
+OPTS UTF8 ON
+OPTS UTF8 ON
+FEAT
 EPSV
 QUIT
 </pre></div>
@@ -1400,22 +1401,37 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-Z
-220-
-220 awL%,%eB&amp;
-530 Y@v$2Uf{Y
-331 vq)b1Gyf,[~&#39;P9elO%3
-230 SIg+&gt;pT26*ls!;9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-FP!;BY%`u,@&#39;i{R
+220-Job~?(T1{]%C0
+220- o0Y#&quot;?aPsmX
+220-=DcAmomGg}0]69!xdZ 
+220-)pS
+220-w8!.*+
+220 &#39;
+500 1(o
+500 dC;eB_~xxZ5I(D&amp;W&quot;8~G
+331 @4W*`-&#39;
+230 m@KQH@WLF@|C
 229 Entering Extended Passive Mode (|||50100|)
-200 4
-150 ;t
-226 HjyW0%&amp;$,!1l&amp;&gt;,Od{N
-229 Entering Extended Passive Mode (|||50100|)
+200 &quot;8&gt;nBd
+200 7o~Z&gt;^;Hgoq{f
+211-Features:
+ EPSV
+211 End
+211-Features:
+ EPSV
+211 End
+150 ;weAiZ.wB@*2=E.~V
+226 V.
+257 &quot;/TBLG/nrGjtHYQtWawt1/UWktEdeB8Z/fh2hn0RK94j13M&quot; is the current directory
 215 Linux
-150 ]RxU
-226 zQ5=#ZUS
 229 Entering Extended Passive Mode (|||50100|)
-221 vi\)SDKu#%$koP!
+200 1y6!~6&#39;N9;&quot;q
+150 UK&#39;EQXu^mvmW
+226 LS
+229 Entering Extended Passive Mode (|||50100|)
+200 Db*E&lt;o|sEKs{[
+221 p&gt;YkyPe*(5j_*k&lt;&gt;
 </pre></div>
 </div>
 </div>

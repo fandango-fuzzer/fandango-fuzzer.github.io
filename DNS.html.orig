@@ -478,6 +478,9 @@ window.addEventListener("load", load);
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0rc1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
 
   
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
@@ -978,11 +981,11 @@ When sending the request, we choose a random value:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x0eross-patterson\x03com&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x05cispa\x02de&#39;,
+ b&#39;\x06github\x03com&#39;,
  b&#39;\x05cispa\x02de&#39;,
- b&#39;\x05ellis\x04info&#39;,
- b&#39;\trobertson\x03com&#39;,
- b&#39;\x05lopez\x03com&#39;]
+ b&#39;\x05cispa\x02de&#39;,
+ b&#39;\x05cispa\x02de&#39;]
 </pre></div>
 </div>
 </div>
