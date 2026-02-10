@@ -990,16 +990,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Robert Watkins,60560118552693
-Erin Donovan,3
-Shawn Carter,0014979234599637555
-Joseph Holt,514
-Michael Sanders,059
-Scott Donovan,01191376031481100
-Stephanie Harris,0074889608
-Michelle Jacobs,96942296
-Aaron Johns,385734011337
-Joe Wilson,532161
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joseph Taylor,02808614815662
+Shawn Fuller,384674679678
+Rebecca Griffin,544151208260500
+Joe Ward,305800410700
+Nicole Vargas,29191298
+Melissa Harvey,442542653
+Amanda Hess,56445295
+Paul Murphy,89934205284376066834
+Douglas Burke,6033310583249
+Amanda Graham,65274
 </pre></div>
 </div>
 </div>
@@ -1044,16 +1044,16 @@ Joe Wilson,532161
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>acaccbcaaccaacacb
-aaaaacbccbcbcac
-bbabbcbb
-babcaabacabcc
-a
-acbaabcaccbbbac
-acbcbbabaacbaa
-baaab
-bbcbabcbccabb
-abacabacbbbabbc
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bcbcbabcccb
+accaccbabcbbaccbc
+baccabbcabbbabcacc
+bcbcb
+aabbc
+bcaccaabccbcbbcbca
+cbc
+caa
+bcbacb
+aaac
 </pre></div>
 </div>
 </div>
@@ -1082,7 +1082,9 @@ abacabacbbbabbc
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tree = &#39;abc&#39;
-&lt;start&gt; ::= &#39;a&#39; &#39;b&#39; &#39;c&#39;  # Position 0x0000 (0); abc
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &#39;a&#39; &#39;b&#39; &#39;c&#39;  # Position 0x0000 (0); abc
 </pre></div>
 </div>
 </div>
@@ -1135,7 +1137,7 @@ abacabacbbbabbc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f08087e55a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f42104fd5a0&gt;
 </pre></div>
 </div>
 </div>

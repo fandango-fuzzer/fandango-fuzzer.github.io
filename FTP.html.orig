@@ -1336,9 +1336,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c-wxr-x--x                746 91jEqmHeUN                  5GQ                    6772165 Jan 06 01:13 U.9V4H2p+
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d-wx-wxrw-  190 FcySb3mc PTPZKxVb7891Fk2UO           5692778 May 09 16:34 &quot;&lt;
 
-cr-x-wx-w-           756 c-NlXGmwiKGlYzNX7C    faoG_GlTMyNL6gHCN4v              69838 Dec 21 14:49 y&amp;mt#:
+b-w-rwxrwx         447 TYNQ   bu      2892863 Oct 27 22:20 {eM)K\3$&gt;3B8r
+
+c--xrw--wx           805 JHuV7OwVP9dqg              ur6b6    2163362 Sep 28 22:45 @aB./&#39;7sKyj^[?M)j&#39;
 </pre></div>
 </div>
 </div>
@@ -1374,24 +1376,14 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
-PASS j5Em6VVYpfj8PZIei
-AUTH TLS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
 AUTH SSL
-AUTH TLS
-AUTH TLS
 USER the_user
 PASS the_password
-SYST
-EPSV
-TYPE I
-LIST
-FEAT
 PWD
-OPTS UTF8 ON
+TYPE I
 EPSV
-LIST
-EPSV
+PWD
 QUIT
 </pre></div>
 </div>
@@ -1406,28 +1398,31 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-m, @w2&#39;_
-220-)n!
-220-ISp
-220-=IOjt}wL_![W+d$
-220-`(&quot;Zn_&amp;lm6&quot;VS%H+P%
-220-:v)h&gt;
-220-S_Lk
-220-!35[&#39;F0$m
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-iF_&lt;EKF$rmHLBR
+220-#`|Ni
+220-SjGcO3o}tB/,4NGyqs
+220-ZV&#39;+{VS,!&quot;~b
+220-Cr/.J~!&lt;OZ]G36-~j
+220-5H]HUtIVb\!T8k66d
+220-ff
+220-[(
+220-xIeigvEQw%Kc;w`
+220-l*dX9;dN&amp;
+220-Yb{PYA
+220-_=f
 220-
-220-=`dq*)+
-220-W-cHXDwB-uq)~Xd
-220-|&quot;n&lt;&lt;f,{]s.an
-220 asW5h4-r_GE&quot;Dqr~!
-331 YFNI/0Fg.\%Ab,v1sz
-530 E!&amp;/
-500 RX$S@&amp;x.o:=2L8%j
-530 ND2DAYhX&#39;4fR
-331 [A`ux_
-230 ,Y[o??o/oN
-200 yN=Wc.oSF[))K5#
+220-G40wUvm)14lg:B9l[
+220 ]&quot;9
+331 p5K!zT7Y|i
+530  O+&quot;6t9
+331 &amp;bJ]
+530  Z}|mm5l(
+530 1[PLO2
+331 WBGkd3fAPBbH
+230 es.ipAz]8@+
 229 Entering Extended Passive Mode (|||50100|)
-221 ]P3H&#39;z!H58G0a
+200 6Zw:
+221 q4d] ^J:r`&lt;
 </pre></div>
 </div>
 </div>
