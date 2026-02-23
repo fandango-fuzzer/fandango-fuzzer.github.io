@@ -1060,16 +1060,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Benjamin Taylor,882652305423
-Dustin Mitchell,81451
-Sharon Johnston,9023
-Ronald Molina,533141445411
-Brett Anderson,3997331
-Katie Patel,56411492079005779
-Debra Johnson,0512167916
-Jennifer Perez,1058684492743414432
-Lisa Green,2
-Allison Anderson,80902827985820
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Carrie Sullivan,192336175
+Gabriela Mitchell,2618
+Susan Harding,655365119
+Elizabeth Hill,1109770
+Ryan Brock,905
+Cynthia King,50606325051195207
+Evan Krause,2764984
+Isabel Davis,9
+Jaime Hart,37599112
+Stephanie Duncan,00595624267003
 </pre></div>
 </div>
 </div>
@@ -1114,16 +1114,16 @@ Allison Anderson,80902827985820
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>acbccaabbbacabaa
-abacabacbacccca
-accab
-a
-acacacbaacabcab
-acabbcbccbbbca
-bacaaab
-cbcbcababcb
-ac
-aacbccbabccabbcbbbc
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cbaaababac
+baaacbbaacaabcaabbcc
+cbcabca
+c
+cabcc
+bbcbcbbababbbbc
+bcabaabacaabbc
+abbcc
+abacacbbbbaaaabcacac
+cbcccccbababbcc
 </pre></div>
 </div>
 </div>
@@ -1205,7 +1205,7 @@ aacbccbabccabbcbbbc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7fe7688ed5a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f0268afd5a0&gt;
 </pre></div>
 </div>
 </div>
