@@ -1406,9 +1406,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cr-x-wx---     645 6x7L9pq8hkmWZRNCxce     TVYQ0acd                  5230324 May 16 17:34 WM)ZMf=)Rd*/
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l--xrwx-wx        820 9e5XvwMK6C70wCoqectR      cH7B7WXz8anbejIO7_F 9466933 Oct 01 02:36 R{3qh&#39;tM&gt;?nd_z
 
--rw-rw---x      506 3cQ      DXWZWIRcj_zxS4y0Cf                    2527357 Jul 18 18:51 WJB}+YF&amp;x#(-E)&lt;aga
+lrwxrw-rw-               891 -JB_zkb62xsal     E2           4524712 Feb 13 01:02 HHO&amp;3VB#{aJ
+
+b-wx-w-r-x   139 7Q0Py-aAJx-7e8LqeZU      HkY4icEGbgRWnIIMQt                 2176880 Jan 22 11:33 %lJnjT&#39;
 </pre></div>
 </div>
 </div>
@@ -1447,23 +1449,29 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
 USER the_user
 PASS the_password
+EPSV
 TYPE I
-FEAT
-EPSV
-PWD
 LIST
-SYST
-SYST
-FEAT
-OPTS UTF8 ON
-PWD
 OPTS UTF8 ON
 EPSV
 LIST
-FEAT
-OPTS UTF8 ON
 EPSV
+LIST
+OPTS UTF8 ON
+SYST
+SYST
+EPSV
+LIST
 FEAT
+PWD
+EPSV
+OPTS UTF8 ON
+OPTS UTF8 ON
+LIST
+PWD
+SYST
+EPSV
+PWD
 QUIT
 </pre></div>
 </div>
@@ -1478,36 +1486,25 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-AV(Ow]wZ+O!eRRHQ
-220-Qt1;DiO7&#39;b|&quot;M&quot;K]:YX
-220-T&quot;8dAW&gt;o&quot;Fhyk1Gor
-220-`.M*{4c![$(:H
-220-k[^:;&quot;6VB#H%7hTB/[s
-220 lnM,z6S*}+DY.U4
-530 Ibb~Kjsi,hxOcSVB7&lt;E
-331 )d W&lt;/;mk)|\9FFHd~
-230 WE4
-200 =aN9Jg
-229 Entering Extended Passive Mode (|||50100|)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-S
+220-2xz&quot;5i=0:vbCk;2)
+220-HD*]*b&lt;M^P;%P?tU
+220-`f7W#@_~GV?R`&quot;z2f^
+220-7!_{(s
+220-*Z/x&#39;|b7Y&lt;{}]nP
+220-~&gt;:GSo7*jf7~Lq
+220-M,&quot;+&gt;
+220-KlQ
+220-nr~bg?
+220-0
+220 A$&gt;r4 
+331 &lt;&lt;2$.)8,#:Gar{\uT]Uy
+230 -#&#39;[+fTC:j:Oi7n 6
 257 &quot;/&quot; is the current directory
-150 DS6P)@{&lt;4hy\0qz_-;
-226 NFX\ux|GIf
-257 &quot;/&quot; is the current directory
 229 Entering Extended Passive Mode (|||50100|)
-150 _;\@)&amp;L#3i}N-~w
-226 vgRk,iEhIe-e|/a%gM9
-211-Features:
- EPSV
-211 End
-257 &quot;/AtXN0FlrXIxjkReD/AcOz6WhsikIKyoF5oWs&quot; is the current directory
-200 _
-200 ]n
-211-Features:
- EPSV
-211 End
-229 Entering Extended Passive Mode (|||50100|)
-215 Linux
-221 7I*8+SmcXk7f;1C7&lt;
+257 &quot;/99vFo5rH6_NOXLo/VR62qM4IxWlP/KgKuFkP&quot; is the current directory
+200 LyVhbK[2RLzT
+221 jCd
 </pre></div>
 </div>
 </div>
