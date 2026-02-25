@@ -28,21 +28,39 @@ def limit_failed_logins(tree, symbol_to_find):
 
 # Limits number of errors to 10. Our testing target (vsftpd) disconnects the client at 10 failed attempts in a row.
 def limit_errors(tree):
-    nts = [NonTerminal('<request_auth_ssl>'), NonTerminal('<response_auth_ssl>'), NonTerminal('<request_auth_tls>'), NonTerminal('<response_auth_tls>')]
+    auth_error_symbols = [
+        NonTerminal('<request_auth_ssl>'),
+        NonTerminal('<response_auth_ssl>'),
+        NonTerminal('<request_auth_tls>'),
+        NonTerminal('<response_auth_tls>'),
+    ]
+    request_login_pass_fail = NonTerminal('<request_login_pass_fail>')
+    request_login_user_fail = NonTerminal('<request_login_user_fail>')
+    login_symbols = [
+        NonTerminal('<request_login_user_ok>'), request_login_user_fail,
+        request_login_pass_fail, NonTerminal('<request_login_pass_ok>'),
+        NonTerminal('<response_login_pass_fail>'), NonTerminal('<response_login_user>')
+    ]
     count = 0
+    login_command_counted = False
     for msg in tree.protocol_msgs()[::-1]:
-        if msg.msg.symbol not in nts:
+        symbol = msg.msg.symbol
+        if symbol in auth_error_symbols:
+            count += 1
+        elif symbol in login_symbols:
+            # Failed login attempts are multi-step; count at most 2 errors per attempt:
+            if (symbol == request_login_user_fail or symbol == request_login_pass_fail) and not login_command_counted:
+                count += 2
+                login_command_counted = True
+        else:
             return True
-        count += 1
         if count > 10:
             return False
 
 <state_logged_in> ::= (<logged_in_cmds><state_logged_in>) | (<exchange_set_type><state_in_binary>) | (<exchange_set_epassive><state_in_passive>)
 <state_in_binary> ::= (<logged_in_cmds><state_in_binary>) | (<exchange_set_epassive><state_in_binary_passive>)
 <state_in_passive> ::= (<logged_in_cmds><state_in_passive>) | (<exchange_set_type> <state_in_binary_passive>)
-<state_in_binary_passive> ::= (<logged_in_cmds><state_in_binary_passive>) | (<exchange_list><state_in_binary>) | (<exchange_quit><state_finished>)
-
-<state_finished> ::= ''
+<state_in_binary_passive> ::= (<logged_in_cmds><state_in_binary_passive>) | (<exchange_list><state_in_binary>) | <exchange_quit>
 
 # The logged in state. If the client is logged in, it is allowed to send the following commands.
 <logged_in_cmds> ::= <exchange_pwd> | <exchange_syst> | <exchange_feat> | <exchange_set_utf8>
@@ -123,9 +141,11 @@ def feat_response():
 <exchange_list> ::= <ClientControl:ServerControl:request_list><ServerControl:ClientControl:open_list><list_transfer>
 <request_list> ::= 'LIST\r\n'
 <open_list> ::= '150 ' <command_tail> '\r\n'
+# <open_list_already_open> ::= '150 ' <command_tail> '\r\n'
 # <list_data> gets sent using the data-channel. Therefore, we use ServerData and ClientData as sending and receiving parties.
-<list_transfer> ::= <ServerData:ClientData:list_data>?<ServerControl:ClientControl:finalize_list>
+<list_transfer> ::= <ServerData:ClientData:list_data>?(<SocketControlServer:close_data><ServerControl:ClientControl:finalize_list>|<ServerControl:ClientControl:finalize_list><ServerData:ClientData:list_data>?<SocketControlServer:close_data>)
 <finalize_list> ::= '226 ' <command_tail> '\r\n'
+<close_data> ::=  'Data socket closed.\r\n'
 <list_data> ::= (<list_data_file>)+
 <list_data_file> ::= <permissions> ' '+ <link_count> ' ' <user> ' '+ <group> ' '+ <file_size> ' ' <date> ' ' <filename> '\r\n'
 <filename>    ::= r'[\x20-\x7E]+'
@@ -180,12 +200,12 @@ def open_data_port(port) -> int:
         # Party instances not created
         return port
 
+    client_data.stop()
+    server_data.stop()
     if client_data.port != port:
-        client_data.stop()
         client_data.port = port
-    if server_data.port != port:
-        server_data.stop()
-        server_data.port = port
     client_data.start()
+    if server_data.port != port:
+        server_data.port = port
     server_data.start()
     return port

@@ -9,10 +9,10 @@ class ClientControl(NetworkParty):
         )
         self.start()
 
-    def receive(self, message: str | bytes, sender: Optional[str]) -> None:
-        # 150 indicates the start of a data transfer. We start the data parties then in order to connect to the ftp servers data socket.
-        if message.decode("utf-8").startswith("150"):
-            ClientData.instance().start()
+    def send(self, message: str | bytes, recipient: Optional[str]) -> None:
+        super().send(message, recipient)
+
+    def receive(self, message: str | bytes | None, sender: Optional[str]) -> None:
         # We set ServerControl as the sender for all received messages.
         # Fandango can only automatically infer the sender of a message for specification 2 two party definitions.
         # In this specification we have 4 parties, so we need to set the sender incoming messages manually.
@@ -36,7 +36,10 @@ class ClientData(NetworkParty):
         )
 
     # Tell FANDANGO that all received messages come from ServerData.
-    def receive(self, message: str | bytes, sender: Optional[str]) -> None:
+    def receive(self, message: str | bytes | None, sender: Optional[str]) -> None:
+        if message is None:
+            super().receive("Data socket closed.\r\n", sender="SocketControlServer")
+            return
         super().receive(message.decode("utf-8"), sender="ServerData")
 
 
@@ -46,3 +49,31 @@ class ServerData(NetworkParty):
             connection_mode=ConnectionMode.EXTERNAL,
             uri="tcp://[::1]:50100"
         )
+
+class SocketControlServer(FandangoParty):
+    def __init__(self):
+        super().__init__(
+            connection_mode=ConnectionMode.EXTERNAL
+        )
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+class SocketControlClient(FandangoParty):
+    def __init__(self):
+        super().__init__(
+            connection_mode=ConnectionMode.CONNECT
+        )
+
+    def send(self, message: str | bytes, recipient: Optional[str]) -> None:
+        if str(message).startswith("Data socket closed.\r\n"):
+            ClientData.instance().stop()
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass

@@ -993,20 +993,25 @@ However, the <code class="docutils literal notranslate"><span class="pre">Fandan
 <section id="the-receive-method">
 <span id="sec-receive-api"></span><h3>The <code class="docutils literal notranslate"><span class="pre">receive()</span></code> method<a class="headerlink" href="#the-receive-method" title="Link to this heading">#</a></h3>
 <p>On a <code class="docutils literal notranslate"><span class="pre">FandangoParty</span></code> object, the <code class="docutils literal notranslate"><span class="pre">receive()</span></code> method is invoked when data has been received by the party.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">receive</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">),</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">receive</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="kc">None</span><span class="p">),</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">message:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span></code>: The message received.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span> <span class="pre">|</span> <span class="pre">None</span></code>: The message received.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">recipient:</span> <span class="pre">str</span></code>: The sender of the message.</p></li>
 </ul>
 <p>This method is typically overloaded and extended in subclasses.
 For instance, to apply a <code class="docutils literal notranslate"><span class="pre">decompress()</span></code> method to every message received, write</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompressedNetworkParty</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">DerivationTree</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">uncompress</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">sender</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">decompress</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">sender</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Note that a party can also receive <code class="docutils literal notranslate"><span class="pre">None</span></code>-type messages.
+These signal the party that its communication partner has closed the connection.
+Fandango does assume that a party only closes the connection when the protocol execution is complete.
+The party specification throws an exception if its communication partner closes the connection during the protocol execution.
+If you want to allow for connection closures during the protocol execution, you have to overload the <code class="docutils literal notranslate"><span class="pre">receive()</span></code> function to handle <code class="docutils literal notranslate"><span class="pre">None</span></code>-type messages.</p>
 </section>
 <section id="the-start-and-stop-methods">
 <span id="sec-startstop-api"></span><h3>The <code class="docutils literal notranslate"><span class="pre">start()</span></code> and <code class="docutils literal notranslate"><span class="pre">stop()</span></code> methods<a class="headerlink" href="#the-start-and-stop-methods" title="Link to this heading">#</a></h3>
@@ -1031,6 +1036,10 @@ For instance, to apply a <code class="docutils literal notranslate"><span class=
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FandangoParty</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="s2">&quot;Client&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c1"># Equivalent to the above.</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">instance()</span></code> method is not thread-safe and cannot identify a party implementation from a thread different from the main thread.
+The receive-method of a party implementation is often not invoked from the main thread, as listen loops usually run asynchronously.
+Use the local reference to <code class="docutils literal notranslate"><span class="pre">self.io_instance.parties[&quot;PartyName&quot;]</span></code> in those cases to access the party implementation.
+<a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">Generators</span></a> and <a class="reference internal" href="Conversion.html#sec-conversion"><span class="std std-ref">Converters</span></a> run on the main thread and can safely access the party implementation.</p>
 </section>
 </section>
 <section id="the-networkparty-class">

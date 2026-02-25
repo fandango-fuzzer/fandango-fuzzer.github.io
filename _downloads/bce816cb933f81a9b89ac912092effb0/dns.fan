@@ -242,6 +242,7 @@ def decompress_msg(compressed: bytes) -> bytes:
 # The DNS message identifier (ID) (<h_id>)
 # The question that the response aims to answer is the same as the question in the request (<question>)
 # The question count in the response matches the question count in the request (<req_qd_count>)
+# Counted as 4 constraints
 where forall <ex> in <start>.<exchange>:
     <ex>.<dns_resp>.<header_resp>.<h_rd> == <ex>.<dns_req>.<header_req>.<h_rd> and <ex>.<dns_resp>.<header_resp>.<h_id> == <ex>.<dns_req>.<header_req>.<h_id> and <ex>.<dns_resp>.<question_section>.<question> == <ex>.<dns_req>.<question> and bytes(<ex>.<dns_resp>.<header_resp>.<resp_qd_count>) == bytes(<ex>.<dns_req>.<header_req>.<req_qd_count>)
 
@@ -273,6 +274,7 @@ where forall <ex> in <start>.<exchange>:
 <byte> ::= <bit>{8}
 <label_len_octet> ::= <byte>
 
+
 <question> ::= <q_name> <q_type> <rr_class>
 <q_name_optional> ::= <q_name_written>? 0{8}
 <q_name> ::= <q_name_written> 0{8}
@@ -283,13 +285,14 @@ where forall <ex> in <start>.<exchange>:
 # Checks if a dns response answers the corresponding dns question using the verify_transitive-function.
 # The second part of the `or` clause `bytes(<a>.<answer_an_type>)[0:2]...` also checks this, but only for direct answers without allowing transitive response chains.
 # This allows Fandango optimizations to be used to generate a valid answer more efficiently.
+# Counted as 2 constraints
 where forall <ex> in <start>.<exchange>:
     forall <a> in <ex>.<dns_resp>.<answer_an_section>.<answer_an>:
         exists <q> in <ex>.<dns_req>.<question>:
             verify_transitive(<q>, <ex>.<dns_resp>) or bytes(<a>.<answer_an_type>)[0:2] == bytes(<q>.<q_type>) and bytes(<a>.<q_name_optional>) == bytes(<q>.<q_name>)
 
 <answer_au> ::= <q_name_optional> <type_soa>
-<answer_opt> ::= <q_name_optional> (<type_opt>|<type_a>)
+<answer_opt> ::= <q_name_optional> (<type_opt>|<type_a>|<type_aaaa>)
 <answer_an> ::= <q_name_optional> <answer_an_type>
 <a_ttl> ::= 0 <bit>{7} <byte>{3}
 <a_rd_length> ::= <byte>{2} := pack(">H", randint(0, 0))
@@ -301,8 +304,11 @@ where forall <ex> in <start>.<exchange>:
 <type_id_soa> ::= 0{13} 1 1 0
 <type_id_cname> ::= 0{13} 1 0 1
 <type_id_opt> ::= 0{10} 1 0 1 0 0 1
+<type_id_aaaa> ::= 0{11} 1 1 1 0 0
 <type_a> ::= <type_id_a> <rr_class> <a_ttl> 0{13} 1 0 0 <ip_address>
+<type_aaaa> ::= <type_id_aaaa> <rr_class> <a_ttl> 0{11} 1 0 0 0 0 <ip_address_v6>
 <ip_address> ::= <byte>{4}
+<ip_address_v6> ::= <byte>{16}
 <type_ns> ::= <type_id_ns> <rr_class> <a_ttl> <a_rd_length> <a_rdata>{int(unpack('>H', bytes(<a_rd_length>))[0])}
 <type_soa> ::= <type_id_soa> <rr_class> <a_ttl> <a_rd_length> <a_rdata>{int(unpack('>H', bytes(<a_rd_length>))[0])}
 <type_opt> ::= <type_id_opt> <udp_payload_size> <a_ttl> <a_rd_length> <a_rdata>{int(unpack('>H', bytes(<a_rd_length>))[0])}
@@ -310,6 +316,7 @@ where forall <ex> in <start>.<exchange>:
 <udp_payload_size> ::= <bit>{16}
 
 # <type_cname> responses must have the correct length in the <a_rd_length> field (r data length), which corresponds to the following <q_name> field.
+# Counted as one constraint
 where forall <t> in <type_cname>:
     bytes(<t>.<a_rd_length>) == pack('>H', len(bytes(<t>.<q_name>)))
 
@@ -332,7 +339,7 @@ class Client(NetworkParty):
     def __init__(self):
         super().__init__(
             connection_mode=ConnectionMode.CONNECT if fandango_is_client else ConnectionMode.EXTERNAL,
-            uri="udp://localhost:25566"
+            uri="udp://127.0.0.1:25566"
         )
         self.start()
 

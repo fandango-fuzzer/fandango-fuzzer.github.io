@@ -543,18 +543,18 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabc
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabc
 abcabc
 abcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabcabcabcabcabcabcabcabc
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
 </pre></div>
 </div>
 </div>
@@ -574,10 +574,12 @@ Let us limit the number of repetitions to the range 1…5:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabc
-abc
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abc
 abcabc
-abcabcabcabc
+abcabcabc
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabc
 abcabcabcabcabc
 </pre></div>
 </div>
