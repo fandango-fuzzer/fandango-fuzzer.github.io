@@ -1462,9 +1462,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>drw---x--x     93 PbBs6vlO57nm5u5  LguWwZSy    9002064 Jul 05 17:45 .a$
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br------w-                384 smIwZCf3iQit     tFeteh_NLNjl   4391470 Sep 03 10:09 1*gt_{{nih+?t2#
 
-drwxr--r-x          111 -Q               cei          9730431 Jan 24 04:39 {+qVC
+c-w-rwx-wx       779 TeHg      l2zdYNPw-RG   3577176 Jan 01 11:57 ?a,-?&amp;^@5
+
+cr-x---rw-                    843 RC8Xg                  2uAG3NL5p6WGQd04xiQ          9987475 May 03 17:02 @}K-J
 </pre></div>
 </div>
 </div>
@@ -1500,17 +1502,23 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER Uqsyu8
-PASS I8wa
-AUTH SSL
-AUTH TLS
-AUTH TLS
-AUTH SSL
-AUTH TLS
-AUTH SSL
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
 USER the_user
 PASS the_password
+EPSV
 TYPE I
+LIST
+OPTS UTF8 ON
+OPTS UTF8 ON
+EPSV
+FEAT
+LIST
+FEAT
+FEAT
+FEAT
+EPSV
+LIST
+FEAT
 EPSV
 QUIT
 </pre></div>
@@ -1526,32 +1534,44 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-F1(l`fqY]!e
-220-:Z
-220-k3Dn|g&quot;:
-220-9&#39;s
-220-x B~.
-220-,f1Q#/&gt;$ C@
-220-m
-220-!g
-220-%,ag$6i
-220-
-220-Y:?D\j&gt;6gL?
-220-&quot;vCkr^|Yr`m72X`
-220-}
-220-_&lt;r#Icp_&amp;!]X{w
-220-`F&gt;Ee&#39;&quot;D,}9!oD5zWY
-220-W~kmOp{tM&lt;8sV:_7;I
-220-3(wE`pP$(w
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-=a
+220-X&#39;5`CPU
+220-]YMd$o5)_m
+220-@{ Wc?*3y;`9c&gt;F%;
+220-v6ImO?,{+gt5u1$0
+220-S$&#39;2qR*wy
+220-9
+220-X\W5P3y*w
+220-#
+220-t,
+220-{mChMLi&quot;d&amp;O5~
+220-V@P;
+220-Ja7q3j{DR&gt;6fPz%
+220-[_`:Zji!=}2U//4
+220-bnl
+220-#OQV[
+220-?*IBwh{@DHM3G2D
+220-Wa3jcQ!RPX5-x
 220 
-331 Sn|N$~1&lt;_akW\e4J1
-230 {[y`P|5F5
-200 c41.\ZTgwS):Pwe2-4j+
-200 6#rGv0\^6vlVNf_NT.0$
+331 d=Om1hG&#39;B+NUjNIRrkb
+530 d%u.kB4.QR9/wn|%
+331 f&gt;k
+230 xSF
+200 &lt;3^@\
+211-Features:
+ EPSV
+211 End
 215 Linux
-200 luK`&gt;
 229 Entering Extended Passive Mode (|||50100|)
-221 i 7U ;
+150 \Ipuh?
+226 %x&gt;Pm[
+229 Entering Extended Passive Mode (|||50100|)
+215 Linux
+150 {8&#39;Z]{*DdC`+YfR8h^v
+226 EE 
+215 Linux
+229 Entering Extended Passive Mode (|||50100|)
+221 7`J;?~o*Ho2~F+`}cm L
 </pre></div>
 </div>
 </div>
