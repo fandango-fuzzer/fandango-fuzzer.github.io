@@ -1051,11 +1051,11 @@ When sending the request, we choose a random value:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x06github\x03com&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x05cispa\x02de&#39;,
+ b&#39;\x06church\x03com&#39;,
  b&#39;\x06github\x03com&#39;,
- b&#39;\x07houston\x03com&#39;,
  b&#39;\x05cispa\x02de&#39;,
- b&#39;\x06rogers\x03org&#39;]
+ b&#39;\x05cispa\x02de&#39;]
 </pre></div>
 </div>
 </div>

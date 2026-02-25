@@ -1462,11 +1462,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br------w-                384 smIwZCf3iQit     tFeteh_NLNjl   4391470 Sep 03 10:09 1*gt_{{nih+?t2#
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>drw-r-xrw-              434 8tArav1-GI                    kV_jcrhfQhh             8371170 Jun 09 20:30 81A
 
-c-w-rwx-wx       779 TeHg      l2zdYNPw-RG   3577176 Jan 01 11:57 ?a,-?&amp;^@5
-
-cr-x---rw-                    843 RC8Xg                  2uAG3NL5p6WGQd04xiQ          9987475 May 03 17:02 @}K-J
+cr-xrw-r-x                   957 SiZJ8NZbolgU            b   2145336 Jan 09 23:11 PKwd=~r6g&#39;Gx4,
 </pre></div>
 </div>
 </div>
@@ -1504,22 +1502,16 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
 USER the_user
+PASS 03K
+USER the_user
 PASS the_password
-EPSV
+PWD
 TYPE I
-LIST
+EPSV
+FEAT
 OPTS UTF8 ON
+PWD
 OPTS UTF8 ON
-EPSV
-FEAT
-LIST
-FEAT
-FEAT
-FEAT
-EPSV
-LIST
-FEAT
-EPSV
 QUIT
 </pre></div>
 </div>
@@ -1534,44 +1526,19 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-=a
-220-X&#39;5`CPU
-220-]YMd$o5)_m
-220-@{ Wc?*3y;`9c&gt;F%;
-220-v6ImO?,{+gt5u1$0
-220-S$&#39;2qR*wy
-220-9
-220-X\W5P3y*w
-220-#
-220-t,
-220-{mChMLi&quot;d&amp;O5~
-220-V@P;
-220-Ja7q3j{DR&gt;6fPz%
-220-[_`:Zji!=}2U//4
-220-bnl
-220-#OQV[
-220-?*IBwh{@DHM3G2D
-220-Wa3jcQ!RPX5-x
-220 
-331 d=Om1hG&#39;B+NUjNIRrkb
-530 d%u.kB4.QR9/wn|%
-331 f&gt;k
-230 xSF
-200 &lt;3^@\
-211-Features:
- EPSV
-211 End
-215 Linux
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-,
+220-1$3cKuH) 
+220-dskQgUoaRSA
+220-
+220-auKui/9:ZW%7
+220-)^6V&lt;:HNc B
+220 SIo(lk7K@,xq5i
+331 #LZ}fI)m0!oM
+230 e63rX
+200 641N{|;mTjhHSReu]
+200 -FiN@.0B6wAPk7u
 229 Entering Extended Passive Mode (|||50100|)
-150 \Ipuh?
-226 %x&gt;Pm[
-229 Entering Extended Passive Mode (|||50100|)
-215 Linux
-150 {8&#39;Z]{*DdC`+YfR8h^v
-226 EE 
-215 Linux
-229 Entering Extended Passive Mode (|||50100|)
-221 7`J;?~o*Ho2~F+`}cm L
+221 V.}TvcygQ?C
 </pre></div>
 </div>
 </div>
