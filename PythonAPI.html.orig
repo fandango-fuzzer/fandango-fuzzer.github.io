@@ -1060,16 +1060,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michelle Costa,16049486
-Karen Fitzgerald,73728007199918979
-Zachary Roberson,84
-William Marquez,8
-Kayla Green,1192624598359051
-Katrina Taylor,52666869
-Stephen Smith,2546157501
-Eric Martin,0613323113879
-Steven Wright,2297451844
-Frank Miller,029
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ashley Mendoza,501696
+John Watson,266681
+David Blackwell,342724
+Sarah Cook,0869574117133961
+Dana Nunez,6
+Zachary King,403091
+Lisa Burns,9
+Randall Goodwin,038858469113863
+Alyssa Nguyen,978936
+Rodney Garcia,8360954304942
 </pre></div>
 </div>
 </div>
@@ -1114,16 +1114,16 @@ Frank Miller,029
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>baccba
-acaaa
-ccbab
-baccacabaab
-bac
-cacabb
-aca
-ccaab
-a
-abbcabacaabb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cba
+baaabbccbbac
+caababbabacc
+bbaca
+cbbccbaa
+bbc
+cababbcaabbcbbcbbcc
+cccaabac
+acbcbaacbcc
+ccbcaccba
 </pre></div>
 </div>
 </div>
@@ -1205,7 +1205,7 @@ abbcabacaabb
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f96147e55a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f60885195a0&gt;
 </pre></div>
 </div>
 </div>

@@ -486,20 +486,20 @@ In order to obtain more natural first and last names in our <a class="reference 
 <p>then we can have Fandango create names such as</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice Bmlrmpiiwrfnxselvj,9878683081049624
-Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Smith,126147267861499
-Alice Doe,6825859087835926468
-Zhurzuazmo Ruiz Picasso,06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zjeoeyfoq Ruiz Picasso,41882089516933
+Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Doe,224683793
+Pablo Diego José Francisco de Paula Juan Nepomuceno Cipriano de la Santísima Trinidad Ruiz Picasso,994968061041307
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eve Doe,25347
-Alice Smith,35539951393689094030
-Eve Ebhqmtndth,68922913
-Mdfoprrtozmgvnu Ruiz Picasso,1572
-Rjsamzucbbubuho Ruiz Picasso,39654128059529
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice Doe,972873
+Alice Doe,42057445750811964
+Alice Ruiz Picasso,138436070
+Bob Ruiz Picasso,50234
+Hjful Smith,62
+Eve Ruiz Picasso,3503872875935050588
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thikndfxhlsebftdkljq Ruiz Picasso,2208079865313
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice Pdxfiayvnmyduuqtcj,870480043
 </pre></div>
 </div>
 </div>
@@ -528,16 +528,16 @@ Let us illustrate this with an example.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lorraine
-Sherri
-Kathy
-Austin
-Jennifer
-William
-Mary
-Lisa
-Nicole
-Mary
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>John
+Robert
+Craig
+Stephanie
+Hannah
+Dakota
+Darlene
+Kristen
+Ebony
+Heidi
 </pre></div>
 </div>
 </div>
@@ -601,22 +601,24 @@ Use the Python <code class="docutils literal notranslate"><span class="pre">impo
 <p>This is what the output of the above spec looks like:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sonya Dunn,4236
-Julie Jones,237
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ryan Watts,785881804211001
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Molly Moses,990000994
-Victoria Powers,53
-John Perez,664542
-Sue Williams,12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cameron Rose,70625972067876
+Michael Jackson,76409400
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jennifer Powell,4530779083864200282
-Amanda Ray,559093
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kari Knight,047444122
+David Hicks,8
+Gary Martinez,43118792720418679720
+Albert Cobb,16
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>William Thomas,1787125739914
-Bethany Sandoval,0315862952565
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>James Hernandez,01626346589594917
+Lori Hopkins,07929318069949
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rita Pearson,2502146859
 </pre></div>
 </div>
 </div>
@@ -648,20 +650,22 @@ To obtain a range of ages between 25 and 35, we can thus write:</p>
 <p>The resulting <a class="reference download internal" download="" href="_downloads/22db315d6c7c283d43c6fb1e355624fe/persons-faker-age.fan"><span class="xref download myst">Fandango spec file</span></a> produces the desired range of ages:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heather Smith,31
-Joseph Figueroa,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shannon Jackson,35
+Randall Roberts,31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kristy Arroyo,31
-Cameron Walker,31
-Jeffrey Warren,26
-Lisa Jones,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chase Cook,32
+Susan Hull,33
+Richard Wolf,32
+Roberto Davis,33
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pamela Matthews,35
-Amanda Wallace,28
-Jessica Johnson,25
-Steven Reyes,31
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Steven Christensen,29
+Christy Miller,30
+Jessica Mcguire,28
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raymond Lester,30
 </pre></div>
 </div>
 </div>
@@ -675,20 +679,20 @@ However, the final value must fit the given symbol rules (in our case, <code cla
 <p>These are the ages we get this way:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>David Reed,36
-Kelly Rice,35
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ashley Barrett,34
+Karen Andrews,34
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jessica Mccormick,34
-Lisa Brown,35
-Christopher King,35
-Ricky Torres,35
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tammy Curry,33
+Ronald Yoder,34
+Shannon Schmidt,33
+Nathaniel Cordova,34
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tamara Wright,34
-Christopher Patton,36
-Patrick Madden,35
-Andrew Mayer,35
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Karen Kirby,35
+Samuel Griffin,35
+Jessica Cannon,34
+Amanda Mills,35
 </pre></div>
 </div>
 </div>
@@ -710,22 +714,24 @@ Andrew Mayer,35
 <p>With this, both random names (<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code>) and natural names (<code class="docutils literal notranslate"><span class="pre">&lt;natural_name&gt;</span></code>) will have a chance of 50% to be produced:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ffxkeixm Hoffman,636
-Roy Powers,1806
-Fltbwdoxexhwifqe Jennings,786
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ricardo Johnson,58213175686242
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ugootyjohqb Alexander,9027117
-Mary Cooley,82378949567
-Debra Allison,0682756
-Qh Ramos,6632338
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jacob Mcguire,00685309355632369951
+Alexandria Taylor,781
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fpzjnntyfujn Christensen,841021825934239
-David Aguilar,174499902889
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>David Cabrera,88484126324639329
+Jenna Archer,383776044178
+Nicholas Garrett,836106402914829
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Janet Rivera,50218660
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ewik Nelson,434513
+Kwduniyazjkiepipdia Smith,04
+Peggy Dominguez,66289616
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Amy Silva,53161687496241239099
 </pre></div>
 </div>
 </div>
@@ -755,30 +761,32 @@ If we want all last names to start with an <code class="docutils literal notrans
 <p>and we get</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Stokes,6974294879
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kenneth Sullivan,4262036663752
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vanessa Smith,7930812239849
-Arthur Smith,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>David Sherman,99634253297534
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Amy Salinas,05480
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michelle Schultz,042151444
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tammy Spencer,440126
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stephen Stewart,7608346478
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Amy Stephens,2553965339
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brandon Smith,81743140476482668050
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zachary Salazar,3654144528354
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Edwin Sawyer,187
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kristina Salinas,35755
-Arthur Smith,2179
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>David Stone,9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thomas Stephens,104502344928
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Richard Stone,1115288188090817
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>George Smith,99527022416202164406
+Jacob Sanchez,3
 </pre></div>
 </div>
 </div>
@@ -805,28 +813,28 @@ If the target keeps on changing, the algorithm will lose guidance and will not p
 <p>This would work:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brandi Spencer,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catherine Soto,31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nathan Spencer,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michelle Soto,31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alisha Stewart,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catherine Smith,31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jason Schmidt,30
-Brandi Spencer,33
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lisa Sanders,31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aaron Simpson,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lisa Soto,31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brandi Simpson,30
-Nathan Stewart,30
-Susan Strickland,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Michelle Smith,31
+Michelle Soto,33
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kayla Stewart,30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Edward Shah,31
+Elizabeth Sawyer,31
+Catherine Sanders,31
 </pre></div>
 </div>
 </div>

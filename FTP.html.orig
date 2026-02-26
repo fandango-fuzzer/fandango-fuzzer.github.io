@@ -1462,9 +1462,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dr-xrwx--- 592 kQF                 bBDQrBYfDvP_Ff4                9015783 Mar 05 12:06 /6&quot;LzG]{%^22 |Eh]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr----xrw-  313 88kUcoJ3YkSHSo       DzOPmz        9915788 Apr 18 17:30 4*Z^&#39;.![Z41V5Y
 
-brw--wx-w-       906 acdJPZYzd1       sZz5bQpjD            1035220 Oct 16 08:58 ~1^#P@|mhYAswf9;;
+drw-r-x-wx                 258 29H3ZiaKW         Cn9YbWS7GuGAEnyu1Yi0    5453620 Apr 22 23:09 rcD[o&#39;U|d&quot;gxx][l
+
+-r--rwxr-x                  554 ZQ                  07ek_PbhPKazpXyysS-D      5117944 Feb 25 08:18 &amp;w-Q=~XfNN^qo q
 </pre></div>
 </div>
 </div>
@@ -1500,10 +1502,14 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER KD
+PASS the_password
+USER the_user
 PASS the_password
 TYPE I
-SYST
+OPTS UTF8 ON
+FEAT
+FEAT
 EPSV
 QUIT
 </pre></div>
@@ -1519,46 +1525,32 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-6WwA,i\M6ZhpjBV@3qX
-220-xhQ@
-220-.T-{5ZPH~wLd@G/PVR\
-220-/R9gZC~]$vR/2l0F(
-220-jOp
-220-~
-220-U&gt;4YXK
-220-IFe`f4 upue\&quot;9X&amp;g;
-220-R}
-220-XC
-220-~$/kl,P!G@D[&lt;Awq
-220-u&quot;bp&lt;l%fVP
-220-,45+&quot;Fd_4Kf XMn
-220-2vye\ay
-220-vNQZi9d`N?B&lt;
-220-&#39;/-I)
-220-$N&lt;fM(6mvr
-220-UC;u?Dgqy&lt;
-220-Q;BV
-220 c4r
-500 J2i`#14^~M$Edyo]`+qW
-500 Li
-331 )75rD@:
-230 qhv 8!Q
-200  o ]Xd
-229 Entering Extended Passive Mode (|||50100|)
-150 ZO%VP+\IR&amp;X^r&lt;Vv=p&quot;
-226 *=5a,8e54o[YpP
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-I`MC
+220-#qv/}-_ie$&#39;7
+220-iqL_VaO&gt;!1
+220 `uJp4&amp;B|q%]A=Q-{&quot;Pt
+331 OrD1|&quot;i^W8Awq_
+230 K&lt;O~
 229 Entering Extended Passive Mode (|||50100|)
 215 Linux
 215 Linux
-257 &quot;/f5y/UtndrzmN/ZvAG9VMLH/LaD328BckzJupVIcFi/_d1NTckFnip/za3xraTP_d/RvD_/2fj9yBTJ95/LmLRi0/KSOgljVO79Ol52perQv/AtBuJ9VICHrbmWi25/b80rI&quot; is the current directory
-150 fiE$S8Z&#39;!Y,y;JU
-226 \3Vl\7#mHhYe?r
-229 Entering Extended Passive Mode (|||50100|)
 211-Features:
  EPSV
 211 End
-200 qTD-
-221 g
+200 1_2S5|X&gt;_)1|8FQ+F
+200 dS&lt;48ll|
+150 &lt;`
+226 /%c$@1,C~f^U79 g`Z
+215 Linux
+257 &quot;/&quot; is the current directory
+215 Linux
+211-Features:
+ EPSV
+211 End
+215 Linux
+200 l3)cX-:\!&lt;-O
+229 Entering Extended Passive Mode (|||50100|)
+221 #tuVg&lt;M$9&amp;RIc
 </pre></div>
 </div>
 </div>
