@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0rc1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -494,7 +494,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11001101
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10010010
 </pre></div>
 </div>
 </div>
@@ -512,17 +512,15 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01100101
-11110001
-00110010
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000100
-11111100
-11011100
-10001111
-00100001
-10101000
-11101011
+10011011
+00100111
+11111101
+00000100
+00011111
+11110000
+00110100
+01101101
+11000010
 </pre></div>
 </div>
 </div>
@@ -534,7 +532,7 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00111111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10111111
 </pre></div>
 </div>
 </div>
@@ -549,25 +547,27 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10111111
-11101111
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10011111
-10101111
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10001111
+11011111
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11111111
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01001111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10101111
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11001111
-10001111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00101111
+11101111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10111111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01001111
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01101111
