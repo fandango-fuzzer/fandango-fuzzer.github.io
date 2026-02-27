@@ -1462,11 +1462,7 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr----xrw-  313 88kUcoJ3YkSHSo       DzOPmz        9915788 Apr 18 17:30 4*Z^&#39;.![Z41V5Y
-
-drw-r-x-wx                 258 29H3ZiaKW         Cn9YbWS7GuGAEnyu1Yi0    5453620 Apr 22 23:09 rcD[o&#39;U|d&quot;gxx][l
-
--r--rwxr-x                  554 ZQ                  07ek_PbhPKazpXyysS-D      5117944 Feb 25 08:18 &amp;w-Q=~XfNN^qo q
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-r-xr-x--x 110 zW6hSdSimgHUco      XuyPqIn6vCvRLh6              67541 Mar 16 06:29 (
 </pre></div>
 </div>
 </div>
@@ -1502,14 +1498,23 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER KD
-PASS the_password
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
+AUTH TLS
+AUTH TLS
+AUTH TLS
+AUTH SSL
 USER the_user
 PASS the_password
+EPSV
 TYPE I
-OPTS UTF8 ON
-FEAT
-FEAT
+LIST
+SYST
+EPSV
+LIST
+PWD
+PWD
+EPSV
+LIST
 EPSV
 QUIT
 </pre></div>
@@ -1525,32 +1530,19 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-I`MC
-220-#qv/}-_ie$&#39;7
-220-iqL_VaO&gt;!1
-220 `uJp4&amp;B|q%]A=Q-{&quot;Pt
-331 OrD1|&quot;i^W8Awq_
-230 K&lt;O~
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-0vQ3OX,{7S&gt;z
+220 +&gt;(6
+530 ylSs+6JhC-H+
+500 &quot;U@,3&quot;ZDy#&gt;B(
+530 qz&#39;rxrghh-e`Y
+500 *^m`c8IFZ8
+500 ,OT]L,I*V|.o
+500 F
+331 U!S:I_yud={8
+230 I
+200 aOY}C/6DV_H%=
 229 Entering Extended Passive Mode (|||50100|)
-215 Linux
-215 Linux
-211-Features:
- EPSV
-211 End
-200 1_2S5|X&gt;_)1|8FQ+F
-200 dS&lt;48ll|
-150 &lt;`
-226 /%c$@1,C~f^U79 g`Z
-215 Linux
-257 &quot;/&quot; is the current directory
-215 Linux
-211-Features:
- EPSV
-211 End
-215 Linux
-200 l3)cX-:\!&lt;-O
-229 Entering Extended Passive Mode (|||50100|)
-221 #tuVg&lt;M$9&amp;RIc
+221 w!*7HAC
 </pre></div>
 </div>
 </div>

@@ -984,7 +984,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.sqh55rn4vktezahojetgrejhff.gx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.ttqjmwsfqlrevpeg1231sqoq4f.bx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1119,7 +1119,7 @@ fandango:INFO: Current coverage: 1.96%
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmnay03.sqh55rn4vktezahojetgrejhff.gx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmnay03.ttqjmwsfqlrevpeg1231sqoq4f.bx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
 fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 fandango:INFO: Current coverage: 74.51%
@@ -1213,6 +1213,12 @@ So if we invoke</p>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Fandango IO only supports desired-solution values of 1 for now, overriding value
+fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+</pre></div>
+</div>
+</div>
 </div>
 <p>we can then connect to our running Fandango “SMTP Server” and interact with it according to the <code class="docutils literal notranslate"><span class="pre">smtp-simple.fan</span></code> spec:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>telnet<span class="w"> </span>localhost<span class="w"> </span><span class="m">8125</span>
@@ -1221,22 +1227,12 @@ So if we invoke</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ConnectionRefusedError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">minitelnet</span><span class="w"> </span><span class="kn">import</span> <span class="n">telnet</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">telnet</span><span class="p">([</span><span class="s2">&quot;QUIT</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">port</span><span class="o">=</span><span class="mi">8125</span><span class="p">)</span>
-
-<span class="nn">File ~/work/fandango/fandango/docs/minitelnet.py:21,</span> in <span class="ni">telnet</span><span class="nt">(commands, port, host)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trying </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">21</span> <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Escape character is &#39;^]&#39;.&quot;</span><span class="p">)</span>
-
-<span class="ne">ConnectionRefusedError</span>: [Errno 111] Connection refused
+Connected to localhost.
+Escape character is &#39;^]&#39;.
+220 host.example.com &#39;5O
+QUIT
+221 Cizk&quot;S+4a
+Connection closed by foreign host.
 </pre></div>
 </div>
 </div>
@@ -1256,6 +1252,55 @@ Note how the interaction diagram reflects how Fandango is now taking the role of
 <p>So far, our SMTP server is not great at testing SMTP clients – all it can handle is a single <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> command.
 Let us extend it a bit with a few more commands, reflecting the interaction in the introduction:</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;connect&gt;
+&lt;connect&gt; ::= &lt;Server:id&gt; &lt;helo&gt;
+
+&lt;id&gt; ::= &#39;220 &#39; &lt;hostname&gt; &#39; ESMTP Postfix\r\n&#39;
+&lt;hostname&gt; ::= r&quot;[-a-zA-Z0-9.:]+&quot; := &quot;host.example.com&quot;
+
+&lt;helo&gt; ::= &lt;Client:HELO&gt; \
+    (&lt;Server:hello&gt; &lt;mail_from&gt; | &lt;Server:error&gt; &lt;end&gt;)
+&lt;HELO&gt; ::= &#39;HELO &#39; &lt;hostname&gt; &#39;\r\n&#39;
+
+&lt;hello&gt; ::= &#39;250 Hello &#39; &lt;hostname&gt; &#39;, glad to meet you\r\n&#39;
+
+&lt;error&gt; ::= &#39;5&#39; &lt;digit&gt; &lt;digit&gt; &#39; &#39; &lt;error_message&gt; &#39;\r\n&#39;
+&lt;error_message&gt; ::= r&#39;[^\r]*&#39; := &quot;Error&quot;
+
+&lt;mail_from&gt; ::= &lt;Client:MAIL_FROM&gt; \
+    (&lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt; &lt;end&gt;)
+
+&lt;MAIL_FROM&gt; ::= &#39;MAIL FROM:&lt;&#39; &lt;email&gt; &#39;&gt;\r\n&#39;
+# Actual email addresses are much more varied
+&lt;email&gt; ::= r&quot;[-a-zA-Z0-9.]+&quot; &#39;@&#39; &lt;hostname&gt; := &quot;alice@example.com&quot;
+
+&lt;ok&gt; ::= &#39;250 Ok\r\n&#39;
+
+&lt;mail_to&gt; ::= &lt;Client:RCPT_TO&gt; \
+    (&lt;Server:ok&gt; &lt;data&gt; | &lt;Server:ok&gt; &lt;mail_to&gt; | &lt;Server:error&gt; &lt;end&gt;)
+
+&lt;RCPT_TO&gt; ::= &#39;RCPT TO:&lt;&#39; &lt;email&gt; &#39;&gt;\r\n&#39;
+
+&lt;data&gt; ::= &lt;Client:DATA&gt; &lt;Server:end_data&gt; &lt;Client:message&gt; \
+    (&lt;Server:ok&gt; &lt;quit&gt; | &lt;Server:error&gt; &lt;end&gt;)
+
+&lt;DATA&gt; ::= &#39;DATA\r\n&#39;
+
+&lt;end_data&gt; ::= &#39;354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;\r\n&#39;
+
+&lt;message&gt; ::= r&#39;[^.\r\n]*\r\n[.]\r\n&#39;
+
+&lt;quit&gt; ::= &lt;Client:QUIT&gt; &lt;Server:bye&gt; &lt;end&gt;
+
+&lt;QUIT&gt; ::= &#39;QUIT\r\n&#39;
+
+&lt;bye&gt; ::= &#39;221 Bye\r\n&#39;
+
+&lt;end&gt; ::= &#39;&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>This spec can actually handle the initial interaction (check it!).</p>
 </section>
@@ -1373,6 +1418,27 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Automatically generated from &#39;smtp-extended.fan&#39;.
+# Format: STATE_1 --&gt; STATE_2: [ACTIONS]; `[*]` is a start/end state
+#
+[*] --&gt; &lt;start&gt;
+&lt;start&gt; --&gt; &lt;connect&gt;
+&lt;connect&gt; --&gt; &lt;helo&gt;: &lt;Server:id&gt;
+&lt;helo&gt; --&gt; &lt;mail_from&gt;: &lt;Client:HELO&gt; &lt;Server:hello&gt;
+&lt;helo&gt; --&gt; &lt;end&gt;: &lt;Client:HELO&gt; &lt;Server:error&gt;
+&lt;end&gt; --&gt; [*]
+&lt;mail_from&gt; --&gt; &lt;mail_to&gt;: &lt;Client:MAIL_FROM&gt; &lt;Server:ok&gt;
+&lt;mail_from&gt; --&gt; &lt;end&gt;: &lt;Client:MAIL_FROM&gt; &lt;Server:error&gt;
+&lt;mail_to&gt; --&gt; &lt;data&gt;: &lt;Client:RCPT_TO&gt; &lt;Server:ok&gt;
+&lt;mail_to&gt; --&gt; &lt;mail_to&gt;: &lt;Client:RCPT_TO&gt; &lt;Server:ok&gt;
+&lt;mail_to&gt; --&gt; &lt;end&gt;: &lt;Client:RCPT_TO&gt; &lt;Server:error&gt;
+&lt;data&gt; --&gt; &lt;quit&gt;: &lt;Client:DATA&gt; &lt;Server:end_data&gt; &lt;Client:message&gt; &lt;Server:ok&gt;
+&lt;data&gt; --&gt; &lt;end&gt;: &lt;Client:DATA&gt; &lt;Server:end_data&gt; &lt;Client:message&gt; &lt;Server:error&gt;
+&lt;quit&gt; --&gt; &lt;end&gt;: &lt;Client:QUIT&gt; &lt;Server:bye&gt;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1383,11 +1449,23 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
+MAIL FROM:&lt;alice@example.com&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>--party<span class="o">=</span>Server<span class="w"> </span>-f<span class="w"> </span>smtp-extended.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
+590 Error
+</pre></div>
+</div>
+</div>
 </div>
 <p>That’s it for now. GO and thoroughly test your programs!</p>
 <div class="cell tag_remove-input docutils container">
