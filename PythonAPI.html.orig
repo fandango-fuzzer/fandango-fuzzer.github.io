@@ -1060,16 +1060,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Holly Mccormick,49679910
-Douglas Rose,76531120818
-Kathryn Powell,919344176500754457
-Connie Martinez,026044172424550768
-Emily Cooper,2302754061562293662
-Frederick Bailey,0
-Sandra Humphrey,3003
-Emily Ball,568938
-Derrick James,7638239
-Dale Weiss,08755
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>David Fowler,943922739872262
+Brent Miller,3874551241922863
+Victoria Taylor,798216172703
+Christopher Rogers,2413389849537082
+Jeffrey Kelley,9098675803425
+Lauren Schroeder,389454013
+Michael Fowler,580480709978587
+Emily Miller,0030400323585085
+Joseph Arroyo,6675732770432959821
+Leslie Olson,21785130
 </pre></div>
 </div>
 </div>
@@ -1096,9 +1096,6 @@ Dale Weiss,08755
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Redefining &lt;start&gt;
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Initializing base population ----------
 </pre></div>
 </div>
@@ -1114,16 +1111,16 @@ Dale Weiss,08755
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>baa
-cbcc
-bbbbcb
-ccaaaccac
-bbabbcabcaaabbaab
-ccbaaaaaaaccccbca
-aabcccabaab
-acbcbaaacaabccbca
-ccbacbcaababcbbaaa
-cbb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>baaabbbbbccbaacaaab
+acabbccbacacbccacaca
+cbaabab
+aacacb
+baccacabac
+a
+ab
+aabcaaab
+abacbcabbcbaaccabc
+aabbcbbbb
 </pre></div>
 </div>
 </div>
@@ -1205,7 +1202,7 @@ cbb
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7fd72c7e55a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7fd980c18af0&gt;
 </pre></div>
 </div>
 </div>
