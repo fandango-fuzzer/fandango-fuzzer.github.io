@@ -460,24 +460,22 @@ But let us again have a look at the inputs we generated so far:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xqcik Uboeynpvmvmhvq,722081510169774
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ywes Vkorvjmqqauvameewmc,724913730
+Dramqoujdnx Hswqsizcfbmd,375888391
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Elrmnnhlidjmsthhwtq Cpkeumewnvniqozvtcfd,70964546817390463
-Owcdqbowpzke Hg,3656096688073839647
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mguvkxstplsylcdua Nrmitbkxwmjvtwjlv,3109639991762
+Gemn Mswppktcsxjyrvkj,597866305
+Eju Gdohy,7569845789952382
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gfakxfaagexgsq Va,68678446947250334023
-Rjjgiihqgexfmonmgp Qekwjqnhdbmt,9381919251712068466
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ug Bqirvaxpinnvpig,0763606607607195
+Wmnwwjnmst Eaxmnjcjnkosez,4076212411205142017
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Icopxmumciaheu Sfbskjngyykfcg,20245637932681854
-Ngvgmiat Zy,1
-Sbhnytmtjvgbzucv Mekqgjxnh,675
-Uxe Oyczknsica,38972
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lxewe Jpcdcmfowhzstlu,34876
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mbaaynqtdyedvg Zqxk,5095069742223912
+Cvsptvbgaqe Rbpaqfpqrokjnwadeo,79150
+Ybc Yhwxyuumhzhpumajhqsas,58024419084693
 </pre></div>
 </div>
 </div>
@@ -516,34 +514,34 @@ So-called <em>buffer overflows</em> have long been among the most dangerous vuln
 <p>This is the effect of this rule:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hlaokiamecqbosvrbbquwnelbzqhuoxeoxsbnxeucwzklhjjrpeqbfsqvbpastxuuqiquungxjpcjamenkoxnjitqgkorpbthxjn Fekzusrpmxnnhnbakdfedjoppgusyjvvvgqglzgfgbjxzoyysqwiwmuwkoidgamtgtsmszdqbhsuznievspemyqjyjvrwutrjmky,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bwxnduazfaigspjsigdujkesdjnmvpyqzustlteyufwyzfouvunyzwfdlfkzkpsgjxkvirtfcticpjahsnzflcgqwlgbawaunfjm Cbmrngalpteugmjnstqtupnvoznrsiswshpbgptdpzxiyglbaxkffgtblzenrpmedvhhfmrtbdbgjblybgsuarvcqkcpaboteqmq,5
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bqrdxkuxlwpnglcpbidlxfilbsbzulkwndbakcracdijjookcudpjajadxcrbulajfsghzhdfujnfmmolniujgojdgvpxgcpnwsw Hksqxngkefxhzwyyrvtypewnmpjsedhuhtnewchdbjvfhaxsxgtibozkqosbhezmnkmqcwliattqkcqvuynrpvmxdyawdmlrvpxt,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wmimgsqompmebgkzbrzxyyjjnowkjcxtmstxkgdyyirkatiotblqvtqpiboayebpiqzrkxhvdaiyzxdlrvfdlortjgviclquiivj Dpojyrlodxlqdhvfizuhnwjtvndjdgwshxqldlmtbkbommorskgrsqzreicdrirchtqhdjbrwzeqdhjjtjiugctwtplpcgkyprmh,7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mzguxrchnzjjmqhbijbdhjcjetdfstdfevindpzwfbhthvgguugrzhdqjnytlkhfsphxikublnuylbkatxcabtwrlyixvyqjcvtp Ohkjguthdnuigdvizgfxvbqzatnawtjusbalajdtlwtzovtxsulxnuswnhyseuqjyogfodnrbsymjoqcemflenaroeqqpxhpivcp,1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bddjdkguktozpgijpvdstxcuzkqmnhuyiozyycmznxpkstslthikqschjjemasdpcysklcbvhyjyhsbbjfwmijdnpgzigxfvbcpn Pyhziqipkghltjajwxdhanyoniibxprdknilakyuzxnnykmbpsobgukgbntwenfqkccotlwctchzvikjvwadxclztyefkcdembfy,3
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bfyuhhlhepxbiyacgbzqrsafsykfoeqfonzrbugoquuctgrxhnifzfgqgmyjufapmshvpflzoaealystdxyctxhhdhsjgpdyzsar Hcbsdyzyhfoefwtscwupaytquahobaoaowfgzkjhctvnxuctpzwzxokfjvdqfsgmuqbopesrvnzdcymnwtikzcmkgpbzgkpfkmzk,9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pxiapzaubjqurwvlzqnaunlkknnpfswouxbfoyfnuvvevyseovdyffukslsyxvjmlorgdxkwvudzyjqoxlatejemhvztgagqbosv Xzfzcvpxsodgofnvtnkeqkzqprkvokxulsxzatyjppjwglbjbrbshbbnbcgxqxniqywpbvbmmjlyprxudwlhjjgmqtpvgxcdijxe,7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xfsmtonfakruwyrrfttixxcblyihcgnapwgirtwdafllqwnvsffyxnovkvngipsyqcexicbtbukqsftddecbhnhgowxwhiqsnrpx Persecvpmjrcbjskydocdafopqzdtnagjoblybpcliwblrszpbxwhxglaniizadmmyuztqragqhbjqhgxqviiqpbrcyuxfrrxlsj,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tjgnfbkxonoezmhslbzgtymoconvqgsvgkmedebonsorkfgkkcvioafihbjxmennlzlpmnribnfnicjysjhktukuhdiydjtrmmdk Liayrkqecrzyqzqmgimiitcbvqifbwueftywbzysjvofiqjchgepsctnxolkngtrjjwjjkptggzvojxrwmyxlcmpigdwxwzwkpll,0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vfivsciieguhkvhfmdfgxrwqscqtrqahzncooqdjcewfkomzatnhsijmpymxrzszrcbhvppbekwdhvkeqxebqbepgyfykkisxozz Kbhxoitzkzpiyvlcnmavtgppfjneeqmakvjjnuylpyoyycvwyqtfghfrplsbznpntmzmiftgecxsrjslpohdgzfqppmdmxsanuyo,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Edkffpdzehymwbywsgiupgrsljisebvntpgiwzcmgrdgxezubfknvwqtsvxwpydsrlreigoacknwllnbemwuwawdjmywnhlfbqvh Lvyoumxfxmeseqahzrswmbluwrjadhfdnfuniwhxywkfgwdqkxnbickhwxxcueasgyjqvheoeqenbofnruhauouriqcycrgyikfi,8
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jbktfvbimayxmazwxjqphlpszevsxyzmiaxlnwgvhgxqrwpefjhvrfzpuklelohqbjwvgzpfbkumfriuevigztusydvnyimdxqln Dfpskpzfazozysimpgbwfxjvmdbjieykswpfziytuhpvwrvmpkzorbovfmqfbvrwecuwxwfkcxvcexrciaeufrfqxggjhniorbje,5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fvonplvzsfojsuxqunhbfauuzlngckiuraityslbelxvosqsjzetdjpjbgcktfzzsymdekzjiytmhjinwqxcwdttihcqgxsocvlf Chyskicypunrhvxxmvjrdjspzvtcelsxyffgcyyhxuapartommjdxbhdbtmobdlbkdrwddgtvrcuowoqkdwmexfmkbbvesmxmcqz,5
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guvjbxdxsxpgsavtpxsuuxlnrbnkqedthgbxeavyadmwyisjgggmtabvrxjgpgrgqdcyvjshhaeasokqezdquehgcgfmeknuqcmv Eypobutddjovgwnxlthhktaazshlflapqddjlddumrgquenhjimnhimzjcjyehulzimniymdumfirqrhgbrcryfcvbtwelnxoxve,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dazbvadcjsbynwtvnfuiyankakjnyvsfhzlorbxjmvirwbitjljboizdcpztpmvwhsmnhpdabhcoszdcdgltnpinhpabyporsdsl Dmapztxhgkmhlcbabmogemezvmevwvkewvjmowqaplhtjmbblbppmwqwwfmukdqcjrgvmmclrxmkejhvauhnomdnispcftdplbxu,9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jmhzrdbwphwycfhjfxwbghmughortdlqlekjphpzfhnqjitensynthlfhfhmqhiqpxsasvyyzuryavtxydfmjqvyjplezokhxocu Zdnmxdfmfupahpuqsitdimxwxsyseaysgqweirpzootqphdzvoozbdogeddckcuuiwncxcbodluujkqeuvsmkskqbmcrcqczuihk,9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kxvocveiooufijyoegwlkjtbpnabgpfruwlixeluihjrzknfphezjaultxdkuwdepwdssyeydaklhlizwcqytzwbvruroomwkvkr Uuwkvfztzetcjolitruunazdgcahgdygetuqgyluztgnkzmrdgddjdqewcbipnixpyedoftsbhhpzhqoiydakfzkkzzyxpgttxbp,8
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eqengqhemddqdetyssfyttxirzdceioeqialdgvmkykrxonnzyazivqrtmdvadvyglzkfwiegryibkedsqcmptyarqqophtxjdzy Okocvcxsxbczogyowkxsgefxluvvccktsajvwualsqsrxjbwihzcguxpigrlpopzainukmffdlwzwiamkysdbexmfhruvilsomif,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wcfelurtodcpanlqrpzjgxceloxmtxhiljknaowouglplowcoxmyicrcfbfyrqurmvudohjwqlsiahfeyhqjtsnltqlztwjypboe Enpaxluivbcqdgzrgtnovnwhzveamoklcpmskkrrhvkofgdegxxpwthuhcooztqjsgtsejvgeuakayunixziouysfvslcunjvgda,9
 </pre></div>
 </div>
 </div>
@@ -571,22 +569,24 @@ What happens if we have a person with a negative age?</p>
 <p>Try it yourself and modify <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> such that it can also produce negative numbers, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rljutxcyt Zcbpvewjckiqelrcjhryo,-644424103149146
-Sjcjd Zhsfcsxpitdhktkyz,-684895518651
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mkoft Jzgzsvqufuqeenx,-6
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hfodsamcwfmvjiwt Lyxcotaurouyz,-92142831364270862704
-Szfnljdahgabvyvcrvrz Jobeglnetbkwz,-6924281810350
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xauwwtbsvo Amwiuyvlttnvxgqxorreo,-44109433018462
+Slvy Kbt,9757154873047230
+Mrwexctn Ciqtojnzzvsrnfqy,19450549649044
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jxyrt Zlwgxdiezstxytolxyrwy,-490230385182475
-Paqhxaiwlbgnd Yopouotamnd,-5
-Eem Wilddqlvi,13964578
-Gudeeeehtr Yiqdjbtm,5318
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lewjdtnisejefepvrl Zfpe,-4242810286369136767
+Hdnrqhgjzglwt Wesgizcpur,-9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pymenozo Dvffcjzppquuzicpef,5873
-Hl Rokahsv,5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cssuustddxfbaowvmomsx Melrxdwteumljamia,29634684565518600
+Zxyzjulhpgrdrhanjagip Erjojegrybwxzu,312
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kudtwloodczo Tnrsyljeuypfxf,-494205
+Fvdiiiddsekacyjokyp Sqmsres,-35452058863971648150
 </pre></div>
 </div>
 </div>
