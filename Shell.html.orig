@@ -114,7 +114,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -498,22 +498,24 @@ Just invoke Fandango without a command:</p>
 <p>and you will get the same results:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rrmmopn Kd,86
-Argpcy Zcvw,4557804538709
-Zzpgtmrccvtkhxaxjwfdg Xttuema,1077541299213119829
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hjbwaeylfusdp Mhpxfdycua,60
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xvibxylrfcaxdrwey Ayeqdmjojrjhck,42722
-Gcpdeybmnwf Xsjom,0268782789915205
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qbstdbnlewevtryoyjgfg Dagqvz,0115474935
+Pus Nzcowvfnyesgcrse,606
+Shkhqepzpuujnal Hskbg,321602623
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fjpwbfosrkzyzuc Jgfpuvrqwkhjr,9821819486
-Xoaaxaqhjyruxlsmnzud Bppqurifldep,813123200
-Tbdyhfjqoauxpvlqiav Rpg,532
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qjjkkfvp Hxymdjmlmkrq,03070016903929
+Dfajur Aiaeryijrbm,659930691881
+Pl Rhpv,272007
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bmbwo Guwfnwzqggf,7
-Ftvycajtawtffgjs Bhupc,29036466772942941206
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gnep Uyfgazzqmrgdvfqlikxdx,51165946114779239539
+Ieiiiqzductbnrfqptcc Impnfvrtacvmapp,43995380153571618649
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cklwgzedzgrrtmteovtr Fmvxxyye,44878404463209
 </pre></div>
 </div>
 </div>
@@ -670,22 +672,24 @@ To have Fandango read and execute commands from, say, <code class="docutils lite
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ctzsstenhcpeni Vtnto,460087610
-Bajt Ipjunwhejozfgcyhk,727152680903
-Efbn Whqhbfhkornrz,3722279301320
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vjhbmqueygskblzil Qwohnxdksqpnu,49665980116
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uqtvqmloyodzmjl Hzjiaempgzf,7716798887338784
-Jugxrgedw Vpfngoqfmmtixqzdqpbn,8895805
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xmjrfdnjrveudzr Zdmdzmutrzfdrcixo,696083785827271
+Clqsaf Hmwfuulvxya,056314790308797
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anxpwarziqvxrcnltp Vu,315611727362388
-Qsmcwhxtdubbjh Tfv,578135
-Qnueah Wjznhm,0532794379564
-Vipxrdllfadwzauasiip Ljfajrijryplx,0648028
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uo Wxrwhamae,030496855561621661
+Gulpjg Felgqfxsvdmjpi,12467557415424802
+Idcidm Sdmybejzwfuvxslh,46515365725300
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jeatapxmlfnlu Xgvxug,7085
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xxixk Wjmlwt,83104955555790781244
+Cmfjxujkayduew Xmwta,8366893010309501272
+Zlqcf Cajoealdgbfdlugl,31628418956
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nkkfjjlksb Dsry,4597108038822686691
 </pre></div>
 </div>
 </div>

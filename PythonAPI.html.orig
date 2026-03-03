@@ -549,7 +549,7 @@ window.addEventListener("load", load);</script>
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.0rc1/" style="color:white;">Fandango 1.1.0</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -1060,16 +1060,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sean Lester,498
-Pamela Christensen,9477803
-Brittany Gardner,21271306729754114045
-Meredith Bates,985777950
-Jacqueline Freeman,2805522524737304614
-Cheryl Sampson,012641311069795
-Zachary Becker,641696675289
-Jamie Johnson,662943
-Mark Jenkins,0088712
-Jacob Kim,58969
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brenda Lopez,9716740
+Jared Collins,27
+Carly Hale,380330115973697
+Vanessa Stewart,3833584498970225
+Lisa Eaton,80689
+Sherry Winters,88254
+Elizabeth Johnson,81799539836166376
+Cindy Miller,38322039857
+Chad Smith,14
+Frank Johnson,4553197
 </pre></div>
 </div>
 </div>
@@ -1111,16 +1111,16 @@ Jacob Kim,58969
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ababbabbccbbaa
-abb
-ccccabcbcbbbccbbac
-c
-abbb
-cbcbacaababcb
-cbcbabcaaabacbbaa
-cacbbacbaaacba
-aaaaabaa
-cccbb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cc
+bcaabbc
+aaccbabcaacaac
+cbaabbabcabbacb
+accba
+aaabaabacabbcca
+aacbaacc
+bbbbcb
+abbcbabaaaacbbcc
+cccccccbcccabababa
 </pre></div>
 </div>
 </div>
@@ -1202,7 +1202,7 @@ cccbb
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f77d4670af0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f42189b09c0&gt;
 </pre></div>
 </div>
 </div>
