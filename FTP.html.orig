@@ -1462,9 +1462,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cr----x-wx              312 NiFCVBtjd  633cx3y57WLTgRnDQnG                    1416850 Mar 22 17:01 :mCn!|T`c3TG
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d-wx-----x         179 m62-                    YEwxwjch                   260575 Oct 14 15:55 \+ka{1ON{{5Hig
 
-c--xrw-rwx             81 6H                 CzFDMxJxrMfmPAODO5   941780 Jul 17 11:17 ZgjZ%&lt;8*|v
+c-wx------                  432 BUc1i5Ieo9W6     XtjO2v5   1087452 May 20 20:17 X-I#L&amp;h`.e]/h^@+fo
 </pre></div>
 </div>
 </div>
@@ -1500,20 +1500,12 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
-AUTH SSL
-USER the_user
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
 TYPE I
 EPSV
-LIST
 PWD
 PWD
-EPSV
-LIST
-SYST
-SYST
-EPSV
 QUIT
 </pre></div>
 </div>
@@ -1528,25 +1520,20 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-6e;Ft#&gt;TqYX3WHZNu
-220-jOEk&gt;hBU?:(n3:)J W
-220-MAAJ5V8|{0u~
-220-m!8+GZqz`
-220-@GQX.-h?
-220-Rr!j^yg8&#39;\Qr
-220-JKl^^Hj.0_pm
-220-}8e6L Y0V
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-PZ4)i.a`-X&gt;Yx&#39;&#39;y
+220-H&#39;%TP[+
 220 
-331 Jj]/H2Eetb|
-530 R^s
-331 _r
-230 `
+500 72EmYf8i#
+530 (k0XH7N)Fdqj:`8qs
+331 P 4n52]9g4a~-x@MH
+230 Nt
+200 v?]ip
 229 Entering Extended Passive Mode (|||50100|)
-211-Features:
- EPSV
-211 End
-200 &quot;_Aa
-221 (X)Co*00#b@%$Q(NwTg
+257 &quot;/BnfCrB/VuC5/hjDQVYTxms/1e_M1zG6AKwMB/gPvbtbrjMp/7TSUOU1mxiSb9Ahqj9pS/TZehDmLCu73/jg0gNzVNf/8vw_vO148yyzne02l/s9/5hus1wFDt3HCsiGDo&quot; is the current directory
+150 %F{N9$&lt;E*1J!&quot;&lt;^
+226 OgjluQJQVSgMHv2RXP+B
+229 Entering Extended Passive Mode (|||50100|)
+221 u?4Jbw4*DX;Bocs(
 </pre></div>
 </div>
 </div>
