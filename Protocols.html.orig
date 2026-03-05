@@ -984,7 +984,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.dbzesidl24wutf20byskfd0whb.yx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.do3hyeqjqakedjyqlio5j1o5xh.cx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1112,14 +1112,16 @@ fandango:INFO: Generating (additional) initial population (size: 100)...
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
 fandango:INFO: Initial population generated in 0.05 seconds
-fandango:INFO: Current coverage: 1.96%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Current coverage: 1.96%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmnay03.dbzesidl24wutf20byskfd0whb.yx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm0kj6c.do3hyeqjqakedjyqlio5j1o5xh.cx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
 fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 fandango:INFO: Current coverage: 74.51%
@@ -1229,9 +1231,9 @@ fandango:WARNING: Could not generate a full population of unique individuals. Po
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com
+220 host.example.com )R V`u*ZHtWhjgRjLL
 QUIT
-221 -pyc4P/$=((CWfoKuU
+221 EGvl(W,9!TzPGv&gt;
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1462,8 +1464,7 @@ MAIL FROM:&lt;alice@example.com&gt;
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-250 Hello host.example.com, glad to meet you
-513 Error
+541 Error
 </pre></div>
 </div>
 </div>
