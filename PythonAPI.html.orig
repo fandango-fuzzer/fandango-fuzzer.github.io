@@ -1060,16 +1060,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>John Peterson,87371819042
-Kevin Gates,15576392996646578929
-Breanna Finley,20984577
-Charles Cantu,11961145937256495
-Crystal Carter,70665927
-Anita Chambers,80076248885060686173
-Jessica Love,4509666
-Joseph Howard,180750389866884
-Robert Clark,24092620435040
-Lori Brown,1779821279
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mary Arellano,40
+Bryan Fitzgerald,7572741
+Edwin Snow,2325370155480312134
+Peggy Cooper,55335806326830042
+Monica Duran,682074017116
+Anthony Wang,6237274257609
+Joshua Kelley,91854572
+Anne Richardson,259538511617
+Julie Melton,99324150448298
+Amanda Jennings,6955993267768035
 </pre></div>
 </div>
 </div>
@@ -1111,16 +1111,16 @@ Lori Brown,1779821279
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cbc
-baccabbacabbacca
-cbabcabaaccbacba
-bacacabcacabbb
-bacabbaabb
-accccac
-cbacabaabbaccb
-bbcbaaabcccaaaa
-ababaccaabccacbc
-aabacaaacaabcbcbba
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bc
+bbbbabbba
+abacbccabcbb
+babcbabccaabc
+cabbacabcbacbba
+bccbaccbb
+baccaabbbacb
+cba
+bcbbabcbbabacacaca
+ccbbaacaabb
 </pre></div>
 </div>
 </div>
@@ -1202,7 +1202,7 @@ aabacaaacaabcbcbba
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f8fbc7b2050&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f2150d04c20&gt;
 </pre></div>
 </div>
 </div>
