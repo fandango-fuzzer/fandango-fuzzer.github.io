@@ -1462,11 +1462,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lrwx-wx-w- 252 vzCkE5sZyTns             lobL1YjswPxZ4kJYRm          4539657 May 13 19:53 &lt;lt4pZRt`:dcWj
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b--xr-----              152 AcQG-5H               QtBB3JUwRhcnQLO0t     3301053 Dec 11 01:16 T*!h-]bze#p-|QG8xyqb
 
-br------wx      26 cnOM4FF6bqY5hz        ob8x 6031129 May 18 12:12 (!UAJ=x&amp;8
-
-b-w-r-x-w-                   391 _ZgshZqfpqP 9VTnwyKGK                7425462 May 11 02:04 =}?8+}}5AV
+lr--rw-r-x      164 DmjmBOI6yE     mRHfP2aMujVVco5                   25587 Jul 01 16:40 -e&amp;h%8
 </pre></div>
 </div>
 </div>
@@ -1504,12 +1502,12 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
-FEAT
 EPSV
 FEAT
-PWD
+FEAT
 TYPE I
 SYST
+PWD
 QUIT
 </pre></div>
 </div>
@@ -1524,40 +1522,35 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-&amp;advRiB*%}
-220-,KXy
-220-_IXjv9~!_^Lfj
-220-(sWru.PqK)|QB
-220-rn,w&amp;_DP;lH
-220-6?;|.9o
-220-h.Tmv
-220-IpgKEN
-220-Xm!xf:Zo.MOhf.O
-220-I@dZybeDG
-220-[@L&lt;hbk}]JyU
-220-K^d{_P3|&gt;.
-220-KI^&gt;.0ijOTGU+Q
-220-[45%Qgc4kh8cu|Qz
-220-y&gt;0
-220-8v5:*um
-220-&quot;KEsi&amp;zn}(92bAx{E
-220 yLJMH51g9k70n-
-500 fpGG\[d/e}~1Z
-500 gb\{4U&quot;/:Eg&#39;
-331 `m/!
-230 gp&lt;McJF@q&#39;&amp;=P
-215 Linux
-200 wPB-&gt;&#39;a[05DV&gt;V@^F
-215 Linux
-211-Features:
- EPSV
-211 End
-200 ~B;)A55J:!/OV^&#39;Av
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-DEN&lt;Z&#39;J&amp;{%I&#39;\R^_
+220-i#%%
+220-J`vmCzM0%5,
+220-v8M.C{&lt;nPdPm
+220-4Vh6&lt;n,&quot;^{Y
+220-ylW&amp;I,&gt;w|58Z6)fp
+220-Eih0&quot;7v 4ih;
+220-&gt;DHL&amp;5rb2NS[o
+220-ACv
+220-h`j6or2lFJM-;6+.
+220-C&amp;%&#39;8
+220-\3$HWn&#39;1JGtw{\}
+220-0w|S_$$R3`=/*D&amp;[Gr{
+220-ZN
+220-m4Q/t|~[R`7WV|6a
+220-2e3To$w *i
+220-R^XjXs&lt;E5gXF*s&#39;_\V
+220 Z@4SRQ
+500 6fCh
+530 :1W%=!4&quot;O3/N[M!
+500 c9&gt;5
+530 o?8v9]r
+530 8F^GI 0&amp;Wn;OIdn
+530 ugn.w[H]RnFd&amp;k!W
+331 J!)zV2DucslDTo
+230 +~~0(t}wNJ)6
+200 h;sYJ:`)!&amp;yizb@R~lIl
 229 Entering Extended Passive Mode (|||50100|)
-150 x`
-226 KaYS\Lh#g#HRlW-}Sp&#39;!
-229 Entering Extended Passive Mode (|||50100|)
-221 y,WXH5YiU-i2E&amp;rh`
+221 s8cl&#39;Dyp
 </pre></div>
 </div>
 </div>
