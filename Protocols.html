@@ -984,7 +984,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.isbtygbhkgwune5ckp3zdudqla.dx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.pfe21i0rikauph5zkfwnlcew1b.ex.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1105,29 +1105,27 @@ fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhos
 fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
+fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: ---------- Generating  for 500 generations----------
 fandango:INFO: Generating (additional) initial population (size: 100)...
-fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
-fandango:INFO: Initial population generated in 0.05 seconds
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Current coverage: 1.96%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:WARNING: Could not generate a full population of unique individuals. Population size reduced to 1.
+fandango:INFO: Initial population generated in 0.05 seconds
+fandango:INFO: Current coverage: 1.96%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm0kj6c.isbtygbhkgwune5ckp3zdudqla.dx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm0kj6c.pfe21i0rikauph5zkfwnlcew1b.ex.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
+fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
+fandango:INFO: Current coverage: 74.51%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
-fandango:INFO: Current coverage: 74.51%
-fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
 fandango:INFO: Current coverage: 100.00%
 </pre></div>
 </div>
@@ -1231,9 +1229,9 @@ fandango:WARNING: Could not generate a full population of unique individuals. Po
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com Dqb!j38kTr
+220 host.example.com =a%oke
 QUIT
-221 lD)X#HgO#Kq+Q
+221 udBvSI;2zbnKl+IqF
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1464,7 +1462,13 @@ MAIL FROM:&lt;alice@example.com&gt;
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-522 Error
+250 Hello host.example.com, glad to meet you
+250 Ok
+250 Ok
+250 Ok
+250 Ok
+250 Ok
+533 Error
 </pre></div>
 </div>
 </div>
