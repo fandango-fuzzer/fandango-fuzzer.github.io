@@ -985,7 +985,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.i0fnop2thlderixbsj2qpy22md.yx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.c5dam0qjnfsefkc3bjzldlum2d.dx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1122,7 +1122,7 @@ fandango:INFO: Initial population generated in 0.05 seconds
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm46oaq.i0fnop2thlderixbsj2qpy22md.yx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmrg6be.c5dam0qjnfsefkc3bjzldlum2d.dx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
 </pre></div>
 </div>
@@ -1232,9 +1232,9 @@ fandango:WARNING: Could not generate a full population of unique individuals. Po
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com a`U*CHm,39
+220 host.example.com 3YEx[!&quot;L9[OAmXI
 QUIT
-221 7pi.&quot;&quot;p`IRXn&gt;
+221 Kz-RLW@HW
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1456,10 +1456,6 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
 MAIL FROM:&lt;alice@example.com&gt;
 RCPT TO:&lt;alice@example.com&gt;
-DATA
-[H:@N 
-.
-QUIT
 </pre></div>
 </div>
 </div>
@@ -1470,7 +1466,8 @@ QUIT
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-560 Error
+250 Hello host.example.com, glad to meet you
+561 Error
 </pre></div>
 </div>
 </div>
