@@ -1463,11 +1463,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----wxr-x       366 9gx2QG6q7PB2w   nZgDbnZ7ZJTmd               1276279 Jun 20 21:34 U!=A3.lbl
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dr-x--x-w-                   155 2o            1Mw1H          3220686 Oct 24 00:26 WsO5&gt;4A6_3)
 
---w-r-xrw-   953 JkcS-TvqWsYVQ2FW       0e4Mi         707357 Jan 11 00:33 DLzlmw&amp;^P 0C4-pg:
-
-crwx--x-w-       537 yJE        ivkmqHuuU0GVdlC              7495113 Jul 12 15:33 2rwoS .
+c-w-r---w-  883 BCNS03f0uBCi      T9Thp             9129018 Oct 17 10:42 7=)c~,L= ?+^DDPt
 </pre></div>
 </div>
 </div>
@@ -1503,18 +1501,20 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
-AUTH TLS
-AUTH SSL
-USER the_user
-PASS 0qPWHrA5VGYvR_
-AUTH TLS
-USER the_user
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
-EPSV
-SYST
 TYPE I
+OPTS UTF8 ON
+PWD
+SYST
 FEAT
+PWD
+FEAT
+FEAT
+EPSV
+LIST
+OPTS UTF8 ON
+EPSV
 SYST
 QUIT
 </pre></div>
@@ -1530,32 +1530,27 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-8+vh);m&amp;gt7v60Gk!
-220- ;Y
-220-
-220-(*=CFk$PoI*:\-Mkq9P
-220-
-220-y2&#39;`7mdP
-220-f*&lt;k?,sK3=&#39;oj|[w;7+
-220-sQ*twf7_
-220-.4ue^r+oL}B?nms
-220-&gt;-9
-220-uCh[
-220-6i^ChioHlOcKBm)ht$
-220-YV)v]Uj[q
-220-
-220-yPIt+f,cfgH*PlsGTX7
-220-y_ZFf)[lPS&quot;j
-220-j^qz6.
-220 0H#-7&gt;HEwrga]
-331 PVc).
-530 Iq&#39;V*Tc-^+d
-500 6))gC^A8)(a~X3nIx&quot;
-331 6&#39;&gt;$Owaa`x1KR3Ud&gt;&quot;
-230 ~),{/PHcy*]D 
-200 OKh7JljXfMf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-`Mx}sg
+220-^E(
+220-w
+220-GZT8oiB[!_37&lt;CHiy&lt;
+220-`VaMTP=J$]$$!
+220-D\u[EGy%.4|6Fkm70(9
+220-|k@8Gm&lt;@|beO`R`J#;+
+220-Q
+220-B_DUT~`]`9;+
+220-s,cM*xd
+220-ldkR&amp;%uPiz
+220-swWt
+220-OBDTn&#39;xsCZ
+220-H?]I-ndC@=l`q4.l
+220 (YC|{!bN&#39;&quot;t&amp;-(~
+331 K9r2&gt;*.In&quot;1?6IW
+230 ^;9
 229 Entering Extended Passive Mode (|||50100|)
-221 c/R~_~^DW2LSL
+215 Linux
+200 &lt;_L8lM1m8Vc~2,R
+221 DU=qOVU
 </pre></div>
 </div>
 </div>
