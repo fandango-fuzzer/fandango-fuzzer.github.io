@@ -1052,11 +1052,11 @@ When sending the request, we choose a random value:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x05cispa\x02de&#39;,
- b&#39;\x06rivera\x03net&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x04hahn\x03biz&#39;,
  b&#39;\x05cispa\x02de&#39;,
- b&#39;\x04shah\x03com&#39;,
- b&#39;\x05kirby\x03com&#39;]
+ b&#39;\x05cispa\x02de&#39;,
+ b&#39;\x06bryant\x03org&#39;,
+ b&#39;\x0ecooper-ferrell\x03net&#39;]
 </pre></div>
 </div>
 </div>
@@ -1255,12 +1255,12 @@ If, for example the question is</p>
     <span class="n">type_byte</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_type&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">allowed_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])]</span>
 
-    <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_all_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_subtrees</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span>
             <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">allowed_names</span><span class="p">):</span>
             <span class="n">allowed_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span> <span class="c1"># &lt;type_cname&gt;.&lt;q_name&gt;</span>
 
-    <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_all_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_subtrees</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_byte</span> <span class="ow">and</span>
             <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">allowed_names</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>

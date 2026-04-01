@@ -543,18 +543,16 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabc
-abcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabc
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabc
+abcabcabcabcabcabc
+abcabc
 </pre></div>
 </div>
 </div>
@@ -575,10 +573,10 @@ Let us limit the number of repetitions to the range 1…5:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abc
-abcabcabc
-abcabcabcabc
 abcabc
+abcabcabc
 abcabcabcabcabc
+abcabcabcabc
 </pre></div>
 </div>
 </div>
