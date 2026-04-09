@@ -543,16 +543,16 @@ Thus, a grammar <a class="reference download internal" download="" href="_downlo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abc
-abcabcabcabcabcabcabcabcabcabc
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcabcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabc
-abcabcabcabcabcabcabcabcabcabcabcabc
-abcabc
+abcabcabcabcabcabcabcabcabc
 abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-abcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+abc
+abcabc
 </pre></div>
 </div>
 </div>
@@ -574,9 +574,9 @@ Let us limit the number of repetitions to the range 1…5:</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abc
 abcabc
-abcabcabcabc
-abcabcabcabcabc
 abcabcabc
+abcabcabcabcabc
+abcabcabcabc
 </pre></div>
 </div>
 </div>
