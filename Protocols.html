@@ -985,7 +985,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.vdbwcwnibg1ebpw4dzf3ckeoic.phxx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.p1ufsl4xqpaudj01gz3oesysqg.cx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1102,10 +1102,10 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
-fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
 fandango:INFO: ---------- Done initializing base population ----------
@@ -1122,7 +1122,7 @@ fandango:INFO: Current coverage: 1.96%
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm727z3.vdbwcwnibg1ebpw4dzf3ckeoic.phxx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm35a4x.p1ufsl4xqpaudj01gz3oesysqg.cx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
 fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 fandango:INFO: Current coverage: 74.51%
@@ -1232,9 +1232,9 @@ fandango:WARNING: Could not generate a full population of unique individuals. Po
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com U=`3n%S&#39;Kp-u8[R
+220 host.example.com ZTYE;iD=)#=Yp&#39;hUoV+
 QUIT
-221 l
+221 sTlV9e+FX3]H&lt;4
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1454,8 +1454,6 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
-MAIL FROM:&lt;alice@example.com&gt;
-RCPT TO:&lt;alice@example.com&gt;
 </pre></div>
 </div>
 </div>
@@ -1467,7 +1465,7 @@ RCPT TO:&lt;alice@example.com&gt;
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
 250 Hello host.example.com, glad to meet you
-575 Error
+521 Error
 </pre></div>
 </div>
 </div>

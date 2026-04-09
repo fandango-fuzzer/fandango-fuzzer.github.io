@@ -494,7 +494,7 @@ We can use the special option <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011110
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011101
 </pre></div>
 </div>
 </div>
@@ -511,16 +511,16 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10011010
-00100111
-10001011
-01011100
-10010111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00010110
+10011001
+01100001
+11110001
+00101100
+11110010
+10001110
+11001011
 11100101
-01010110
-00100101
-01101000
-00011110
+10110101
 </pre></div>
 </div>
 </div>
@@ -532,7 +532,7 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01111111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00011111
 </pre></div>
 </div>
 </div>
@@ -547,24 +547,32 @@ For instance, we can profit from the fact that Python treats <code class="docuti
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01001111
-11111111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11101111
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10111111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01111111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01001111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11111111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11011111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01101111
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01011111
+00101111
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10011111
-01111111
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00111111
-00001111
-11011111
-00101111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10111111
 </pre></div>
 </div>
 </div>
