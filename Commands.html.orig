@@ -788,10 +788,7 @@ options:
                         addresses) using PROTOCOL (&#39;tcp&#39; (default)/&#39;udp&#39;).
   --server [NAME=][PROTOCOL:][HOST:]PORT
                         Act as a server NAME (default: &#39;Server&#39;) running at
-                        PORT on HOS
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T (default: 127.0.0.1; use &#39;[...]&#39; for IPv6
+                        PORT on HOST (default: 127.0.0.1; use &#39;[...]&#39; for IPv6
                         addresses) using PROTOCOL (&#39;tcp&#39; (default)/&#39;udp&#39;).
 
 Fandango file settings:

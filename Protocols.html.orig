@@ -985,7 +985,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.g3hwm4zdrdxutl2hw05zhfo4lf.dx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.4kotvprhf31e1pif1vofyx33zd.cx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1102,7 +1102,9 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
-fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
 fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
@@ -1117,12 +1119,10 @@ fandango:INFO: Current coverage: 1.96%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
+fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Current coverage: 29.41%
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm35a4x.g3hwm4zdrdxutl2hw05zhfo4lf.dx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm35a4x.4kotvprhf31e1pif1vofyx33zd.cx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
 fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 fandango:INFO: Current coverage: 74.51%
@@ -1232,9 +1232,9 @@ fandango:WARNING: Could not generate a full population of unique individuals. Po
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com NDI=@rD0
+220 host.example.com 8T%r.NLnq&#39;&amp;gc:
 QUIT
-221 5?&gt;A:&gt;u
+221 oNp`uUP\)=4sT*&#39;
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1465,7 +1465,8 @@ MAIL FROM:&lt;alice@example.com&gt;
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-528 Error
+250 Hello host.example.com, glad to meet you
+553 Error
 </pre></div>
 </div>
 </div>
