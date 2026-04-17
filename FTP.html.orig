@@ -1463,9 +1463,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--w--wxrw-                   483 OefT                 YdMQQ0SP5uiJaf6        8639783 Nov 11 14:55 4p/7uw*@`&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b---rw-rw-                  576 5HeWwgzqMRXt    KqHBjQQt2       2296810 Jul 05 09:42 Stj0a=`:0qmE_:1/.6
 
-c----wx--x               426 Mpr_d6YYhaqu7SutT          7ZW7y               6264079 Jun 01 20:12 L&gt;ye|JR&gt;y
+d--x-wxrwx                160 5KMVTl         mcn3EkxPHwi_S5fj            1846733 Jun 24 08:55 )&quot;&#39;XsYn|
 </pre></div>
 </div>
 </div>
@@ -1501,18 +1501,9 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
-USER the_user
-PASS CXPGrfD
-AUTH TLS
-AUTH SSL
-AUTH SSL
-USER the_user
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
 TYPE I
-EPSV
-LIST
-PWD
 EPSV
 QUIT
 </pre></div>
@@ -1528,22 +1519,29 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-0Ny#{t3&gt;CoF;
-220-)n\|+..#8JE!@)dr6V-
-220-CXc
-220-;1=RQ_4v(:N-or}aU9&quot;
-220 [DJgPDl(@gk
-331 D~Gn2?[r^JI^{V3uZ~_8
-530 z=4]9f7
-331 2NhibXS*
-230 30b=}yX/F&gt;Quoji[]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-7c-8/z /O&amp;u[
+220-&quot;~`z@7@I i!#&#39;0$
+220-6 j4Kk7bb&amp;oZ
+220-#
+220-W|CLO8yt
+220-A|Qa
+220-=x64T[#_l
+220-{G#H:0vx`
+220-M
+220-rCn#Ga.4Fd l8IL}u
+220-/r@7l=Z&lt;+7I
+220-(^S.pUjKZ/C&amp;Z|`G&lt;*
+220 wL5&amp;U7LFN8S
+331 @c-ZpM@Dg?&quot;
+530 W+(wzs
+530 :q$CHDZ|2
+530 h$WenL
+331 If4t]DM&lt;)`;
+230 &amp;P8]W;9
 229 Entering Extended Passive Mode (|||50100|)
-200 x@L7ek(
-215 Linux
-211-Features:
- EPSV
-211 End
-221 46x
+200 g}yvRk=Y
+200 WR|@;^si(s
+221 (+\X
 </pre></div>
 </div>
 </div>

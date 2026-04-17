@@ -550,20 +550,20 @@ The function <code class="docutils literal notranslate"><span class="pre">credit
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📦 Checking for Fandango updates... (set FANDANGO_DISABLE_UPDATE_CHECK=1 to disable)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1179823670752276
-3931715297105794
-3579417307880139
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1239165201100064
+4334874284658868
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3389891787288205
-7102839138975175
-9627478346305149
-9021947167171766
-3443924131217002
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4931638171841862
+7064743806105360
+9924963978037334
+0613614768373869
+3802484150212132
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8682172157895975
-3682086733331480
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0350383073761500
+6149894914288993
+4796512276051939
 </pre></div>
 </div>
 </div>
@@ -589,29 +589,29 @@ Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/.venv/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">10</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
     sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
              <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f73fffe5440&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f6275bd9440&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">main</span>
     last_status = run(command, args)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f73ff5265c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f627542e5c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">521</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f7400d585e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f627695c5e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">47</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">519</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
     <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.parse_command) at 0x7f73ff525d00&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.parse_command) at 0x7f627542dd00&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">283</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f7400d585e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f627695c5e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">47</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">280</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
     tree = parse_file(fd, args, grammar, constraints, settings)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.utils.parse_file) at 0x7f73ffe3d6c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">136</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.utils.parse_file) at 0x7f62757456c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">136</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/utils.py&quot;</span>, line <span class=" -Color -Color-Magenta">318</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
     raise FandangoParseError(
         f&quot;Did not match the following constraints: {&#39;, &#39;.join(failed_constraints)}&quot;
@@ -684,16 +684,18 @@ This is especially useful for character classes.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9wBU#
-\GU*,
-)&#39;5w0
-q/:&lt;O
-&quot;fgN9
-1*-Sj
-3Je8@
-uR!X.
-]aD&amp;C
-MX7Z&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rd1n&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.+E&amp;d
+d?Yre
+-i`OJ
+x`cUp
+=,,Wr
+7e+sc
+:.Xc&#39;
+&quot;gVSI
+wAw)$
 </pre></div>
 </div>
 </div>
@@ -748,11 +750,11 @@ Let us produce a single output using <code class="docutils literal notranslate">
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  0e 00 2a 39 c3 ab 6c 01  c2 8f c2 9d c3 aa c3 84  |..*9..l.........|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  12 00 2f 2f c3 92 55 0e  44 c2 9b c3 b5 c3 b6 c3  |..//..U.D.......|
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000010  c3 99 17 c2 92 c3 80 c3  ac 0a                    |..........|
-0000001a
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000010  8a c3 86 42 0e c2 bb c3  b2 c2 92 43 46 0a        |...B.......CF.|
+0000001e
 </pre></div>
 </div>
 </div>
@@ -801,7 +803,7 @@ The function <code class="docutils literal notranslate"><span class="pre">from_u
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 19 c3 b3 78 c2 a9  0a                       |.....x...|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00000000  00 04 3d 36 c2 bd c3 bd  0a                       |..=6.....|
 00000009
 </pre></div>
 </div>
@@ -830,11 +832,8 @@ def uint16(n: int) -&gt; str:
 <p>and obtain the same result:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 021  \0   3   0   3   8   9   1   8   3   0   2   6   0   0   3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000020   8   9   0  \n
-0000024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0000000 003  \0   5   0   3  \n
+0000006
 </pre></div>
 </div>
 </div>
