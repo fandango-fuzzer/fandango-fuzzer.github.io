@@ -1463,11 +1463,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--w------x   544 Xb4Z3RuC   xNRLi4HnxwWt  9155529 Jan 14 15:37 |07N7@5V)BT!&amp;{8U&amp;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lrwx-w-r-x  539 6QIhPzFzNmGKmGr              A9Btgmyt                7520279 Apr 07 09:02 {
 
-lr-x-w-rwx                  63 6e-R                   LWq    6259445 Nov 09 06:13 ]t)R%[2E}LfB
-
-drwx-w-rw-               600 pTcVc34YC           DN-A2_h              8235858 Nov 19 04:48 X3JY70#p\3it
+l-wxr-xrwx                    613 vkYAfWipK5bfg1V        dolhS-wm41u-    3623932 Jan 18 03:07 o&gt;LD\=DOtY&gt;c|
 </pre></div>
 </div>
 </div>
@@ -1505,16 +1503,15 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
 USER the_user
+PASS xbUUOzXUkBiyJu
+AUTH SSL
+AUTH TLS
+AUTH TLS
+USER the_user
 PASS the_password
-TYPE I
-EPSV
-FEAT
-LIST
-SYST
 PWD
 EPSV
-OPTS UTF8 ON
-FEAT
+TYPE I
 QUIT
 </pre></div>
 </div>
@@ -1529,35 +1526,23 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-cBbkHgG]=HrA`};/4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-tL`yHpR{.D3&amp;_V1e
+220-0;f
 220-
-220-N0H_[&lt;1r/[^S*WP
-220-/.bmbO%*_
-220-9P,c&gt;r-CI$l&quot;Bf
-220-y9bZ?
-220-O&quot;IvPO^F_o-}=
-220-NvO6{Y[-scVQuEA!Z
-220-X&#39;
-220-SP
-220-1t2Lmuwp*KwDYC
-220-byXM,&quot;?k-y}S:4)R`N
-220-AkKG.biI{
-220-]uN;g,T#l&lt;%t98S1 
-220-b9Z#iGWY-Hb{:
-220-&amp;
-220 f7yQ-+UgM26`z
-331 {ac]lwo
-530 [i}3[k,B&#39;7u3/
-530 +j&lt;km`8z}V4&lt;D2G&amp;uc{t
-500 V@3&#39;iuux\13Tif,#I
-500 &lt;taTuAlYDuD&lt;AR\Gj
-331 M6%
-230 Jmu!::}
+220-qS&quot;V$K
+220-.&lt;,C,&quot;)*p *N
+220-t;lyYZjEZF\sVGK?
+220-)f3?
+220-KI[s7C_
+220-IQ]VXn&quot;zh
+220 [~OM&quot;`]*RD&quot;5+Id\
+500 P_Qd`}M)
+500 EcTMYz%;jD
+331 %w}BMiL[=
+230 {;M@F@kz/6?das8
 229 Entering Extended Passive Mode (|||50100|)
-215 Linux
-200 C#e8zCDSO$[!
-200 syO~[9
-221 &gt;+BNZX(HO
+200 @+
+221 A4#S8lu:|&lt;.chWab.lQ
 </pre></div>
 </div>
 </div>
