@@ -1463,9 +1463,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-rwx-----x       572 m0jjHusnty5B1PjZ              wkjyKB8tu      8579148 May 05 19:10 NIas]&amp;^8gU
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>crw-r-xr--       294 KFoV5UG5EATt3xrj_                    LJ2stD                    1074801 May 27 14:51 sD^B:Y^?mMoBQ0
 
-d-w-r-xr-x            930 udOtcI9yASJtNpmh6R8    D3Oja        7570211 Nov 12 23:43 xX!p
+br--rw-r-x         115 rXRDndg Bvp1U3          875760 Oct 11 09:39 &#39;0^?v#{I$(
 </pre></div>
 </div>
 </div>
@@ -1501,31 +1501,22 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
+AUTH TLS
+AUTH TLS
+AUTH TLS
+AUTH SSL
+AUTH SSL
+AUTH SSL
 USER the_user
 PASS the_password
 OPTS UTF8 ON
+EPSV
+FEAT
+SYST
+FEAT
+OPTS UTF8 ON
 TYPE I
-PWD
-PWD
-FEAT
-EPSV
-PWD
-LIST
-PWD
-EPSV
-LIST
-SYST
-FEAT
-EPSV
-LIST
-SYST
-SYST
-OPTS UTF8 ON
-EPSV
-OPTS UTF8 ON
-LIST
-EPSV
 PWD
 QUIT
 </pre></div>
@@ -1541,28 +1532,19 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-O6q&lt;-8u*&lt;0f&quot;r
-220-nr&quot;&#39;4P(I!qV FA$M+H
-220-n8e3%+\tb_fjb{`
-220-Em2%}UbQ
-220-`zR3P|+TO&amp;$Ar\v_U
-220-&quot;y6?;~A&quot;g
-220-0Gz[o
-220-V.&quot;ie=x8Mx
-220-@$F 2Q4&gt;&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-|&amp;oN7Oh
+220-0WWfh
 220-
-220-]Zc6Re&lt;kh7ZeN&#39;X
-220 ~Xv]vo_5wST.
-331 wy5E{QLK6
-530 xN{u#4OI%g
-331 kGNS!
-230 &quot;m/j/u818=RJ%fj
-215 Linux
-200 ?
-200 -
+220-f.kuU1
+220 a&gt;&gt;ffB3p4
+331 q
+230 v.%q*;
+211-Features:
+ EPSV
+211 End
 229 Entering Extended Passive Mode (|||50100|)
-200 xk&gt;pSu_nP,Uc%fz7I\G
-221 o3vvpa=#nVic;w8E7
+200 V
+221 !:-K+\(;&gt;
 </pre></div>
 </div>
 </div>
