@@ -1118,10 +1118,7 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 <span class=" -Color -Color-Yellow">&#39;52&#39;</span> | <span class=" -Color -Color-Yellow">&#39;53&#39;</span> | <span class=" -Color -Color-Yellow">&#39;54&#39;</span> | <span class=" -Color -Color-Yellow">&#39;55&#39;</span> | <span class=" -Color -Color-Yellow">&#39;56&#39;</span> | <span class=" -Color -Color-Yellow">&#39;57&#39;</span> | <span class=" -Color -Color-Yellow">&#39;58&#39;</span> | <span class=" -Color -Color-Yellow">&#39;59&#39;</span> | <span class=" -Color -Color-Yellow">&#39;60&#39;</span>
 &lt;iso8601fraction&gt; ::= &lt;digit&gt;+
 
-&lt;iso8601timezone&gt; ::= <span class=" -Color -Color-Yellow">&#39;Z&#39;</span> | <span class=" -Color -Color-Yellow">&#39;+&#39;</span> &lt;iso8601hour&gt; (<span class=" -Color -Color-Yellow">&#39;:&#39;</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>? &lt;iso8601minute&gt;)? | <span class=" -Color -Color-Yellow">&#39;-&#39;</span> 
+&lt;iso8601timezone&gt; ::= <span class=" -Color -Color-Yellow">&#39;Z&#39;</span> | <span class=" -Color -Color-Yellow">&#39;+&#39;</span> &lt;iso8601hour&gt; (<span class=" -Color -Color-Yellow">&#39;:&#39;</span>? &lt;iso8601minute&gt;)? | <span class=" -Color -Color-Yellow">&#39;-&#39;</span> 
 &lt;iso8601hour&gt; (<span class=" -Color -Color-Yellow">&#39;:&#39;</span>? &lt;iso8601minute&gt;)?
 <span class=" -Color -Color-Blue">where</span> is_valid_iso8601datetime(<span class=" -Color -Color-Cyan">str</span>(&lt;iso8601datetime&gt;))
 
@@ -1142,20 +1139,24 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5003
-4635W48
-06441104T21
-5917-08-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15790722
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5817362
-6099-03-05
-71850419
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8844-W03
+2011-02
+5275-W16
+5737158
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6756
-2156193
-0109-04-17T12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0299-06-30T01:42:30
+29770814
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7903-334
+4483-05-08
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2291254T15
 </pre></div>
 </div>
 </div>
@@ -1166,30 +1167,28 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102T14:21
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1983-11-25T0405+11:54
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102T09-1812
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1983-11-25T1105+11:54
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102T12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1963-11-25T1105+11:54
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102T09-1421
-19680102T12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1983-06-25T0405+11:54
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1983-06-25
+1963-11-25T0405+11:54
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19880102T12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1963-06-25T0405+11:54
+1983-06-20T0405+11:54
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102T12:21
-19640102T12
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600102T09-1449
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1983-06-25T1105+11:54
+19631120
 </pre></div>
 </div>
 </div>
@@ -1200,16 +1199,16 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T0010:59,94
-00Z
-T00-00:02
-T00Z
-T00
-00:4320
-0048:09
-00+0051
-00:3300+00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00:2008.88784450899659044-0052
 00
+00-00
+T00-00
+00:53:56-00
+T00
+T00Z
+T00:08+0040
+T00+00
+T004855-0002
 </pre></div>
 </div>
 </div>

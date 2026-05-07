@@ -473,16 +473,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2492293073
-47495247513
-450684516101232
-618983435049
-94350139948305475578
-3892050542682
-994584231
-859380218834791105
-0037769546081
-698110182
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>243036
+720821469139
+612146527928
+469123
+40
+833142
+8905
+10068364
+0311485578654884082
+24198487960961
 </pre></div>
 </div>
 </div>
@@ -534,12 +534,23 @@ For instance, these are all the options supported by <code class="docutils liter
                      [-n DESIRED_SOLUTIONS] [--best-effort]
                      [-i INITIAL_POPULATION] [--progress-bar {on,off,auto}]
                      [--warnings-are-errors] [--party PARTY] [-o OUTPUT]
+                     [--stop-criterion STOP_CRITERION]
+                     [--stop-after-seconds STOP_AFTER_SECONDS]
                      [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
 options:
   -h, --help            show this help message and exit
   -o, --output OUTPUT   Write output to OUTPUT (default: stdout).
+  --stop-criterion STOP_CRITERION
+                        stop criterion to be used. This is a lambda function
+                        which is run on every new solution. Example: `lambda
+                        t: t.to_string().startswith(&quot;abc&quot;)`. Is `eval()`ed, so
+                        be careful!
+  --stop-after-seconds STOP_AFTER_SECONDS
+                        Stop after a given number of seconds, evaluated at
+                        each generation beginning. Example: `--stop-after-
+                        seconds 60`
 
 Fandango file settings:
   -f, --fandango-file FAN_FILE

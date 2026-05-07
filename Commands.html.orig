@@ -522,12 +522,23 @@ See https://fandango-fuzzer.github.io/ for more information.
                      [-n DESIRED_SOLUTIONS] [--best-effort]
                      [-i INITIAL_POPULATION] [--progress-bar {on,off,auto}]
                      [--warnings-are-errors] [--party PARTY] [-o OUTPUT]
+                     [--stop-criterion STOP_CRITERION]
+                     [--stop-after-seconds STOP_AFTER_SECONDS]
                      [--input-method {stdin,filename,libfuzzer}]
                      [command] ...
 
 options:
   -h, --help            show this help message and exit
   -o, --output OUTPUT   Write output to OUTPUT (default: stdout).
+  --stop-criterion STOP_CRITERION
+                        stop criterion to be used. This is a lambda function
+                        which is run on every new solution. Example: `lambda
+                        t: t.to_string().startswith(&quot;abc&quot;)`. Is `eval()`ed, so
+                        be careful!
+  --stop-after-seconds STOP_AFTER_SECONDS
+                        Stop after a given number of seconds, evaluated at
+                        each generation beginning. Example: `--stop-after-
+                        seconds 60`
 
 Fandango file settings:
   -f, --fandango-file FAN_FILE
