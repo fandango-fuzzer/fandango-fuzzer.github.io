@@ -16,41 +16,44 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -64,6 +67,7 @@
     <link rel="prev" title="Regular Expressions" href="Regexes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,19 +83,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -107,8 +99,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -127,7 +119,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -157,21 +150,17 @@
     
     
     <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
-    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -250,9 +239,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -382,7 +376,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -396,25 +390,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -504,16 +490,18 @@ Have a look at the above rule first, and then check out the solution.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7844472822 + 8953 + 745721929837354
-023844126013466 + 3 + 456168130110322252
-4033713728129925267 + 78546763179035
-81283 + 6374 + 3166036440948189
-7620936540373416
-743265417044140619
-89
-19260
-197204721535 + 659
-911859421610055870 + 8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>113372 + 1532
+0487636651344137 + 81063859633967308750
+911133326220605
+7345 + 3670375112746
+6640922718
+78959577908560794 + 506030290337 + 896948 + 31273454213670
+835089068160
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47821359358449947254 + 94893363295341392 + 9921651580379 + 19695
+099600476200683 + 9049
+0 + 8540032666648737907 + 15462
 </pre></div>
 </div>
 </div>
@@ -577,28 +565,28 @@ Hence, <code class="docutils literal notranslate"><span class="pre">2</span> <sp
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(++-+(7114947 + --+(-09 / 31) / +94 / +9 / 100 * 95 + +2) / 66575 - +8) / +47 * 05 - -65
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--+-(-0312105234 * (---7 * 795 * 99 / 24 / 1 * -6 / 611 / 16 - +70) * 720) * (75) + 661
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34 * +-692113 * (08119655841257802) * ((+56 * 73 / 69 + 12) * 625 + 74) / +56 / +8
-+(4 * 464369 * (((++052256427260 * (++(07 * 58 / 88 - +93)) / +-34 - +7) / 9052)))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+(++(+-(413 / 69124 + 5548 * -++++((70 + +6)) - 42 - 35) / -+85) / 853 / 86 * +8) / -97
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-6480668434809359410 / -(-6 * 84 / -1 / -06 / 38 * 65 / 0 / 318 / 60 / 03 / 93 + -92)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-+94868895 / (+(+-+52097169451154084 * 293177222)) / 7993361 - 163757 - 45
+-+(1484829386960431 / ((+7) / +89 / 33 / 48 + 353) / -4 - 919) * +-9 / -79 / 24 + +11
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>++((+--+(-87 * -+64 * 9 * ++07 + -7) - -4 * -3) * +-3 * 916 * 43 / 20 * 69 / 70 - +90) - +173
-+-+(8618453633111643865 / --+(-+10 * -1 * 626 * 22 / 03 - 30) - (+88)) * -+86 - -03
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(49904240923725 * 4 / 26 / 70 + 396) / -2 / 286 / 51 / 67 / 70 * 80 / 27 * 57 * 40 + +6
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4928445575226 / -(++677958135 / 3026641458 + -(-9)) / -509 / +85 * 00 / 15 + 242
---+835540170395 * 24276 * +++(+0296310 * +(-9 * +10 / -9 - 519) + ++38) / 4597 * +6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>274183073 + (36758255047 * +(1833568379404895872) * (1) * (14)) * +36 + +72
+3412275146077
++++-5048219873566383167 - 04 * 515747012900871
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---(+(-+--(-28438975612 * 11317 - 063) - 3650) * +39 + -91) * 6678 / 02 * 86 + +33
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60073882586297 / +95098888269235929 / +-353242 + 72845628296577106 * 13
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8591774849632763404 / 1480127508119777 / +(--(65 * 6 / -9 / -76 * 00 + +72))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-+87484300 / +(-(+8) / -22 / 98 * +6 * +26 / 01 * 90 / 34 * 85 * 27) * -89 / 26 / +7 + --6
 </pre></div>
 </div>
 </div>
@@ -637,26 +625,28 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3.79715441680775077 / 6.6942 * 0.3297615759614975 / (-2) / 18714 / 4 / -7
-5520973.871132272016917590 * (+2 * 1.3 / ++-+6 + 5 * +4) * 265 * -8 / -7 / 708 * 6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 / 8.49706955158731114 * +(4694767.8775 * ((6 * -6) * -5 - 2.08)) / (4) + -296
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9380721863850.86721110544 * 5.14247557318619009347 * +94.95 / 919 - +6
-3 * -+6829.033 / -+104069393851694.4531 * (---6) * ++2 / -9 / -0.7 / +7 / --2 + --1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+7 - -+577355711641553554186.772135 + (-2) * 0 / +++2 * 4.0 / -8 - 0.9) - +-5
+(5 * 81732150418265331 / -2 / 321 * 5 / +5 - 3130) * -5 / 28 / 8 * -+1 / 703 * 7 - (7)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+6 / 4 / 9 * +2 / -9.1149933564081 + +4.841179138 - 6.54443429561915) + +-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-(6.569583749315592) + +(-95.8 * ((-573) - 7) * 78958 * 3 + 738) * --7 * +0 / +7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-(-1860808387073730.080018226491 + (6266219533.3704) * 2 + 9 / 94) / 3.77
-((-+972842917416221 / +((5 / +9 * -2) / +-6 / +1 - +4) / (--1))) / 9.75 / +4 / +0 - -+4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-(--4589782114.01059159613913780 * +68894 + --7) - (+7) * 5 / -+8 * +-7 + 7.21
+4.759 / 1 / -+(((8 / -7 / -0 / -+1 / -8 / 373 * +6 / 1 - 4.68)) * -7) * 5.44 * +5 / +3 + +589
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--3361.3392564863 * 2 * 9412757134 * +9 / 7.49 / 2.73425333307788 / +0 - 8
--((+8 * ++-(++-6 * 0 / 5.36 - -0) * 3 * ---896 / +4 / --1 * 8 - 3.03) + --3) * 0 / 2.484 * 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>603249639685740374 + 9.8 * 329490955246753029.9640878584922157 - 160
+(--(5684 * (5 / (8) + 0.16) / -2 + +8) * (-2) * -2 - 8) / 447643 * 4 / 523 / 7 * 890 - +1
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.526104417127625946
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.9100009 / (0 / -6 - --(8.543278 * +6344428042124033424) * +-1 + +36) + 6.35
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(((---9 * +-364879540.76419 * 8.0231000) * 165 + +3) - (3)) * 315 / -4 / -4 + 7.14
 </pre></div>
 </div>
 </div>
@@ -667,34 +657,32 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>++85144798375134.8222826878659213 + -1.3759148 - (0 * +3 - 6.1) / 549 * 4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>559.4822316783264167419 * +6.0897239 * 339795391.846537744367 - 8 * -9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4656 / +994127240 * 8.0 * +70904893694349.948543483127
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+583828109657313 * +57995458010.65315216402281648685 - 7 / -5 / +7 - 387
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80847127673924337912.109 * 558177614288 + ---++26349361.885446435
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4053432792 - +311.88765705038044743853 * 9 * 77893913 / +(0 + -3.61695)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7457560057 / 4271077655 * 984731641576457568 * (-++0 * --3 * -8 - +-9) - 6 / +9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((-6.9443483 / 249248460038009649151.3200 - (9 - 868) - -9) + ++307) + 888
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5550653173858603516.408496145 * (8.580536740165443789 / -7 + --2) / ++3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+++2.65507254662 + 5768650351 / 73.164542148308270
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+(-6692430991345 / -6.6660) * -2 * 9598398707847.9855 / 7 * -7 * 5 / 1755 + -4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+++--43504612.27362319961321470594
+(+7525165528627 + -9.5806058 / +8.5477972 * +--330489523 * -+1 - 8) - 6 - -9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 - -9 * 572198523992463353.370479829585341 / (-+5.90 / 70 + 9) / +4.88 * 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+++((-5118233862.723 / -(+6.979 + 0 / -2) / -612 / +8 - -1)) / -+-+9 / -+3 / 3 + 9 * -8
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-2.4116088246198576 / (-+2) - ---(4824019106660) - (6) * 9 * 1.89 * -0 - -+6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+166614969 * 4.9313704 + +7.67855959849561943509 / 2533813
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3172072847145944414 + ++904976788815 / -((++0 - 758) / 6 - (+4)) * -5 - 45.10
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90 * 7 - 97953 * -(569973332975099405 + -3 / ++6 / -12 / -6 / -+6 / +6) / 607 - (+6)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.610 - 3898691812760503 / 652404507921232756.057265 - +(-2) * 523 + +1
 </pre></div>
 </div>
 </div>
@@ -762,14 +750,16 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-inputs">Recursive Inputs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-repetitions">More Repetitions</a></li>
@@ -822,8 +812,8 @@ By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Sm
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

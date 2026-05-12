@@ -16,41 +16,44 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -64,6 +67,7 @@
     <link rel="prev" title="Complex Input Structures" href="Recursive.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,19 +83,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -107,8 +99,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -127,7 +119,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -157,21 +150,17 @@
     
     
     <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
-    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -250,9 +239,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -382,7 +376,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -396,25 +390,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -737,28 +723,26 @@ For instance, if we want to refer to a <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nx Krqhuhr,15754589
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naxigfkcjhcsgujstyx Yopmzfijnzw,81
+Ugqrbtfyytcx Yffkdsgyvuhfutenlzbl,764499
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mflkcgfouqdprnpxzx Dxvzuadhwirqk,532721827152405375
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ridvmzqibx Gzgishfvmdiripviaaddf,3585479185414
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ajmqclgysfztzrwrydoix Jlpasiokbaeuwjq,1704398
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Antx Fgisbgw,44263999491432444
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Idbdbwlwpnxysbsx Mfqxgfiqxpw,5803
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cycwx Zjwydubod,8
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nx Krqhuhq,15754589
-Ajmqclgysfztzrwrydoix Jlpasiokbaeuwjq,1004398
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Antx Fgisbgw,01137
+Ridvmzqibx Gzgishfvmdiripviaaddf,4585479185414
+Ugqrbtfyytcx Yffkdsgyvuhfutenlzbl,764399
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nx Krqhuhr,15754581
-Ajmqclgysfztzrwrydoix Krqhuhr,15754589
-Nx Jlpasiokbaeuwjq,1704398
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mflkcgfouqdprnpxzx Dxvzuadhwirqa,532721827152405375
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ridvmzqibx Gzgishfvmdiripviaaddf,3585479185413
+Avtx Fgisbgw,44263999491432444
 </pre></div>
 </div>
 </div>
@@ -788,28 +772,30 @@ This is useful, for instance, if you want to compare several children against a 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Chavez,72399144
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Christensen,2543338709072405250
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chavez,72399144
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Chang,871
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Chavez,72399744
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Chang,107230361
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Chavez,72392144
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Christensen,871
+Charles Christensen,1590659
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chavez,32399144
-Christopher Chavez,07472058414292124
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Chang,71229703567
+Charles Christensen,7716559
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chavez,72399144
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Chang,2543338709072405250
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Chavez,07472258414292124
-Christine Chavez,73
-Christine Chavez,07472058414292124
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Chang,107230561
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Christensen,39
 </pre></div>
 </div>
 </div>
@@ -832,30 +818,28 @@ Hence, <code class="docutils literal notranslate"><span class="pre">&lt;start&gt
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Wallace,7308751725
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Reed,64863347279976
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Porter,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Brock,06976
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Wallace,268116829084
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Riley,06155152247757253
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Wallace,2308751725
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Sullivan,9926225517883
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Porter,219503711
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Robinson,3018792709897
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher White,268116829084
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Brock,64863347279976
+Christopher Reed,06976
+Christopher Reed,64563347279976
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Ballard,3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Porter,219504711
-Charles Roberts,2308751725
-Christopher Morrison,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Brock,06974
+Charles Riley,06155152267757253
 </pre></div>
 </div>
 </div>
@@ -891,28 +875,30 @@ This allows you to express the earlier constraint in a possibly more readable fo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ezhhxqjqhqx Vtm,47819260914806798
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cmfaxaboxhhhfx Zt,870036334159368908
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fbx Hk,0564244301271
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vavmkfsmlveqsawckx Ixryyyxhhtawfsen,94093110190087978
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ugwbluwohofgxghaztqlx Ywxpbrs,857120
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jheiqmwsbgdwqztnabehx Hlddmunvqzwrppfid,39
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ugwbluwohofgxghaztqlx Ywxpbrs,516774483922
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rbsx Njktiiewibxhpo,9644289148
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ezhhxqjqhqx Vtm,643814954
-Ugwbluwohofgxghaztqlx Ftvvkghwqcncehtfbaf,857120
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vavmkvsmlveqsawckx Ixryyyxhhtawfsen,94093110190087978
+Vavmkfsmlveqsawckx Njktiiewibxhpo,94093110190087978
+Rbsx Ixryyyxhhtawfsen,9644289148
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ugwbluwohofgxghaztqlx Ymxpbrs,857120
-Fbx Hk,244
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bbsx Njktiiewibxhpo,9644289148
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uzwbluwohofgxghaztqlx Ywxpbrs,857120
-Ugwbluwohofgxghaztqlx Ywxpbrs,857124
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cmfaxaboxhhhfx Weyq,870036334159368908
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jheiqmwsbgdwqztnabehx Hlddmunvqzwrppfid,92174735337836
 </pre></div>
 </div>
 </div>
@@ -956,22 +942,24 @@ A simpler way to think about <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xj Mcplemtjrxph,477
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xekvx Dfhrjpws,6672
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xdkhqvmyjfzy Vogbuumprdhz,021783085706421
-Xpykpxvynrdijebqfhvvo Ifgvxgiqzmsxw,0
-Xksmxv Uwte,59444143
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xdwhvvidummnkfu Zkegwomorfayrhwn,16785477043118529453
+Xsnhoqfp Hhfinhqguuoja,51725
+Xfky Ang,924111713452659
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xljifeeycgoge Uisoc,116
-Xrerv Yu,79
-Xkqag Osijd,7419107058832271
-Xyrx Qwsnbmjncmslytxwrkq,398493346
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xpdwk Nvhdegdfhdiydwmdh,5939
+Xxqgbanxywshypwzdta Jiy,9057976476655
+Xhhecgwaub Osp,158587211439597
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xngowztmjilhpvvlemx Ota,911041337
-Xhvuekkhtncij Hzvawgkvex,22492005805
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xoumudrng Zjtrsawzdywp,37441521829435707
+Xpaylnlxohmhclau Pbnyadnwgxo,719951
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xribntaqtkjvwhzifi Ztftpbzpyambeebckejzg,82767482005972339137
 </pre></div>
 </div>
 </div>
@@ -996,24 +984,24 @@ What would the expression <code class="docutils literal notranslate"><span class
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hwvyyinijto Jxxxxxxxxxx,835
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kegl Lxxxxxxxxxxx,47329627782316700
+Rkgtboenntqomvrc Dxxxxxxxxxxxxxxxxxx,8240930204
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pwrequkwdqglosmbn Sxxxxxxxxxxxxxx,06328431275118517533
-Xtgafpmqj Vxxxxx,1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ocdyqhydi Fxxxxxxxxxxxxxxx,55296014554507
+Ofymmiz Xxxxxxxxxxx,394174
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wtve Axxxxxxxxxxxx,274235994548728757
-Bjxsrtbqbswoenyzfqme Vxxxxx,9
-Cggzjzyofftiyrdmm Axx,36102046864486578532
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pchxlwoankyslhmv Cxxxxxxxxxxxxxxxx,210120879895816
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lsn Qxxxxxxxxxxxxxxxxx,1946992795
-Vnzj Fxxxxxxxxxx,2804
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mqbqmjsynhhdbhnurl Hxxxx,72806875038269
+Otjnvqw Axxxxxxxxxxxxxxxxxxx,76479647113486
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bpjubytvhdjeuy Nxxxxxxxxxxxxxxx,182262427
-Ttqtmzreuwqeuukx Bxx,595573
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Csvemtoe Zxxxxxxxxxxxxx,35375570252
+Ji Ixxxxxxxx,266142
+Qulhq Cxxxxxxxxxxxxxxx,032
 </pre></div>
 </div>
 </div>
@@ -1070,32 +1058,34 @@ For instance, we can have a constraint check whether a particular element is in 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aqdlqxgjwrypqqhy Jathyhlohm,21938557263166987
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Abngpkovl Bgjwdczhwt,280123
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cjjvenwdcyy Aaddubrkdvdmjeysf,847779714497
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fivfgnsggyhqljnp Akzydcg,77941
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atzldqhybycmvr Vuoagmhudbwztebfn,0548785669515
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Abzgmpvjbf Jl,9009076614236
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Buysgnretkniio Abdwntdlbxn,233283157
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avpdurykygj Agnhrehnzmaequwgyw,412402436450594
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Djoyvwfuvghhm Aula,9898824669386092979
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vzt Aoufxkzmzlcojj,94931337523611830
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aovokgzjdmklbxvx Qhibgwdqoxoxumiwdkqi,11487238516013
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aiflrjjgr Scrihytegbm,89
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jseqvhlzgdhr Aleapdoedfvnvo,76345122428
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atarpbouhkr Ajcfixrizsozufofpqd,706
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grhgoadxhps Aijiqpbfoezhexa,7336983124259021304
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jtveeiduwdxgjcsha Ajbtapgpjmskkliaat,697254864
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qmgvnqyec Airkhettkwlkgafb,0434069
-Atwzdraboqyj Ujb,819
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bjbikwkps Axkfxvbzibvczix,7387024927
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aii Qwrlwoylologhwyeezqyn,5432832959705397749
 </pre></div>
 </div>
 </div>
@@ -1126,26 +1116,26 @@ Here we use the Python <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uaaaaaaaaaaaaa Oazjzvqivzrwgn,441774920584
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yaaaaaaaa Krtavfbccu,142168
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kaaaaaaaaaaaaaaaaa Lasfnnqxiekaqidmre,8471276159
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vaaaaaaaaaaaaaaaaa Agunmoyrk,352261
+Laaaaaaaaaaaaaaa Fmulbggauhmaauvytpptn,018218600730723
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vaaaaaaaaaaaaaaaaaaa Opmzrviieps,93962429
-Va Zcfucbrebmcxlydbq,472504636
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kaaaaaaaaaaaaaaaaaaaa Ysdwca,20453851444
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Waaaaaaaaaaaaaaaa Wxqoyplaqwnjjpcgjf,865138556475766562
-Taaaaaaaaaaaaaaaaaaaa Rty,6869218954886
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raaaaaaaaaaa Rgnf,0682793
+Waaaaaaaaaaaaaaaaaaa Yvqhgexv,8857478030828
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Paaaaaaaaaaaaaaa Jvtv,923428436387
-Eaaaaaaa Xqbgyvtb,81400518743456922
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maaaaaa Oppaxoczazrvk,179917151340479781
+Caaaaaaaaaaaaaaaaaaaa Fpxy,16
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aaaaaaaaaaaaaaaaaaaaa Furr,86829730638
-Yaaaaaaaaaaa Afrjoq,8340
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saaaaaaaaaaa Sizmcbqotqjmlrbrsaztf,7243768706952685
+Oaaaaaaaaaaa Ud,777395378
 </pre></div>
 </div>
 </div>
@@ -1178,13 +1168,13 @@ This is what we do here with <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dxodoju Camqmici,90440
-Daaaoaa Caaamaai,90440
-Kaaaaaabaavzaatabaaaa Ayataapo,2954542921099580713
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laaaaa Daaaajaaauzaa,154220838
+Jflxbk Bdqrnjhurfyejvda,8427194969692
+Jaaaaa Baaaaaaarfaajada,8427194969692
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trktymibmfhyhqcaqbp Hpbpdtiqhjxwo,0055597410
-Taaaaaaamaayhaaaqba Hpbpatiqhaaaa,0055597410
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Agkdaxwtwdx Tzbhmkggzhairfhjj,3718927982944
+Aaaaaaaawdx Taaaakggzhaaaahaj,3718927982944
 </pre></div>
 </div>
 </div>
@@ -1194,19 +1184,19 @@ Taaaaaaamaayhaaaqba Hpbpatiqhaaaa,0055597410
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zaa Haaaaaaa,679198872772420
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laaa Eaaaaaa,14364802103592
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jaa Baa,9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Faaaaaa Baaaaa,1477777
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maaa Eaaaaaaa,05969931
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xaaa Ta,8
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laaa Jaaaaaaaaa,9119741679588
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qa Pa,33978
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xaaa Da,9999573212933812
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uaaaaaa Qaaa,00064286413236334230
 </pre></div>
 </div>
 </div>
@@ -1273,14 +1263,16 @@ Taaaaaaamaayhaaaqba Hpbpatiqhaaaa,0055597410
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-trees">Derivation Trees</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnosing-derivation-trees">Diagnosing Derivation Trees</a></li>
@@ -1349,8 +1341,8 @@ By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Sm
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

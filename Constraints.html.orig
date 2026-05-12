@@ -16,41 +16,44 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -64,6 +67,7 @@
     <link rel="prev" title="Some Fuzzing Strategies" href="Strategies.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,19 +83,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -107,8 +99,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -127,7 +119,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -157,21 +150,17 @@
     
     
     <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
-    <script>document.write(`<img src="_static/fandango.png" class="logo__image only-dark" alt="Fuzzing with Fandango - Home"/>`);</script>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -250,9 +239,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -382,7 +376,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -396,25 +390,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -508,28 +494,32 @@ where int(&lt;age&gt;) &lt; 50
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ngbpahlkvcpuhzeotlutv Tpjyibelomayugzy,6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hwlyezcpzjlin Gwbygj,2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wyeoglu Afm,26
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Foih Bkazgrc,026
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clbcaea Rgtxkydlrrz,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wecnrvovcgnbn Ezmuev,9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fkkssewhup Zfrshznl,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jawpizmugwjwv Bhltltqxegljude,2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dipsqqrakiwarc Knnzzzfvlmuspf,24
-Sagxvuqe Qmyozhrwoj,16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yqazvdbxeodq Wrblqoptuhyocmoqr,2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sagxvuqe Qmyozhrwot,16
-Sagxvuqe Imyozhrwoj,16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bgtofpd Lrrzpzwibhfqlpubacdu,33
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fagxvuqe Qmyozhrwoj,16
-Skkssewhup Zfrshznl,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pqmsafp Kof,17
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zlkbtozmjxeapq Luriaoyvkvnkulky,9
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zlkbtozmjxeapq Luriaoyvkvnkulky,2
+Grtkntqg Luriaoyvkvnkulky,9
 </pre></div>
 </div>
 </div>
@@ -548,30 +538,34 @@ Be sure, though, to leave spaces around <code class="docutils literal notranslat
 <p>and we obtain these inputs:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qjcoebkzlhgzmtuzdx Rwzwfbgxgbziwp,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ulowdjydqtnnxnxtuvvirdiukcjdhrwvaitsuldcwzkmrvanywepfohjmy Vsi,42
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ajjglyqqnqbxh Zfnrwufeb,44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ulowdjydqtnnxnxtuvvirdiukcjdhrwvaitsuldcwzkmrvanywepfohjmy Vsi,43
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qjcoebkzlhgzmtuzdx Qdaynnqjbkphuttjemyf,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ulowdjydqtnnxnxtuvvirdiukcjdhrwvaitvuldcwzkmrvanywepfohjmy Vsi,42
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xtnwtehzfvts Wisq,44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wuttjqisqyyuxinxslpipslozclclvtnrjyhtclqgqglzzkgxvxirnijjo Spm,39
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ajjgoyqqnqbxh Zfnrwufeb,44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wuttjqisqyyuxinxslpipslozclclvtnrjyetclqgqglzzkgxvxirnijjo Spm,39
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qjcoebkzlhgzmtuzdx Qwzwfbgxgbziwp,25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cqhiuilxliwuvcebbcphlasastjvyuwikngyywiyqktyvntpwjljtrssac Qno,25
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ajjglyqqnqbch Zfnrwufeb,44
-Xvywsvejip Reuljwj,44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Giefxzfvpayqynzxyuiruidzutiyjsoynvgbpmbplptoetxsrumrsnmzie Rri,25
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ajcoebkzlhgzmtuzdx Rwzwfbgxgbziwp,25
-Qjjglyqqnqbxh Zfnrwufeb,44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gjbzvluvmwhkacjkecwgxqalahthxjswlhqdqfdjdfjbgabxofbcrxuhzr Vaj,36
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tqjmvhmgqktwsldjelwtwwfbfxcenpnxjuwdzelyvgdxlzkavyfexkzsiu Yxn,27
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wxmftmyxkkligeqehzyqpukvxhpcipleleoulbuepjguivpurkexmlvxai Vwy,35
 </pre></div>
 </div>
 </div>
@@ -579,32 +573,28 @@ Qjjglyqqnqbxh Zfnrwufeb,44
 <p>Start with <a class="reference download internal" download="" href="_downloads/eb75cca3f691010aefb22548a3d912ba/persons.fan"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">persons.fan</span></code></span></a> and add a constraint such that we generate people whose age is a multiple of 7, as in</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atzi Bhiqrzeazxfdnzwdihp,00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jweynz Gzgurffdwffu,713772531276
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kquqez Ttkvzvvihozk,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Msftffrbugihxqkum Ariixyqzvdtjylesoh,44896587380591485
+Ocppfjpo Gbzjthbdcv,76766575907649964
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lkuqzefyadc Fmdwbuqfajowolrsfguco,765201244116177652
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pxqenzfgqvia Vqqrfqbqdbmcg,0079804578976836105
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Siqwfthmyryfzqasblkp Xymhffvdfvvtszb,4258795023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gxityjrelnn Floziumziok,52855588973107500503
+Hlvkywvuug Fyytlpfacqfujuqikou,3713815388182676
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iad Ognayvdi,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crwlyycbiqyjrzeote Iki,8884781232835074
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hnvphlseomdemermgf Hggwuahhn,7
-Baaacsy Cqfwhwxxolbmjtpx,061097556215332
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xwqat Wx,558467
+Upt Qcvkjw,2458455099177
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Slfgjfea Rzumutoclyproyp,720239921520
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pyefkpdhsbxawffcwcu Tvplpkzedj,86129086248396590133
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lblpouvmtnqdkmpqdewu Mwcdvbmtdgnllnybtf,0064949977939
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iugmancltecyork Kui,730191
 </pre></div>
 </div>
 </div>
@@ -703,30 +693,34 @@ fandango:INFO: ---------- Generating  for 500 generations----------
 fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wlsgt Dhxdfyqwethwrsxmzauj,0
-Pjeosysvxdsi Pqgxiorhturiokhp,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bvte Wpbcsunpufaqvhgtvyrl,820738096438148
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dgxyqwnhgomn Kqoe,874545
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qgpbxwpzjeyditbrnn Gfyrbvt,0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zlwlsntnyozetxlxp Ayfjptoorxajbif,77216377
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wmgawbzr Isqqwexyfrhdecknwb,146590542
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pzjyzrnmeewairjwwg Xqxkuyeeutpgiinxiijop,0844389308
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wshtibicohuhufqfy Tjscomknnhvlzxfsdaey,374958353182543739
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hlvpmaqogatzpu Vrkljxwiqqsryf,84
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gibwwt Ztramdaixhdiextbced,0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qgmdyvbvaqwspmzcosfc Emniwrexwlrhfurwdhpme,980
-Axhnuspzr Rpvurxfsacr,693
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Usdwpw Icgkvyxe,692513246187
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aolmeswxsihtevctddq Ciqcror,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zkcgnmwoqxvamjepirhf Srahfuswie,27447118686697829
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Smjgpkppnpvbsmkj Ysdoituiaxk,47760090
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xxfqnelfsbwbio Sghjqsqefev,038597138897551668
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qdvqfrbqkgvqpylmnpz Mf,876568
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ejlqt Zoaufhp,339206
 </pre></div>
 </div>
 </div>
@@ -782,32 +776,32 @@ These “soft” constraints come in two forms:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hnlujcpgdqogytcyh Tdexruozykrkbkundxob,8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jhdhbvpouiukn Qgucobwubrszffiv,483539
+Dr Roguel,58132441432851353
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cx Zobybltyriobak,81399824456534573
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ikaotcyaddoqmsfccojde Xbpfynxdexk,37035946754887212337
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fkyasrubahwhrqujv Aewu,887638907817261594
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gyowaw Wddhaovqhlrgycz,47738256480706870724
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eolnaxtqpndfy Txashscbklmqifpyfxs,2322522315201631000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kvxnl Ljl,59455424941682742695
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fxfnocyirlsj Zlrrakbdgzhnhxycb,2426380104918810279
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tmibrcvlxagjluxkaw Ohixgwerrcr,67491945164454028933
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hobvhfgathhgafuoyw Iwqwvijuhihinh,32027948506945640581
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jmibrcvlxagjluxkaw Ohixgwerrcr,67491945164454028933
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wwdygcycdtyvntyx Iuvbvbaxd,36348253582214540605
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tmibrcvlxagjluxkaw Ohixgwerrcr,67491945164454528933
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wwdygcyjdtyvntyx Iuvbvbaxd,36348253582214540605
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jmibrcvlxagjluxkaw Ohixgwerrcr,67491945164454728933
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hobvhfgathhgafuoyw Iuvbvbaxd,36348253582214540605
-Wwdygcycdtyvntyx Iuvbvbaxd,36348253582214540405
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tmibrcvlxagjluxkaw Ohixgwerrcr,67491945164954028933
 </pre></div>
 </div>
 </div>
@@ -818,30 +812,30 @@ Wwdygcycdtyvntyx Iuvbvbaxd,36348253582214540405
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zycusc Tymphktiyvzfquz,7812836909
-Zjbgysxntyboancs Giszfvfvgxxf,4900256
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zjzoox Ogywa,93779
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ogmdwgxa Xsqvjwoztebxuzmksk,073011
-Uhjtug Dgaogdtryxxvpnjsvc,012
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Irato Lijfimuhmpozcigt,8634
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bfdb Fzqhpspzdkecfi,11
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iblxksfhjixnntwluiv Ztrhkxynmyckroiyprilu,02
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gdzz Xhwcmgwqhe,3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wmcqqcuuvjqutyjuvvtfn Yariprxhgmovuekuuukuz,01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tdijenesaggiokerrqyck Vd,1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wmcqqcuuvjqutyjuvvtfn Mjqdzdggxxdkxjoclskx,01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tbzinjrye Ahdacmgrttgfvakkmey,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zjzoox Yariprxhgmovuekuuukuz,01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tbzinjxye Ahdacmgrttgfvakkmey,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gjeiodujwretcnskwwijp Dpcigloglhrfkwcvz,01
+Imcqqcuuvjqutyjuvvtfn Yariprxhgmovuekuuukuz,01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tdijenesaggiokerrqyck Ahdacmgrttgfvakkmey,0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cs Dtwbrcfnnb,01
+Ndialmed Epaesckmnjho,01
 </pre></div>
 </div>
 </div>
@@ -867,24 +861,24 @@ Then, Fandango will aim to maximize (or minimize) its value.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zodvyywu Zfwrlctalenb,242
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tetgseluvyjdpewr Gvkiexhcllsd,6956645558
+Ewckv Eyyz,498489
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nshjcmonuqqcydgatxuhu Pznvkoeizpudcmioj,7103
-Lhocfejvmijhwf Petdkjhdmhmci,550020053825
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cbzfzbyzdtogchwtz Cczsih,176850983912958
+Ekqvxmpvunfi Fzzzwhl,25
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Odyntyxhqcag Xngmmuhlbkwv,27079
-Zlysaceppzknj Gu,7505980
-Gjmekoxhtsxkflnc Dojtocsaclroqwp,19696437558705215
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qj Ukgddgflczemzcc,2182518486881
+Vqdvmvbuvsj Krbkfcbwlccgdmtjle,281968847132289
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dicqmxjcwpwnyqwugxrm Vh,4507681189
-Hycsfjxoqvfuta Txmxt,6059650468265291
-Nlonmjj Agnljj,179986
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fdddkxeeazuljamvfxzw Wdhrnmdcmjbryx,6981135
+Jdsydche Taoamqdixwg,6154918378982355
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crnecw Amhmdrgqrfhtrc,453302048
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hdiwttozhejiulklll Eijykymswnpxowveoglgg,5426983822085695
+Ikuxkvqbmjygecft Jtu,577334854677
 </pre></div>
 </div>
 </div>
@@ -901,7 +895,7 @@ We can see this if we specify <code class="docutils literal notranslate"><span c
 <p class="sidebar-title"></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-N</span></code> option limits the number of generations - the default is 500.</p>
 </aside>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;False&#39;</span><span class="w"> </span>-N<span class="w"> </span><span class="m">50</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>persons.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;False&#39;</span><span class="w"> </span>-N<span class="w"> </span><span class="m">10</span>
 </pre></div>
 </div>
 <div class="cell tag_remove-input tag_scroll-output docutils container">
@@ -912,12 +906,14 @@ We can see this if we specify <code class="docutils literal notranslate"><span c
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
-fandango:INFO: ---------- Done initializing base population ----------
-fandango:INFO: ---------- Generating  for 50 generations----------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
+fandango:INFO: ---------- Generating  for 10 generations----------
 fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 1.73 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Initial population generated in 1.81 seconds
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1 - Average Fitness: 0.01
@@ -926,9 +922,7 @@ fandango:INFO: Generating (additional) initial population (size: 100)...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1: Increasing mutation rate from 0.200 to 0.220
 fandango:INFO: Generation 1: Decreasing crossover rate from 0.800 to 0.760
 fandango:INFO: Generation 1: Increasing MAX_REPETITION from 20 to 30
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 1 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 1 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
 fandango:INFO: Generation 2 - Average Fitness: 0.01
 </pre></div>
 </div>
@@ -942,7 +936,9 @@ fandango:INFO: Generation 3 - Average Fitness: 0.01
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 3: Increasing mutation rate from 0.242 to 0.266
 fandango:INFO: Generation 3: Decreasing crossover rate from 0.722 to 0.686
 fandango:INFO: Generation 3: Increasing MAX_REPETITION from 45 to 68
-fandango:INFO: Generation 3 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 3 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
 fandango:INFO: Generation 4 - Average Fitness: 0.01
 </pre></div>
 </div>
@@ -958,18 +954,14 @@ fandango:INFO: Generation 5 - Average Fitness: 0.01
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 5: Increasing mutation rate from 0.293 to 0.322
 fandango:INFO: Generation 5: Decreasing crossover rate from 0.652 to 0.619
 fandango:INFO: Generation 5: Increasing MAX_REPETITION from 102 to 153
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 5 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 5 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
 fandango:INFO: Generation 6 - Average Fitness: 0.01
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 6: Increasing mutation rate from 0.322 to 0.354
 fandango:INFO: Generation 6: Decreasing crossover rate from 0.619 to 0.588
 fandango:INFO: Generation 6: Increasing MAX_REPETITION from 153 to 230
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 6 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+fandango:INFO: Generation 6 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
 fandango:INFO: Generation 7 - Average Fitness: 0.01
 </pre></div>
 </div>
@@ -1001,302 +993,12 @@ fandango:INFO: Generation 10 - Average Fitness: 0.01
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 10: Increasing mutation rate from 0.472 to 0.519
 fandango:INFO: Generation 10: Decreasing crossover rate from 0.504 to 0.479
 fandango:INFO: Generation 10: Increasing MAX_REPETITION from 777 to 1000
-fandango:INFO: Generation 10 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 11 - Average Fitness: 0.01
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 11: Increasing mutation rate from 0.519 to 0.571
-fandango:INFO: Generation 11: Decreasing crossover rate from 0.479 to 0.455
-fandango:INFO: Generation 11 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 12 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 12: Increasing mutation rate from 0.571 to 0.628
-fandango:INFO: Generation 12: Decreasing crossover rate from 0.455 to 0.432
-fandango:INFO: Generation 12 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 13 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13: Increasing mutation rate from 0.628 to 0.690
-fandango:INFO: Generation 13: Decreasing crossover rate from 0.432 to 0.411
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 13 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 14 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14: Increasing mutation rate from 0.690 to 0.759
-fandango:INFO: Generation 14: Decreasing crossover rate from 0.411 to 0.390
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 14 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 15 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 15: Increasing mutation rate from 0.759 to 0.835
-fandango:INFO: Generation 15: Decreasing crossover rate from 0.390 to 0.371
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 15 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 16 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 16: Increasing mutation rate from 0.835 to 0.919
-fandango:INFO: Generation 16: Decreasing crossover rate from 0.371 to 0.352
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 16 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 17 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 17: Increasing mutation rate from 0.919 to 1.000
-fandango:INFO: Generation 17: Decreasing crossover rate from 0.352 to 0.334
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 17 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 18 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 18: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 18: Decreasing crossover rate from 0.334 to 0.318
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 18 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 19 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 19: Decreasing crossover rate from 0.318 to 0.302
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 19 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 20 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 20: Decreasing crossover rate from 0.302 to 0.287
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 20 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 21 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 21: Decreasing crossover rate from 0.287 to 0.272
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 21 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 22 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 22: Decreasing crossover rate from 0.272 to 0.259
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 22 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 23 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 23: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 23: Decreasing crossover rate from 0.259 to 0.246
-fandango:INFO: Generation 23 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 24 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 24: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 24: Decreasing crossover rate from 0.246 to 0.234
-fandango:INFO: Generation 24 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 25 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 25: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 25: Decreasing crossover rate from 0.234 to 0.222
-fandango:INFO: Generation 25 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 26 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 26: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 26: Decreasing crossover rate from 0.222 to 0.211
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 26 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 27 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 27: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 27: Decreasing crossover rate from 0.211 to 0.200
-fandango:INFO: Generation 27 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 28 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 28: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 28: Decreasing crossover rate from 0.200 to 0.190
-fandango:INFO: Generation 28 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 29 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 29: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 29: Decreasing crossover rate from 0.190 to 0.181
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 29 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 30 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 30: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 30: Decreasing crossover rate from 0.181 to 0.172
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 30 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 31 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 31: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 31: Decreasing crossover rate from 0.172 to 0.163
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 31 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 32 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 32: Decreasing crossover rate from 0.163 to 0.155
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 32 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 33 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 33: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 33: Decreasing crossover rate from 0.155 to 0.147
-fandango:INFO: Generation 33 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 34 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 34: Decreasing crossover rate from 0.147 to 0.140
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 34 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 35 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 35: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 35: Decreasing crossover rate from 0.140 to 0.133
-fandango:INFO: Generation 35 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 36 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 36: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 36: Decreasing crossover rate from 0.133 to 0.126
-fandango:INFO: Generation 36 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 37 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 37: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 37: Decreasing crossover rate from 0.126 to 0.120
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 37 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 38 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 38: Decreasing crossover rate from 0.120 to 0.114
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 38 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 39 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 39: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 39: Decreasing crossover rate from 0.114 to 0.108
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 39 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 40 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 40: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 40: Decreasing crossover rate from 0.108 to 0.103
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 40 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 41 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 41: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 41: Decreasing crossover rate from 0.103 to 0.100
-fandango:INFO: Generation 41 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 42 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 42: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 42: Decreasing crossover rate from 0.100 to 0.100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 42 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 43 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 43: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 43: Decreasing crossover rate from 0.100 to 0.100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 43 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 44 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 44: Decreasing crossover rate from 0.100 to 0.100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 44 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 45 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 45: Decreasing crossover rate from 0.100 to 0.100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 45 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 46 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 46: Decreasing crossover rate from 0.100 to 0.100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 46 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 47 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 47: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 47: Decreasing crossover rate from 0.100 to 0.100
-fandango:INFO: Generation 47 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 48 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 48: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 48: Decreasing crossover rate from 0.100 to 0.100
-fandango:INFO: Generation 48 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 49 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 49: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 49: Decreasing crossover rate from 0.100 to 0.100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 49 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
-fandango:INFO: Generation 50 - Average Fitness: 0.01
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 50: Increasing mutation rate from 1.000 to 1.000
-fandango:INFO: Generation 50: Decreasing crossover rate from 0.100 to 0.100
-fandango:INFO: Generation 50 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generation 10 stats -- Best fitness: 0.01, Avg fitness: 0.01, Avg diversity: 0.01, Population size: 100
 fandango:INFO: Average fitness of population: 0.01
-fandango:INFO: ---------- Done generating  for 50 generations----------
-fandango:INFO: Time taken: 157.35 seconds
+fandango:INFO: ---------- Done generating  for 10 generations----------
+fandango:INFO: Time taken: 14.76 seconds
 fandango:ERROR: Population did not converge to a perfect population
 fandango:ERROR: Only found 0 perfect solutions, instead of the required 10
 </pre></div>
@@ -1367,14 +1069,16 @@ Of course, if the constraint is <code class="docutils literal notranslate"><span
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-grammars">The Limits of Grammars</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-constraints">Specifying Constraints</a></li>
@@ -1432,8 +1136,8 @@ By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Sm
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
