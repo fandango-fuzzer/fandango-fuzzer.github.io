@@ -1051,16 +1051,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tina Maldonado,37613916062037
-Charles Mason,07784198
-Kim Byrd,2447730
-Kimberly Poole,4083601460
-Matthew Foster,40713974983
-Steve Williams,996349419763209
-Paul Becker,73576
-Monica Morrison,8
-Amanda Jennings,545279887413295
-Jason Williams,4845
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jennifer Stephens,15653154
+Alex Jones,6297710507892525419
+Emily Dougherty,907106726049692
+Julie Morris,27127416598579
+Carol Bowman,2712441613
+Juan Hernandez,507
+Erica Gonzalez,627696
+Theodore Lewis,32
+Travis Mccoy,406697
+Melinda Rowe,0068541874867
 </pre></div>
 </div>
 </div>
@@ -1102,16 +1102,16 @@ Jason Williams,4845
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aabccbcabbccba
-abcbbcbcbac
-acba
-aabb
-bccbbbbcccab
-cbbaacccaaabbbbacbab
-ccbbbaabbcbbcc
-b
-cc
-babcabcbcaababbcbca
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ca
+bacab
+bcaabacbcaaaaccc
+abbbaacbcbaabaccabb
+cbbbbbbbccc
+bba
+ccabacbcbccabbaaa
+bbbccbcbaaccba
+cbbbbcb
+c
 </pre></div>
 </div>
 </div>
@@ -1193,7 +1193,7 @@ babcabcbcaababbcbca
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f4c94f63480&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f2680895f20&gt;
 </pre></div>
 </div>
 </div>
