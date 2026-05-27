@@ -490,16 +490,18 @@ Have a look at the above rule first, and then check out the solution.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94371655208234547845 + 86095647786 + 53578 + 9185
-5155907 + 439839
-78505891033
-4793167634
-6174611627206
-7210664714184004 + 0052714388
-97523076460
-362410706565 + 290820558443203 + 97055623558
-2629609
-73845851 + 2924216881960423 + 16213008108165 + 763252
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9777458
+873467514 + 4874558 + 10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7076346 + 647380184358249 + 76639499591720567 + 471031449941452
+347 + 974916217433
+28113494
+64 + 56172 + 48096
+0823592850617170 + 861004
+552956845917
+24
+50882459602053
 </pre></div>
 </div>
 </div>
@@ -563,28 +565,28 @@ Hence, <code class="docutils literal notranslate"><span class="pre">2</span> <sp
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49519246797560262 * +(500026611315190 / +(18977717895 * 71 + 71)) + 63 / 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 + (----((--6696017650883511 * -9902 - +36) + ++4) * -+880 + +49) / +59 * 18 + +42
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((6 + -(+38251745148 - -(96056) * 18 * 72) / +83 + +7) / +-68 / +88 - 663) * 52 + -28
-(-+45228715347310224178 / 33724470 / 881912728217689 / 07 * 96 - +8) + -+12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>++-73314882656757210860 / +2955163752580 * (---62 / +19 * 82 * 1 - 6744) + 543
++21365867520216
++3901940221 / ((7741297912 * -53272535261 + ++-5 + 2050) / -3 * +20 + 246) * -0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76325 + ++961897187961117629 - ((---4 / 857 * 65) * -2 / 477) / 87 / 90 * 87 - 999
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+(-82528418869847891 / -+--++-+(((25699) / 24 / 10 / 38 + +62) - 980)) - (+5077)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-(0696359086 * (-984644045184 * 01 / 66 / 66 - +3) / --1) / +-88 / +0 + --4) - (89)
-13847947904 * -++(-(3023742568263 / 6 * +2 / +85 * 13 / 07) / +56 * 12 + +79) * -+38
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+(-694557556 - 6049366792643721 / -(+427 * 57 - +6) - +180) / -846 / 91 * 21 / 77
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-211568765925251 / ((4340 * 3 + +36) * 593 + 96) * -65 + +09) * -79 / 67 / 53 + -00
-55538540091 / 315719308726
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--+(+-((+2 / (961624904659 / 3 - 812) / 725 - +01) * 0 / -+9 + ++02) + ++69) + 35616
+103854637684 * -339082810279250019 / 117134211304690 / 7021 / -1 / +55 * 68
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71364630252989273710 - --+51183357720831002 * (-707 * -0 * 727 - +0) + (74)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(---122971176740 * 89503229049433756 / -45184 / +56 * 71 * 59 - -56) * +3 + 888
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+85177515421194291970 * 428 * -++2 * 6 * 22682901409 * 80 * 31 * 13 / 25 / 26 / 94
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4078301957 / +-300 * 685450199754648 / +69 * 02 / 24 * 27 * 13 / 99 * -7 / -85 - 753
 </pre></div>
 </div>
 </div>
@@ -623,28 +625,28 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(707.9058807236 + ++(((41599412016473856 * +4) + 845) + +74) + 7.39) + +-1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(--9 / -0 / 213057142719953990.52 + +6) * 809 / +8 / 24 / 8 / 771 / -5 * +1 / +1 / 735
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(866879.938146489749556104 / 1247154323839384 + 742864084)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20171386285575403.2072335209767555845 * -+9 / 4
+((++(222175164 - +-3238 * +5 / 4 * 1.76) * -+0 - (6)) / +-5 * 339 * +9 * -2 - +-9) * 2.9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+6954632656229.13010686871 / 7 * 8.0 * 16094306852 + 3785.8 * 9 * -2 + -606
-142 + -+-279860808544004683 * 71521548.92 / 0 / 216 * 7 * -0 * +-4 * +3 * --6 / 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-6 - 5.45789863 * 3 / -8 * -8703705171.94670452883790097859 - ++7 / +8 / 7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>96259007860.75368051 * -+(839.214226075966 + -0) / 3 / (0.2) * +6 / 7 - +(3)
-3 * (-(+(((-3) * +6 * +4) * -+3 / -7 / 9.1 / 41 - 588) * 723 - +6) / +-2 * 349 + 839) + --3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2.394768846179 * +--820910497908 + -(-314615475737 / -4 + --1) * +-1 + (2)
+(++25356478571.054496269490276 / -2.38916426543193844 * +0 - 250) + 7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.62723227589 - 9.5639851752950242 * 655332675.12 * 1 * +2 * 963 / -8 + 658
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+6 / --42634118877880.19479881 * 182267 * 283859784409564242.01 / 7 * -+0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(((1 / 11171549763530873073 * 12.86 * +0 * -8 / 2 + 4.814) + -8) * -+8) / 0 / 5084
-(3.8409098998450939 / 933275489640985306.012481) * 14242 / --3.59 - 541
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---46583901479877253 / +((--5 / 45 + 428) * +9 / +8 + +-6) * -440 * 3 * 2.14 * 0 / -4
+++7741.12504535915 / (+266286074480 / 94 * -6606985304 + +73879.67 - 94)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-(-319482625867629307844 * ((+4 / +5) / 3 * --7) / 8.27 / -1 - +-7) - -++3) - -750
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-+--0.45324415182772636006 * 7 / 25454429 * 1 * 6 * 8.96 / 5 / -9 / ++9 * +5 - --2
 </pre></div>
 </div>
 </div>
@@ -655,30 +657,30 @@ This was prone to errors, so in today’s Python, octal numbers need a <code cla
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34581086198850.3946502210046255 + 16786621978841.38 * 7 / -6 / +5 + 2.81
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>477668618 * (129.45604989231734012078)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 + 409327431601.079022 + 73597.5386781866599
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((++-+(+2.3 * -0 * 547 / 5 * -5 + (4)) / 8.460 * 5 * -7 / --2 * +6 * 9) - 6 * 5) * 8.76 - 9
+9098378280723081.689621059 / (825106430 / 139230.3 - 100) * 6 / 6.88 - -6
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(65279940624605546.55939618 + (((5) / -9 + -+2)) / -+5 * 5.94 + +0) / 9.6 + 270
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-43132328789747544 / +((-4101300910.06992207 / 3 - -+4) / (3) + --2) + 1 / +3
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68943273871543.67724140580623460063 / +726919905.84 * +3 / +8 * --8 - 4.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+-(-9.46949238953903696939 + 5.6 * (9069 * 1 / -1 / 6 + +395)) + 8 / 763) - 191
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+2070161196.8574022433130
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2920649816752001963.141 * (+3.77996575 * 6 * --3 / --7 / 3 * -9 - 5 / 9) + 6 / 7
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-+77 * (((++38298959107673 * 2 - (0)) / +2 * -+0 + -491) * 479 / 6 / +7 + -648) + 279
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>632977022011663857535.52412 / 3980110484390870.196330 + (1) * 92 / +2
+-+(4403730988 / (-410 / 28 * -1 * +3 + ++3) * 6034 / 7 * 4) / -(+5) / ++8 * 6 / 3.97 + 31
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.1292 - 7572064.7619032 / --6.487527327513999611 / 1.85583 / 3 * -6 * ++8
-+33699654852371
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-7 - 8231 * -570723577 - -2 * (-+8 / 395) * -4 / 497 * +9 * +0 / -9 * +2 / 1 / 5.56 - -6
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((+-22270585118354488128 + ++7 - -+8) - 3 * -9) * ++2 / 996 / 7 * -9 / --1 * 4 - 5123
-294557941252837255 * +--203402714.070168 - +-2.5896819334213 * 5 + 5.78
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-(+1.250 / +(7433414997802210415 / 439) + 7.4) * 507 - 861) * 5 / +-5 * +9 / 2
 </pre></div>
 </div>
 </div>

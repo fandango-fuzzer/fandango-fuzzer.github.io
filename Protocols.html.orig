@@ -971,7 +971,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.rsxgazygpvhe1a5ds0tn1b54hd.bx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.wpgp3irlzinurint5chaucoqrc.dx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1080,8 +1080,8 @@ Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/_temp/uv-python-dir/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/threading.py&quot;</span>, line <span class=" -Color -Color-Magenta">995</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">self._target</span><span class=" -Color -Color-Bold -Color-Bold-Red">(*self._args, **self._kwargs)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7eff95833420&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">693</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7fc7197fade0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">697</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
     line = self.stdout.read(1)
 <span class=" -Color -Color-Bold -Color-Bold-Magenta">OSError</span>: <span class=" -Color -Color-Magenta">[Errno 5] Input/output error</span>
 </pre></div>
@@ -1100,25 +1100,23 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
 fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
-fandango:INFO: File mode: text
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
 fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: ---------- Generating  for 500 generations----------
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Current coverage: 1.96%
+fandango:INFO: Current coverage: 1.96%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmg397c.rsxgazygpvhe1a5ds0tn1b54hd.bx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmg397c.wpgp3irlzinurint5chaucoqrc.dx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
+fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 fandango:INFO: Current coverage: 74.51%
 Exception in thread Thread-1 (_listen_loop):
 Traceback (most recent call last):
@@ -1128,11 +1126,13 @@ Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/_temp/uv-python-dir/cpython-3.13.13-linux-x86_64-gnu/lib/python3.13/threading.py&quot;</span>, line <span class=" -Color -Color-Magenta">995</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">self._target</span><span class=" -Color -Color-Bold -Color-Bold-Red">(*self._args, **self._kwargs)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7fb3f804b420&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">693</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7fd24e24ede0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">697</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
     line = self.stdout.read(1)
 <span class=" -Color -Color-Bold -Color-Bold-Magenta">OSError</span>: <span class=" -Color -Color-Magenta">[Errno 5] Input/output error</span>
-fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
 fandango:INFO: Current coverage: 100.00%
 </pre></div>
 </div>
@@ -1220,9 +1220,9 @@ When invoked with the <code class="docutils literal notranslate"><span class="pr
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com i$(+*y%ijV@
+220 host.example.com ]#&lt;-@=@Kum&gt;3
 QUIT
-221 S?a\r[7dwyuB![
+221 XYZ
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1442,9 +1442,6 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
-MAIL FROM:&lt;alice@example.com&gt;
-RCPT TO:&lt;alice@example.com&gt;
-RCPT TO:&lt;alice@example.com&gt;
 </pre></div>
 </div>
 </div>
@@ -1456,7 +1453,7 @@ RCPT TO:&lt;alice@example.com&gt;
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
 250 Hello host.example.com, glad to meet you
-588 Error
+509 Error
 </pre></div>
 </div>
 </div>
