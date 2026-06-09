@@ -499,7 +499,7 @@ See https://fandango-fuzzer.github.io/ for more information.
                      [--file-mode {text,binary,auto}] [--no-cache]
                      [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                      [-x FILENAME_EXTENSION]
-                     [--format {string,bits,tree,grammar,value,repr,none}]
+                     [--format {string,bits,tree,grammar,value,repr,1,none}]
                      [--validate] [-N MAX_GENERATIONS] [--infinite]
                      [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
@@ -564,10 +564,11 @@ Output settings:
                         Create individual output files in DIRECTORY.
   -x, --filename-extension FILENAME_EXTENSION
                         Extension of generated file names (default: &#39;.txt&#39;).
-  --format {string,bits,tree,grammar,value,repr,none}
+  --format {string,bits,tree,grammar,value,repr,1,none}
                         Produce output(s) as string (default), as a bit
                         string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, or none.
+                        Python value, in internal representation, as the
+                        constant &#39;1&#39; (for testing), or none.
   --validate            Run internal consistency checks for debugging.
 
 Generation settings:
@@ -645,7 +646,7 @@ command invocation settings:
                       [--file-mode {text,binary,auto}] [--no-cache]
                       [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                       [-x FILENAME_EXTENSION]
-                      [--format {string,bits,tree,grammar,value,repr,none}]
+                      [--format {string,bits,tree,grammar,value,repr,1,none}]
                       [--validate] [--warnings-are-errors] [--party PARTY]
                       [--prefix] [-o OUTPUT]
                       [files ...]
@@ -692,10 +693,11 @@ Output settings:
                         Create individual output files in DIRECTORY.
   -x, --filename-extension FILENAME_EXTENSION
                         Extension of generated file names (default: &#39;.txt&#39;).
-  --format {string,bits,tree,grammar,value,repr,none}
+  --format {string,bits,tree,grammar,value,repr,1,none}
                         Produce output(s) as string (default), as a bit
                         string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, or none.
+                        Python value, in internal representation, as the
+                        constant &#39;1&#39; (for testing), or none.
   --validate            Run internal consistency checks for debugging.
 
 General settings:
@@ -761,7 +763,7 @@ Party settings:
                      [--file-mode {text,binary,auto}] [--no-cache]
                      [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                      [-x FILENAME_EXTENSION]
-                     [--format {string,bits,tree,grammar,value,repr,none}]
+                     [--format {string,bits,tree,grammar,value,repr,1,none}]
                      [--validate] [-N MAX_GENERATIONS] [--infinite]
                      [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
@@ -827,10 +829,11 @@ Output settings:
                         Create individual output files in DIRECTORY.
   -x, --filename-extension FILENAME_EXTENSION
                         Extension of generated file names (default: &#39;.txt&#39;).
-  --format {string,bits,tree,grammar,value,repr,none}
+  --format {string,bits,tree,grammar,value,repr,1,none}
                         Produce output(s) as string (default), as a bit
                         string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, or none.
+                        Python value, in internal representation, as the
+                        constant &#39;1&#39; (for testing), or none.
   --validate            Run internal consistency checks for debugging.
 
 Generation settings:

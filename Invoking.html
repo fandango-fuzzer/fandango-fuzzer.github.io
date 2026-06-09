@@ -459,16 +459,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2594719
-0880695718609894953
-0
-541526010146714739
-61
-23267883
-9017676
-39751332631
-3104513985946
-624735072177
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>833776
+679
+9350492785405465404
+1539831195588
+96177082459
+4941
+634316214
+0012443
+628852484511096
+276
 </pre></div>
 </div>
 </div>
@@ -506,7 +506,7 @@ For instance, these are all the options supported by <code class="docutils liter
                      [--file-mode {text,binary,auto}] [--no-cache]
                      [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                      [-x FILENAME_EXTENSION]
-                     [--format {string,bits,tree,grammar,value,repr,none}]
+                     [--format {string,bits,tree,grammar,value,repr,1,none}]
                      [--validate] [-N MAX_GENERATIONS] [--infinite]
                      [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
@@ -571,10 +571,11 @@ Output settings:
                         Create individual output files in DIRECTORY.
   -x, --filename-extension FILENAME_EXTENSION
                         Extension of generated file names (default: &#39;.txt&#39;).
-  --format {string,bits,tree,grammar,value,repr,none}
+  --format {string,bits,tree,grammar,value,repr,1,none}
                         Produce output(s) as string (default), as a bit
                         string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, or none.
+                        Python value, in internal representation, as the
+                        constant &#39;1&#39; (for testing), or none.
   --validate            Run internal consistency checks for debugging.
 
 Generation settings:
