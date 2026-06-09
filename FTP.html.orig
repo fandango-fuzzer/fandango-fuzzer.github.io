@@ -1449,9 +1449,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr--rwxr-x                 684 D             g6KsB-k     9532041 Jul 17 07:33 Qd;*D
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr----xr--     269 kO8   vbj_p0KVUZrcOeEzp8L2                  6696917 Feb 18 21:57 lbi7;ko9X;~*4
 
-c-wxrwxrw-           223 Z1gQwXFYkuvcu2INtW            rw5Dy4             9022665 Apr 03 04:52 &quot;CP:(Kgui]FzIPf
+brwxr-xrwx             599 Iabv88zvktvAIq    71Gs3   3552890 Apr 25 06:18 2 V\_*gn
+
+dr-xr--r-- 959 9qABsc               s6KgWH                29391 Dec 07 12:56 fSKG^P=
 </pre></div>
 </div>
 </div>
@@ -1489,13 +1491,24 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
+EPSV
+SYST
 TYPE I
+LIST
+PWD
+EPSV
+FEAT
+PWD
+LIST
+EPSV
+LIST
+OPTS UTF8 ON
 EPSV
 OPTS UTF8 ON
-LIST
+FEAT
 SYST
 SYST
-EPSV
+SYST
 QUIT
 </pre></div>
 </div>
@@ -1510,18 +1523,36 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-
-220-fZ&quot;]n{@2h43qS-0
-220-+1zX$y\
-220-N
-220-_&#39;].Il5`77x=m#
-220-x&quot;%aQ@FqsU3_4bf R.
-220 
-331 _XP1p{O
-230 Ffr+D&quot;J:l
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-%0v7#b
+220-&lt;UY|oWkfqyh+W
+220-nis_2{5 &amp;!P$m
+220-a&#39;&lt;)EXQn)TSrW`2&lt;!v/
+220-7su*_%)Bx78?c6
+220--R3k/~As;~NBF3Z*hM
+220 HZqSH*.X+t~,5o
+331 #lufn=cdoERP
+530 +-|1t:EGPe[J9j2
+331 {j+rO=+&lt;*1$y&quot;7\*r
+530 $ROHl@~sOIl
+500 ccc`5oqlc&gt;7-/;B+
+530 aw0~!w:^_
+530 ?nE3j/f&lt;g0#&#39;XOkcsVxH
+331 se
+230 0zq
 229 Entering Extended Passive Mode (|||50100|)
-200 mx&amp;&#39;
-221 0fCJ&#39;q
+200 .wc
+211-Features:
+ EPSV
+211 End
+150 LW*o1
+226  .W.X{^:hF?m]c?}
+229 Entering Extended Passive Mode (|||50100|)
+150 ZHQ?
+226  iLP&amp; &amp;60u&amp;yI2;aoE
+229 Entering Extended Passive Mode (|||50100|)
+215 Linux
+257 &quot;/p_xeCHd_MTUvfFWlvGT/3Z6XleJK/nFZwQVafdmd/wbTyce4_nYOPyqPC/IZlXkwiB4N9_Ulf0/IHyZyJO&quot; is the current directory
+221 R=*%&amp;l
 </pre></div>
 </div>
 </div>
