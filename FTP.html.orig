@@ -1449,9 +1449,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b-w--wxr--     474 3uCxf3IGU4JjCxe2x-nE     YO0svC-nHp-OhymAKkpw                   6228477 Sep 28 12:30 w+zcToyYj
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b-----x-wx                27 6VS7cf2pKN           hRjrTbrWMjeEyE3QC         3647405 Jul 05 16:38 Qt.}
 
-lr--rwx---             288 2jTlvXkOOzcZmgEUyd  in1maQnG-Xf0dQgCF           2668791 Nov 13 15:37 y4xYJn54o&lt;b7;
+l--x-wx---            210 vQm  9P6DOqVlyTX9      7916785 May 23 03:58 {&gt;4p
 </pre></div>
 </div>
 </div>
@@ -1487,21 +1487,19 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
+PASS L
 USER the_user
 PASS the_password
-OPTS UTF8 ON
 EPSV
+FEAT
 TYPE I
 LIST
-EPSV
 OPTS UTF8 ON
-OPTS UTF8 ON
-PWD
-LIST
-PWD
+FEAT
 EPSV
 LIST
+OPTS UTF8 ON
 EPSV
 QUIT
 </pre></div>
@@ -1517,16 +1515,23 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 ^{ns$n3sSg
-331 D&amp;uf
-530 ypE*{JX}
-331 Bx
-230 G{(T&#39;`dk[n*TJt&#39;
-215 Linux
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-?.8bK
+220-OS?U@W
+220-X2Wsxi&lt;@K}e/
+220-Z%KZ,!zXUcM)a,d
+220-
+220-6TyVShZn*|f6~F
+220-
+220-t
+220- x.t.#` +,1m91Do?~
+220-e[cL_aZ1z
+220 M)px=_;y+B.,, (m
+331 aFP&#39;rWSxHW[/g t
+230 0j,`wT3dND|7[|]M
 229 Entering Extended Passive Mode (|||50100|)
-200 ms36bLP$I0kd
-200 W98W1
-221 &amp;&amp;5lW\p+&lt;%vAVgcJ!$
+200 )VtNI
+200 *|g^&lt;2,SY@x!eGP_
+221 S?i2%RwI,-
 </pre></div>
 </div>
 </div>
