@@ -1449,9 +1449,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b-----x-wx                27 6VS7cf2pKN           hRjrTbrWMjeEyE3QC         3647405 Jul 05 16:38 Qt.}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br----xr--            840 bILVX2GWsbqkn                   hWIECbjLSY8rne  9863034 Oct 02 22:36 k#g#.nSdT]%p?^|@
 
-l--x-wx---            210 vQm  9P6DOqVlyTX9      7916785 May 23 03:58 {&gt;4p
+c--x-wxr--    660 ZrymTsd_D8Oi_uRXh5         iLZTGk         1182840 Aug 27 13:37 )onw&lt;fmLO#c)KEL
 </pre></div>
 </div>
 </div>
@@ -1488,18 +1488,14 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
-PASS L
-USER the_user
 PASS the_password
-EPSV
-FEAT
 TYPE I
+SYST
+EPSV
 LIST
-OPTS UTF8 ON
 FEAT
 EPSV
 LIST
-OPTS UTF8 ON
 EPSV
 QUIT
 </pre></div>
@@ -1515,23 +1511,24 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-?.8bK
-220-OS?U@W
-220-X2Wsxi&lt;@K}e/
-220-Z%KZ,!zXUcM)a,d
-220-
-220-6TyVShZn*|f6~F
-220-
-220-t
-220- x.t.#` +,1m91Do?~
-220-e[cL_aZ1z
-220 M)px=_;y+B.,, (m
-331 aFP&#39;rWSxHW[/g t
-230 0j,`wT3dND|7[|]M
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-k/$_C50
+220-~#k2|L`/}5
+220-5jgWFG_|ux
+220 Y
+331 _(r&lt;aarJTmAgY2(.
+530 XT{B`3o}&gt;IpmS\&amp;
+331 Y
+230 F&quot;0&quot;G9&quot;1&#39;n~i! O#
+200 \U
+211-Features:
+ EPSV
+211 End
+215 Linux
 229 Entering Extended Passive Mode (|||50100|)
-200 )VtNI
-200 *|g^&lt;2,SY@x!eGP_
-221 S?i2%RwI,-
+211-Features:
+ EPSV
+211 End
+221 PDa/^Bm{fGSA/6g
 </pre></div>
 </div>
 </div>
