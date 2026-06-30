@@ -1449,9 +1449,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br----xr--            840 bILVX2GWsbqkn                   hWIECbjLSY8rne  9863034 Oct 02 22:36 k#g#.nSdT]%p?^|@
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d-wxr--r-x   550 iUgCX-caC           Qjr-btqPAL1      9854800 Jun 20 13:48 +/{9Q
 
-c--x-wxr--    660 ZrymTsd_D8Oi_uRXh5         iLZTGk         1182840 Aug 27 13:37 )onw&lt;fmLO#c)KEL
+crwx-wx---            355 qppjQaxpd               dYE8xK05      9320996 Aug 01 23:14 }gCU&quot;@!n/k&gt;![_%L
 </pre></div>
 </div>
 </div>
@@ -1487,16 +1487,20 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
+AUTH TLS
+AUTH SSL
+USER the_user
 PASS the_password
 TYPE I
+EPSV
+OPTS UTF8 ON
+LIST
+EPSV
+LIST
+EPSV
+PWD
 SYST
-EPSV
-LIST
-FEAT
-EPSV
-LIST
-EPSV
 QUIT
 </pre></div>
 </div>
@@ -1511,24 +1515,23 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-k/$_C50
-220-~#k2|L`/}5
-220-5jgWFG_|ux
-220 Y
-331 _(r&lt;aarJTmAgY2(.
-530 XT{B`3o}&gt;IpmS\&amp;
-331 Y
-230 F&quot;0&quot;G9&quot;1&#39;n~i! O#
-200 \U
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-=+
+220-b;C&gt;yr&gt;F7,ZhC0EKT
+220 A
+500 Ek9y
+500 g9
+331 vOrJ`l&amp;@IAOZ[sKM
+230 )(H~
 211-Features:
  EPSV
 211 End
 215 Linux
+200 }
 229 Entering Extended Passive Mode (|||50100|)
 211-Features:
  EPSV
 211 End
-221 PDa/^Bm{fGSA/6g
+221 5/FFerB$
 </pre></div>
 </div>
 </div>
