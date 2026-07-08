@@ -1078,25 +1078,28 @@ How would one do this? (Hint: use the Python <code class="docutils literal notra
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoFailedError: Timed out while waiting for message from remote party. Expected message from party: Out
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FandangoFailedError: Could not parse received message fragments into predicted NonTerminals.
+Incompletely parsed NonTerminals:
+Applicable NonTerminals: &lt;output&gt;
+Received messages: [(&#39;Out&#39;, &#39;Out&#39;, &#39;-&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;1&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;4&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;3&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;1&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;2&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;4&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;4&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;\n&#39;)]
 Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/.venv/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">10</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
     sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
              <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f28019deac0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7feefdb24c20&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">55</span>, in <span class=" -Color -Color-Magenta">main</span>
     last_status = run(command, args)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f2801237740&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7feefd8618a0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">521</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f2802b9b560&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7feeff1d56c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">47</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">519</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
     <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.talk_command) at 0x7f2801236fc0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">talk_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.talk_command) at 0x7feefd861120&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">talk_command</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">346</span>, in <span class=" -Color -Color-Magenta">talk_command</span>
     <span class=" -Color -Color-Red">fandango.fuzz</span><span class=" -Color -Color-Bold -Color-Bold-Red">(</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
@@ -1107,22 +1110,37 @@ Traceback (most recent call last):
         <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^</span>
     <span class=" -Color -Color-Bold -Color-Bold-Red">)</span>
     <span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.fuzz) at 0x7f28019dd6c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">128</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.fuzz) at 0x7feefdfe37e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">128</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">427</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
     for s in <span class=" -Color -Color-Bold -Color-Bold-Red">generator</span>:
              <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.generate_solutions) at 0x7f28019dd440&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.generate_solutions) at 0x7feefdfe3560&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">293</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
     yield from self.fandango.generate(max_generations=max_generations, mode=mode)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm.generate) at 0x7f2801f1fc40&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm.generate) at 0x7feefe54dda0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">390</span>, in <span class=" -Color -Color-Magenta">generate</span>
     yield from self._generate_io(max_generations=max_generations)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm._generate_io) at 0x7f2801f1fd80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">53</span>, in <span class=" -Color -Color-Magenta">_generate_io</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">677</span>, in <span class=" -Color -Color-Magenta">_generate_io</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm._generate_io) at 0x7feefe54dee0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">53</span>, in <span class=" -Color -Color-Magenta">_generate_io</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">681</span>, in <span class=" -Color -Color-Magenta">_generate_io</span>
+    forecast, packet_tree = <span class=" -Color -Color-Red">parse_next_remote_packet</span><span class=" -Color -Color-Bold -Color-Bold-Red">(</span>
+                            <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">self.grammar,</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">self.packet_selector.forecasting_result,</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">io_instance,</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">)</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.packetparser.parse_next_remote_packet) at 0x7feefe52b920&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">75</span>, in <span class=" -Color -Color-Magenta">parse_next_remote_packet</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/packetparser.py&quot;</span>, line <span class=" -Color -Color-Magenta">160</span>, in <span class=" -Color -Color-Magenta">parse_next_remote_packet</span>
     raise FandangoFailedError(
-        f&quot;Timed out while waiting for message from remote party. Expected message from party: {&#39;, &#39;.join(external_parties)}&quot;
+    ...&lt;7 lines&gt;...
     )
-<span class=" -Color -Color-Bold -Color-Bold-Magenta">fandango.errors.FandangoFailedError</span>: <span class=" -Color -Color-Magenta">Timed out while waiting for message from remote party. Expected message from party: Out</span>
+<span class=" -Color -Color-Bold -Color-Bold-Magenta">fandango.errors.FandangoFailedError</span>: <span class=" -Color -Color-Magenta">Could not parse received message fragments into predicted NonTerminals.</span>
+<span class=" -Color -Color-Magenta">Incompletely parsed NonTerminals:</span>
+<span class=" -Color -Color-Magenta">Applicable NonTerminals: &lt;output&gt;</span>
+<span class=" -Color -Color-Magenta">Received messages: [(&#39;Out&#39;, &#39;Out&#39;, &#39;-&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;1&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;4&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;3&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;1&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;2&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;6&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;4&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;7&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;4&#39;), (&#39;Out&#39;, &#39;Out&#39;, &#39;\n&#39;)]</span>
 </pre></div>
 </div>
 </div>
@@ -1223,31 +1241,30 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+62001934374026677975 / 736 * 23 * -9 * +42 * 97 * 30 / 73 * 92 / 88 / 23 - +05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+(1819 * +-3795012103 * ((15754 / +1818177 + -77) + 4781) + 535) / 266 / 83
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68426312495 / (-++--+-----+(2981480203639083 + 19)) / (38 / 43) * +2 - +65
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>836 + 58799699297587774869 / +++(2631570300459785 - +10) / -8 + ++-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00656848 / +(08360681 / -(+--+-+892251748231 + +6869) * +63 - -46) + (73)
 
-++++((+++869 / (+((+575))) * +(61) * -80 / 56 * 13 - -45) * +5 / -40 - -17) - ++-3
+27 * -(3658914 * 478428817448069 + -----((+-90)) * +-+5 - +-77) / --70 - 250
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(+++--+--(00 / 2 / +8 - -74) / ++--28 * +69 + -84) * 719 / 26 / 93 / 03 * 84 * 48 - 37
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>173 - (((-((++6)) * +-42 * 56 * 27 - 290) * -9 - --2) / +-1 * +15 * +8 + -+9) + ++25
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3760222228715326349 * 8886798185 * ((39 * 56 / 30 * 26 - -9) + +211) / 6
 
-+(26998 + +8403 + +--(-30132570 + -3) / -686 * +3 * +29 / 87 - 124) / 604 + +13
+64211382267963292 * --(3061834640640166027 + 5499 / 66 - -60) + -+57
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--+-(102249878803500516 / ((0790) + +03) / 244 / 41 + -5) * +-+6 / +-8 + -+9
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>069 / 13255 * ((+--+28791640528783766 / 5919950762 + (-2) / 647 - -2))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(++((((5936 / 694 * 10 * 76 - +4) / +17) * +27 / 90 / 42) * 38 * 23) + 1917) - +58
 
---8873063698 + 0 * 4766984252 + 6485351642886761 / ++(--37) / 3854 / 66
+-+2587469850
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--2031622 / (+(307859 / (-08) + -74) / +62 / +2 * +04 * 55 * 14 * 27 / 91) + 097
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--38 / 5342473571099074 * 7591604541421480 * -2057 * -+++459 * 508 - 108
+
+615580561003198312 / 871721251424473476 - (263 - +66) / 53 * -7 + --9
 </pre></div>
 </div>
 </div>
@@ -1258,27 +1275,26 @@ To see what typical inputs to <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8539197
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32123042477861907547
+
+985614761
+
+75
+
+762626012519338206
+
+85199402562332
+
+27003494
+
+9925423155461
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6270862233539304971
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>144868004
 
-75701501921648738827
+455609
 
-44210933985931138065
-
-78298607472
-
-7512804970711175961
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>833344
-
-247287200
-
-771470487
-
-0
+3544
 </pre></div>
 </div>
 </div>

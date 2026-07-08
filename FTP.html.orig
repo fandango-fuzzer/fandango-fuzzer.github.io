@@ -1449,9 +1449,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d-wxr--r-x   550 iUgCX-caC           Qjr-btqPAL1      9854800 Jun 20 13:48 +/{9Q
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lrw-r-xr-x     507 87Ew                 wZWlN      706554 Feb 03 16:40 o
 
-crwx-wx---            355 qppjQaxpd               dYE8xK05      9320996 Aug 01 23:14 }gCU&quot;@!n/k&gt;![_%L
+brw-r---wx        396 bcHPoES9IQf       x         3103103 Jul 28 17:54 AMwFSA45JB*0[
 </pre></div>
 </div>
 </div>
@@ -1487,20 +1487,21 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER hGQgqlJl0
+PASS the_password
 AUTH TLS
 AUTH SSL
+AUTH TLS
+USER nq2hms6j4hc
+PASS the_password
+AUTH TLS
 USER the_user
 PASS the_password
 TYPE I
-EPSV
-OPTS UTF8 ON
-LIST
-EPSV
-LIST
-EPSV
-PWD
 SYST
+EPSV
+LIST
+EPSV
 QUIT
 </pre></div>
 </div>
@@ -1515,23 +1516,19 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-=+
-220-b;C&gt;yr&gt;F7,ZhC0EKT
-220 A
-500 Ek9y
-500 g9
-331 vOrJ`l&amp;@IAOZ[sKM
-230 )(H~
-211-Features:
- EPSV
-211 End
-215 Linux
-200 }
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-A&gt;e&lt; upvyr0bYw 
+220 3&quot;r4&quot;uz
+530 )FZZMDOT)?
+331 r@-uK
+530 j\pV`_w
+530 B` 1f
+530 uvo9A&lt;gZ
+331 A&gt; {yNO&#39;.]2:vHh/9O|
+230 neVlEhl^N4o[
+200 I=5p;~LqWH]Bb}wPO~(
 229 Entering Extended Passive Mode (|||50100|)
-211-Features:
- EPSV
-211 End
-221 5/FFerB$
+257 &quot;/OMFy&quot; is the current directory
+221 &amp;t0-zl
 </pre></div>
 </div>
 </div>
