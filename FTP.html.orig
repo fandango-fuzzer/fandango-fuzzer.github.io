@@ -1449,9 +1449,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lrw-r-xr-x     507 87Ew                 wZWlN      706554 Feb 03 16:40 o
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-r--rw--wx                  754 UjKxJ7_                2EafnhrAzRJ82pUVSj   5537375 Jun 27 05:11 LQ7X#Toqz{D\1
 
-brw-r---wx        396 bcHPoES9IQf       x         3103103 Jul 28 17:54 AMwFSA45JB*0[
+b----w-r--     785 KTWR  A0_CA6UmZ3SF      5283108 May 24 00:59 lu 55!s#.0R%SBR4|?x
+
+l-w-rw---x    622 4_ewVu2iFmmPJPN          BwKROU  6225641 May 25 21:17 gn&quot;
 </pre></div>
 </div>
 </div>
@@ -1487,18 +1489,21 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER hGQgqlJl0
-PASS the_password
-AUTH TLS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
+PASS bUPMA
+AUTH SSL
+AUTH SSL
 AUTH SSL
 AUTH TLS
-USER nq2hms6j4hc
-PASS the_password
-AUTH TLS
+USER the_user
+PASS oTtxS
 USER the_user
 PASS the_password
-TYPE I
+OPTS UTF8 ON
 SYST
+TYPE I
+EPSV
+LIST
 EPSV
 LIST
 EPSV
@@ -1516,19 +1521,38 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-A&gt;e&lt; upvyr0bYw 
-220 3&quot;r4&quot;uz
-530 )FZZMDOT)?
-331 r@-uK
-530 j\pV`_w
-530 B` 1f
-530 uvo9A&lt;gZ
-331 A&gt; {yNO&#39;.]2:vHh/9O|
-230 neVlEhl^N4o[
-200 I=5p;~LqWH]Bb}wPO~(
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-&quot;JMO;Jm e&#39;I:S_^dyc@
+220-pI&amp;{lRTNj(`Cml
+220-\_=
+220-b;e9WDve&amp;@*C|
+220-JT6&gt;EVJZhf}usdo|I
+220-RGzyR4?qb^=j/3?
+220-`4u!d&quot;qldK
+220-Y|dt{;$}`zwb)2H
+220-SX&quot;KdT3X
+220-Q
+220-&lt;r@5,tO;b6u(*@L
+220-zY|,vTAr]
+220-Yl(iGz.pKy+V?W3xX&amp;
+220-$f|L+LMaT
+220-0EezCz.d~$OY;
+220-m5H`DAfLJ*h*$
+220 tMg(
+331 lCQ5T=M}_~:
+230 lZjM}q{
 229 Entering Extended Passive Mode (|||50100|)
-257 &quot;/OMFy&quot; is the current directory
-221 &amp;t0-zl
+200 Jjb&gt;zI6GwSLIoj
+150 &#39;z&quot;
+226 0a;Ro&amp;(ogiRui
+229 Entering Extended Passive Mode (|||50100|)
+150 D7&amp;4E^|T}6K
+226 J%O&quot;[5
+229 Entering Extended Passive Mode (|||50100|)
+150 &gt;`@ +\VY&amp;D7=]k(xQJ
+226 af`V..~&#39;Zp3VytSW^.
+257 &quot;/&quot; is the current directory
+229 Entering Extended Passive Mode (|||50100|)
+221 RMrK}nn,n^L[[v
 </pre></div>
 </div>
 </div>
