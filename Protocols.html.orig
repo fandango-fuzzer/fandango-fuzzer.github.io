@@ -971,7 +971,7 @@ For instance, entering a <code class="docutils literal notranslate"><span class=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 smtp.example.com.oyxxliiq5pgedpchvcbsaosj3d.bx.internal.cloudapp.net Python SMTP 1.4.6
+220 smtp.example.com.c2rp1btxlhcejh44lz4aykhskb.bx.internal.cloudapp.net Python SMTP 1.4.6
 QUIT
 221 Bye
 Connection closed by foreign host.
@@ -1080,7 +1080,7 @@ Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/_temp/uv-python-dir/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/threading.py&quot;</span>, line <span class=" -Color -Color-Magenta">995</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">self._target</span><span class=" -Color -Color-Bold -Color-Bold-Red">(*self._args, **self._kwargs)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7f814b47d940&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7faf43881940&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">697</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
     line = self.stdout.read(1)
 <span class=" -Color -Color-Bold -Color-Bold-Magenta">OSError</span>: <span class=" -Color -Color-Magenta">[Errno 5] Input/output error</span>
@@ -1114,7 +1114,7 @@ fandango:INFO: Current coverage: 1.96%
 fandango:INFO: Current coverage: 29.41%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervmkkn4f.oyxxliiq5pgedpchvcbsaosj3d.bx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;m220&gt; &#39;220 runnervm5mmn9.c2rp1btxlhcejh44lz4aykhskb.bx.internal.cloudapp.net Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 60.78%
 fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 fandango:INFO: Current coverage: 74.51%
@@ -1126,7 +1126,7 @@ Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/_temp/uv-python-dir/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/threading.py&quot;</span>, line <span class=" -Color -Color-Magenta">995</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">self._target</span><span class=" -Color -Color-Bold -Color-Bold-Red">(*self._args, **self._kwargs)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7f93f5669940&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.io.Out._listen_loop) at 0x7f6431d7d940&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">12</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/io/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">697</span>, in <span class=" -Color -Color-Magenta">_listen_loop</span>
     line = self.stdout.read(1)
 <span class=" -Color -Color-Bold -Color-Bold-Magenta">OSError</span>: <span class=" -Color -Color-Magenta">[Errno 5] Input/output error</span>
@@ -1220,9 +1220,9 @@ When invoked with the <code class="docutils literal notranslate"><span class="pr
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com ONN[iK^,:XTvMO&gt;U@!M
+220 host.example.com ^EhP]pQSf
 QUIT
-221 Zy@/3+ _7F&#39;&lt;omiRE
+221 2&gt;
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1442,6 +1442,7 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELO host.example.com
+MAIL FROM:&lt;alice@example.com&gt;
 </pre></div>
 </div>
 </div>
@@ -1454,10 +1455,7 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
 250 Hello host.example.com, glad to meet you
 250 Ok
-250 Ok
-354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
-250 Ok
-221 Bye
+599 Error
 </pre></div>
 </div>
 </div>
