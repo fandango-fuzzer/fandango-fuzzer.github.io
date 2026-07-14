@@ -1088,15 +1088,15 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 &lt;iso8601hour&gt; ::= <span class=" -Color -Color-Yellow">&#39;00&#39;</span> | <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | <span class=" -Color -Color-Yellow">&#39;08&#39;</span> 
 | <span class=" -Color -Color-Yellow">&#39;09&#39;</span> | <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | <span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | <span class=" -Color -Color-Yellow">&#39;21&#39;</span> | <span class=" -Color -Color-Yellow">&#39;22&#39;</span> | <span class=" -Color -Color-Yellow">&#39;23&#39;</span> | <span class=" -Color -Color-Yellow">&#39;24&#39;</span>
-&lt;iso8601minute&gt; ::= <span class=" -Color -Color-Yellow">&#39;00&#39;</span> | <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | 
+&lt;iso8601minute&gt; ::= <span class=" -Color -Color-Yellow">&#39;00&#39;</span> | <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;08&#39;</span> | <span class=" -Color -Color-Yellow">&#39;09&#39;</span> | <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | <span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | <span class=" -Color -Color-Yellow">&#39;21&#39;</span> | <span class=" -Color -Color-Yellow">&#39;22&#39;</span> | <span class=" -Color -Color-Yellow">&#39;23&#39;</span> | <span class=" -Color -Color-Yellow">&#39;24&#39;</span> | <span class=" -Color -Color-Yellow">&#39;25&#39;</span> | <span class=" -Color -Color-Yellow">&#39;26&#39;</span> | <span class=" -Color -Color-Yellow">&#39;27&#39;</span> | <span class=" -Color -Color-Yellow">&#39;28&#39;</span> | <span class=" -Color -Color-Yellow">&#39;29&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;30&#39;</span> | <span class=" -Color -Color-Yellow">&#39;31&#39;</span> | <span class=" -Color -Color-Yellow">&#39;32&#39;</span> | <span class=" -Color -Color-Yellow">&#39;33&#39;</span> | <span class=" -Color -Color-Yellow">&#39;34&#39;</span> | <span class=" -Color -Color-Yellow">&#39;35&#39;</span> | <span class=" -Color -Color-Yellow">&#39;36&#39;</span> | <span class=" -Color -Color-Yellow">&#39;37&#39;</span> | <span class=" -Color -Color-Yellow">&#39;38&#39;</span> | <span class=" -Color -Color-Yellow">&#39;39&#39;</span> | <span class=" -Color -Color-Yellow">&#39;40&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;41&#39;</span> | <span class=" -Color -Color-Yellow">&#39;42&#39;</span> | <span class=" -Color -Color-Yellow">&#39;43&#39;</span> | <span class=" -Color -Color-Yellow">&#39;44&#39;</span> | <span class=" -Color -Color-Yellow">&#39;45&#39;</span> | <span class=" -Color -Color-Yellow">&#39;46&#39;</span> | <span class=" -Color -Color-Yellow">&#39;47&#39;</span> | <span class=" -Color -Color-Yellow">&#39;48&#39;</span> | <span class=" -Color -Color-Yellow">&#39;49&#39;</span> | <span class=" -Color -Color-Yellow">&#39;50&#39;</span> | <span class=" -Color -Color-Yellow">&#39;51&#39;</span> | 
-<span class=" -Color -Color-Yellow">&#39;52&#39;</span> | <span class=" -Color -Color-Yellow">&#39;53&#39;</span> | <span class=" -Color -Color-Yellow">&#39;54&#39;</span> | <span class=" -Color -Color-Yellow">&#39;55&#39;</span> | <span class=" -Color -Color-Yellow">&#39;56&#39;</span> | <span class=" -Color -Color-Yellow">&#39;57&#39;</span> | <span class=" -Color -Color-Yellow">&#39;58&#39;</span> | <span class=" -Color -Color-Yellow">&#39;59&#39;</span>
+<span class=" -Color -Color-Yellow">&#39;52&#39;</span> | <span class=" -Color -Color-Yellow">&#39;53&#39;</span> | <span class=" -Color -Color-Yellow">&#39;54&#39;</span> | <span class=" -Color -Color-Yellow">&#39;55&#39;</span> | <span class=" -Color -Color-Yellow">&#39;56&#39;</span> | <span class=" -Color -Color-Yellow">&#39;</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">57&#39;</span> | <span class=" -Color -Color-Yellow">&#39;58&#39;</span> | <span class=" -Color -Color-Yellow">&#39;59&#39;</span>
 
 <span class=" -Color -Color-White"># xx:yy:60 is allowed to represent leap seconds</span>
 &lt;iso8601second&gt; ::= <span class=" -Color -Color-Yellow">&#39;00&#39;</span> | <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | 
@@ -1128,18 +1128,22 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2703-09-19
-3362295
-8613-W26
-0145-12-09
-03150628
-6057-W49-1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5737-W26-5
+5887-03-13T20+23
+8634-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2423-08-26
-2282-10-05
-1939087T17Z
-0218-216
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0785-06
+8406-038
+02370326
+5834-08
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3401-09-20T183329,6230954232684
+0136-W28
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77590810
 </pre></div>
 </div>
 </div>
@@ -1150,28 +1154,26 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1956-10-03T06Z
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19710112T13
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1966-10-03T06Z
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1971-W51-4
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1966-10-03
-1956-10-03T01Z
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19710112T19
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1967-10-03T06Z
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19740112T13
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1966-06-03T06Z
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19710112
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1956-10-03T06+04
-1956-10-03T06+09:50
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1964-10-03T06Z
-1956-10-03T1350
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19740612T13
+19710112T14
+19710124T13
+19740112T2045-07:56
+1971-W51-4T2045-07:56
 </pre></div>
 </div>
 </div>
@@ -1182,16 +1184,18 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0034-0014
-00:37:15.26548635875472250
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0030
 00+00
-T0034
-T00Z
-0009-00
 T00
-T00:44-00:38
-00Z
-T00:46-00:44
+T0022
+00:24
+00+00:33
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00:3023.30637419044-00:40
+T00:34Z
+00
+00:06Z
 </pre></div>
 </div>
 </div>
