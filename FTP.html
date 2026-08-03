@@ -536,12 +536,16 @@ window.runMermaid = runMermaid;</script>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
 <ul class="nav bd-sidenav">
@@ -1369,9 +1373,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dr-x--xr-x                 383 DzrZiqS7inTzktVgZdd       La20hrJa-2BQC1Nj    1105023 May 16 22:27 L.!,DMRulK
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br-x--x-wx                   948 3MT3DMf9gJw1i20C           J      613884 May 20 13:59 &lt;{N]oG
 
-l-wx--x-wx              504 -                  CrB-awMzYhLsX2QpQ        9331022 Oct 17 09:11 /UhBec!0?Ie$!fNtdH
+b-w-r-x-wx  727 zBnFGSkszus4-orbro        zlZ                 799450 Oct 25 22:56 YJF/%
 </pre></div>
 </div>
 </div>
@@ -1407,22 +1411,19 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
+AUTH SSL
+AUTH SSL
+AUTH TLS
+USER nuxgDQmQoWTo5o6Z
+PASS DKgD3wZxZCp4Xn
+AUTH TLS
+AUTH SSL
+AUTH SSL
 USER the_user
 PASS the_password
-SYST
-PWD
 TYPE I
 EPSV
-OPTS UTF8 ON
-LIST
-OPTS UTF8 ON
-SYST
-EPSV
-LIST
-EPSV
-PWD
-SYST
 QUIT
 </pre></div>
 </div>
@@ -1437,16 +1438,20 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-EVDeVg5ikKYM
-220 
-331 c8&#39;uC#Kjt8(X^5fB(z
-230 peOwAOH:\~QN1duQ&lt;0S
-200 MHv~G&amp;SCz\wYCM&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-w=8l[&#39;y
+220-ul8k%g}eIN\#mX=X/&gt;7
+220-(EOq8VY/\ZoMCJ&#39;,
+220-5&amp;H,
+220 2v
+530 UHJq&amp;Jt.uixMT0wD|M=
+530 `nMb:{Rm[Tchh0BJSv{
+530 ;9)c_5fxmfU&gt;tjViu
+331 l0::H8&amp;x
+230 &gt;] jdC
 229 Entering Extended Passive Mode (|||50100|)
-150 z6QFE
-226 |F_:X TtG+vON{H
-229 Entering Extended Passive Mode (|||50100|)
-221 l
+200 o8B.
+257 &quot;/H9Izc8R8R2IuPi/kC17TnMWGFNU/a1UgJ/Ug/OLFc3SK/YaxHeWMP9QSDXdBdaeV/_oK3g07o76/QDSbGKnfyF3m7L/SeI52SLHFe4yYJiEfo5&quot; is the current directory
+221 g7~PO
 </pre></div>
 </div>
 </div>

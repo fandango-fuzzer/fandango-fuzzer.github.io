@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Covering Specs and Code &#8212; Fuzzing with Fandango</title>
+    <title>Documentation Conventions &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -60,13 +60,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Diversity';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Conventions';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Case Study: ISO 8601 Date + Time" href="ISO8601.html" />
-    <link rel="prev" title="Converting ANTLR and Other Input Specs" href="Converters.html" />
+    <link rel="next" title="Installing Fandango" href="Setup.html" />
+    <link rel="prev" title="Contributing to Fandango" href="Contributing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -181,8 +179,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Documentation Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
@@ -194,7 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
@@ -202,7 +200,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
@@ -313,7 +311,7 @@
       
       
       
-      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FDiversity.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FConventions.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -343,7 +341,7 @@
       
       
       
-      <li><a href="_sources/Diversity.md" target="_blank"
+      <li><a href="_sources/Conventions.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -419,7 +417,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Covering Specs and Code</h1>
+    <h1>Documentation Conventions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -429,9 +427,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grammar-coverage">Grammar Coverage</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-coverage">Code Coverage</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-coverage">Constraint Coverage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions-in-this-documentation">Conventions in this Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-commands">Shell Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callouts">Callouts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quizzes">Quizzes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changes">Changes</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -443,41 +446,111 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="covering-specs-and-code">
-<span id="sec-diversity"></span><h1>Covering Specs and Code<a class="headerlink" href="#covering-specs-and-code" title="Link to this heading">#</a></h1>
-<p>During input generation, Fandango attempts to <em>cover</em> as many behaviors as possible.
-There are three ways to do so:</p>
-<ul class="simple">
-<li><p><strong>Grammar coverage</strong> - that is, covering <em>alternatives in the grammar</em>;</p></li>
-<li><p><strong>Code coverage</strong> - that is, covering <em>alternatives in the program under test</em>; and</p></li>
-<li><p><strong>Constraint coverage</strong> - that is, covering <em>alternatives in constraints</em>.</p></li>
-</ul>
-<p>Fandango is set to satisfy all these goals in unison.</p>
-<section id="grammar-coverage">
-<h2>Grammar Coverage<a class="headerlink" href="#grammar-coverage" title="Link to this heading">#</a></h2>
-<p>During <em>input generation</em>, Fandango favors individual inputs that have a high <em>grammar coverage</em> - that is, they cover as many alternatives as possible.
-It does so after construction, as part of evaluating the fitness of individual inputs.</p>
-<p>During <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref"><em>protocol testing</em></span></a>, Fandango already produces such interactions <em>by construction</em> – that is, with every new iteration, it tries to cover parts of the grammar (= states, messages, and transitions) that have not been seen yet.</p>
-<p>Grammar coverage is determined and achieved using the <span class="math notranslate nohighlight">\(k\)</span>-path metric by <span class="bibtex-citation" id="id1">Havrikov and Zeller [<a class="reference internal" href="About.html#id16" title="Nikolas Havrikov and Andreas Zeller. Systematically covering input structure. In Proceedings of the 34th IEEE/ACM International Conference on Automated Software Engineering, ASE '19, 189–199. IEEE Press, 2020. URL: https://doi.org/10.1109/ASE.2019.00027, doi:10.1109/ASE.2019.00027.">HZ20</a>]</span>.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">Added in version 1.2: </span>For version 1.2, during input generation, Fandango will also achieve grammar coverage by construction.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="documentation-conventions">
+<span id="sec-doc-conventions"></span><h1>Documentation Conventions<a class="headerlink" href="#documentation-conventions" title="Link to this heading">#</a></h1>
+<section id="conventions-in-this-documentation">
+<span id="sec-conventions"></span><h2>Conventions in this Documentation<a class="headerlink" href="#conventions-in-this-documentation" title="Link to this heading">#</a></h2>
+<section id="shell-commands">
+<h3>Shell Commands<a class="headerlink" href="#shell-commands" title="Link to this heading">#</a></h3>
+<p>Fandango is mostly operated via the <em>command line</em>.
+A command <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">help</span></code> is shown as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span><span class="nb">help</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this book, a <code class="docutils literal notranslate"><span class="pre">$</span></code> at the beginning of a command stands for your input prompt.
+Do not enter it yourself.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Hovering the mouse pointer over the command offers an option to copy the command to the clipboard.</p>
 </div>
 </section>
-<section id="code-coverage">
-<h2>Code Coverage<a class="headerlink" href="#code-coverage" title="Link to this heading">#</a></h2>
-<p>As of version 1.2, Fandango will provide experimental support for guidance by code coverage.
-Details will be added here.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">Added in version 1.2: </span>This feature is planned for Fandango 1.2.</p>
+<section id="code">
+<h3>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
+<p>File contents (mostly Fandango <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files) are shown like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">fandango</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We often only show excerpts; the complete examples can be downloaded, as in <a class="reference download internal" download="" href="_downloads/743ff06243a90b38d58d4cd590981601/digits.fan"><span class="xref download myst">digits.fan</span></a>.</p>
+<p><em>Executable code</em> examples (mostly in Python) are shown like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fandango</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fandango</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Enter these at a Python prompt, or include them in your Python programs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Hovering the mouse pointer over the code offers an option to copy the code to the clipboard.</p>
 </div>
 </section>
-<section id="constraint-coverage">
-<h2>Constraint Coverage<a class="headerlink" href="#constraint-coverage" title="Link to this heading">#</a></h2>
-<p>Future versions of Fandango will aim to achieve diversity by fulfilling different alternatives in constraints.
-Once this is complete, details will be added here.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">Added in version 1.x: </span>This feature is planned for a future Fandango version.</p>
+<section id="callouts">
+<h3>Callouts<a class="headerlink" href="#callouts" title="Link to this heading">#</a></h3>
+<p>This documentation uses the following conventions for <em>callouts</em>:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>There are also <em>margin notes</em>, which show interesting background information.</p>
+</aside>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Show helpful information or another way to do something.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bring additional information to the readers’ attention.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Bring important information to the readers’ attention.</p>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">Under Construction</p>
+<p>Indicate that some parts of the documentation or the implementation are under construction.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Tell the reader to proceed carefully.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Warn about possible irreversible damage, such as permanent data loss.</p>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Pretty much all of these occur in the chapter on <a class="reference internal" href="Strategies.html#sec-strategies"><span class="std std-ref">Fuzzing Strategies</span></a>.</p>
+</aside>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Warn about hazards that may lead to death or serious injury.</p>
+</div>
+</section>
+<section id="quizzes">
+<h3>Quizzes<a class="headerlink" href="#quizzes" title="Link to this heading">#</a></h3>
+<p>This book also uses <em>quizzes</em> – that is, questions for the reader.
+The solutions are initially hidden, but can be unhidden by clicking on them.</p>
+<p>For instance, what does a <em>Warning</em> callout indicate?</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>It indicates a step that might cause irreversible damage, such as permanent data loss.</p>
+</div>
+</section>
+<section id="changes">
+<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">#</a></h3>
+<p>These hints highlight changes across versions:</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0: </span>Explanation of the new feature.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.0: </span>Explanation of the change.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.0: </span>Explanation of the deprecation.</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -512,20 +585,20 @@ Once this is complete, details will be added here.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Converters.html"
+       href="Contributing.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Converting ANTLR and Other Input Specs</p>
+        <p class="prev-next-title">Contributing to Fandango</p>
       </div>
     </a>
     <a class="right-next"
-       href="ISO8601.html"
+       href="Setup.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Case Study: ISO 8601 Date + Time</p>
+        <p class="prev-next-title">Installing Fandango</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -547,9 +620,14 @@ Once this is complete, details will be added here.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grammar-coverage">Grammar Coverage</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-coverage">Code Coverage</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-coverage">Constraint Coverage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions-in-this-documentation">Conventions in this Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-commands">Shell Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callouts">Callouts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quizzes">Quizzes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changes">Changes</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

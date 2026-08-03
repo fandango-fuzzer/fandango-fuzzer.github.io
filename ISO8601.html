@@ -180,12 +180,16 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
 <ul class="current nav bd-sidenav">
@@ -1099,7 +1103,10 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 &lt;iso8601second&gt; ::= <span class=" -Color -Color-Yellow">&#39;00&#39;</span> | <span class=" -Color -Color-Yellow">&#39;01&#39;</span> | <span class=" -Color -Color-Yellow">&#39;02&#39;</span> | <span class=" -Color -Color-Yellow">&#39;03&#39;</span> | <span class=" -Color -Color-Yellow">&#39;04&#39;</span> | <span class=" -Color -Color-Yellow">&#39;05&#39;</span> | <span class=" -Color -Color-Yellow">&#39;06&#39;</span> | <span class=" -Color -Color-Yellow">&#39;07&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;08&#39;</span> | <span class=" -Color -Color-Yellow">&#39;09&#39;</span> | <span class=" -Color -Color-Yellow">&#39;10&#39;</span> | <span class=" -Color -Color-Yellow">&#39;11&#39;</span> | <span class=" -Color -Color-Yellow">&#39;12&#39;</span> | <span class=" -Color -Color-Yellow">&#39;13&#39;</span> | <span class=" -Color -Color-Yellow">&#39;14&#39;</span> | <span class=" -Color -Color-Yellow">&#39;15&#39;</span> | <span class=" -Color -Color-Yellow">&#39;16&#39;</span> | <span class=" -Color -Color-Yellow">&#39;17&#39;</span> | <span class=" -Color -Color-Yellow">&#39;18&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;19&#39;</span> | <span class=" -Color -Color-Yellow">&#39;20&#39;</span> | <span class=" -Color -Color-Yellow">&#39;21&#39;</span> | <span class=" -Color -Color-Yellow">&#39;22&#39;</span> | <span class=" -Color -Color-Yellow">&#39;23&#39;</span> | <span class=" -Color -Color-Yellow">&#39;24&#39;</span> | <span class=" -Color -Color-Yellow">&#39;25&#39;</span> | <span class=" -Color -Color-Yellow">&#39;26&#39;</span> | <span class=" -Color -Color-Yellow">&#39;27&#39;</span> | <span class=" -Color -Color-Yellow">&#39;28&#39;</span> | <span class=" -Color -Color-Yellow">&#39;29&#39;</span> | 
-<span class=" -Color -Color-Yellow">&#39;30&#39;</span> | <span class=" -Color -Color-Yellow">&#39;31&#39;</span> | <span class=" -Color -Color-Yellow">&#39;32&#39;</span> | <span class=" -Color -Color-Yellow">&#39;33&#39;</span> | <span class=" -Color -Color-Yellow">&#39;34&#39;</span> | <span class=" -Color -Color-Yellow">&#39;35&#39;</span> | <span class=" -Color -Color-Yellow">&#39;36&#39;</span> | <span class=" -Color -Color-Yellow">&#39;37&#39;</span> | <span class=" -Color -Color-Yellow">&#39;38&#39;</span> | <span class=" -Color -Color-Yellow">&#39;39&#39;</span> | <span class=" -Color -Color-Yellow">&#39;40&#39;</span> | 
+<span class=" -Color -Color-Yellow">&#39;30&#39;</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> | <span class=" -Color -Color-Yellow">&#39;31&#39;</span> | <span class=" -Color -Color-Yellow">&#39;32&#39;</span> | <span class=" -Color -Color-Yellow">&#39;33&#39;</span> | <span class=" -Color -Color-Yellow">&#39;34&#39;</span> | <span class=" -Color -Color-Yellow">&#39;35&#39;</span> | <span class=" -Color -Color-Yellow">&#39;36&#39;</span> | <span class=" -Color -Color-Yellow">&#39;37&#39;</span> | <span class=" -Color -Color-Yellow">&#39;38&#39;</span> | <span class=" -Color -Color-Yellow">&#39;39&#39;</span> | <span class=" -Color -Color-Yellow">&#39;40&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;41&#39;</span> | <span class=" -Color -Color-Yellow">&#39;42&#39;</span> | <span class=" -Color -Color-Yellow">&#39;43&#39;</span> | <span class=" -Color -Color-Yellow">&#39;44&#39;</span> | <span class=" -Color -Color-Yellow">&#39;45&#39;</span> | <span class=" -Color -Color-Yellow">&#39;46&#39;</span> | <span class=" -Color -Color-Yellow">&#39;47&#39;</span> | <span class=" -Color -Color-Yellow">&#39;48&#39;</span> | <span class=" -Color -Color-Yellow">&#39;49&#39;</span> | <span class=" -Color -Color-Yellow">&#39;50&#39;</span> | <span class=" -Color -Color-Yellow">&#39;51&#39;</span> | 
 <span class=" -Color -Color-Yellow">&#39;52&#39;</span> | <span class=" -Color -Color-Yellow">&#39;53&#39;</span> | <span class=" -Color -Color-Yellow">&#39;54&#39;</span> | <span class=" -Color -Color-Yellow">&#39;55&#39;</span> | <span class=" -Color -Color-Yellow">&#39;56&#39;</span> | <span class=" -Color -Color-Yellow">&#39;57&#39;</span> | <span class=" -Color -Color-Yellow">&#39;58&#39;</span> | <span class=" -Color -Color-Yellow">&#39;59&#39;</span> | <span class=" -Color -Color-Yellow">&#39;60&#39;</span>
 &lt;iso8601fraction&gt; ::= &lt;digit&gt;+
@@ -1125,24 +1132,18 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1477-10-03
-9536-07
-8256-02
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2832
+7865-06-24T08-13
+1594115
+2147
+7661-W04
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9343-W47
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9635-W06-5
-0284090T1416
-2609-W37
-7305-338T2343
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4032-W28-6T13
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5414
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9504178
+2950318
+2373-220
+2254-W12-5
+68330707T14:40-00
 </pre></div>
 </div>
 </div>
@@ -1153,30 +1154,26 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19690406
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19671122T24+11:45
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19690405
-1969-11-02T21:59-2359
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19671122T21+07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19640406
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19671122T13:40:23,1233+11:45
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19691004
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19671122T24+1338
+1967-07-09T24+07
+19671122T13:40:23,1237+11:45
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19640405
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19671122T24+0440
+19671122T13:38:23,1213-12
+19671122T21+1240
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19690102
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1969-11-02T01
-19660406
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1969300T21:07-2307
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19671109T24+11:45
 </pre></div>
 </div>
 </div>
@@ -1187,18 +1184,18 @@ Let us write it into a <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T0042:31-00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T00
+T00:00:42Z
+T00:37:47+00:55
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0023:38.3822249148302923008
-T00-00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00-0017
+T0008
 00
-T00:25:43.20396Z
-T00
-00:05
-T0001-00
-00:45:42+00
-00:2931
+00:15+00
+T00:0816,94471
+T0059-00:57
+T00:1848+00
 </pre></div>
 </div>
 </div>

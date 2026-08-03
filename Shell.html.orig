@@ -180,12 +180,16 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
 <ul class="current nav bd-sidenav">
@@ -484,22 +488,22 @@ Just invoke Fandango without a command:</p>
 <p>and you will get the same results:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Firakwjxlisqtizgm Zowt,97012423910554
-Lxjiuecl Pyd,4975
-Psxzz Cbasoya,4086416067
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mgqvwtcehrqzlrrvhgyoz Vjxzpqbvftfnvehuvsq,6369354758442948152
+Ymnzotawhxqlxohifs Vdwbpahipdm,754985773696434399
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xxhcltwhs Uoqty,83102489233648271
-Shplcvuygzgl Gyapb,04187560398218282051
-Irhne Yanpuwxuxwr,6265698228053058
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tjtugcvswrlxdvgvazj Xtrnggazabiavozlseio,31
+Ksmlsngcjsitjvpvuw Cfyoieikthrmdkdl,12470628
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lvewg Cfimkziqvlzmmbesrp,01
-Fxmh Xocgjqllutvyerawyv,92986580800655947443
-Drpjwsvij Ilcc,93110254311011668
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fllhzhkkemsmtuxf Ziwsivmhtjjdy,385469214862270
+Mnqhwjsfwwjauuv Baiict,20912825875868404
+Baobjarbhalhjmudc Sxc,6870789053
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Badwdqlqxg Hk,62501643039990279
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yyettkodmjespgveqii Haxhzfxtxtwgfeh,630245
+Otgbsqgxaqarmke Lqst,555001465023
+Imtwujudzoviezgjcw Wcsmmodkfpcl,9159
 </pre></div>
 </div>
 </div>
@@ -656,24 +660,22 @@ To have Fandango read and execute commands from, say, <code class="docutils lite
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xetllqugxvrvybndcz Ozwiafcnwpyvcfuh,2414781545610625
-Vmbbcdxkpw Yagpgvdvbmwiwqqrc,42031633416872
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xxtdciz Apznjhnifgdf,8
+Weuuqtbwhkqxsofr Rhsuch,3891043513014
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ucxwvnewpyetodrv Jkshhz,857535324262364961
-Lmtzhxurdisdfhgwut Thwo,1296247
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mskkkofk Cqoniomx,6993696312039
+Ixnvlfp Mzgfpifmlkjmjk,551
+Vrngfpjihxf Jxulprbibyxohxmvffr,777187766
+Gzvhi Gfhg,0617781738150
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ikfjmowywimr Jdyslrbgownveibeltiv,46275836208889
-Wucfcrakzmelxcavdfml Wml,394646
-Fmmaohoqbwywgcptdl Zux,73542645235502
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kttzdcegoqzcz Sknmlkvrefxmrgnaijxby,891959
+Abnyka Mh,59931523
+Wowcrumdkkcx Shrfnmv,6760
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xcuvbvfnyeqhakp Pxxbzeasocqjtq,34861999721627507
-Usiedoiapucpqoez Jtcjdxnbivmumovjxxokf,921853733
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jaqgfqriprzypzbfcayv Zsojczaefyshytvbmuldn,0566879212
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ktizmuekodypabwexhg Juznwetfqixt,2605
 </pre></div>
 </div>
 </div>

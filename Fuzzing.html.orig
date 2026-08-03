@@ -180,12 +180,16 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fuzzing with Fandango</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
 <ul class="nav bd-sidenav">
@@ -497,22 +501,22 @@ The full definition looks like this:</p>
 <p>Your output will look like this:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wsgicsgmtcvuxdaddwnvl Qtejnhckcm,470406114430
-Ixuinfhfw Qykcwdytyvlqer,183929956428
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukdqwhzwvvgrspqj Xrbinaom,16143947197944
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uqshipwypcwfecakfrt Irxyuo,2364129549622
-Yslafnddbzh Rcvgojqrfyeo,87847788712335670
-Hzusrsslmjoyqcpauvt Kzckdrgj,655
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ksz Ttzeosj,78926
+Mqajuykeosemoysh Orvrefdvacusbovfseimj,711467421067376
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jnjbcogriyde Xidrjwzjtp,221766335359
-Ufagiunizdob Onclspeccjvhyhs,20259050236869
-Zdubwromyl Yjlvubilqg,67380
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gwaujvbpurxoxmjyyj Moofvxoqty,09922010
+Zd Ywukaukq,26
+Cti Ejucniesqfx,39
+Muibdw Zoftjez,145915673221
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ccczf Rbiwswnzgmzbbdoupohbs,817028292660311182
-Sprxw Bannpzdbiq,35612596
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cejbndelhkhreafwdt Rjodbokhftlxpxclez,14897977
+Gnockgaozwf Jbnbvz,85373981
+Jpwdxcbqaxas Dsqpb,27263212438928963
 </pre></div>
 </div>
 </div>
@@ -628,7 +632,7 @@ $<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pyryoyi Slngvvxopbft,60828506283181
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sfhfzrwonktgglbt Fjzrrtj,33257706325533939520
 </pre></div>
 </div>
 </div>

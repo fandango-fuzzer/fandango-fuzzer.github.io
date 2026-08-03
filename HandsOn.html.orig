@@ -1,0 +1,1544 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hands-On: Fuzzing a Protocol End to End &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'HandsOn';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Shaping Inputs with Constraints" href="Constraints.html" />
+    <link rel="prev" title="Some Fuzzing Strategies" href="Strategies.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On: Fuzzing a Protocol End to End</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: The GIF Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FHandsOn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/HandsOn.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hands-On: Fuzzing a Protocol End to End</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-target-fdp">The Target: FDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arc">The Arc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-block-works">How a Block Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowing-when-you-are-done">Knowing When You Are Done</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#each-block-builds-on-the-last">Each Block Builds on the Last</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-0-random-bytes">Block 0: Random Bytes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-stops-so-early">Why It Stops So Early</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-1-grammar">Block 1: Grammar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-given">What Is Given</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-write">What You Write</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-it">Running It</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-reaches">What It Reaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-2-constraints">Block 2: Constraints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-whole-exercise">The Whole Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What You Write</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Running It</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">What It Reaches</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-this-stops">Where This Stops</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-execution-feedback">Block 3: Execution Feedback</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-feedback-signal">The Feedback Signal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3a-cover-the-whole-population">Exercise 3a: Cover the Whole Population</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3b-aim-at-one-branch">Exercise 3b: Aim at One Branch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ceiling">The Ceiling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-protocol">Block 4: Protocol</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4a-a-session-as-one-input">Exercise 4a: A Session as One Input</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4b-a-live-conversation">Exercise 4b: A Live Conversation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-server-disagrees">When the Server Disagrees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-you-landed">Where You Landed</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hands-on-fuzzing-a-protocol-end-to-end">
+<span id="sec-handson"></span><h1>Hands-On: Fuzzing a Protocol End to End<a class="headerlink" href="#hands-on-fuzzing-a-protocol-end-to-end" title="Link to this heading">#</a></h1>
+<p>The rest of this book introduces Fandango feature by feature. This part does
+the opposite: it takes <strong>one</strong> program and fuzzes it five times over, each pass
+adding a single idea, and measures what each idea buys you in code coverage of
+that program.</p>
+<p>Everything here is an <em>exercise</em>. The files live in the <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/tree/main/tutorial"><code class="docutils literal notranslate"><span class="pre">tutorial/</span></code>
+directory</a> of
+the Fandango repository, and each block leaves blanks for you to fill in. A
+self-check tells you when a block is complete, so you can work through the
+whole thing without an instructor.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Clone the Fandango repository and everything you need is in <code class="docutils literal notranslate"><span class="pre">tutorial/</span></code>: the
+target, the exercises, the protocol spec, and the self-check.</p>
+</div>
+<section id="the-target-fdp">
+<span id="sec-handson-target"></span><h2>The Target: FDP<a class="headerlink" href="#the-target-fdp" title="Link to this heading">#</a></h2>
+<p>The target is <strong>FDP</strong>, the Fandango Demo Protocol: a tiny, text-based, stateful
+messaging protocol invented for this tutorial. It is text so that every input
+is human-readable and can be edited by hand when you are debugging your own
+grammar.</p>
+<p>One message is one line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP1</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">alice</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">16</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">339</span><span class="n">a</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FDP1</span></code> is the anchor and version (<code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">2</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOGIN</span></code> is the message type, one of <code class="docutils literal notranslate"><span class="pre">LOGIN</span></code>, <code class="docutils literal notranslate"><span class="pre">MSG</span></code>, <code class="docutils literal notranslate"><span class="pre">SUB</span></code>, <code class="docutils literal notranslate"><span class="pre">PING</span></code>, <code class="docutils literal notranslate"><span class="pre">QUIT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user=alice</span></code> is the payload: <code class="docutils literal notranslate"><span class="pre">key=value</span></code> records joined by <code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LEN=16</span></code> is the decimal length of the <em>body</em>, the <code class="docutils literal notranslate"><span class="pre">LOGIN</span> <span class="pre">user=alice</span></code> part</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CRC=339a</span></code> is the CRC-16/CCITT of that same body, as four hex digits</p></li>
+</ul>
+<p>FDP is specified like an RFC in
+<a class="reference external" href="https://github.com/fandango-fuzzer/fandango/blob/main/tutorial/docs/FDP-SPEC.txt"><code class="docutils literal notranslate"><span class="pre">tutorial/docs/FDP-SPEC.txt</span></code></a>,
+and the exercises refer to it by section. The reference implementation,
+<code class="docutils literal notranslate"><span class="pre">fdp.py</span></code>, is a four-stage pipeline:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">frame</span>  <span class="o">-&gt;</span>  <span class="n">parse</span>  <span class="o">-&gt;</span>  <span class="n">validate</span>  <span class="o">-&gt;</span>  <span class="n">apply</span>
+</pre></div>
+</div>
+<p>Each stage consumes the <em>typed</em> result of the previous one and rejects
+malformed input as early as it can. A later stage cannot run unless every
+earlier stage succeeded, and some <code class="docutils literal notranslate"><span class="pre">apply</span></code> branches need session state that only
+an <em>earlier message on the same connection</em> can set.</p>
+<p>That last property is what makes this worth doing. The coverage gradient below
+is not staged with artificial <code class="docutils literal notranslate"><span class="pre">if</span></code>s: it falls out of real data dependencies, so
+reaching deeper genuinely requires better inputs.</p>
+</section>
+<section id="the-arc">
+<span id="sec-handson-arc"></span><h2>The Arc<a class="headerlink" href="#the-arc" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Block</p></th>
+<th class="head"><p>You add</p></th>
+<th class="head"><p>Reaches</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#sec-handson-random"><span class="std std-ref">0. Random bytes</span></a></p></td>
+<td><p>nothing</p></td>
+<td><p>the framing checks</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sec-handson-grammar"><span class="std std-ref">1. Grammar</span></a></p></td>
+<td><p>structure</p></td>
+<td><p>the parser</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sec-handson-lang"><span class="std std-ref">2. Constraints</span></a></p></td>
+<td><p>semantics (length, checksum)</p></td>
+<td><p>the handlers</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#sec-handson-feedback"><span class="std std-ref">3. Execution feedback</span></a></p></td>
+<td><p>the target’s own behaviour</p></td>
+<td><p>every single-message branch</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#sec-handson-protocol"><span class="std std-ref">4. Protocol</span></a></p></td>
+<td><p>statefulness</p></td>
+<td><p>the login-gated handlers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Measured against <code class="docutils literal notranslate"><span class="pre">fdp.py</span></code>, with the reference solution for each block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span>                            <span class="n">label</span>                     <span class="n">lines</span>   <span class="n">funnel</span> <span class="p">(</span><span class="n">cumulative</span> <span class="n">reach</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------------------</span>
+<span class="mi">00</span><span class="n">_random</span><span class="o">.</span><span class="n">fan</span>                   <span class="n">random</span> <span class="nb">bytes</span>                 <span class="mi">14</span>   <span class="n">frame</span><span class="p">:</span><span class="mi">200</span>  <span class="n">parse</span><span class="p">:</span><span class="mi">0</span>    <span class="n">validate</span><span class="p">:</span><span class="mi">0</span>    <span class="n">apply</span><span class="p">:</span><span class="mi">0</span>
+<span class="mi">01</span><span class="n">_grammar</span><span class="o">.</span><span class="n">fan</span>                  <span class="n">grammar</span> <span class="n">only</span>                 <span class="mi">45</span>   <span class="n">frame</span><span class="p">:</span><span class="mi">200</span>  <span class="n">parse</span><span class="p">:</span><span class="mi">200</span>  <span class="n">validate</span><span class="p">:</span><span class="mi">200</span>  <span class="n">apply</span><span class="p">:</span><span class="mi">0</span>
+<span class="mi">02</span><span class="n">_constraints</span><span class="o">.</span><span class="n">fan</span>              <span class="n">grammar</span> <span class="o">+</span> <span class="n">constraints</span>        <span class="mi">78</span>   <span class="n">frame</span><span class="p">:</span><span class="mi">5</span>    <span class="n">parse</span><span class="p">:</span><span class="mi">5</span>    <span class="n">validate</span><span class="p">:</span><span class="mi">5</span>    <span class="n">apply</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">03</span><span class="n">_coverage</span><span class="o">.</span><span class="n">fan</span>                 <span class="o">+</span> <span class="n">coverage</span> <span class="n">feedback</span>          <span class="mi">82</span>   <span class="n">frame</span><span class="p">:</span><span class="mi">5</span>    <span class="n">parse</span><span class="p">:</span><span class="mi">5</span>    <span class="n">validate</span><span class="p">:</span><span class="mi">5</span>    <span class="n">apply</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">03</span><span class="n">_target</span><span class="o">.</span><span class="n">fan</span>                   <span class="o">+</span> <span class="n">targeted</span> <span class="n">line</span>              <span class="mi">77</span>   <span class="n">frame</span><span class="p">:</span><span class="mi">200</span>  <span class="n">parse</span><span class="p">:</span><span class="mi">200</span>  <span class="n">validate</span><span class="p">:</span><span class="mi">200</span>  <span class="n">apply</span><span class="p">:</span><span class="mi">200</span>
+<span class="mi">04</span><span class="n">a_session</span><span class="o">.</span><span class="n">fan</span>                 <span class="n">stateful</span> <span class="n">session</span>             <span class="mi">94</span>   <span class="n">frame</span><span class="p">:</span><span class="mi">800</span>  <span class="n">parse</span><span class="p">:</span><span class="mi">800</span>  <span class="n">validate</span><span class="p">:</span><span class="mi">800</span>  <span class="n">apply</span><span class="p">:</span><span class="mi">800</span>
+</pre></div>
+</div>
+<p>The <em>funnel</em> reads left to right: how many inputs got as far as each pipeline
+stage. Random bytes never leave <code class="docutils literal notranslate"><span class="pre">frame</span></code>. A grammar gets every input to
+<code class="docutils literal notranslate"><span class="pre">validate</span></code> and no further, because <code class="docutils literal notranslate"><span class="pre">LEN</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC</span></code> are still wrong. Constraints
+are what first push inputs into <code class="docutils literal notranslate"><span class="pre">apply</span></code>.</p>
+<p>Two rows deserve a note, because a naive reading of the <code class="docutils literal notranslate"><span class="pre">lines</span></code> column is
+misleading.</p>
+<p>Rows 3 and 4 are run at <strong>five inputs each</strong>, on purpose, so they are a fair
+same-budget comparison. That is where feedback earns its keep, and
+<a class="reference internal" href="#sec-handson-feedback"><span class="std std-ref">block 3</span></a> shows the two outputs side by side.</p>
+<p>Row 5 covers <em>fewer</em> lines than row 4 and is still the point of its block: it
+is <strong>directed</strong>, every input is a <code class="docutils literal notranslate"><span class="pre">LOGIN</span></code>, so it deliberately trades breadth
+for precision.</p>
+</section>
+<section id="setup">
+<span id="sec-handson-setup"></span><h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>You need Python 3.10 or later and Fandango itself; the target and all helper
+scripts use only the standard library. From a checkout of the Fandango
+repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorial
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>..
+</pre></div>
+</div>
+<p>Standalone, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">fandango-fuzzer</span></code> does the same job. Check the install:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>--version
+$<span class="w"> </span>python<span class="w"> </span>fdp_validate.py<span class="w"> </span>--step<span class="w"> </span>random<span class="w"> </span>--spec<span class="w"> </span>exercises/00_random.fan
+</pre></div>
+</div>
+<p>If that ends in <code class="docutils literal notranslate"><span class="pre">PASS</span></code>, you are ready for <a class="reference internal" href="#sec-handson-random"><span class="std std-ref">block 0</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Run every command from the <code class="docutils literal notranslate"><span class="pre">tutorial/</span></code> directory, so that specs can
+<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">fdp</span></code>.</p>
+</div>
+</section>
+<section id="how-a-block-works">
+<span id="sec-handson-loop"></span><h2>How a Block Works<a class="headerlink" href="#how-a-block-works" title="Link to this heading">#</a></h2>
+<p>Every block is the same short loop.</p>
+<ol class="arabic">
+<li><p><strong>Open the exercise</strong> in <code class="docutils literal notranslate"><span class="pre">exercises/</span></code>. Its header states the goal, what to
+read in the FDP spec, which chapter of this book covers the idea, and the exact
+commands to run and to validate.</p></li>
+<li><p><strong>Fill in the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">TODO</span></code> markers.</strong> That is the only part you write.</p></li>
+<li><p><strong>Run it</strong> to see what comes out:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/01_grammar.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Validate it.</strong> This is the part that tells you whether you are <em>done</em>,
+rather than merely producing output.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PASS</span></code> means move on.</strong></p></li>
+</ol>
+<p>Every exercise below carries its solution in a dropdown, holding the complete
+spec rather than a snippet. Nothing is spoiled unless you click, so use them
+freely rather than staying stuck.</p>
+<p>To run a solution rather than read it, save it under <code class="docutils literal notranslate"><span class="pre">solutions/</span></code> in the
+tutorial directory, keeping the file name:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_harness.py<span class="w"> </span>--spec<span class="w"> </span>solutions/02_constraints.fan<span class="w"> </span>--n<span class="w"> </span><span class="m">200</span>
+</pre></div>
+</div>
+<p>With all of them in place the reference ladder runs end to end and reproduces
+the coverage table above:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_harness.py<span class="w"> </span>--all<span class="w"> </span>--n<span class="w"> </span><span class="m">200</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">solutions/</span></code> is deliberately absent from the repository and is listed in
+<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, so a checkout never spoils the exercises. Creating it yourself is
+the intended way to get the reference ladder running.</p>
+</div>
+</section>
+<section id="knowing-when-you-are-done">
+<span id="sec-handson-validator"></span><h2>Knowing When You Are Done<a class="headerlink" href="#knowing-when-you-are-done" title="Link to this heading">#</a></h2>
+<p>Sample output tells you a spec runs. It does not tell you the spec is
+<em>complete</em>. That is what <code class="docutils literal notranslate"><span class="pre">fdp_validate.py</span></code> is for:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_validate.py<span class="w"> </span>--step<span class="w"> </span>grammar<span class="w"> </span>--spec<span class="w"> </span>exercises/01_grammar.fan
+</pre></div>
+</div>
+<p>The target has small <strong>beacons</strong> planted at the branches each block is meant to
+unlock. Reaching one means you have found it. The validator generates inputs
+from your spec, runs them through the target, and reports which beacons your
+inputs tripped. Here is a grammar that is missing the <code class="docutils literal notranslate"><span class="pre">SUB</span></code> alternative:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">step</span> <span class="s1">&#39;grammar&#39;</span><span class="p">:</span> <span class="n">structurally</span> <span class="n">valid</span> <span class="n">lines</span><span class="p">:</span> <span class="n">every</span> <span class="n">body</span> <span class="nb">type</span> <span class="n">parses</span>
+<span class="n">checking</span> <span class="n">exercises</span><span class="o">/</span><span class="mi">01</span><span class="n">_grammar</span><span class="o">.</span><span class="n">fan</span>  <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">coverage</span> <span class="p">:</span> <span class="mi">45</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">fdp</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">reference</span> <span class="n">solution</span> <span class="n">reaches</span> <span class="mi">45</span><span class="p">)</span>
+<span class="n">bugs</span>     <span class="p">:</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">5</span> <span class="n">found</span> <span class="k">for</span> <span class="n">this</span> <span class="n">step</span> <span class="p">(</span><span class="n">bugs</span> <span class="n">are</span> <span class="n">the</span> <span class="k">pass</span><span class="o">/</span><span class="n">fail</span> <span class="n">signal</span><span class="p">,</span> <span class="ow">not</span> <span class="n">the</span> <span class="n">raw</span> <span class="n">line</span> <span class="n">count</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">LOGIN</span>     <span class="n">a</span> <span class="n">LOGIN</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">MSG</span>       <span class="n">a</span> <span class="n">MSG</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">PING</span>      <span class="n">a</span> <span class="n">PING</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">QUIT</span>      <span class="n">a</span> <span class="n">QUIT</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span> <span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">SUB</span>       <span class="n">a</span> <span class="n">SUB</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+       <span class="o">-&gt;</span> <span class="n">add</span> <span class="n">the</span> <span class="n">SUB</span> <span class="n">alternative</span> <span class="n">to</span> <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span> <span class="ow">and</span> <span class="n">give</span> <span class="n">it</span> <span class="n">the</span> <span class="n">fields</span> <span class="n">it</span> <span class="n">needs</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">FAIL</span><span class="p">:</span> <span class="mi">1</span> <span class="n">bug</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">left</span> <span class="n">to</span> <span class="n">find</span> <span class="p">(</span><span class="n">shape</span><span class="p">:</span><span class="n">SUB</span><span class="p">)</span><span class="o">.</span> <span class="n">Fix</span> <span class="n">the</span> <span class="n">grammar</span> <span class="ow">and</span> <span class="n">re</span><span class="o">-</span><span class="n">run</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Note that this incomplete grammar reaches <strong>45 lines, exactly as many as the
+complete one</strong>. Line coverage alone would have called it finished. The beacon
+is what catches the gap, which is a small lesson in its own right about what
+coverage numbers can and cannot tell you.</p>
+<p>For a plain coverage number with no pass/fail, use the harness instead:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_harness.py<span class="w"> </span>--spec<span class="w"> </span>exercises/02_constraints.fan<span class="w"> </span>--n<span class="w"> </span><span class="m">200</span>
+</pre></div>
+</div>
+</section>
+<section id="each-block-builds-on-the-last">
+<span id="sec-handson-building"></span><h2>Each Block Builds on the Last<a class="headerlink" href="#each-block-builds-on-the-last" title="Link to this heading">#</a></h2>
+<p>From block 2 onwards, an exercise does not restate the previous one. It
+<a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">includes</span></a> it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;01_grammar.fan&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So your own work carries forward: the grammar you wrote in block 1 is what
+block 2 constrains, and the constraints you wrote in block 2 are what block 3
+steers. Exercise 2 is six lines long, because the grammar is not repeated in
+it.</p>
+<p>This has a consequence worth knowing before you start. If Fandango reports an
+undefined symbol in a later block, the gap is almost always in an <em>earlier</em>
+file. Get each block to <code class="docutils literal notranslate"><span class="pre">PASS</span></code> before moving on and this will not happen.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Reproducibility: every command in this part uses <code class="docutils literal notranslate"><span class="pre">--random-seed</span> <span class="pre">18</span></code> and
+<code class="docutils literal notranslate"><span class="pre">PYTHONHASHSEED=0</span></code>, so the same spec always yields the same inputs and the same
+numbers. Your output should match what is printed here exactly.</p>
+</div>
+<hr class="docutils" />
+</section>
+<section id="block-0-random-bytes">
+<span id="sec-handson-random"></span><h2>Block 0: Random Bytes<a class="headerlink" href="#block-0-random-bytes" title="Link to this heading">#</a></h2>
+<p>This is the warm-up, and the only block with nothing to fill in. Its job is to
+establish the baseline that every later block is measured against.</p>
+<p>The spec is one line, <code class="docutils literal notranslate"><span class="pre">exercises/00_random.fan</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">byte</span><span class="o">&gt;*</span>
+</pre></div>
+</div>
+<p>That is dumb fuzzing: no structure at all, just a random number of random
+bytes. Run it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/00_random.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">3</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">&lt;</span><span class="n">A4</span><span class="o">&gt;^</span><span class="n">_M</span><span class="o">-^</span><span class="n">G</span><span class="o">&lt;</span><span class="n">Y</span>
+<span class="n">M</span><span class="o">-</span><span class="p">;</span><span class="o">&lt;</span><span class="n">FC</span><span class="o">&gt;^</span><span class="n">CM</span><span class="o">-^</span><span class="n">OM</span><span class="o">-^</span><span class="n">KM</span><span class="o">-^</span><span class="p">[</span><span class="n">J</span>
+<span class="n">RM</span><span class="o">-^</span><span class="n">_3M</span><span class="o">-^</span><span class="n">DM</span><span class="o">-</span><span class="mi">0</span><span class="n">M</span><span class="o">/</span><span class="n">M</span><span class="o">-^</span><span class="n">I</span><span class="o">^</span><span class="n">C</span><span class="p">,</span>\<span class="n">M</span><span class="o">-^</span><span class="n">KM</span><span class="o">-+</span><span class="n">M</span><span class="o">-^</span><span class="n">Z</span>
+</pre></div>
+</div>
+<p>Now measure what that reaches inside the target:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_validate.py<span class="w"> </span>--step<span class="w"> </span>random<span class="w"> </span>--spec<span class="w"> </span>exercises/00_random.fan
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">step</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span> <span class="n">raw</span> <span class="nb">bytes</span> <span class="n">reaching</span> <span class="n">the</span> <span class="n">framing</span> <span class="n">layer</span>
+<span class="n">checking</span> <span class="n">exercises</span><span class="o">/</span><span class="mi">00</span><span class="n">_random</span><span class="o">.</span><span class="n">fan</span>  <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">coverage</span> <span class="p">:</span> <span class="mi">14</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">fdp</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">reference</span> <span class="n">solution</span> <span class="n">reaches</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">bugs</span>     <span class="p">:</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span> <span class="n">found</span> <span class="k">for</span> <span class="n">this</span> <span class="n">step</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">raw</span><span class="o">-</span><span class="n">badmagic</span>    <span class="n">a</span> <span class="n">line</span> <span class="n">without</span> <span class="n">the</span> <span class="n">FDP</span> <span class="n">anchor</span> <span class="n">was</span> <span class="n">rejected</span> <span class="p">(</span><span class="n">ERR_MAGIC</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">raw</span><span class="o">-</span><span class="n">nonascii</span>    <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">ASCII</span> <span class="n">line</span> <span class="n">was</span> <span class="n">rejected</span> <span class="p">(</span><span class="n">ERR_ENCODING</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">PASS</span><span class="p">:</span> <span class="n">found</span> <span class="n">every</span> <span class="n">bug</span> <span class="k">for</span> <span class="s1">&#39;random&#39;</span><span class="o">.</span> <span class="n">Safe</span> <span class="n">to</span> <span class="n">move</span> <span class="n">on</span> <span class="n">to</span> <span class="s1">&#39;grammar&#39;</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Fourteen lines, and the funnel says all 200 inputs died in <code class="docutils literal notranslate"><span class="pre">frame</span></code>. Not one
+reached the parser.</p>
+<section id="why-it-stops-so-early">
+<h3>Why It Stops So Early<a class="headerlink" href="#why-it-stops-so-early" title="Link to this heading">#</a></h3>
+<p>Look at where the target gives up:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frame</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="s2">&quot;ERR_ENCODING&quot;</span><span class="p">)</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">PROTO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="s2">&quot;ERR_MAGIC&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Random bytes fail one of the first two checks essentially always. To get past
+<code class="docutils literal notranslate"><span class="pre">startswith(&quot;FDP&quot;)</span></code> by chance you would need the first three bytes to land on
+<code class="docutils literal notranslate"><span class="pre">F</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code> exactly, and then everything after it still has to satisfy the
+trailer regex, the type check, the length field, and the checksum.</p>
+<p>This is the honest case for grammars, and it is worth sitting with for a
+moment: the target is not hostile, it is not obfuscated, and it is 300 lines
+long. Random bytes still see almost none of it. Those two beacons you did find
+are both <em>rejection</em> paths.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both bugs pass here even though the inputs are garbage. That is the point: this
+block’s target is the framing layer, and garbage reaches the framing layer just
+fine. Later blocks ask for much more.</p>
+</div>
+<p>Next: <a class="reference internal" href="#sec-handson-grammar"><span class="std std-ref">give the inputs a shape</span></a>.</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="block-1-grammar">
+<span id="sec-handson-grammar"></span><h2>Block 1: Grammar<a class="headerlink" href="#block-1-grammar" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> <code class="docutils literal notranslate"><span class="pre">exercises/01_grammar.fan</span></code>    <strong>Background:</strong>
+<a class="reference internal" href="FirstSpec.html#sec-first-spec"><span class="std std-ref">A First Fandango Spec</span></a></p>
+<p>Now you describe the <em>shape</em> of an FDP message, so that inputs stop dying at
+the anchor check. No constraints yet: <code class="docutils literal notranslate"><span class="pre">LEN</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC</span></code> stay free, so the
+messages will be structurally right and semantically wrong. That is expected,
+and it is precisely what <a class="reference internal" href="#sec-handson-lang"><span class="std std-ref">block 2</span></a> fixes.</p>
+<section id="what-is-given">
+<h3>What Is Given<a class="headerlink" href="#what-is-given" title="Link to this heading">#</a></h3>
+<p>The frame of the message, and the leaf definitions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">message</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">message</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">ver</span><span class="o">&gt;</span> <span class="s2">&quot; &quot;</span> <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span> <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="nb">len</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">crc</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">ver</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1&quot;</span> <span class="o">|</span> <span class="s2">&quot;FDP2&quot;</span>          <span class="c1"># anchor + version</span>
+<span class="o">&lt;</span><span class="nb">len</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>                  <span class="c1"># unconstrained for now</span>
+<span class="o">&lt;</span><span class="n">crc</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>                  <span class="c1"># unconstrained for now</span>
+
+<span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z]+&#39;</span>
+<span class="o">&lt;</span><span class="n">word</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z0-9]+&#39;</span>
+<span class="o">&lt;</span><span class="n">text</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z0-9 ]+&#39;</span>
+<span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]&#39;</span>
+<span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-f]&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="what-you-write">
+<h3>What You Write<a class="headerlink" href="#what-you-write" title="Link to this heading">#</a></h3>
+<p>Two things, from sections 3 to 6 of the FDP spec.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> as an alternative</strong> over the five message kinds. A body is
+<code class="docutils literal notranslate"><span class="pre">&quot;&lt;TYPE&gt;</span> <span class="pre">&lt;payload&gt;&quot;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">LOGIN</span> <span class="pre">user=alice</span></code>, or just <code class="docutils literal notranslate"><span class="pre">PING</span></code>.</p>
+<p><strong>Each message kind and its records.</strong> <code class="docutils literal notranslate"><span class="pre">LOGIN</span></code> carries a <code class="docutils literal notranslate"><span class="pre">user=</span></code> record and
+<em>may</em> also carry <code class="docutils literal notranslate"><span class="pre">&amp;pass=</span></code>. <code class="docutils literal notranslate"><span class="pre">MSG</span></code> carries <code class="docutils literal notranslate"><span class="pre">to=</span></code> and <code class="docutils literal notranslate"><span class="pre">&amp;body=</span></code>. <code class="docutils literal notranslate"><span class="pre">SUB</span></code> carries
+<code class="docutils literal notranslate"><span class="pre">chan=</span></code>. <code class="docutils literal notranslate"><span class="pre">PING</span></code> and <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> carry no payload at all.</p>
+<p>The optional password is the interesting one: think about how a grammar says
+“either this record, or nothing”.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution: 01_grammar.fan</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to Exercise 1. Structure only, no constraints.</span>
+<span class="c1"># The FDP anchor, a valid version and message type, and a payload of key=value</span>
+<span class="c1"># records; one alternative per message kind binds a type to the payload it</span>
+<span class="c1"># expects.</span>
+<span class="c1">#</span>
+<span class="c1"># &lt;len&gt; and &lt;crc&gt; are still free tokens, so every line is rejected at the</span>
+<span class="c1"># validation stage (length mismatch or bad checksum). This reaches the parser</span>
+<span class="c1"># but not the handlers.</span>
+<span class="c1">#</span>
+<span class="c1"># A generated line looks like:  FDP1 LOGIN user=alice LEN=73 CRC=0af3</span>
+
+<span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">message</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">message</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">ver</span><span class="o">&gt;</span> <span class="s2">&quot; &quot;</span> <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span> <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="nb">len</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">crc</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">ver</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1&quot;</span> <span class="o">|</span> <span class="s2">&quot;FDP2&quot;</span>                        <span class="c1"># anchor + version (alternatives)</span>
+
+<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>      <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">message_msg</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">subscribe</span><span class="o">&gt;</span> <span class="o">|</span> <span class="s2">&quot;PING&quot;</span> <span class="o">|</span> <span class="s2">&quot;QUIT&quot;</span>
+<span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span>       <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;LOGIN user=&quot;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">passopt</span><span class="o">&gt;</span>     <span class="c1"># optionality below</span>
+<span class="o">&lt;</span><span class="n">passopt</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;&amp;pass=&quot;</span> <span class="o">&lt;</span><span class="n">word</span><span class="o">&gt;</span> <span class="o">|</span> <span class="s2">&quot;&quot;</span>               <span class="c1"># optional pass record</span>
+<span class="o">&lt;</span><span class="n">message_msg</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;MSG to=&quot;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="s2">&quot;&amp;body=&quot;</span> <span class="o">&lt;</span><span class="n">text</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">subscribe</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;SUB chan=&quot;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nb">len</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>                                <span class="c1"># decimal, unconstrained for now</span>
+<span class="o">&lt;</span><span class="n">crc</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>                                <span class="c1"># 4 hex digits, unconstrained for now</span>
+
+<span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z]+&#39;</span>
+<span class="o">&lt;</span><span class="n">word</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z0-9]+&#39;</span>
+<span class="o">&lt;</span><span class="n">text</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z0-9 ]+&#39;</span>
+<span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]&#39;</span>
+<span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-f]&#39;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;passopt&gt;</span></code> expresses optionality as an alternative with an empty
+string. Fandango also has a <code class="docutils literal notranslate"><span class="pre">?</span></code> operator, so <code class="docutils literal notranslate"><span class="pre">(&quot;&amp;pass=&quot;</span> <span class="pre">&lt;word&gt;)?</span></code> works too.</p>
+<p>Note that the message type is never a nonterminal called <code class="docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code>: <code class="docutils literal notranslate"><span class="pre">type</span></code> is a
+reserved word in the <code class="docutils literal notranslate"><span class="pre">.fan</span></code> language.</p>
+</div>
+</section>
+<section id="running-it">
+<h3>Running It<a class="headerlink" href="#running-it" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/01_grammar.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP2</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">5235706</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">945</span><span class="n">d</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">pcpepepchucrlgzumz</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">12654866796622412</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">27</span><span class="n">b8</span>
+<span class="n">FDP1</span> <span class="n">QUIT</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">12</span> <span class="n">CRC</span><span class="o">=</span><span class="n">ae2a</span>
+<span class="n">FDP1</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">0311357877549</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">9</span><span class="n">d57</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">xwvrrilgbvu</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">41253</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">6</span><span class="n">a5a</span>
+</pre></div>
+</div>
+<p>These are recognisably FDP messages. They are also all wrong: <code class="docutils literal notranslate"><span class="pre">LEN=5235706</span></code>
+for a four-character body, a 17-digit length, a leading-zero length. The
+grammar constrains the <em>form</em> of <code class="docutils literal notranslate"><span class="pre">&lt;len&gt;</span></code> (some digits) and says nothing about
+its <em>value</em>.</p>
+</section>
+<section id="what-it-reaches">
+<h3>What It Reaches<a class="headerlink" href="#what-it-reaches" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_validate.py<span class="w"> </span>--step<span class="w"> </span>grammar<span class="w"> </span>--spec<span class="w"> </span>exercises/01_grammar.fan
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coverage</span> <span class="p">:</span> <span class="mi">45</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">fdp</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">reference</span> <span class="n">solution</span> <span class="n">reaches</span> <span class="mi">45</span><span class="p">)</span>
+<span class="n">bugs</span>     <span class="p">:</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">5</span> <span class="n">found</span> <span class="k">for</span> <span class="n">this</span> <span class="n">step</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">LOGIN</span>     <span class="n">a</span> <span class="n">LOGIN</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">MSG</span>       <span class="n">a</span> <span class="n">MSG</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">PING</span>      <span class="n">a</span> <span class="n">PING</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">QUIT</span>      <span class="n">a</span> <span class="n">QUIT</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">SUB</span>       <span class="n">a</span> <span class="n">SUB</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">PASS</span><span class="p">:</span> <span class="n">found</span> <span class="n">every</span> <span class="n">bug</span> <span class="k">for</span> <span class="s1">&#39;grammar&#39;</span><span class="o">.</span> <span class="n">Safe</span> <span class="n">to</span> <span class="n">move</span> <span class="n">on</span> <span class="n">to</span> <span class="s1">&#39;language&#39;</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>From 14 lines to 45, and the funnel now shows all 200 inputs reaching
+<code class="docutils literal notranslate"><span class="pre">validate</span></code>. Structure alone carried every input through framing and parsing.</p>
+<p>And there they stop. Every one is rejected at the length check:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+    <span class="n">fr</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">frame</span>
+    <span class="k">if</span> <span class="n">fr</span><span class="o">.</span><span class="n">length</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fr</span><span class="o">.</span><span class="n">body</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;validate&quot;</span><span class="p">,</span> <span class="s2">&quot;ERR_LENGTH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>No handler has run yet. <code class="docutils literal notranslate"><span class="pre">apply</span></code> is still at zero. A grammar can say what a
+message <em>looks like</em>, but <code class="docutils literal notranslate"><span class="pre">LEN</span></code> is not a shape, it is a <em>relationship</em> between
+two parts of the input, and that is a different kind of statement.</p>
+<p>Next: <a class="reference internal" href="#sec-handson-lang"><span class="std std-ref">say what the parts mean to each other</span></a>.</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="block-2-constraints">
+<span id="sec-handson-lang"></span><h2>Block 2: Constraints<a class="headerlink" href="#block-2-constraints" title="Link to this heading">#</a></h2>
+<p><strong>Exercise:</strong> <code class="docutils literal notranslate"><span class="pre">exercises/02_constraints.fan</span></code>    <strong>Background:</strong>
+<a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">Shaping Inputs with Constraints</span></a>, <a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">Hatching Specs</span></a></p>
+<p>Block 1 ended with every input rejected at the length check. <code class="docutils literal notranslate"><span class="pre">LEN</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC</span></code>
+are not shapes, they are <em>relationships</em> between parts of the input, and a
+grammar cannot express a relationship. A <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">constraint</span></a> can.</p>
+<section id="the-whole-exercise">
+<h3>The Whole Exercise<a class="headerlink" href="#the-whole-exercise" title="Link to this heading">#</a></h3>
+<p>This is the first block that builds on your own earlier work, so the file is
+short:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;01_grammar.fan&#39;</span><span class="p">)</span>
+
+<span class="c1"># TODO 1 (length encoding) ...</span>
+<span class="c1"># TODO 2 (checksum) ...</span>
+<span class="c1"># TODO 3 (min/max) ...</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">fdp</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">include()</span></code></span></a> pulls in your block 1 grammar, so <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&lt;len&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;crc&gt;</span></code> and the message kinds are all in scope here without being
+repeated. You add three <code class="docutils literal notranslate"><span class="pre">where</span></code> clauses.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Because the grammar is not restated, an undefined-symbol error in this block
+means the gap is in your <code class="docutils literal notranslate"><span class="pre">01_grammar.fan</span></code>. Fix it there and this file starts
+working, with nothing to change here.</p>
+</div>
+</section>
+<section id="id1">
+<h3>What You Write<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><strong>Length encoding.</strong> <code class="docutils literal notranslate"><span class="pre">LEN</span></code> must equal the number of characters in <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>.
+The fields are text, so compare them as strings.</p>
+<p><strong>Checksum.</strong> <code class="docutils literal notranslate"><span class="pre">CRC</span></code> must equal the CRC-16 of <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>. Do not re-derive the
+algorithm: <code class="docutils literal notranslate"><span class="pre">fdp.py</span></code> has the reference implementation, and Appendix B of the FDP
+spec says which helper.</p>
+<p><strong>Bounds.</strong> Keep the body between 1 and 64 characters.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution: 02_constraints.fan</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to Exercise 2. The grammar comes from Exercise 1 via include();</span>
+<span class="c1"># only the three well-formedness constraints are new.</span>
+<span class="n">include</span><span class="p">(</span><span class="s1">&#39;01_grammar.fan&#39;</span><span class="p">)</span>
+
+<span class="c1"># length encoding: the LEN token equals the body length.</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">len</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span><span class="p">)))</span>
+
+<span class="c1"># checksum: the CRC token is the CRC-16/CCITT of the body. The algorithm is</span>
+<span class="c1"># part of the protocol (see docs/FDP-SPEC.txt Appendix B); we call the</span>
+<span class="c1"># reference implementation rather than re-deriving it here.</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">crc</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="n">fdp</span><span class="o">.</span><span class="n">crc16hex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span><span class="p">))</span>
+
+<span class="c1"># min/max: keep the body within the server&#39;s accepted window.</span>
+<span class="n">where</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">64</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">fdp</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">str(...)</span></code> on both sides matters. <code class="docutils literal notranslate"><span class="pre">&lt;len&gt;</span></code> is a derivation tree, not an
+integer, and comparing it to a number would not do what you want. See
+<a class="reference internal" href="Constraints.html#sec-derivationtree"><span class="std std-ref">Constraints and DerivationTree types</span></a>.</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">fdp.crc16hex</span></code> from a constraint is worth noticing on its own: a <code class="docutils literal notranslate"><span class="pre">where</span></code>
+clause is arbitrary Python, so a checksum, a compression step or a signature is
+no harder to express than a length. Block 3 pushes that much further.</p>
+</div>
+</section>
+<section id="id2">
+<h3>Running It<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/02_constraints.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP2</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">6427</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">pcpepepchucrlgzumz</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">27</span> <span class="n">CRC</span><span class="o">=</span><span class="n">f024</span>
+<span class="n">FDP1</span> <span class="n">QUIT</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">9</span><span class="n">f54</span>
+<span class="n">FDP1</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">6427</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">xwvrrilgbvu</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">20</span> <span class="n">CRC</span><span class="o">=</span><span class="n">eac4</span>
+</pre></div>
+</div>
+<p>Every line now round-trips. <code class="docutils literal notranslate"><span class="pre">PING</span></code> has a four-character body and says <code class="docutils literal notranslate"><span class="pre">LEN=4</span></code>;
+the checksums match. You can confirm the server agrees:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/02_constraints.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><span class="w"> </span>--file-mode<span class="w"> </span>binary<span class="w"> </span>-d<span class="w"> </span>/tmp/ex2
+$<span class="w"> </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>/tmp/ex2/*<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>fdp_server.py<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>What It Reaches<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_validate.py<span class="w"> </span>--step<span class="w"> </span>language<span class="w"> </span>--spec<span class="w"> </span>exercises/02_constraints.fan
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coverage</span> <span class="p">:</span> <span class="mi">82</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">fdp</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">reference</span> <span class="n">solution</span> <span class="n">reaches</span> <span class="mi">82</span><span class="p">)</span>
+<span class="n">bugs</span>     <span class="p">:</span> <span class="mi">11</span> <span class="o">/</span> <span class="mi">11</span> <span class="n">found</span> <span class="k">for</span> <span class="n">this</span> <span class="n">step</span> <span class="p">(</span><span class="n">bugs</span> <span class="n">are</span> <span class="n">the</span> <span class="k">pass</span><span class="o">/</span><span class="n">fail</span> <span class="n">signal</span><span class="p">,</span> <span class="ow">not</span> <span class="n">the</span> <span class="n">raw</span> <span class="n">line</span> <span class="n">count</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">crc</span>        <span class="n">a</span> <span class="n">message</span> <span class="n">passed</span> <span class="n">the</span> <span class="n">CRC</span> <span class="n">check</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">fields</span>     <span class="n">a</span> <span class="n">message</span> <span class="n">passed</span> <span class="n">field</span> <span class="n">validation</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">length</span>     <span class="n">a</span> <span class="n">message</span> <span class="n">passed</span> <span class="n">the</span> <span class="n">LEN</span> <span class="n">check</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">noauth</span>     <span class="n">a</span> <span class="n">privileged</span> <span class="n">message</span> <span class="n">bounced</span> <span class="k">with</span> <span class="n">no</span> <span class="n">session</span> <span class="p">(</span><span class="n">ERR_NOAUTH</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">handler</span><span class="o">-</span><span class="n">login</span>   <span class="n">a</span> <span class="n">LOGIN</span> <span class="n">was</span> <span class="n">accepted</span> <span class="p">(</span><span class="n">OK_LOGIN</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">handler</span><span class="o">-</span><span class="n">ping</span>    <span class="n">a</span> <span class="n">PING</span> <span class="n">was</span> <span class="n">accepted</span> <span class="p">(</span><span class="n">OK_PONG</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">LOGIN</span>     <span class="n">a</span> <span class="n">LOGIN</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">MSG</span>       <span class="n">a</span> <span class="n">MSG</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">PING</span>      <span class="n">a</span> <span class="n">PING</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">QUIT</span>      <span class="n">a</span> <span class="n">QUIT</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">SUB</span>       <span class="n">a</span> <span class="n">SUB</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">PASS</span><span class="p">:</span> <span class="n">found</span> <span class="n">every</span> <span class="n">bug</span> <span class="k">for</span> <span class="s1">&#39;language&#39;</span><span class="o">.</span> <span class="n">Safe</span> <span class="n">to</span> <span class="n">move</span> <span class="n">on</span> <span class="n">to</span> <span class="s1">&#39;feedback&#39;</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>45 lines to 82, and for the first time inputs reach <code class="docutils literal notranslate"><span class="pre">apply</span></code>. Three <code class="docutils literal notranslate"><span class="pre">where</span></code>
+clauses nearly doubled the reachable code, because they were the difference
+between “looks like a message” and “is a message”.</p>
+</section>
+<section id="where-this-stops">
+<h3>Where This Stops<a class="headerlink" href="#where-this-stops" title="Link to this heading">#</a></h3>
+<p>Look at what the validator reports for a privileged message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">noauth</span>  <span class="n">a</span> <span class="n">privileged</span> <span class="n">message</span> <span class="n">bounced</span> <span class="k">with</span> <span class="n">no</span> <span class="n">session</span> <span class="p">(</span><span class="n">ERR_NOAUTH</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">SUB</span></code> or a <code class="docutils literal notranslate"><span class="pre">MSG</span></code> is now perfectly well-formed and still refused, because
+<code class="docutils literal notranslate"><span class="pre">apply</span></code> wants an authenticated session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># everything below requires an authenticated session</span>
+    <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="s2">&quot;ERR_NOAUTH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>No single message can satisfy that, however well-formed. <code class="docutils literal notranslate"><span class="pre">OK_SUB</span></code>, <code class="docutils literal notranslate"><span class="pre">OK_MSG</span></code> and
+<code class="docutils literal notranslate"><span class="pre">OK_QUIT</span></code> are unreachable from here by construction, and they stay unreachable
+until <a class="reference internal" href="#sec-handson-protocol"><span class="std std-ref">block 4</span></a>.</p>
+<p>Before that, <a class="reference internal" href="#sec-handson-feedback"><span class="std std-ref">block 3</span></a> asks a different question:
+given a fixed budget of inputs, are you spending it well?</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="block-3-execution-feedback">
+<span id="sec-handson-feedback"></span><h2>Block 3: Execution Feedback<a class="headerlink" href="#block-3-execution-feedback" title="Link to this heading">#</a></h2>
+<p><strong>Exercises:</strong> <code class="docutils literal notranslate"><span class="pre">exercises/03_coverage.fan</span></code>, <code class="docutils literal notranslate"><span class="pre">exercises/03_target.fan</span></code>
+   <strong>Background:</strong> <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">Shaping Inputs with Constraints</span></a>, <a class="reference internal" href="Diversity.html#sec-diversity"><span class="std std-ref">Covering Specs and Code</span></a></p>
+<p>After block 2 every input is well-formed and reaches the handlers. So what is
+left to want?</p>
+<p>Generate five inputs and look at them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP2</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">6427</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">pcpepepchucrlgzumz</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">27</span> <span class="n">CRC</span><span class="o">=</span><span class="n">f024</span>
+<span class="n">FDP1</span> <span class="n">QUIT</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">9</span><span class="n">f54</span>
+<span class="n">FDP1</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">6427</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">xwvrrilgbvu</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">20</span> <span class="n">CRC</span><span class="o">=</span><span class="n">eac4</span>
+</pre></div>
+</div>
+<p>Two <code class="docutils literal notranslate"><span class="pre">PING</span></code>s, two <code class="docutils literal notranslate"><span class="pre">SUB</span></code>s, one <code class="docutils literal notranslate"><span class="pre">QUIT</span></code>. No <code class="docutils literal notranslate"><span class="pre">LOGIN</span></code>. No <code class="docutils literal notranslate"><span class="pre">MSG</span></code>. Every input is
+valid, and the <em>suite</em> is lopsided: five chances to exercise the target and it
+never once tried a login. Each input was judged on its own, and nothing ever
+asked whether the batch as a whole was any good.</p>
+<p>That is the gap this block closes, and it does so with the same tool as
+before, an ordinary <code class="docutils literal notranslate"><span class="pre">where</span></code> clause. The difference is what the clause knows
+about.</p>
+<section id="the-feedback-signal">
+<h3>The Feedback Signal<a class="headerlink" href="#the-feedback-signal" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">fdp.py</span></code> records, for every message, the internal branches it drove through.
+<code class="docutils literal notranslate"><span class="pre">fdp_cover.py</span></code> runs a message through the target and reads that trace back:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">reaches</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;True iff running this message executes the branch tagged `label`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">_run</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">trace</span>
+</pre></div>
+</div>
+<p>This is <em>behavioural</em> feedback: the constraint runs the program under test and
+judges the input by what the program actually did with it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The target reports its own branch trace rather than being traced line by line
+with <code class="docutils literal notranslate"><span class="pre">sys.settrace</span></code>. Inside a search loop, line tracing is orders of magnitude
+too slow. Real coverage-guided fuzzers instrument the target for the same
+reason.</p>
+</div>
+</section>
+<section id="exercise-3a-cover-the-whole-population">
+<h3>Exercise 3a: Cover the Whole Population<a class="headerlink" href="#exercise-3a-cover-the-whole-population" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">fdp_cover</span></code> keeps a shared record of every branch the population has covered so
+far, so a new message can be judged against everything accepted before it. Your
+job is one <code class="docutils literal notranslate"><span class="pre">where</span></code> clause that admits an input only if it reaches a branch that
+no already-accepted input has.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;02_constraints.fan&#39;</span><span class="p">)</span>
+
+<span class="c1"># TODO: admit an input only if it grows the population&#39;s coverage</span>
+<span class="c1"># where</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">fdp_cover</span>
+</pre></div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution: 03_coverage.fan</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to Exercise 3a. Grammar and well-formedness come from Exercise 2;</span>
+<span class="c1"># only the population-coverage feedback constraint is new.</span>
+<span class="n">include</span><span class="p">(</span><span class="s1">&#39;02_constraints.fan&#39;</span><span class="p">)</span>
+
+<span class="c1"># admit an input only if it grows the population&#39;s coverage, so the suite</span>
+<span class="c1"># spreads across branches instead of cloning one accept path.</span>
+<span class="n">where</span> <span class="n">fdp_cover</span><span class="o">.</span><span class="n">covers_new</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">fdp_cover</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">covers_new</span></code> runs the message, takes the set of branches it reached, and
+accepts it only if that set is not already a subset of what the population
+covers. Accepted inputs are added to the record, so each later input is judged
+against a higher bar.</p>
+</div>
+<p>Now the same five-input budget:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/03_coverage.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP2</span> <span class="n">PING</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">6427</span>
+<span class="n">FDP2</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">pcpepepchucrlgzumz</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">27</span> <span class="n">CRC</span><span class="o">=</span><span class="n">f024</span>
+<span class="n">FDP1</span> <span class="n">QUIT</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">9</span><span class="n">f54</span>
+<span class="n">FDP1</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">ocdfoatnlngrezn</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">26</span> <span class="n">CRC</span><span class="o">=</span><span class="n">c7ba</span>
+<span class="n">FDP2</span> <span class="n">MSG</span> <span class="n">to</span><span class="o">=</span><span class="n">gfhqbbeinbojkbdgbpet</span><span class="o">&amp;</span><span class="n">body</span><span class="o">=</span><span class="n">t</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">34</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">8</span><span class="n">d68</span>
+</pre></div>
+</div>
+<p>One of each. Same budget, same grammar, same constraints, same seed: the only
+change is that an input now has to justify its place in the suite.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coverage</span> <span class="p">:</span> <span class="mi">82</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">fdp</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">reference</span> <span class="n">solution</span> <span class="n">reaches</span> <span class="mi">82</span><span class="p">)</span>
+<span class="n">bugs</span>     <span class="p">:</span> <span class="mi">11</span> <span class="o">/</span> <span class="mi">11</span> <span class="n">found</span> <span class="k">for</span> <span class="n">this</span> <span class="n">step</span>
+</pre></div>
+</div>
+<p>Against 78 lines for the undirected spec at the same budget. Ask for 200 inputs
+instead and block 2 stumbles into every type eventually and also reaches 82.
+That is the honest framing of what feedback bought: <strong>not a higher ceiling, but
+the same ceiling far sooner</strong>. When each input is cheap that is a curiosity.
+When each input costs a network round trip or a device flash, it is the whole
+game.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">5</span></code> here. <code class="docutils literal notranslate"><span class="pre">covers_new</span></code> is a hard gate, and the target has exactly five
+single-message branches to pioneer, so a sixth input satisfying it does not
+exist. Asking for more does not print the five it found; Fandango keeps
+searching to its budget and prints nothing. Sizing <code class="docutils literal notranslate"><span class="pre">-n</span></code> to the satisfiable
+population is a real consideration whenever coverage is a <code class="docutils literal notranslate"><span class="pre">where</span></code> constraint.</p>
+</div>
+</section>
+<section id="exercise-3b-aim-at-one-branch">
+<h3>Exercise 3b: Aim at One Branch<a class="headerlink" href="#exercise-3b-aim-at-one-branch" title="Link to this heading">#</a></h3>
+<p>The other use of behavioural feedback is directed: not “cover everything” but
+“every input must do <em>this</em>”. Demand that each input drive the <code class="docutils literal notranslate"><span class="pre">apply:login</span></code>
+branch.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution: 03_target.fan</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to Exercise 3b. Grammar and well-formedness come from Exercise 2;</span>
+<span class="c1"># only the directed-feedback constraint is new.</span>
+<span class="n">include</span><span class="p">(</span><span class="s1">&#39;02_constraints.fan&#39;</span><span class="p">)</span>
+
+<span class="c1"># demand each input execute a specific target branch.</span>
+<span class="n">where</span> <span class="n">fdp_cover</span><span class="o">.</span><span class="n">reaches</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span><span class="p">),</span> <span class="s2">&quot;apply:login&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">fdp_cover</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/03_target.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP1</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">ocdfoatnlngrezn</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">26</span> <span class="n">CRC</span><span class="o">=</span><span class="n">c7ba</span>
+<span class="n">FDP2</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">ap</span><span class="o">&amp;</span><span class="k">pass</span><span class="o">=</span><span class="mi">7</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">20</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">4325</span>
+<span class="n">FDP1</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">of</span><span class="o">&amp;</span><span class="k">pass</span><span class="o">=</span><span class="mi">5</span><span class="n">lqb7tb5ds6mvww</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">34</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">19</span><span class="n">c8</span>
+<span class="n">FDP2</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">uakqycttmodyae</span><span class="o">&amp;</span><span class="k">pass</span><span class="o">=</span><span class="n">nntty8e0ba6ujawy73</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">49</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">148</span><span class="n">a</span>
+<span class="n">FDP2</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">jxqpsonu</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">19</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">3</span><span class="n">bfa</span>
+</pre></div>
+</div>
+<p>Every input is a login, and the variation has moved inside the login: with and
+without a password, short and long names. This spec covers 77 lines, <em>fewer</em>
+than either spec above, and that is the correct outcome. You asked for one
+branch and got a suite that hammers it.</p>
+<p>Change the label to <code class="docutils literal notranslate"><span class="pre">&quot;apply:pong&quot;</span></code> and you get only <code class="docutils literal notranslate"><span class="pre">PING</span></code>s. Swap in
+<code class="docutils literal notranslate"><span class="pre">fdp_cover.response(str(&lt;start&gt;))</span> <span class="pre">==</span> <span class="pre">&quot;ERR_NOAUTH&quot;</span></code> and you get well-formed
+privileged messages sent with no session, which is negative testing: a suite of
+inputs that are valid in every way except the one that matters.</p>
+</section>
+<section id="the-ceiling">
+<h3>The Ceiling<a class="headerlink" href="#the-ceiling" title="Link to this heading">#</a></h3>
+<p>Both variants stop at the same wall. <code class="docutils literal notranslate"><span class="pre">OK_SUB</span></code>, <code class="docutils literal notranslate"><span class="pre">OK_MSG</span></code> and <code class="docutils literal notranslate"><span class="pre">OK_QUIT</span></code> never
+appear, no matter how the feedback is pointed, because the branches behind them
+need a login that happened <em>earlier on the same connection</em>. There is no
+single message that satisfies that.</p>
+<p>Next: <a class="reference internal" href="#sec-handson-protocol"><span class="std std-ref">stop generating messages and start generating conversations</span></a>.</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="block-4-protocol">
+<span id="sec-handson-protocol"></span><h2>Block 4: Protocol<a class="headerlink" href="#block-4-protocol" title="Link to this heading">#</a></h2>
+<p><strong>Exercises:</strong> <code class="docutils literal notranslate"><span class="pre">exercises/04a_session.fan</span></code>, <code class="docutils literal notranslate"><span class="pre">exercises/04b_protocol.fan</span></code>
+   <strong>Background:</strong> <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">Testing Protocols</span></a>, <a class="reference internal" href="Parties.html#sec-parties"><span class="std std-ref">Customizing Party Communication</span></a></p>
+<p>Three blocks in, a wall has held throughout: <code class="docutils literal notranslate"><span class="pre">OK_SUB</span></code>, <code class="docutils literal notranslate"><span class="pre">OK_MSG</span></code> and <code class="docutils literal notranslate"><span class="pre">OK_QUIT</span></code>
+are unreachable. Not because the inputs are malformed, but because of this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># everything below requires an authenticated session</span>
+    <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="s2">&quot;ERR_NOAUTH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The state that opens those branches is set by a <em>different message</em>, earlier on
+the same connection. No amount of work on a single message gets there. The unit
+of generation has to change.</p>
+<section id="exercise-4a-a-session-as-one-input">
+<h3>Exercise 4a: A Session as One Input<a class="headerlink" href="#exercise-4a-a-session-as-one-input" title="Link to this heading">#</a></h3>
+<p>The measurement form: generate a whole conversation as one input, four
+messages, newline-separated.</p>
+<p>The per-message <code class="docutils literal notranslate"><span class="pre">LEN</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC</span></code> constraints are given, one pair per message.
+You write two things.</p>
+<p><strong>The sequence.</strong> Define <code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span></code> as the four messages in protocol order,
+<code class="docutils literal notranslate"><span class="pre">LOGIN</span></code>, <code class="docutils literal notranslate"><span class="pre">SUB</span></code>, <code class="docutils literal notranslate"><span class="pre">MSG</span></code>, <code class="docutils literal notranslate"><span class="pre">QUIT</span></code>, joined by newlines.</p>
+<p><strong>The stateful link.</strong> You can only message a channel you have joined. Tie the
+<code class="docutils literal notranslate"><span class="pre">MSG</span></code> target to the <code class="docutils literal notranslate"><span class="pre">SUB</span></code> channel.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution: 04a_session.fan</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to Exercise 4a: a whole stateful SESSION as one input.</span>
+<span class="c1"># Four messages for one connection, newline-separated:</span>
+<span class="c1">#     LOGIN -&gt; SUB -&gt; MSG -&gt; QUIT</span>
+<span class="c1"># Each message is well-formed (its own LEN and CRC), and one cross-message</span>
+<span class="c1"># constraint ties the MSG&#39;s target to the subscribed channel, so the sequence</span>
+<span class="c1"># reaches the deep handlers (OK_SUB, OK_MSG, OK_QUIT) that NO single message</span>
+<span class="c1"># can. The harness replays all four lines through ONE Session, which is what</span>
+<span class="c1"># makes this the coverage finale.</span>
+<span class="c1">#</span>
+<span class="c1"># The live, interactive version of this is 04b_protocol.fan + fdp_server.py.</span>
+
+<span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">&lt;</span><span class="n">msg</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">&lt;</span><span class="n">quit</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_login</span><span class="o">&gt;</span> <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l1</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c1</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_sub</span><span class="o">&gt;</span>   <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l2</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c2</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">msg</span><span class="o">&gt;</span>    <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_msg</span><span class="o">&gt;</span>   <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l3</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c3</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">quit</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_quit</span><span class="o">&gt;</span>  <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l4</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c4</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">b_login</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;LOGIN user=&quot;</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">b_sub</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;SUB chan=&quot;</span> <span class="o">&lt;</span><span class="n">chan</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">b_msg</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;MSG to=&quot;</span> <span class="o">&lt;</span><span class="n">dest</span><span class="o">&gt;</span> <span class="s2">&quot;&amp;body=&quot;</span> <span class="o">&lt;</span><span class="n">text</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">b_quit</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;QUIT&quot;</span>
+
+<span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z]+&#39;</span>
+<span class="o">&lt;</span><span class="n">chan</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z]+&#39;</span>
+<span class="o">&lt;</span><span class="n">dest</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z]+&#39;</span>
+<span class="o">&lt;</span><span class="n">text</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[a-z0-9 ]+&#39;</span>
+<span class="o">&lt;</span><span class="n">l1</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>
+<span class="o">&lt;</span><span class="n">l2</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>
+<span class="o">&lt;</span><span class="n">l3</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>
+<span class="o">&lt;</span><span class="n">l4</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;+</span>
+<span class="o">&lt;</span><span class="n">c1</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">c2</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">c3</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">c4</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">digit</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9]&#39;</span>
+<span class="o">&lt;</span><span class="nb">hex</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-f]&#39;</span>
+
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">l1</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_login</span><span class="o">&gt;</span><span class="p">)))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">c1</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="n">fdp</span><span class="o">.</span><span class="n">crc16hex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_login</span><span class="o">&gt;</span><span class="p">))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">l2</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_sub</span><span class="o">&gt;</span><span class="p">)))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">c2</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="n">fdp</span><span class="o">.</span><span class="n">crc16hex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_sub</span><span class="o">&gt;</span><span class="p">))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">l3</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_msg</span><span class="o">&gt;</span><span class="p">)))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">c3</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="n">fdp</span><span class="o">.</span><span class="n">crc16hex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_msg</span><span class="o">&gt;</span><span class="p">))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">l4</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_quit</span><span class="o">&gt;</span><span class="p">)))</span>
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">c4</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="n">fdp</span><span class="o">.</span><span class="n">crc16hex</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_quit</span><span class="o">&gt;</span><span class="p">))</span>
+
+<span class="n">where</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_login</span><span class="o">&gt;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">64</span>
+<span class="n">where</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_sub</span><span class="o">&gt;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">64</span>
+<span class="n">where</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">b_msg</span><span class="o">&gt;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">64</span>
+
+<span class="n">where</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">dest</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="o">&lt;</span><span class="n">chan</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">fdp</span>
+</pre></div>
+</div>
+<p>That second constraint is the interesting one. It relates two fields in
+<em>different messages</em>, which is exactly the kind of statement that makes a
+conversation valid rather than merely well-formed. Without it, <code class="docutils literal notranslate"><span class="pre">MSG</span></code> addresses a
+random channel, the server answers <code class="docutils literal notranslate"><span class="pre">ERR_NOSUB</span></code>, and the delivery path stays
+dark.</p>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>exercises/04a_session.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FDP1</span> <span class="n">LOGIN</span> <span class="n">user</span><span class="o">=</span><span class="n">fzxlbqmciokhm</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">24</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">2</span><span class="n">ad4</span>
+<span class="n">FDP1</span> <span class="n">SUB</span> <span class="n">chan</span><span class="o">=</span><span class="n">yquhyrhm</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">17</span> <span class="n">CRC</span><span class="o">=</span><span class="n">e3ee</span>
+<span class="n">FDP1</span> <span class="n">MSG</span> <span class="n">to</span><span class="o">=</span><span class="n">yquhyrhm</span><span class="o">&amp;</span><span class="n">body</span><span class="o">=</span><span class="n">m</span> <span class="n">gtng</span> <span class="mi">5</span><span class="n">dquiy</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">34</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">9993</span>
+<span class="n">FDP1</span> <span class="n">QUIT</span> <span class="n">LEN</span><span class="o">=</span><span class="mi">4</span> <span class="n">CRC</span><span class="o">=</span><span class="mi">9</span><span class="n">f54</span>
+</pre></div>
+</div>
+<p>Four messages, eight satisfied length and checksum constraints, and
+<code class="docutils literal notranslate"><span class="pre">to=yquhyrhm</span></code> matching <code class="docutils literal notranslate"><span class="pre">chan=yquhyrhm</span></code> across two lines.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>fdp_validate.py<span class="w"> </span>--step<span class="w"> </span>protocol<span class="w"> </span>--spec<span class="w"> </span>exercises/04a_session.fan
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coverage</span> <span class="p">:</span> <span class="mi">94</span> <span class="n">lines</span> <span class="ow">in</span> <span class="n">fdp</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">reference</span> <span class="n">solution</span> <span class="n">reaches</span> <span class="mi">94</span><span class="p">)</span>
+<span class="n">bugs</span>     <span class="p">:</span> <span class="mi">12</span> <span class="o">/</span> <span class="mi">12</span> <span class="n">found</span> <span class="k">for</span> <span class="n">this</span> <span class="n">step</span> <span class="p">(</span><span class="n">bugs</span> <span class="n">are</span> <span class="n">the</span> <span class="k">pass</span><span class="o">/</span><span class="n">fail</span> <span class="n">signal</span><span class="p">,</span> <span class="ow">not</span> <span class="n">the</span> <span class="n">raw</span> <span class="n">line</span> <span class="n">count</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">crc</span>        <span class="n">a</span> <span class="n">message</span> <span class="n">passed</span> <span class="n">the</span> <span class="n">CRC</span> <span class="n">check</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">fields</span>     <span class="n">a</span> <span class="n">message</span> <span class="n">passed</span> <span class="n">field</span> <span class="n">validation</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">gate</span><span class="o">-</span><span class="n">length</span>     <span class="n">a</span> <span class="n">message</span> <span class="n">passed</span> <span class="n">the</span> <span class="n">LEN</span> <span class="n">check</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">handler</span><span class="o">-</span><span class="n">login</span>   <span class="n">a</span> <span class="n">LOGIN</span> <span class="n">was</span> <span class="n">accepted</span> <span class="p">(</span><span class="n">OK_LOGIN</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">session</span><span class="o">-</span><span class="n">authed</span>  <span class="n">a</span> <span class="n">message</span> <span class="n">ran</span> <span class="n">on</span> <span class="n">an</span> <span class="n">authenticated</span> <span class="n">session</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">session</span><span class="o">-</span><span class="n">msg</span>     <span class="n">a</span> <span class="n">message</span> <span class="n">was</span> <span class="n">delivered</span> <span class="p">(</span><span class="n">OK_MSG</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">session</span><span class="o">-</span><span class="n">quit</span>    <span class="n">a</span> <span class="n">session</span> <span class="n">closed</span> <span class="n">cleanly</span> <span class="p">(</span><span class="n">OK_QUIT</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">session</span><span class="o">-</span><span class="n">sub</span>     <span class="n">a</span> <span class="n">channel</span> <span class="n">subscription</span> <span class="n">succeeded</span> <span class="p">(</span><span class="n">OK_SUB</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">LOGIN</span>     <span class="n">a</span> <span class="n">LOGIN</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">MSG</span>       <span class="n">a</span> <span class="n">MSG</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">QUIT</span>      <span class="n">a</span> <span class="n">QUIT</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">shape</span><span class="p">:</span><span class="n">SUB</span>       <span class="n">a</span> <span class="n">SUB</span> <span class="n">message</span> <span class="n">parsed</span> <span class="p">(</span><span class="n">right</span> <span class="n">structure</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="n">PASS</span><span class="p">:</span> <span class="n">found</span> <span class="n">every</span> <span class="n">bug</span> <span class="k">for</span> <span class="s1">&#39;protocol&#39;</span><span class="o">.</span> <span class="n">Safe</span> <span class="n">to</span> <span class="n">move</span><span class="p">;</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">last</span> <span class="n">step</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>94 lines, and the four <code class="docutils literal notranslate"><span class="pre">session-*</span></code> beacons are lit for the first time. That is
+the finale of the gradient: 14, 45, 82, 94.</p>
+</section>
+<section id="exercise-4b-a-live-conversation">
+<h3>Exercise 4b: A Live Conversation<a class="headerlink" href="#exercise-4b-a-live-conversation" title="Link to this heading">#</a></h3>
+<p>Generating a transcript is one thing; holding the conversation is another. In
+this exercise Fandango is the <em>client</em>, and <code class="docutils literal notranslate"><span class="pre">fdp_server.py</span></code> is a real server
+process on the other end of a pipe.</p>
+<p>The vocabulary is <a class="reference internal" href="Parties.html#sec-parties"><span class="std std-ref">parties</span></a>: <code class="docutils literal notranslate"><span class="pre">&lt;In:x&gt;</span></code> is a message Fandango
+<strong>sends</strong>, <code class="docutils literal notranslate"><span class="pre">&lt;Out:y&gt;</span></code> is a reply it <strong>receives and must match</strong>. Your job is to
+write the exchange.</p>
+<p>The file <a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">includes</span></a> your 4a spec, so the messages, the constraints
+and your cross-message link all carry over. What it adds is given: every message
+now ends in a newline, since the server reads one line at a time, and the
+replies get rules of their own.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution: 04b_protocol.fan</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to Exercise 4b. Messages, constraints and the stateful cross-message</span>
+<span class="c1"># constraint come from Exercise 4a; only the live exchange and the</span>
+<span class="c1"># newline-terminated / reply rules are new.</span>
+<span class="n">include</span><span class="p">(</span><span class="s1">&#39;04a_session.fan&#39;</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">In</span><span class="p">:</span><span class="n">login</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Out</span><span class="p">:</span><span class="n">ok_login</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">In</span><span class="p">:</span><span class="n">sub</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Out</span><span class="p">:</span><span class="n">ok_sub</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">In</span><span class="p">:</span><span class="n">msg</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Out</span><span class="p">:</span><span class="n">ok_msg</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">In</span><span class="p">:</span><span class="n">quit</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">Out</span><span class="p">:</span><span class="n">ok_quit</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_login</span><span class="o">&gt;</span> <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l1</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c1</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_sub</span><span class="o">&gt;</span>   <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l2</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c2</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">msg</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_msg</span><span class="o">&gt;</span>   <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l3</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c3</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">quit</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;FDP1 &quot;</span> <span class="o">&lt;</span><span class="n">b_quit</span><span class="o">&gt;</span>  <span class="s2">&quot; LEN=&quot;</span> <span class="o">&lt;</span><span class="n">l4</span><span class="o">&gt;</span> <span class="s2">&quot; CRC=&quot;</span> <span class="o">&lt;</span><span class="n">c4</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+<span class="o">&lt;</span><span class="n">ok_login</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;OK_LOGIN &quot;</span> <span class="o">&lt;</span><span class="n">rest</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">ok_sub</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;OK_SUB &quot;</span> <span class="o">&lt;</span><span class="n">rest</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">ok_msg</span><span class="o">&gt;</span>   <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;OK_MSG &quot;</span> <span class="o">&lt;</span><span class="n">rest</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">ok_quit</span><span class="o">&gt;</span>  <span class="p">:</span><span class="o">:=</span> <span class="s2">&quot;OK_QUIT &quot;</span> <span class="o">&lt;</span><span class="n">rest</span><span class="o">&gt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="o">&lt;</span><span class="n">rest</span><span class="o">&gt;</span>     <span class="p">:</span><span class="o">:=</span> <span class="sa">r</span><span class="s1">&#39;[^\n]*&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>exercises/04b_protocol.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>fdp_server.py
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">login</span><span class="o">&gt;</span>    <span class="s1">&#39;FDP1 LOGIN user=oigiwdkqvy LEN=21 CRC=8bc5</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">Out</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">ok_login</span><span class="o">&gt;</span> <span class="s1">&#39;OK_LOGIN oigiwdkqvy</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">In</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">sub</span><span class="o">&gt;</span>      <span class="s1">&#39;FDP1 SUB chan=vgacmvy LEN=16 CRC=9ebe</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">Out</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">ok_sub</span><span class="o">&gt;</span>   <span class="s1">&#39;OK_SUB vgacmvy</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">In</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">msg</span><span class="o">&gt;</span>      <span class="s1">&#39;FDP1 MSG to=vgacmvy&amp;body=7rk7pgszpo09 LEN=32 CRC=0169</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">Out</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">ok_msg</span><span class="o">&gt;</span>   <span class="s1">&#39;OK_MSG 1</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">In</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">quit</span><span class="o">&gt;</span>     <span class="s1">&#39;FDP1 QUIT LEN=4 CRC=9f54</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">Out</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">ok_quit</span><span class="o">&gt;</span>  <span class="s1">&#39;OK_QUIT delivered=1</span><span class="se">\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>A complete protocol run: authenticated, subscribed, delivered one message,
+closed cleanly. <code class="docutils literal notranslate"><span class="pre">OK_QUIT</span> <span class="pre">delivered=1</span></code> is the server confirming that the message
+actually arrived, which is only true because <code class="docutils literal notranslate"><span class="pre">to=vgacmvy</span></code> matched the channel
+subscribed two messages earlier.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A warning about “population size reduced to 1” is expected here and harmless.</p>
+</div>
+</section>
+<section id="when-the-server-disagrees">
+<h3>When the Server Disagrees<a class="headerlink" href="#when-the-server-disagrees" title="Link to this heading">#</a></h3>
+<p>This is the part worth remembering, because it is how the technique finds real
+bugs.</p>
+<p>If the server’s reply does not match the <code class="docutils literal notranslate"><span class="pre">&lt;Out:...&gt;</span></code> you predicted, Fandango
+stops with <code class="docutils literal notranslate"><span class="pre">Could</span> <span class="pre">not</span> <span class="pre">parse</span> <span class="pre">received</span> <span class="pre">message</span> <span class="pre">fragments</span></code>, and the error contains
+a <code class="docutils literal notranslate"><span class="pre">Received</span> <span class="pre">messages:</span></code> line showing what the server actually said.</p>
+<p>That mismatch is a bug report. Your spec is a statement about how the protocol
+is supposed to behave; the server disagreeing with it is either a bug in your
+model or a bug in the server, and either way you want to know. Try reordering
+the exchange to send <code class="docutils literal notranslate"><span class="pre">&lt;In:msg&gt;</span></code> before <code class="docutils literal notranslate"><span class="pre">&lt;In:login&gt;</span></code> and watch <code class="docutils literal notranslate"><span class="pre">ERR_NOAUTH</span></code> come
+back where you predicted <code class="docutils literal notranslate"><span class="pre">OK_MSG</span></code>.</p>
+</section>
+<section id="where-you-landed">
+<h3>Where You Landed<a class="headerlink" href="#where-you-landed" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random</span> <span class="nb">bytes</span>         <span class="mi">14</span> <span class="n">lines</span>    <span class="n">died</span> <span class="n">at</span> <span class="n">the</span> <span class="n">framing</span> <span class="n">checks</span>
+<span class="o">+</span> <span class="n">grammar</span>            <span class="mi">45</span> <span class="n">lines</span>    <span class="n">reached</span> <span class="n">the</span> <span class="n">parser</span>
+<span class="o">+</span> <span class="n">constraints</span>        <span class="mi">82</span> <span class="n">lines</span>    <span class="n">reached</span> <span class="n">the</span> <span class="n">handlers</span>
+<span class="o">+</span> <span class="n">feedback</span>           <span class="mi">82</span> <span class="n">lines</span>    <span class="n">same</span> <span class="n">ceiling</span><span class="p">,</span> <span class="mi">40</span><span class="n">x</span> <span class="n">fewer</span> <span class="n">inputs</span>
+<span class="o">+</span> <span class="n">statefulness</span>       <span class="mi">94</span> <span class="n">lines</span>    <span class="n">the</span> <span class="n">login</span><span class="o">-</span><span class="n">gated</span> <span class="n">handlers</span> <span class="n">opened</span>
+</pre></div>
+</div>
+<p>Each step added one idea, and every step was expressed in the same two
+constructs: a grammar rule and a <code class="docutils literal notranslate"><span class="pre">where</span></code> clause. Nothing here was special-cased
+for FDP, and the four ideas transfer directly to any format or protocol with a
+length field, a checksum, a handler table and a state machine, which is to say
+most of them.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Strategies.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Some Fuzzing Strategies</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Constraints.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Shaping Inputs with Constraints</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-target-fdp">The Target: FDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-arc">The Arc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-block-works">How a Block Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowing-when-you-are-done">Knowing When You Are Done</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#each-block-builds-on-the-last">Each Block Builds on the Last</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-0-random-bytes">Block 0: Random Bytes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-stops-so-early">Why It Stops So Early</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-1-grammar">Block 1: Grammar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-given">What Is Given</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-write">What You Write</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-it">Running It</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-reaches">What It Reaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-2-constraints">Block 2: Constraints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-whole-exercise">The Whole Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What You Write</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Running It</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">What It Reaches</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-this-stops">Where This Stops</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-3-execution-feedback">Block 3: Execution Feedback</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-feedback-signal">The Feedback Signal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3a-cover-the-whole-population">Exercise 3a: Cover the Whole Population</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3b-aim-at-one-branch">Exercise 3b: Aim at One Branch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ceiling">The Ceiling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-4-protocol">Block 4: Protocol</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4a-a-session-as-one-input">Exercise 4a: A Session as One Input</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4b-a-live-conversation">Exercise 4b: A Live Conversation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-server-disagrees">When the Server Disagrees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-you-landed">Where You Landed</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
