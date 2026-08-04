@@ -1,0 +1,805 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Case Study: PNG &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Png';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Case Study: GIF" href="Gif.html" />
+    <link rel="prev" title="Data Converters" href="Conversion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hatching Specs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Style.html">Fandango Style Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FPng.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Png.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<a href="_static/fandango.pdf" target="_blank"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Download PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Case Study: PNG</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="case-study-png">
+<span id="sec-png"></span><h1>Case Study: PNG<a class="headerlink" href="#case-study-png" title="Link to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/PNG">PNG format</a> is widely used to encode images.</p>
+<p>The PNG spec <a class="reference download internal" download="" href="_downloads/75ed49a14480435b4faac152a849f732/png.fan"><span class="xref download myst">png.fan</span></a> can be directly used in Fandango:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>png.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>--population-size<span class="o">=</span><span class="m">1</span><span class="w"> </span>-o<span class="w"> </span>32x32.png
+</pre></div>
+</div>
+<p>produces a nice <a class="reference download internal" download="" href="_downloads/074986ec543a7d89dc5e25829441c55b/32x32.png"><span class="xref download myst">32x32 pixel PNG file</span></a>:</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/32x32.png"><img alt="Generated PNG file" class="bg-primary mb-1 align-center" src="_images/32x32.png" style="width: 200px;" />
+</a>
+<p>The PNG file <a class="reference download internal" download="" href="_downloads/75ed49a14480435b4faac152a849f732/png.fan"><span class="xref download myst">png.fan</span></a> is reproduced verbatim below.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1: </span><code class="docutils literal notranslate"><span class="pre">png.fan</span></code> requires Fandango 1.1 or later.</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># png_32x32.fan
+# Fandango specification for a structurally valid 32x32 PNG file.
+
+import struct
+import zlib
+import binascii
+import random
+
+# ----------------------------------------------------------------------
+# Global Constants
+# ----------------------------------------------------------------------
+
+IMAGE_WIDTH: int = 32
+IMAGE_HEIGHT: int = 32
+TEXT_LENGTH: int = 100
+
+
+# ----------------------------------------------------------------------
+# Start Symbol
+# ----------------------------------------------------------------------
+
+# Complete PNG file:
+#   Signature
+#   IHDR
+#   Optional tEXt chunks
+#   One or more IDAT
+#   IEND
+&lt;start&gt; ::= \
+    &lt;png_signature&gt; \
+    &lt;ihdr_chunk&gt; \
+    &lt;text_chunk&gt;* \
+    &lt;idat_chunk&gt;+ \
+    &lt;iend_chunk&gt;
+
+
+# ----------------------------------------------------------------------
+# PNG Signature
+# ----------------------------------------------------------------------
+
+# Fixed 8-byte PNG signature
+&lt;png_signature&gt; ::= b&quot;\x89PNG\r\n\x1a\n&quot;
+
+
+# ----------------------------------------------------------------------
+# IHDR Chunk
+# ----------------------------------------------------------------------
+
+# IHDR chunk
+&lt;ihdr_chunk&gt; ::= \
+    &lt;ihdr_length&gt; \
+    &lt;ihdr_type&gt; \
+    &lt;ihdr_data&gt; \
+    &lt;ihdr_crc&gt;
+
+# IHDR data length (13 bytes)
+&lt;ihdr_length&gt; ::= &lt;byte&gt;{4}
+where &lt;ihdr_length&gt; == int_to_be_bytes(13)
+
+# IHDR chunk type
+&lt;ihdr_type&gt; ::= b&quot;IHDR&quot;
+
+# IHDR payload (13 bytes total)
+&lt;ihdr_data&gt; ::= \
+    &lt;ihdr_width&gt; \
+    &lt;ihdr_height&gt; \
+    &lt;ihdr_bit_depth&gt; \
+    &lt;ihdr_color_type&gt; \
+    &lt;ihdr_compression&gt; \
+    &lt;ihdr_filter&gt; \
+    &lt;ihdr_interlace&gt;
+
+# Width (32 pixels)
+&lt;ihdr_width&gt; ::= &lt;byte&gt;{4} := int_to_be_bytes(IMAGE_WIDTH)
+
+# Height (32 pixels)
+&lt;ihdr_height&gt; ::= &lt;byte&gt;{4} := int_to_be_bytes(IMAGE_HEIGHT)
+
+# Bit depth (8 bits per channel)
+&lt;ihdr_bit_depth&gt; ::= b&quot;\x08&quot;
+
+# Color type (2 = truecolor RGB)
+&lt;ihdr_color_type&gt; ::= b&quot;\x02&quot;
+
+# Compression method (0)
+&lt;ihdr_compression&gt; ::= b&quot;\x00&quot;
+
+# Filter method (0)
+&lt;ihdr_filter&gt; ::= b&quot;\x00&quot;
+
+# Interlace method (0 = no interlace)
+&lt;ihdr_interlace&gt; ::= b&quot;\x00&quot;
+
+# CRC of IHDR (computed over type + data)
+&lt;ihdr_crc&gt; ::= &lt;byte&gt;{4}
+where &lt;ihdr_crc&gt; == crc32_bytes( \
+    bytes(&lt;ihdr_type&gt;) + bytes(&lt;ihdr_data&gt;) \
+)
+
+
+# ----------------------------------------------------------------------
+# tEXt Chunk (Optional, Repeatable)
+# ----------------------------------------------------------------------
+
+# Single tEXt chunk
+&lt;text_chunk&gt; ::= \
+    &lt;text_length&gt; \
+    &lt;text_type&gt; \
+    &lt;text_data&gt; \
+    &lt;text_crc&gt;
+
+# Length of text payload
+&lt;text_length&gt; ::= &lt;byte&gt;{4}
+where &lt;text_length&gt; == int_to_be_bytes(len(bytes(&lt;text_data&gt;)))
+
+# tEXt chunk type
+&lt;text_type&gt; ::= b&quot;tEXt&quot;
+
+# Fixed-length ASCII text payload
+&lt;text_data&gt; ::= &lt;byte&gt;{TEXT_LENGTH} := generate_ascii_text(TEXT_LENGTH)
+
+# CRC of tEXt
+&lt;text_crc&gt; ::= &lt;byte&gt;{4}
+where &lt;text_crc&gt; == crc32_bytes( \
+    bytes(&lt;text_type&gt;) + bytes(&lt;text_data&gt;) \
+)
+
+
+# ----------------------------------------------------------------------
+# IDAT Chunks
+# ----------------------------------------------------------------------
+
+# Single IDAT chunk
+&lt;idat_chunk&gt; ::= \
+    &lt;idat_length&gt; \
+    &lt;idat_type&gt; \
+    &lt;idat_data&gt; \
+    &lt;idat_crc&gt;
+
+# Length of compressed image data
+&lt;idat_length&gt; ::= &lt;byte&gt;{4}
+where &lt;idat_length&gt; == int_to_be_bytes(len(bytes(&lt;idat_data&gt;)))
+
+# IDAT chunk type
+&lt;idat_type&gt; ::= b&quot;IDAT&quot;
+
+# Compressed scanline data for 32x32 RGB image
+&lt;idat_data&gt; ::= &lt;byte&gt;* := generate_idat_data(IMAGE_WIDTH, IMAGE_HEIGHT)
+
+# CRC of IDAT
+&lt;idat_crc&gt; ::= &lt;byte&gt;{4}
+where &lt;idat_crc&gt; == crc32_bytes( \
+    bytes(&lt;idat_type&gt;) + bytes(&lt;idat_data&gt;) \
+)
+
+
+# ----------------------------------------------------------------------
+# IEND Chunk
+# ----------------------------------------------------------------------
+
+# Final PNG chunk
+&lt;iend_chunk&gt; ::= \
+    &lt;iend_length&gt; \
+    &lt;iend_type&gt; \
+    &lt;iend_crc&gt;
+
+# Length (always 0)
+&lt;iend_length&gt; ::= &lt;byte&gt;{4}
+where &lt;iend_length&gt; == int_to_be_bytes(0)
+
+# IEND type
+&lt;iend_type&gt; ::= b&quot;IEND&quot;
+
+# CRC of IEND (computed over type only)
+&lt;iend_crc&gt; ::= &lt;byte&gt;{4}
+where &lt;iend_crc&gt; == crc32_bytes(bytes(&lt;iend_type&gt;))
+
+
+# ----------------------------------------------------------------------
+# Helper Functions
+# ----------------------------------------------------------------------
+
+def int_to_be_bytes(value: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Convert integer to 4-byte big-endian format.
+
+    :param value: Integer value.
+    :return: 4-byte big-endian byte sequence.
+    &quot;&quot;&quot;
+    return struct.pack(&quot;&gt;I&quot;, value)
+
+
+def crc32_bytes(data: bytes) -&gt; bytes:
+    &quot;&quot;&quot;
+    Compute PNG CRC32 checksum.
+
+    :param data: Input bytes.
+    :return: 4-byte big-endian CRC.
+    &quot;&quot;&quot;
+    crc: int = binascii.crc32(bytes(data)) &amp; 0xffffffff
+    return struct.pack(&quot;&gt;I&quot;, crc)
+
+
+def generate_ascii_text(length: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Generate ASCII text of fixed length.
+
+    :param length: Number of characters.
+    :return: ASCII byte string.
+    &quot;&quot;&quot;
+    return bytes(
+        random.randint(32, 126)
+        for _ in range(length)
+    )
+
+
+def generate_idat_data(width: int, height: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Generate valid PNG scanlines and compress them.
+
+    For each scanline:
+      - 1 filter byte (0)
+      - width * 3 RGB bytes
+
+    The concatenated raw data is zlib-compressed.
+
+    :param width: Image width.
+    :param height: Image height.
+    :return: zlib-compressed image data.
+    &quot;&quot;&quot;
+    raw: bytearray = bytearray()
+
+    for _ in range(height):
+        raw.append(0)
+        for _ in range(width * 3):
+            raw.append(random.getrandbits(8))
+
+    return zlib.compress(bytes(raw))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">png.fan</span></code> supports only a limited set of PNG fields, so it cannot be used to <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parse</span></a> arbitrary PNG files.</p>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Conversion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Converters</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Gif.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case Study: GIF</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

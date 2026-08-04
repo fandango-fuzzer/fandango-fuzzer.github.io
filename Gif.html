@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Case Study: The GIF Format &#8212; Fuzzing with Fandango</title>
+    <title>Case Study: GIF &#8212; Fuzzing with Fandango</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Gif';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hatching Specs" href="Hatching.html" />
-    <link rel="prev" title="Data Converters" href="Conversion.html" />
+    <link rel="next" title="Case Study: MP3" href="Mp3.html" />
+    <link rel="prev" title="Case Study: PNG" href="Png.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -208,8 +208,9 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: The GIF Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: GIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
 <ul class="nav bd-sidenav">
@@ -222,6 +223,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hatching Specs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Style.html">Fandango Style Guide</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -415,7 +421,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Case Study: The GIF Format</h1>
+    <h1>Case Study: GIF</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -429,116 +435,280 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="case-study-the-gif-format">
-<span id="sec-gif"></span><h1>Case Study: The GIF Format<a class="headerlink" href="#case-study-the-gif-format" title="Link to this heading">#</a></h1>
-<div class="attention admonition">
-<p class="admonition-title">Under Construction</p>
-<p>To be added later.</p>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="case-study-gif">
+<span id="sec-gif"></span><h1>Case Study: GIF<a class="headerlink" href="#case-study-gif" title="Link to this heading">#</a></h1>
 <p>The <a class="reference external" href="https://www.fileformat.info/format/gif/egff.htm">GIF format</a> is widely used to encode image sequences.</p>
-<p>We start with a very short GIF to keep things simple (<a class="reference external" href="http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever">source</a>): <a class="reference download internal" download="" href="_downloads/76eaac8615c4db457e2d37ab8fe4afcd/tinytrans.gif"><span class="xref download myst">tinytrans.gif</span></a>.</p>
-<p>We can parse this file using Fandango:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>fandango<span class="w"> </span>parse<span class="w"> </span>-f<span class="w"> </span>gif89a.fan<span class="w"> </span>tinytrans.gif<span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>--format<span class="o">=</span>grammar<span class="w"> </span>--validate
-<span class="k">assert</span> <span class="n">_exit_code</span> <span class="o">==</span> <span class="mi">0</span>
+<p>The GIF file <a class="reference download internal" download="" href="_downloads/105baf16bc89909096a1ea9d831262ef/gif.fan"><span class="xref download myst">gif.fan</span></a> can be directly used in Fandango:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>gif.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>--population-size<span class="o">=</span><span class="m">1</span><span class="w"> </span>-o<span class="w"> </span>32x32.gif<span class="w"> </span>
 </pre></div>
 </div>
+<p>produces a <a class="reference download internal" download="" href="_downloads/076b46d3ddd4b8d15cc091a69fdbbf59/32x32.gif"><span class="xref download myst">32x32 pixel GIF file</span></a>:</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/32x32.gif"><img alt="Generated GIF file" class="bg-primary mb-1 align-center" src="_images/32x32.gif" style="width: 200px;" />
+</a>
+<p>Here is the generated <code class="docutils literal notranslate"><span class="pre">gif.fan</span></code> specification file.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1: </span><code class="docutils literal notranslate"><span class="pre">gif.fan</span></code> requires Fandango 1.1 or later.</p>
 </div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;GifHeader&gt; &lt;LogicalScreenDescriptor&gt; &lt;GlobalColorTable&gt; &lt;Data_1&gt; &lt;Trailer&gt;  # b&#39;GIF89a\x01\x00\x01\x00\x80\x01\x00\xff\xff\xff\x00\x00\x00!\xf9\x04\x01\n\x00\x01\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02L\x01\x00;&#39;
-  &lt;GifHeader&gt; ::= &lt;GIFHEADER&gt;
-    &lt;GIFHEADER&gt; ::= &lt;Signature&gt; &lt;Version&gt;  # b&#39;GIF89a&#39;
-      &lt;Signature&gt; ::= &lt;char&gt; &lt;char&gt; &lt;char&gt;  # b&#39;GIF&#39;
-        &lt;char&gt; ::= &lt;byte&gt;
-          &lt;byte&gt; ::= &lt;_byte&gt;
-            &lt;_byte&gt; ::= b&#39;G&#39;  # Position 0x0000 (0)
-        &lt;char&gt; ::= &lt;byte&gt;
-          &lt;byte&gt; ::= &lt;_byte&gt;
-            &lt;_byte&gt; ::= b&#39;I&#39;  # Position 0x0001 (1)
-        &lt;char&gt; ::= &lt;byte&gt;
-          &lt;byte&gt; ::= &lt;_byte&gt;
-            &lt;_byte&gt; ::= b&#39;F&#39;  # Position 0x0002 (2)
-      &lt;Version&gt; ::= &lt;char&gt; &lt;char&gt; &lt;char&gt;  # b&#39;89a&#39;
-        &lt;char&gt; ::= &lt;byte&gt;
-          &lt;byte&gt; ::= &lt;_byte&gt;
-            &lt;_byte&gt; ::= b&#39;8&#39;  # Position 0x0003 (3)
-        &lt;char&gt; ::= &lt;byte&gt;
-          &lt;byte&gt; ::= &lt;_byte&gt;
-            &lt;_byte&gt; ::= b&#39;9&#39;  # Position 0x0004 (4)
-        &lt;char&gt; ::= &lt;byte&gt;
-          &lt;byte&gt; ::= &lt;_byte&gt;
-            &lt;_byte&gt; ::= b&#39;a&#39;  # Position 0x0005 (5)
-  &lt;LogicalScreenDescriptor&gt; ::= &lt;LOGICALSCREENDESCRIPTOR&gt;
-    &lt;LOGICALSCREENDESCRIPTOR&gt; ::= &lt;Width&gt; &lt;Height&gt; &lt;PackedFields&gt; &lt;BackgroundColorIndex&gt; &lt;PixelAspectRatio&gt;  # b&#39;\x01\x00\x01\x00\x80\x01\x00&#39;
-      &lt;Width&gt; ::= b&#39;\x01&#39; b&#39;\x00&#39;  # Position 0x0006 (6); b&#39;\x01\x00&#39;
-      &lt;Height&gt; ::= b&#39;\x01&#39; b&#39;\x00&#39;  # Position 0x0008 (8); b&#39;\x01\x00&#39;
-      &lt;PackedFields&gt; ::= &lt;LOGICALSCREENDESCRIPTOR_PACKEDFIELDS&gt;
-        &lt;LOGICALSCREENDESCRIPTOR_PACKEDFIELDS&gt; ::= &lt;GlobalColorTableFlag&gt; &lt;ColorResolution&gt; &lt;SortFlag&gt; &lt;SizeOfGlobalColorTable&gt;  # 0b10000000
-          &lt;GlobalColorTableFlag&gt; ::= 1  # Position 0x000a (10), bit 7
-          &lt;ColorResolution&gt; ::= 0 0 0  # Position 0x000a (10), bits 6-4; 0b000
-          &lt;SortFlag&gt; ::= &lt;bit&gt;
-            &lt;bit&gt; ::= &lt;_bit&gt;
-              &lt;_bit&gt; ::= 0  # Position 0x000a (10), bit 3
-          &lt;SizeOfGlobalColorTable&gt; ::= 0 0 0  # Position 0x000a (10), bits 2-0; 0b000
-      &lt;BackgroundColorIndex&gt; ::= b&#39;\x01&#39;  # Position 0x000b (11)
-      &lt;PixelAspectRatio&gt; ::= b&#39;\x00&#39;  # Position 0x000c (12)
-  &lt;GlobalColorTable&gt; ::= &lt;RGB&gt; b&#39;\x00&#39; b&#39;\x00&#39; b&#39;\x00&#39;  # Position 0x000d (13); b&#39;\xff\xff\xff\x00\x00\x00&#39;
-    &lt;RGB&gt; ::= &lt;R&gt; &lt;G&gt; &lt;B&gt;  # b&#39;\xff\xff\xff&#39;
-      &lt;R&gt; ::= &lt;UBYTE&gt;
-        &lt;UBYTE&gt; ::= &lt;ubyte&gt;
-          &lt;ubyte&gt; ::= &lt;uchar&gt;
-            &lt;uchar&gt; ::= &lt;unsigned_char&gt;
-              &lt;unsigned_char&gt; ::= &lt;byte&gt;
-                &lt;byte&gt; ::= &lt;_byte&gt;
-                  &lt;_byte&gt; ::= b&#39;\xff&#39;  # Position 0x0010 (16)
-      &lt;G&gt; ::= &lt;UBYTE&gt;
-        &lt;UBYTE&gt; ::= &lt;ubyte&gt;
-          &lt;ubyte&gt; ::= &lt;uchar&gt;
-            &lt;uchar&gt; ::= &lt;unsigned_char&gt;
-              &lt;unsigned_char&gt; ::= &lt;byte&gt;
-                &lt;byte&gt; ::= &lt;_byte&gt;
-                  &lt;_byte&gt; ::= b&#39;\xff&#39;  # Position 0x0011 (17)
-      &lt;B&gt; ::= &lt;UBYTE&gt;
-        &lt;UBYTE&gt; ::= &lt;ubyte&gt;
-          &lt;ubyte&gt; ::= &lt;uchar&gt;
-            &lt;uchar&gt; ::= &lt;unsigned_char&gt;
-              &lt;unsigned_char&gt; ::= &lt;byte&gt;
-                &lt;byte&gt; ::= &lt;_byte&gt;
-                  &lt;_byte&gt; ::= b&#39;\xff&#39;  # Position 0x0012 (18)
-  &lt;Data_1&gt; ::= &lt;DATA&gt;
-    &lt;DATA&gt; ::= &lt;GraphicControlExtension&gt; &lt;ImageDescriptor&gt; &lt;LocalColorTable&gt; &lt;ImageData&gt;  # b&#39;!\xf9\x04\x01\n\x00\x01\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02L\x01\x00&#39;
-      &lt;GraphicControlExtension&gt; ::= &lt;GRAPHICCONTROLEXTENSION&gt;
-        &lt;GRAPHICCONTROLEXTENSION&gt; ::= &lt;ExtensionIntroducer_1&gt; &lt;GraphicControlLabel_1&gt; &lt;GraphicControlSubBlock&gt; &lt;BlockTerminator_2&gt;  # b&#39;!\xf9\x04\x01\n\x00\x01\x00&#39;
-          &lt;ExtensionIntroducer_1&gt; ::= b&#39;!&#39;  # Position 0x0013 (19)
-          &lt;GraphicControlLabel_1&gt; ::= b&#39;\xf9&#39;  # Position 0x0014 (20)
-          &lt;GraphicControlSubBlock&gt; ::= &lt;GRAPHICCONTROLSUBBLOCK&gt;
-            &lt;GRAPHICCONTROLSUBBLOCK&gt; ::= &lt;BlockSize&gt; &lt;PackedFields_2&gt; &lt;DelayTime&gt; &lt;TransparentColorIndex&gt;  # b&#39;\x04\x01\n\x00\x01&#39;
-              &lt;BlockSize&gt; ::= b&#39;\x04&#39;  # Position 0x0015 (21)
-              &lt;PackedFields_2&gt; ::= &lt;GRAPHICCONTROLEXTENSION_DATASUBBLOCK_PACKEDFIELDS&gt;
-                &lt;GRAPHICCONTROLEXTENSION_DATASUBBLOCK_PACKEDFIELDS&gt; ::= 0 0 0 0 0 0 0 1  # Position 0x0016 (22), bits 7-0; 0b00000001
-              &lt;DelayTime&gt; ::= b&#39;\n&#39; b&#39;\x00&#39;  # Position 0x0017 (23); b&#39;\n\x00&#39;
-              &lt;TransparentColorIndex&gt; ::= b&#39;\x01&#39;  # Position 0x0019 (25)
-          &lt;BlockTerminator_2&gt; ::= b&#39;\x00&#39;  # Position 0x001a (26)
-      &lt;ImageDescriptor&gt; ::= &lt;IMAGEDESCRIPTOR&gt;
-        &lt;IMAGEDESCRIPTOR&gt; ::= &lt;ImageSeparator_1&gt; &lt;ImageLeftPosition&gt; &lt;ImageTopPosition&gt; &lt;ImageWidth&gt; &lt;ImageHeight&gt; &lt;PackedFields_1&gt;  # b&#39;,\x00\x00\x00\x00\x01\x00\x01\x00\x00&#39;
-          &lt;ImageSeparator_1&gt; ::= b&#39;,&#39;  # Position 0x001b (27)
-          &lt;ImageLeftPosition&gt; ::= b&#39;\x00&#39; b&#39;\x00&#39;  # Position 0x001c (28); b&#39;\x00\x00&#39;
-          &lt;ImageTopPosition&gt; ::= b&#39;\x00&#39; b&#39;\x00&#39;  # Position 0x001e (30); b&#39;\x00\x00&#39;
-          &lt;ImageWidth&gt; ::= b&#39;\x01&#39; b&#39;\x00&#39;  # Position 0x0020 (32); b&#39;\x01\x00&#39;
-          &lt;ImageHeight&gt; ::= b&#39;\x01&#39; b&#39;\x00&#39;  # Position 0x0022 (34); b&#39;\x01\x00&#39;
-          &lt;PackedFields_1&gt; ::= 0 0 0 0 0 0 0 0  # Position 0x0024 (36), bits 7-0; 0b00000000
-      &lt;LocalColorTable&gt; ::= b&#39;\x02&#39; b&#39;\x02&#39; b&#39;L&#39;  # Position 0x0025 (37); b&#39;\x02\x02L&#39;
-      &lt;ImageData&gt; ::= &lt;IMAGEDATA&gt;
-        &lt;IMAGEDATA&gt; ::= &lt;LZWMinimumCodeSize&gt; &lt;DataSubBlocks&gt;  # b&#39;\x01\x00&#39;
-          &lt;LZWMinimumCodeSize&gt; ::= b&#39;\x01&#39;  # Position 0x0028 (40)
-          &lt;DataSubBlocks&gt; ::= b&#39;\x00&#39;  # Position 0x0029 (41)
-  &lt;Trailer&gt; ::= &lt;TRAILER&gt;
-    &lt;TRAILER&gt; ::= &lt;GIFTrailer_1&gt;
-      &lt;GIFTrailer_1&gt; ::= b&#39;;&#39;  # Position 0x002a (42)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># gif.fan
+# Fandango specification for a structurally valid 32x32 GIF89a file.
+
+import struct
+import random
+
+
+# ----------------------------------------------------------------------
+# Global Constants
+# ----------------------------------------------------------------------
+
+IMAGE_WIDTH: int = 32
+IMAGE_HEIGHT: int = 32
+TEXT_LENGTH: int = 100
+GLOBAL_COLOR_TABLE_SIZE: int = 256
+
+
+# ----------------------------------------------------------------------
+# Start Symbol
+# ----------------------------------------------------------------------
+
+# Complete GIF file:
+#   Header
+#   Logical Screen Descriptor
+#   Global Color Table
+#   Optional Comment Extensions
+#   Image Descriptor
+#   Image Data
+#   Trailer
+&lt;start&gt; ::= \
+    &lt;header&gt; \
+    &lt;logical_screen_descriptor&gt; \
+    &lt;global_color_table&gt; \
+    &lt;comment_extension&gt;* \
+    &lt;image_descriptor&gt; \
+    &lt;image_data&gt; \
+    &lt;trailer&gt;
+
+
+# ----------------------------------------------------------------------
+# Header
+# ----------------------------------------------------------------------
+
+# GIF89a signature
+&lt;header&gt; ::= b&quot;GIF89a&quot;
+
+
+# ----------------------------------------------------------------------
+# Logical Screen Descriptor
+# ----------------------------------------------------------------------
+
+# Logical screen descriptor structure
+&lt;logical_screen_descriptor&gt; ::= \
+    &lt;lsd_width&gt; \
+    &lt;lsd_height&gt; \
+    &lt;lsd_packed&gt; \
+    &lt;lsd_background_color_index&gt; \
+    &lt;lsd_pixel_aspect_ratio&gt;
+
+# Logical screen width (32 pixels, little-endian)
+&lt;lsd_width&gt; ::= &lt;byte&gt;{2} := int_to_le_bytes(IMAGE_WIDTH)
+
+# Logical screen height (32 pixels, little-endian)
+&lt;lsd_height&gt; ::= &lt;byte&gt;{2} := int_to_le_bytes(IMAGE_HEIGHT)
+
+# Packed fields:
+#   Global Color Table Flag = 1
+#   Color Resolution = 7
+#   Sort Flag = 0
+#   GCT Size = 7 (2^(7+1)=256 entries)
+&lt;lsd_packed&gt; ::= b&quot;\xf7&quot;
+
+# Background color index
+&lt;lsd_background_color_index&gt; ::= b&quot;\x00&quot;
+
+# Pixel aspect ratio (0 = not specified)
+&lt;lsd_pixel_aspect_ratio&gt; ::= b&quot;\x00&quot;
+
+
+# ----------------------------------------------------------------------
+# Global Color Table
+# ----------------------------------------------------------------------
+
+# Global Color Table (256 entries × 3 bytes RGB)
+&lt;global_color_table&gt; ::= &lt;byte&gt;{GLOBAL_COLOR_TABLE_SIZE * 3} \
+    := generate_color_table(GLOBAL_COLOR_TABLE_SIZE)
+
+
+# ----------------------------------------------------------------------
+# Comment Extension (Optional)
+# ----------------------------------------------------------------------
+
+# Comment Extension block
+&lt;comment_extension&gt; ::= \
+    &lt;comment_introducer&gt; \
+    &lt;comment_label&gt; \
+    &lt;comment_sub_blocks&gt;
+
+# Extension introducer
+&lt;comment_introducer&gt; ::= b&quot;\x21&quot;
+
+# Comment label
+&lt;comment_label&gt; ::= b&quot;\xfe&quot;
+
+# Comment data packed into sub-blocks
+&lt;comment_sub_blocks&gt; ::= &lt;byte&gt;* \
+    := generate_sub_blocks(generate_ascii_text(TEXT_LENGTH))
+
+
+# ----------------------------------------------------------------------
+# Image Descriptor
+# ----------------------------------------------------------------------
+
+# Image descriptor block
+&lt;image_descriptor&gt; ::= \
+    &lt;image_separator&gt; \
+    &lt;image_left&gt; \
+    &lt;image_top&gt; \
+    &lt;image_width&gt; \
+    &lt;image_height&gt; \
+    &lt;image_packed&gt;
+
+# Image separator
+&lt;image_separator&gt; ::= b&quot;\x2c&quot;
+
+# Left position
+&lt;image_left&gt; ::= &lt;byte&gt;{2} := int_to_le_bytes(0)
+
+# Top position
+&lt;image_top&gt; ::= &lt;byte&gt;{2} := int_to_le_bytes(0)
+
+# Image width (32 pixels)
+&lt;image_width&gt; ::= &lt;byte&gt;{2} := int_to_le_bytes(IMAGE_WIDTH)
+
+# Image height (32 pixels)
+&lt;image_height&gt; ::= &lt;byte&gt;{2} := int_to_le_bytes(IMAGE_HEIGHT)
+
+# Packed field (no local color table)
+&lt;image_packed&gt; ::= b&quot;\x00&quot;
+
+
+# ----------------------------------------------------------------------
+# Image Data (LZW)
+# ----------------------------------------------------------------------
+
+# Image data block
+&lt;image_data&gt; ::= \
+    &lt;lzw_min_code_size&gt; \
+    &lt;image_sub_blocks&gt;
+
+# LZW minimum code size (8 bits for 256-color GCT)
+&lt;lzw_min_code_size&gt; ::= b&quot;\x08&quot;
+
+# LZW-compressed pixel indices packed into sub-blocks
+&lt;image_sub_blocks&gt; ::= &lt;byte&gt;* \
+    := generate_sub_blocks(generate_lzw_data(IMAGE_WIDTH, IMAGE_HEIGHT))
+
+
+# ----------------------------------------------------------------------
+# Trailer
+# ----------------------------------------------------------------------
+
+# GIF file terminator
+&lt;trailer&gt; ::= b&quot;\x3b&quot;
+
+
+# ----------------------------------------------------------------------
+# Helper Functions
+# ----------------------------------------------------------------------
+
+def int_to_le_bytes(value: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Convert integer to 2-byte little-endian representation.
+
+    :param value: Integer value.
+    :return: 2-byte little-endian byte sequence.
+    &quot;&quot;&quot;
+    return struct.pack(&quot;&lt;H&quot;, value)
+
+
+def generate_color_table(size: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Generate a global color table.
+
+    Each entry consists of 3 bytes (RGB).
+
+    :param size: Number of color entries.
+    :return: RGB table as bytes.
+    &quot;&quot;&quot;
+    table = bytearray()
+    for _ in range(size):
+        table.extend([
+            random.getrandbits(8),
+            random.getrandbits(8),
+            random.getrandbits(8)
+        ])
+    return bytes(table)
+
+
+def generate_ascii_text(length: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Generate ASCII text of fixed length.
+
+    :param length: Number of characters.
+    :return: ASCII byte string.
+    &quot;&quot;&quot;
+    return bytes(
+        random.randint(32, 126)
+        for _ in range(length)
+    )
+
+
+def generate_lzw_data(width: int, height: int) -&gt; bytes:
+    &quot;&quot;&quot;
+    Generate placeholder LZW-compressed pixel index data.
+
+    This function generates raw pixel indices and performs
+    a minimal LZW-like packing sufficient for structural validity.
+
+    :param width: Image width.
+    :param height: Image height.
+    :return: Compressed byte stream.
+    &quot;&quot;&quot;
+    pixel_count = width * height
+    data = bytearray()
+    for _ in range(pixel_count):
+        data.append(random.randint(0, 255))
+    return bytes(data)
+
+
+def generate_sub_blocks(data: bytes) -&gt; bytes:
+    &quot;&quot;&quot;
+    Split data into GIF sub-blocks.
+
+    Each sub-block:
+      - 1 length byte (1–255)
+      - up to 255 data bytes
+    Terminates with a zero-length block.
+
+    :param data: Payload bytes.
+    :return: Sub-block encoded byte sequence.
+    &quot;&quot;&quot;
+    result = bytearray()
+    index = 0
+    while index &lt; len(data):
+        chunk = data[index:index+255]
+        result.append(len(chunk))
+        result.extend(chunk)
+        index += 255
+    result.append(0)
+    return bytes(result)
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">gif.fan</span></code> does not support only all GIF features, so it cannot be used to <a class="reference internal" href="Parsing.html#sec-parsing"><span class="std std-ref">parse</span></a> arbitrary GIF files.</p>
 </div>
 </section>
 
@@ -573,20 +743,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Conversion.html"
+       href="Png.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Converters</p>
+        <p class="prev-next-title">Case Study: PNG</p>
       </div>
     </a>
     <a class="right-next"
-       href="Hatching.html"
+       href="Mp3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hatching Specs</p>
+        <p class="prev-next-title">Case Study: MP3</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

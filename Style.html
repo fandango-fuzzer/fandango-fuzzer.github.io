@@ -1,0 +1,888 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fandango Style Guide &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Style';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fandango Reference" href="Reference.html" />
+    <link rel="prev" title="Hatching Specs" href="Hatching.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hatching Specs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango Style Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FStyle.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Style.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<a href="_static/fandango.pdf" target="_blank"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Download PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fandango Style Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-fan-files">Managing <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-name-fan-files">How to Name <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-state-metadata">How to State Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-format-variants">Managing Format Variants</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-and-format-conventions">Naming and Format Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-format-grammars">How to Format Grammars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-correct-fandango-syntax">Use Correct Fandango Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-naming-conflicts">Avoid Naming Conflicts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cover-the-entire-specification">Cover the Entire Specification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-python-style-conventions">Follow Python Style Conventions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repetitions-and-length-encodings">Repetitions and Length Encodings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-repetitions-wherever-possible">Use Repetitions Wherever Possible</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-regular-expressions-for-simple-elements">Use Regular Expressions for Simple Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-explicit-length-encodings">Use Explicit Length Encodings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-constraints">Using Constraints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-constraints-to-enforce-semantics">Use Constraints to Enforce Semantics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-constructive-helper-functions">Use Constructive Helper Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prefer-inline-expressions-over-function-definitions">Prefer Inline Expressions over Function Definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prefer-constraints-over-generators">Prefer Constraints over Generators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-generators-only-where-appropriate">Use Generators only where Appropriate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-assurance">Quality Assurance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-your-specification-with-fandango">Verify your Specification with Fandango</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-your-outputs-with-a-processing-program">Verify your Outputs with a Processing Program</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fandango-style-guide">
+<span id="sec-style"></span><h1>Fandango Style Guide<a class="headerlink" href="#fandango-style-guide" title="Link to this heading">#</a></h1>
+<p>Let us assume you want to go beyond toying with Fandango, and write Fandango specifications that are</p>
+<ul class="simple">
+<li><p>reusable;</p></li>
+<li><p>extensible;</p></li>
+<li><p>efficient; and</p></li>
+<li><p>useful for others.</p></li>
+</ul>
+<p>This style guide describes some principles we have found useful for this task. Enjoy!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This style guide is work in progress, and likely to be extended over time.</p>
+</div>
+<section id="managing-fan-files">
+<h2>Managing <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Files<a class="headerlink" href="#managing-fan-files" title="Link to this heading">#</a></h2>
+<section id="how-to-name-fan-files">
+<h3>How to Name <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Files<a class="headerlink" href="#how-to-name-fan-files" title="Link to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file name should start with the format name (typically the file extension), optionally followed by <code class="docutils literal notranslate"><span class="pre">-</span></code> and additional details, such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ical</span><span class="o">.</span><span class="n">fan</span>
+<span class="n">gif89a</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">fan</span>
+<span class="n">svg</span><span class="o">-</span><span class="n">general</span><span class="o">.</span><span class="n">fan</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-state-metadata">
+<h3>How to State Metadata<a class="headerlink" href="#how-to-state-metadata" title="Link to this heading">#</a></h3>
+<p>At the beginning of a <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file, state</p>
+<ul class="simple">
+<li><p>the name of the format</p></li>
+<li><p>the format version, if any</p></li>
+<li><p>associated file extensions</p></li>
+<li><p>your name and contact info :-)</p></li>
+<li><p>the resources you used to create the format (the official spec); if possible, with URLs</p></li>
+<li><p>further details on capabilities (and non-capabilities)</p></li>
+</ul>
+<p>Here is an example. The capability lines state what your spec actually does,
+which is not necessarily everything the format allows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># GIF89a format</span>
+<span class="c1"># Version: 1</span>
+
+<span class="c1"># Extensions: .gif</span>
+
+<span class="c1"># Authors:</span>
+<span class="c1"># * John Smith &lt;smith@example.com&gt;</span>
+
+<span class="c1"># Sources:</span>
+<span class="c1"># * W3 GIF spec, https://www.w3.org/Graphics/GIF/spec-gif89a.txt</span>
+<span class="c1"># * Sweetscape GIF binary template, https://www.sweetscape.com/010editor/repository/templates/file_info.php?file=GIF.bt</span>
+
+<span class="c1"># Details:</span>
+<span class="c1"># * The spec can parse any valid GIF file.</span>
+<span class="c1"># * Only 1x1 pixel GIFs can be produced at this time.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Future Fandango versions will establish a standard for providing such metadata.</p>
+</div>
+</section>
+<section id="managing-format-variants">
+<span id="sec-specialized-variant"></span><h3>Managing Format Variants<a class="headerlink" href="#managing-format-variants" title="Link to this heading">#</a></h3>
+<p>For significant variants of a format, have them build on each other.
+For instance, to disable an extension <code class="docutils literal notranslate"><span class="pre">&lt;extension&gt;</span></code> in an original specification, create a <code class="docutils literal notranslate"><span class="pre">specialized-format.fan</span></code> that says:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specialized format</span>
+
+<span class="n">include</span> <span class="p">(</span><span class="s2">&quot;full-format.fan&quot;</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">extension</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+</div>
+<p>In a similar vein, you can also create simple variants first that have some placeholder (conveniently defined with some “empty” value) which is then defined in a <em>generalized</em> variant.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generalized format</span>
+
+<span class="n">include</span> <span class="p">(</span><span class="s2">&quot;simple-format.fan&quot;</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">extension</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">...</span>  <span class="c1"># Details go here</span>
+</pre></div>
+</div>
+<p>For details on file inclusion, extension, and generalization, see <a class="reference internal" href="Hatching.html#sec-hatching"><span class="std std-ref">Hatching Specs</span></a>.</p>
+</section>
+</section>
+<section id="naming-and-format-conventions">
+<h2>Naming and Format Conventions<a class="headerlink" href="#naming-and-format-conventions" title="Link to this heading">#</a></h2>
+<section id="how-to-format-grammars">
+<h3>How to Format Grammars<a class="headerlink" href="#how-to-format-grammars" title="Link to this heading">#</a></h3>
+<p>Present rules in a top-down style, e.g. starting with <code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span></code> (describing the overall structure) and then going down into details of the individual constituents.
+First list the format’s major sections or element types, then write rules for each; keep on refining.</p>
+<p>You <em>can</em> use indentation to express hierarchies, such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">foo</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">qux</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">quux</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">...</span>
+  <span class="o">&lt;</span><span class="n">qux</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">...</span>
+  <span class="o">&lt;</span><span class="n">quux</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p>However, applying this style across the entire grammar can quickly lead to high indentation levels.
+If you break down your grammar into individual sections, have each section again begin on column 1.</p>
+</section>
+<section id="use-correct-fandango-syntax">
+<h3>Use Correct Fandango Syntax<a class="headerlink" href="#use-correct-fandango-syntax" title="Link to this heading">#</a></h3>
+<p>Here are the most important Fandango syntax rules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     &lt;NT&gt; ::= ALT_1 | ALT_2    productions / alternatives
+     &quot;...&quot;  r&#39;...&#39;  b&#39;...&#39;     string literal / regex / bytes object
+     *  +  ?  {N,M}            repetition
+     := PYTHON_EXPR            generator (default value)
+     where PYTHON_EXPR         constraint (cast symbols: str(), int(), len())
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Every rule ends in a newline. Avoid ending rules in <code class="docutils literal notranslate"><span class="pre">;</span></code>. Do not concatenate rules with <code class="docutils literal notranslate"><span class="pre">;</span></code> on the same line.</p></li>
+<li><p>Split long rules by placing them into parentheses <code class="docutils literal notranslate"><span class="pre">(...)</span></code> or use a trailing <code class="docutils literal notranslate"><span class="pre">\</span></code>.
+A bare line break silently truncates the rule.</p></li>
+<li><p>Never put a literal newline inside a short string (<code class="docutils literal notranslate"><span class="pre">'...'</span></code>); use <code class="docutils literal notranslate"><span class="pre">\n</span></code> or a <code class="docutils literal notranslate"><span class="pre">'''triple-quoted'''</span></code> string instead.</p></li>
+<li><p>Comments (<code class="docutils literal notranslate"><span class="pre">#</span></code>) extend until the end of the line, so finish the rule before commenting.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">lowercase_identifiers</span></code> for nonterminals.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">CapWords</span></code> for protocol parties (notably because they are Python classes).</p></li>
+<li><p>Do not prefix identifiers with <code class="docutils literal notranslate"><span class="pre">_</span></code>, as these are defined for internal Fandango use.</p></li>
+<li><p>Stick to ASCII letters and numbers for all identifiers.</p></li>
+</ul>
+<p>For details on syntax, see <a class="reference internal" href="Language.html#sec-language"><span class="std std-ref">Fandango Language Reference</span></a>.</p>
+</section>
+<section id="avoid-naming-conflicts">
+<h3>Avoid Naming Conflicts<a class="headerlink" href="#avoid-naming-conflicts" title="Link to this heading">#</a></h3>
+<p>Grammars have a <em>global</em> naming scope, so do not define the same element multiple times.
+If an element like <code class="docutils literal notranslate"><span class="pre">&lt;checksum&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> appears in multiple
+contexts <code class="docutils literal notranslate"><span class="pre">C</span></code>, give it a separate prefix for each context: <code class="docutils literal notranslate"><span class="pre">&lt;C_checksum&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;C_length&gt;</span></code>.</p>
+</section>
+<section id="cover-the-entire-specification">
+<h3>Cover the Entire Specification<a class="headerlink" href="#cover-the-entire-specification" title="Link to this heading">#</a></h3>
+<p>Do not just produce a toy subset, but go for maximum coverage of the respective language or protocol.
+Share only specifications that define the vast majority of format features.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Document missing parts with <code class="docutils literal notranslate"><span class="pre">TODO</span></code>, <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> and alike, both in the appropriate parts of the spec as well as under “Details” at the beginning of the file.</p>
+</div>
+</section>
+<section id="follow-python-style-conventions">
+<h3>Follow Python Style Conventions<a class="headerlink" href="#follow-python-style-conventions" title="Link to this heading">#</a></h3>
+<p>Unless otherwise stated, stick to Python conventions for writing your specifications.
+This includes</p>
+<ul class="simple">
+<li><p>code layout (4 spaces indentation; max line length 88 characters, matching our Ruff configuration);</p></li>
+<li><p>usage of blank lines (to separate larger grammar blocks);</p></li>
+<li><p>source file encoding (should be UTF-8);</p></li>
+<li><p>whitespace in expressions and statements; and</p></li>
+<li><p>naming conventions for Python elements.</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://peps.python.org/pep-0008/">Style Guide for Python Code</a> for details.</p>
+</section>
+</section>
+<section id="repetitions-and-length-encodings">
+<h2>Repetitions and Length Encodings<a class="headerlink" href="#repetitions-and-length-encodings" title="Link to this heading">#</a></h2>
+<section id="use-repetitions-wherever-possible">
+<h3>Use Repetitions Wherever Possible<a class="headerlink" href="#use-repetitions-wherever-possible" title="Link to this heading">#</a></h3>
+<p>Prefer <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">*</span></code> to denote repetitions, and <code class="docutils literal notranslate"><span class="pre">?</span></code> to denote optional elements.
+Avoid modeling repetition by means of the grammar.
+See <a class="reference internal" href="Language.html#sec-repeat"><span class="std std-ref">Repetitions</span></a> for details.</p>
+</section>
+<section id="use-regular-expressions-for-simple-elements">
+<h3>Use Regular Expressions for Simple Elements<a class="headerlink" href="#use-regular-expressions-for-simple-elements" title="Link to this heading">#</a></h3>
+<p>For elements that are all equivalent from a testing perspective (and hence do not require exploration of alternatives), prefer regular expressions (using <code class="docutils literal notranslate"><span class="pre">r&quot;expr&quot;</span></code>) over grammar forms.
+See <a class="reference internal" href="Regexes.html#sec-regexes"><span class="std std-ref">Regular Expressions</span></a> for details.</p>
+</section>
+<section id="use-explicit-length-encodings">
+<h3>Use Explicit Length Encodings<a class="headerlink" href="#use-explicit-length-encodings" title="Link to this heading">#</a></h3>
+<p>If you know the length of a field is <code class="docutils literal notranslate"><span class="pre">N</span></code> bytes, use <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;{N}</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;*</span></code> or an associated constraint.</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">&lt;byte&gt;{EXPR}</span></code>, where <code class="docutils literal notranslate"><span class="pre">EXPR</span></code> is computed from other elements (say, a preceding length value).
+See <a class="reference internal" href="Binary.html#sec-length-encodings"><span class="std std-ref">Length Encodings</span></a> for details.</p>
+</section>
+</section>
+<section id="using-constraints">
+<h2>Using Constraints<a class="headerlink" href="#using-constraints" title="Link to this heading">#</a></h2>
+<section id="use-constraints-to-enforce-semantics">
+<h3>Use Constraints to Enforce Semantics<a class="headerlink" href="#use-constraints-to-enforce-semantics" title="Link to this heading">#</a></h3>
+<p>Wherever possible, use <code class="docutils literal notranslate"><span class="pre">where</span></code> constraints to enforces semantic properties. These include</p>
+<ul class="simple">
+<li><p>ranges;</p></li>
+<li><p>enumerations;</p></li>
+<li><p>relationships between symbols (e.g. a length symbol matching the size of a related payload);</p></li>
+<li><p>nestings; and</p></li>
+<li><p>checksums.</p></li>
+</ul>
+<p>Break down constraints into individual <code class="docutils literal notranslate"><span class="pre">where</span></code> clauses as much as possible.
+This makes it easier for Fandango to solve them one by one.</p>
+<p>For details on constraints, see <a class="reference internal" href="Constraints.html#sec-constraints"><span class="std std-ref">Shaping Inputs with Constraints</span></a> and <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">Data Generators and Fakers</span></a>.
+See also <a class="reference internal" href="Binary.html#sec-checksums"><span class="std std-ref">Checksums</span></a> on how to specify checksums.</p>
+</section>
+<section id="use-constructive-helper-functions">
+<h3>Use Constructive Helper Functions<a class="headerlink" href="#use-constructive-helper-functions" title="Link to this heading">#</a></h3>
+<p>Use constructive helper functions (rather than checking helper functions)
+whenever possible.
+In Fandango, a constraint of the form</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">NT</span><span class="o">&gt;</span> <span class="o">==</span> <span class="n">compute</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>can be very efficiently “solved” - by evaluating <code class="docutils literal notranslate"><span class="pre">compute(...)</span></code> and ensuring that <code class="docutils literal notranslate"><span class="pre">&lt;NT&gt;</span></code> is associated with the resulting value.</p>
+<p>This is in contrast to a “checking” predicate</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ok</span><span class="p">(</span><span class="o">&lt;</span><span class="n">NT</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where Fandango must make use of slower algorithms to find proper values for <code class="docutils literal notranslate"><span class="pre">&lt;NT&gt;</span></code> until <code class="docutils literal notranslate"><span class="pre">ok(...)</span></code> is finally satisfied.</p>
+</section>
+<section id="prefer-inline-expressions-over-function-definitions">
+<h3>Prefer Inline Expressions over Function Definitions<a class="headerlink" href="#prefer-inline-expressions-over-function-definitions" title="Link to this heading">#</a></h3>
+<p>Prefer a <code class="docutils literal notranslate"><span class="pre">where</span></code> clause or an inline Python expression directly in the grammar over introducing named Python functions.</p>
+<p>Function definitions are justified <em>only</em> when the computation is genuinely too complex to write as one <code class="docutils literal notranslate"><span class="pre">where</span></code> expression or one <code class="docutils literal notranslate"><span class="pre">:=</span></code> expression inline (e.g. a real multi-step checksum algorithm) — never merely because a value is “random,” reused in several places, or convenient to name.</p>
+</section>
+<section id="prefer-constraints-over-generators">
+<h3>Prefer Constraints over Generators<a class="headerlink" href="#prefer-constraints-over-generators" title="Link to this heading">#</a></h3>
+<p>Do <em>not</em> use a <code class="docutils literal notranslate"><span class="pre">:=</span></code> generator and helper function as a workaround to avoid writing a <code class="docutils literal notranslate"><span class="pre">where</span></code> constraint.
+If two symbols must agree (e.g. a length symbol and the actual length of some payload), express that agreement as a <code class="docutils literal notranslate"><span class="pre">where</span></code> equality between the two, not by generating both from one Python-side random computation that merely happens to keep them in sync.</p>
+<p>For details on generators (and when to use them), see <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">Data Generators and Fakers</span></a>.</p>
+</section>
+<section id="use-generators-only-where-appropriate">
+<h3>Use Generators only where Appropriate<a class="headerlink" href="#use-generators-only-where-appropriate" title="Link to this heading">#</a></h3>
+<p>Generators (<code class="docutils literal notranslate"><span class="pre">:=</span></code>) are for producing a value with no other constraint attached (a free choice).
+Constraints (<code class="docutils literal notranslate"><span class="pre">where</span></code>) are for relationships between two or more parts of the grammar.
+Do not blur the two to dodge writing the (more verbose but more correct) constraint form.</p>
+<p>For details on generators (and when to use them), see <a class="reference internal" href="Generators.html#sec-generators"><span class="std std-ref">Data Generators and Fakers</span></a>.</p>
+</section>
+</section>
+<section id="quality-assurance">
+<h2>Quality Assurance<a class="headerlink" href="#quality-assurance" title="Link to this heading">#</a></h2>
+<section id="verify-your-specification-with-fandango">
+<h3>Verify your Specification with Fandango<a class="headerlink" href="#verify-your-specification-with-fandango" title="Link to this heading">#</a></h3>
+<p>Your spec should actually be verified to work, not just be plausible-looking.
+With your spec in <code class="docutils literal notranslate"><span class="pre">SPEC.fan</span></code> producing files with an extension <code class="docutils literal notranslate"><span class="pre">EXTENSION</span></code>, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>SPEC.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-d<span class="w"> </span>out<span class="w"> </span>-x<span class="w"> </span>.EXTENSION<span class="w"> </span>--warnings-are-errors
+</pre></div>
+</div>
+<p>For GIF files in <code class="docutils literal notranslate"><span class="pre">gif.fan</span></code>, this would be:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>gif.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-d<span class="w"> </span>out<span class="w"> </span>-x<span class="w"> </span>.gif<span class="w"> </span>--warnings-are-errors
+</pre></div>
+</div>
+<p>Ensure that</p>
+<ul class="simple">
+<li><p>the Fandango exit code is 0;</p></li>
+<li><p>Fandango does not produce warnings or error messages; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">out/</span></code> has exactly 10 files.</p></li>
+</ul>
+<p>If not, fix and re-run.</p>
+<p>For details on how to invoke Fandango, see <a class="reference internal" href="Invoking.html#sec-invoking"><span class="std std-ref">Invoking Fandango</span></a> and <a class="reference internal" href="Commands.html#sec-commands"><span class="std std-ref">Fandango Command Reference</span></a>.</p>
+</section>
+<section id="verify-your-outputs-with-a-processing-program">
+<h3>Verify your Outputs with a Processing Program<a class="headerlink" href="#verify-your-outputs-with-a-processing-program" title="Link to this heading">#</a></h3>
+<p>Feed your generated inputs into a program that should process them.
+If inputs are rejected, you should adapt the spec accordingly.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is common that specs describe features that are not supported by the program under test (and thus rejected).
+In that case, produce a <em>specialized</em> specification for the program to test with;
+see <a class="reference internal" href="#sec-specialized-variant"><span class="std std-ref">Managing Format Variants</span></a> for details.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Hatching.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hatching Specs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Reference.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fandango Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-fan-files">Managing <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-name-fan-files">How to Name <code class="docutils literal notranslate"><span class="pre">.fan</span></code> Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-state-metadata">How to State Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-format-variants">Managing Format Variants</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-and-format-conventions">Naming and Format Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-format-grammars">How to Format Grammars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-correct-fandango-syntax">Use Correct Fandango Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-naming-conflicts">Avoid Naming Conflicts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cover-the-entire-specification">Cover the Entire Specification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#follow-python-style-conventions">Follow Python Style Conventions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repetitions-and-length-encodings">Repetitions and Length Encodings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-repetitions-wherever-possible">Use Repetitions Wherever Possible</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-regular-expressions-for-simple-elements">Use Regular Expressions for Simple Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-explicit-length-encodings">Use Explicit Length Encodings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-constraints">Using Constraints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-constraints-to-enforce-semantics">Use Constraints to Enforce Semantics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-constructive-helper-functions">Use Constructive Helper Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prefer-inline-expressions-over-function-definitions">Prefer Inline Expressions over Function Definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prefer-constraints-over-generators">Prefer Constraints over Generators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-generators-only-where-appropriate">Use Generators only where Appropriate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-assurance">Quality Assurance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-your-specification-with-fandango">Verify your Specification with Fandango</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-your-outputs-with-a-processing-program">Verify your Outputs with a Processing Program</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
