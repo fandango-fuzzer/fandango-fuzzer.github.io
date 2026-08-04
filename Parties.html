@@ -106,7 +106,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -479,8 +479,8 @@ This is typically done by <em>subclassing</em> one of the existing classes.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">NetworkParty</span></code> class has a <code class="docutils literal notranslate"><span class="pre">start()</span></code> method that is invoked whenever the respective party is started.
 You can extend this method to execute additional code, for instance to create configuration files.
 To this end, simply subclass the respective party class and override its <code class="docutils literal notranslate"><span class="pre">start()</span></code> method:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_configuration_file</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="o">...</span> <span class="c1"># Your code goes here</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_configuration_file</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># Your code goes here</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">MyClient</span><span class="p">(</span><span class="n">Client</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -513,8 +513,8 @@ To this end, simply subclass the respective party class and override its <code c
 <h3>Stopping a Party<a class="headerlink" href="#stopping-a-party" title="Link to this heading">#</a></h3>
 <p>In the same way as extending starting a party, one can also hook into <em>stopping</em> a party – for cleanup actions, for instance.
 The <code class="docutils literal notranslate"><span class="pre">stop()</span></code> method is useful for this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cleanup_server</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="o">...</span> <span class="c1"># Your code goes here</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cleanup_server</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># Your code goes here</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Server</span><span class="p">(</span><span class="n">Server</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -537,8 +537,9 @@ This includes</p>
 </ul>
 <p>Here is an example in which we compress the <code class="docutils literal notranslate"><span class="pre">DerivationTree</span></code> passed via a <code class="docutils literal notranslate"><span class="pre">compress()</span></code> function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="n">compressed_message</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Your code goes here</span>
+    <span class="n">compressed_message</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># Your code goes here</span>
     <span class="k">return</span> <span class="n">compressed_message</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Server</span><span class="p">(</span><span class="n">Server</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">DerivationTree</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
@@ -564,8 +565,9 @@ However, the <code class="docutils literal notranslate"><span class="pre">Fandan
 Again, you can extend this for your own needs.</p>
 <p>Here is an example in which we decompress the message received via a <code class="docutils literal notranslate"><span class="pre">decompress()</span></code> function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">decompress</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="n">decompressed_message</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Your code goes here</span>
+    <span class="n">decompressed_message</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># Your code goes here</span>
     <span class="k">return</span> <span class="n">decompressed_message</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Server</span><span class="p">(</span><span class="n">Server</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
@@ -588,23 +590,22 @@ See the <a class="reference internal" href="FandangoParty.html#sec-receive-api">
 Using the <a class="reference internal" href="FandangoParty.html#sec-networkparty-class"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">NetworkParty</span></code> constructor</span></a>, the respective <code class="docutils literal notranslate"><span class="pre">.fan</span></code> file would contain these definitions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Client_1</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span>
-                         <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">)</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Server_1</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span>
-                         <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">EXTERNAL</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">EXTERNAL</span><span class="p">)</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Client_2</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span>
-                         <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">)</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Server_2</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8001&quot;</span><span class="p">,</span>
-                         <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">EXTERNAL</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;localhost:8001&quot;</span><span class="p">,</span> <span class="n">connection_mode</span><span class="o">=</span><span class="n">ConnectionMode</span><span class="o">.</span><span class="n">EXTERNAL</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The grammar can then use <code class="docutils literal notranslate"><span class="pre">Client_1</span></code>, <code class="docutils literal notranslate"><span class="pre">Client_2</span></code>, <code class="docutils literal notranslate"><span class="pre">Server_1</span></code>, and <code class="docutils literal notranslate"><span class="pre">Server_2</span></code> as prefixes, and specify a protocol that involves all four parties.

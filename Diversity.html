@@ -108,7 +108,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -466,15 +466,25 @@ It does so after construction, as part of evaluating the fitness of individual i
 <p>During <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref"><em>protocol testing</em></span></a>, Fandango already produces such interactions <em>by construction</em> – that is, with every new iteration, it tries to cover parts of the grammar (= states, messages, and transitions) that have not been seen yet.</p>
 <p>Grammar coverage is determined and achieved using the <span class="math notranslate nohighlight">\(k\)</span>-path metric by <span class="bibtex-citation" id="id1">Havrikov and Zeller [<a class="reference internal" href="About.html#id16" title="Nikolas Havrikov and Andreas Zeller. Systematically covering input structure. In Proceedings of the 34th IEEE/ACM International Conference on Automated Software Engineering, ASE '19, 189–199. IEEE Press, 2020. URL: https://doi.org/10.1109/ASE.2019.00027, doi:10.1109/ASE.2019.00027.">HZ20</a>]</span>.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">Added in version 1.2: </span>For version 1.2, during input generation, Fandango will also achieve grammar coverage by construction.</p>
+<p><span class="versionmodified added">Added in version 1.x: </span>In a future version, during input generation, Fandango will also achieve grammar coverage by construction.</p>
 </div>
 </section>
 <section id="code-coverage">
-<h2>Code Coverage<a class="headerlink" href="#code-coverage" title="Link to this heading">#</a></h2>
-<p>As of version 1.2, Fandango will provide experimental support for guidance by code coverage.
-Details will be added here.</p>
+<span id="sec-code-coverage"></span><h2>Code Coverage<a class="headerlink" href="#code-coverage" title="Link to this heading">#</a></h2>
+<p>As of version 1.2, Fandango provides <em>experimental</em> support for guidance by code coverage.
+It works against a program under test that has been compiled with <a class="reference external" href="https://github.com/fandango-fuzzer/fcc"><code class="docutils literal notranslate"><span class="pre">fcc</span></code></a>, the Fandango coverage compiler.
+<code class="docutils literal notranslate"><span class="pre">fcc</span></code> records the control flow graph of the program at compile time; at run time, Fandango tracks which basic blocks each input reaches, and favors inputs that get closer to code it has not seen yet.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>--enable-experimental-module<span class="w"> </span>execution<span class="w"> </span>fuzz<span class="w"> </span>-f<span class="w"> </span>spec.fan<span class="w"> </span>--fcc<span class="w"> </span>./program
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is an experimental feature, living in <code class="docutils literal notranslate"><span class="pre">fandango.experimental.execution</span></code>.
+It may change without notice, so do not rely on it in production.
+Fandango warns you about this the first time the module is loaded; <code class="docutils literal notranslate"><span class="pre">--enable-experimental-module</span> <span class="pre">execution</span></code> is how you acknowledge the warning and silence it.</p>
+</div>
 <div class="versionadded">
-<p><span class="versionmodified added">Added in version 1.2: </span>This feature is planned for Fandango 1.2.</p>
+<p><span class="versionmodified added">Added in version 1.2: </span>Experimental code coverage guidance is available in Fandango 1.2 and later.</p>
 </div>
 </section>
 <section id="constraint-coverage">

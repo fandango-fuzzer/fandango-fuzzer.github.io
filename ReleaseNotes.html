@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ReleaseNotes';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -106,7 +108,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -439,6 +441,41 @@
 <span id="sec-release-notes"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
 <p>This document lists major changes across releases.</p>
 <div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.2: </span>(August 2026)</p>
+<ul class="simple">
+<li><p>Grammars gained a <strong>permutation operator</strong>: <code class="docutils literal notranslate"><span class="pre">[[</span> <span class="pre">&lt;a&gt;</span> <span class="pre">&lt;b&gt;</span> <span class="pre">&lt;c&gt;</span> <span class="pre">]]</span></code> produces and parses the enclosed symbols in any order. It works for protocol messages too, so a spec can state that two packets may arrive in either order.</p></li>
+<li><p><strong>Timers for protocol testing.</strong> A spec can now start and cancel timers and react to them expiring, so interactions that hinge on timeouts can be tested.</p></li>
+<li><p>Two new ways to stop a fuzzing run once it has done its job:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--stop-criterion</span></code> takes a Python lambda that is evaluated on every new solution, for instance <code class="docutils literal notranslate"><span class="pre">--stop-criterion</span> <span class="pre">'lambda</span> <span class="pre">t:</span> <span class="pre">t.to_string().startswith(&quot;abc&quot;)'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--stop-after-seconds</span></code> stops at the start of the first generation after the given number of seconds.</p></li>
+</ul>
+</li>
+<li><p>Experimental support for <a class="reference internal" href="Diversity.html#sec-code-coverage"><span class="std std-ref">guidance by code coverage</span></a>. Against a program compiled with <a class="reference external" href="https://github.com/fandango-fuzzer/fcc"><code class="docutils literal notranslate"><span class="pre">fcc</span></code></a>, <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span> <span class="pre">--fcc</span></code> steers input generation towards code that has not been reached yet.</p></li>
+<li><p>Submodules under <code class="docutils literal notranslate"><span class="pre">fandango.experimental.*</span></code> are now marked as experimental: they can change without notice, and importing one emits a warning. <code class="docutils literal notranslate"><span class="pre">--enable-experimental-module</span> <span class="pre">MODULE</span></code> opts you in to a module and silences its warning.</p></li>
+<li><p>Internal caches are now bounded, so long runs no longer grow without limit. Set their size with the <code class="docutils literal notranslate"><span class="pre">FANDANGO_CACHE_SIZE</span></code> environment variable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--format=1</span></code> prints the constant <code class="docutils literal notranslate"><span class="pre">1</span></code> for every output, which is useful for testing.</p></li>
+<li><p>New <code class="docutils literal notranslate"><span class="pre">DerivationTree.find_subtrees()</span></code>, which also accepts a symbol name as a plain string. It replaces <code class="docutils literal notranslate"><span class="pre">find_all_trees()</span></code>.</p></li>
+<li><p>Further improved <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">protocol fuzzing</span></a>: a dedicated protocol algorithm, <span class="math notranslate nohighlight">\(k\)</span>-path coverage tracking of the interactions produced so far, and a packet selector that plans which message to send next.</p></li>
+<li><p>We have added new <a class="reference internal" href="Png.html#sec-png"><span class="std std-ref">PNG</span></a> and <a class="reference internal" href="Mp3.html#sec-mp3"><span class="std std-ref">MP3</span></a> case studies.</p></li>
+<li><p>New <a class="reference internal" href="HandsOn.html#sec-handson"><span class="std std-ref">hands-on tutorial</span></a>, which builds one protocol from random bytes up to a stateful conversation.</p></li>
+<li><p>New <a class="reference internal" href="Style.html#sec-style"><span class="std std-ref">style guide</span></a> for writing specs that are reusable, extensible, and efficient.</p></li>
+<li><p>Lots of minor bug fixes.</p></li>
+<li><p>[development] Python 3.14 is now supported, and tested in CI alongside 3.11, 3.12, and 3.13.</p></li>
+<li><p>[development] Fandango now builds with <code class="docutils literal notranslate"><span class="pre">scikit-build-core</span></code> alone, and <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> is gone. Set <code class="docutils literal notranslate"><span class="pre">FANDANGO_SKIP_CPP_PARSER=1</span></code> to skip the C++ parser, or <code class="docutils literal notranslate"><span class="pre">FANDANGO_REQUIRE_BINARY_BUILD=1</span></code> to insist on it.</p></li>
+<li><p>[development] We now ship a <code class="docutils literal notranslate"><span class="pre">pylock.toml</span></code> next to <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>, so tools other than <code class="docutils literal notranslate"><span class="pre">uv</span></code> can consume our dependency set.</p></li>
+<li><p>[development] Ruff replaces black for formatting and linting.</p></li>
+<li><p>[development] The project now has a <a class="reference internal" href="Contributing.html#sec-contributing"><span class="std std-ref">contribution guide</span></a>, a code of conduct, a support policy, a security policy, issue and pull request templates, and a <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code>.</p></li>
+</ul>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.2: </span></p>
+<ul class="simple">
+<li><p>Fandango now requires <strong>Python 3.11 or later</strong>. Python 3.10 is no longer supported.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DerivationTree.find_all_trees()</span></code> is deprecated. Use <code class="docutils literal notranslate"><span class="pre">find_subtrees()</span></code> instead.</p></li>
+</ul>
+</div>
+<div class="versionadded">
 <p><span class="versionmodified added">Added in version 1.1: </span>(February 2026)</p>
 <ul class="simple">
 <li><p>Much enhanced <a class="reference internal" href="Protocols.html#sec-protocols"><span class="std std-ref">protocol fuzzing</span></a>:</p>
@@ -449,7 +486,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">convert</span></code> can now produce <a class="reference internal" href="Protocols.html#sec-extracting-state-diagrams"><span class="std std-ref">state diagrams from grammars</span></a>.</p></li>
 </ul>
 </li>
-<li><p>We have added new <a class="reference internal" href="Png.html#sec-png"><span class="std std-ref">PNG</span></a>, <a class="reference internal" href="Gif.html#sec-gif"><span class="std std-ref">GIF</span></a>, and <a class="reference internal" href="Mp3.html#sec-mp3"><span class="std std-ref">MP3</span></a> case studies.</p></li>
+<li><p>We have added a new <a class="reference internal" href="Gif.html#sec-gif"><span class="std std-ref">GIF</span></a> case study.</p></li>
 <li><p>You can now <a class="reference download internal" download="" href="_downloads/dcece44619cb337e44df2c37aceef71b/fandango.pdf"><span class="xref download myst">download the <strong>documentation</strong> as a PDF</span></a> from the upper-right download icon.</p></li>
 <li><p>Lots of minor bug fixes.</p></li>
 <li><p>[development] Major internal refactorings and code quality improvements.</p></li>

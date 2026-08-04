@@ -462,7 +462,7 @@ window.runMermaid = runMermaid;</script>
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -877,7 +877,7 @@ The actual number of questions is transmitted in a header field <code class="doc
 <p>We decode <code class="docutils literal notranslate"><span class="pre">&lt;req_qd_count&gt;</span></code> using a function <code class="docutils literal notranslate"><span class="pre">byte_to_int()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert a 2-byte byte array to an integer</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">byte_to_int</span><span class="p">(</span><span class="n">byte_val</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">byte_val</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">byte_val</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -968,10 +968,10 @@ When sending the request, we choose a random value:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x06github\x03com&#39;,
- b&#39;\x07johnson\x03com&#39;,
- b&#39;\tschroeder\x03com&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;\x08chambers\x03com&#39;,
  b&#39;\x06github\x03com&#39;,
+ b&#39;\x06github\x03com&#39;,
+ b&#39;\x05cispa\x02de&#39;,
  b&#39;\x05cispa\x02de&#39;]
 </pre></div>
 </div>
@@ -1172,13 +1172,21 @@ If, for example the question is</p>
     <span class="n">allowed_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])]</span>
 
     <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_subtrees</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span>
-            <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">allowed_names</span><span class="p">):</span>
-            <span class="n">allowed_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span> <span class="c1"># &lt;type_cname&gt;.&lt;q_name&gt;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="ow">in</span> <span class="n">allowed_names</span>
+        <span class="p">):</span>
+            <span class="n">allowed_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="p">)</span>  <span class="c1"># &lt;type_cname&gt;.&lt;q_name&gt;</span>
 
     <span class="k">for</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">find_subtrees</span><span class="p">(</span><span class="s2">&quot;&lt;answer_an&gt;&quot;</span><span class="p">):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_byte</span> <span class="ow">and</span>
-            <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">allowed_names</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_byte</span>
+            <span class="ow">and</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">find_direct_trees</span><span class="p">(</span><span class="n">NonTerminal</span><span class="p">(</span><span class="s2">&quot;&lt;q_name_optional&gt;&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="ow">in</span> <span class="n">allowed_names</span>
+        <span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">return</span> <span class="kc">False</span>
@@ -1265,8 +1273,12 @@ Here,</p>
 </div>
 <p>We apply the DNS name compression algorithm to a DNS name starting at <code class="docutils literal notranslate"><span class="pre">curr_idx</span></code> within the uncompressed message.
 <code class="docutils literal notranslate"><span class="pre">suffix_dict</span></code> is a dictionary mapping a known DNS suffix names to their offsets within the already analyzed compressed part of the message.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                  <span class="n">len_reduction</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compress_name</span><span class="p">(</span>
+    <span class="n">uncompressed</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">curr_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">len_reduction</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">suffix_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compress a single name in a DNS message.</span>
 <span class="sd">    :param: uncompressed - the message before compression</span>
@@ -1279,7 +1291,7 @@ Here,</p>
     <span class="k">while</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="o">+</span> <span class="n">name_len</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">name_len</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="o">+</span> <span class="n">name_len</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="n">name_len</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">b_name</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:(</span><span class="n">curr_idx</span><span class="o">+</span><span class="n">name_len</span><span class="p">)]</span>
+    <span class="n">b_name</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="p">(</span><span class="n">curr_idx</span> <span class="o">+</span> <span class="n">name_len</span><span class="p">)]</span>
 
     <span class="k">if</span> <span class="n">name_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">b_name</span><span class="p">,</span> <span class="n">name_len</span><span class="p">,</span> <span class="n">len_reduction</span>
@@ -1287,7 +1299,7 @@ Here,</p>
     <span class="k">for</span> <span class="n">n_offset</span><span class="p">,</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">msg_suffix</span><span class="p">(</span><span class="n">b_name</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="n">suffix_dict</span><span class="p">:</span>
             <span class="n">cpr_ptr</span> <span class="o">=</span> <span class="n">suffix_dict</span><span class="p">[</span><span class="n">suffix</span><span class="p">]</span>
-            <span class="n">bin_ptr</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">192</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">cpr_ptr</span><span class="p">)</span>
+            <span class="n">bin_ptr</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">192</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">cpr_ptr</span><span class="p">)</span>
             <span class="n">new_name</span> <span class="o">=</span> <span class="n">b_name</span><span class="p">[:</span><span class="n">n_offset</span><span class="p">]</span> <span class="o">+</span> <span class="n">bin_ptr</span>
             <span class="n">len_reduction</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b_name</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">new_name</span><span class="p">,</span> <span class="n">name_len</span><span class="p">,</span> <span class="n">len_reduction</span>
@@ -1313,33 +1325,39 @@ Here,</p>
     <span class="n">suffix_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">len_reduction</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qd_count</span><span class="p">):</span>
-        <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">)</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span>
+            <span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span>
+        <span class="p">)</span>
         <span class="n">compressed</span> <span class="o">=</span> <span class="n">compressed</span> <span class="o">+</span> <span class="n">name</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">decompressed_len</span>
-        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">4</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">an_count</span> <span class="o">+</span> <span class="n">ns_count</span> <span class="o">+</span> <span class="n">ar_count</span><span class="p">):</span>
-        <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">)</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span>
+            <span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span>
+        <span class="p">)</span>
         <span class="n">compressed</span> <span class="o">=</span> <span class="n">compressed</span> <span class="o">+</span> <span class="n">name</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">decompressed_len</span>
-        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
         <span class="n">compressed</span> <span class="o">+=</span> <span class="n">rr_type</span>
         <span class="n">rr_type</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">rr_type</span><span class="p">)</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
-        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">6</span><span class="p">]</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">6</span>
-        <span class="n">r_data_len</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">r_data_len</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
 
-        <span class="k">if</span> <span class="n">rr_type</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span> <span class="c1"># If CNAME entry</span>
-            <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span><span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span><span class="p">)</span>
-            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">rr_type</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># If CNAME entry</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">decompressed_len</span><span class="p">,</span> <span class="n">len_reduction</span> <span class="o">=</span> <span class="n">compress_name</span><span class="p">(</span>
+                <span class="n">uncompressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">,</span> <span class="n">len_reduction</span><span class="p">,</span> <span class="n">suffix_dict</span>
+            <span class="p">)</span>
+            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
             <span class="n">compressed</span> <span class="o">=</span> <span class="n">compressed</span> <span class="o">+</span> <span class="n">name</span>
             <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">decompressed_len</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">curr_idx</span><span class="p">]</span>
-            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="n">r_data_len</span><span class="p">]</span>
+            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">curr_idx</span><span class="p">]</span>
+            <span class="n">compressed</span> <span class="o">+=</span> <span class="n">uncompressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="n">r_data_len</span><span class="p">]</span>
             <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">r_data_len</span>
 
     <span class="k">return</span> <span class="n">compressed</span>
@@ -1358,17 +1376,19 @@ Here,</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">segment_len</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span><span class="p">]</span>
     <span class="n">compressed_len</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">decompressed</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+    <span class="n">decompressed</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
 
     <span class="k">while</span> <span class="n">segment_len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># If first two bits are 1</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">segment_len</span> <span class="o">&amp;</span> <span class="mi">192</span><span class="p">)</span> <span class="o">==</span> <span class="mi">192</span><span class="p">:</span>
             <span class="n">name_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">segment_len</span> <span class="o">&amp;</span> <span class="mi">63</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span>
-            <span class="n">name_ptr</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">name_ptr</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
             <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">name_ptr</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">decompressed</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">+</span> <span class="mi">2</span>
         <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">segment_len</span><span class="p">])</span>
-        <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">segment_len</span><span class="p">]</span>
+        <span class="n">decompressed</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">decompressed</span> <span class="o">+</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">name_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">segment_len</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">compressed_len</span> <span class="o">+</span> <span class="n">segment_len</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">name_idx</span> <span class="o">=</span> <span class="n">name_idx</span> <span class="o">+</span> <span class="n">segment_len</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">segment_len</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">name_idx</span><span class="p">]</span>
@@ -1396,29 +1416,29 @@ Here,</p>
         <span class="n">name</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">)</span>
         <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">name</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">compressed_len</span>
-        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">4</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">an_count</span> <span class="o">+</span> <span class="n">ns_count</span> <span class="o">+</span> <span class="n">ar_count</span><span class="p">):</span>
         <span class="n">name</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">)</span>
         <span class="n">decompressed</span> <span class="o">=</span> <span class="n">decompressed</span> <span class="o">+</span> <span class="n">name</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">compressed_len</span>
-        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">rr_type</span> <span class="o">=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
         <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">rr_type</span>
         <span class="n">rr_type</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">rr_type</span><span class="p">)</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
-        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">6</span><span class="p">]</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">6</span>
-        <span class="n">r_data_len</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">r_data_len</span> <span class="o">=</span> <span class="n">byte_to_int</span><span class="p">(</span><span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])</span>
         <span class="n">curr_idx</span> <span class="o">+=</span> <span class="mi">2</span>
-        <span class="k">if</span> <span class="n">rr_type</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span> <span class="c1">#If CNAME entry</span>
+        <span class="k">if</span> <span class="n">rr_type</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># If CNAME entry</span>
             <span class="n">c_name</span><span class="p">,</span> <span class="n">compressed_len</span> <span class="o">=</span> <span class="n">decompress_name</span><span class="p">(</span><span class="n">compressed</span><span class="p">,</span> <span class="n">curr_idx</span><span class="p">)</span>
-            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;H&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_name</span><span class="p">))</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_name</span><span class="p">))</span>
             <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">c_name</span>
             <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">compressed_len</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">curr_idx</span><span class="p">]</span>
-            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span><span class="p">:</span><span class="n">curr_idx</span><span class="o">+</span><span class="n">r_data_len</span><span class="p">]</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">curr_idx</span><span class="p">]</span>
+            <span class="n">decompressed</span> <span class="o">+=</span> <span class="n">compressed</span><span class="p">[</span><span class="n">curr_idx</span> <span class="p">:</span> <span class="n">curr_idx</span> <span class="o">+</span> <span class="n">r_data_len</span><span class="p">]</span>
             <span class="n">curr_idx</span> <span class="o">+=</span> <span class="n">r_data_len</span>
 
     <span class="k">return</span> <span class="n">decompressed</span>

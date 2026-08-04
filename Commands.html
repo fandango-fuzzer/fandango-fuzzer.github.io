@@ -106,7 +106,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.1.1/" style="color:white;">Fandango 1.1.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -474,9 +474,9 @@ options:
                         Parser implementation to use (default: &#39;auto&#39;: use C++
                         parser code if available, otherwise Python).
   --enable-experimental-module ENABLE_EXPERIMENTAL_MODULES
-                        Enable warnings about experimental modules. Can be
-                        given multiple times. Example: --enable-experimental-
-                        module execution
+                        Opt in to an experimental module, silencing its
+                        warning. Can be given multiple times. Example:
+                        --enable-experimental-module execution
 
 commands:
   {fuzz,parse,talk,convert,clear-cache,shell,help,copyright,version}
