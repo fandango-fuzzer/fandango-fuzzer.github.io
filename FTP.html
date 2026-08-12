@@ -1371,9 +1371,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--w-rw----      893 3RD1k1WtDpxYjr               wuK5KEKm                381430 Jun 05 14:36 ^,/+
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--wx-w-rwx       104 X1aLhaYy15i46WP-        B9MohAsYEqXbZku6                 6282765 Aug 26 23:25 NV(BW
 
--rwxrwxrwx                 994 Iv-MQEYF3sz           6Jm-Wjqlkq9L2bR              9450443 Sep 03 22:00 b1]ZhdS0yG
+c--xrwxrw-         325 CF0Y9mNPdiEU     12fqiwmdO              5620369 Sep 26 20:23 gUZb
 </pre></div>
 </div>
 </div>
@@ -1411,15 +1411,19 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
-PWD
-TYPE I
-PWD
 EPSV
+PWD
+SYST
+TYPE I
 OPTS UTF8 ON
 LIST
+OPTS UTF8 ON
 SYST
 EPSV
 LIST
+FEAT
+OPTS UTF8 ON
+OPTS UTF8 ON
 EPSV
 QUIT
 </pre></div>
@@ -1435,20 +1439,19 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 _J2[h
-530 &#39;|{$|dTi$~&quot;
-331 |xIJmohxQ/h
-230 b[M6-O_v(9-B#5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-
+220-|1y&quot;b](cdh8
+220-pAIYIV/3|kIN{3wZ
+220-W4o7LRen&lt;
+220 \Ojqyq$SCh89aZ
+331  -w+}]Sqt3-SS&amp;Zy/p2
+230 @J&lt;;\[tih
+257 &quot;/uiWwp8w0gmOmsl/KDUF/7LOJyz/Mm1lAKks2Z/_oC69hvp/6w3sIF/1/sqsTS5m_mXa0jxugM/tWWcXIOLcb8BI9LVo3Z/Wl/tsbExkRIMa_3e/nm_TbKvMXIvF/mCUXySaSMbrDnD/Iqf3Hg2Hg/FtU5KjwYEFMU/F_UAVgX/d_YVT297brUYRbWX&quot; is the current directory
+257 &quot;/&quot; is the current directory
+200 \EPTGEyc
+257 &quot;/ptoSbh5Fe3AtQXbN3Ey_/qzu2iEmxpV9P0Zd/mM/_swlnd0F/d/D/SemiaNUrP7L/cKujTW&quot; is the current directory
 229 Entering Extended Passive Mode (|||50100|)
-200 6+
-150 kJkGd+4=2rH3?@
-226 f8JM@ YZ
-229 Entering Extended Passive Mode (|||50100|)
-215 Linux
-211-Features:
- EPSV
-211 End
-221 gJ
+221 |OP=eNIy_^e|
 </pre></div>
 </div>
 </div>
