@@ -108,7 +108,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.0/" style="color:white;">Fandango 1.3</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -210,6 +210,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
@@ -440,6 +441,18 @@
   <section class="tex2jax_ignore mathjax_ignore" id="release-notes">
 <span id="sec-release-notes"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
 <p>This document lists major changes across releases.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3: </span>(October 2026)</p>
+<ul class="simple">
+<li><p><strong>Specs from <a class="reference internal" href="Fanbase.html#sec-fanbase"><span class="std std-ref">Fanbase</span></a>.</strong> <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span> <span class="pre">-F</span> <span class="pre">png</span></code> fetches the default PNG spec from Fanbase, a registry of ready-made specs for file formats, and produces PNG files. Variants have names such as <code class="docutils literal notranslate"><span class="pre">png-apng</span></code>. Since the format is known, the file name extension is set for you, and files are written to a fresh directory unless you give <code class="docutils literal notranslate"><span class="pre">-o</span></code> or <code class="docutils literal notranslate"><span class="pre">-d</span></code>. Fanbase specs can be overridden with specs of your own given with <code class="docutils literal notranslate"><span class="pre">-f</span></code>.</p></li>
+<li><p>The new <code class="docutils literal notranslate"><span class="pre">fanbase</span></code> command lists, shows, installs, and updates specs. It comes with Fandango, which now depends on the <code class="docutils literal notranslate"><span class="pre">fanbase</span></code> package.</p></li>
+<li><p><strong>A faster parser.</strong> Parsing is now much faster on long inputs, thanks to shortcuts for right-recursive rules, parse states that record only the latest step instead of copying everything parsed so far, and a garbage collector that is paused while parsing. For <code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span> <span class="pre">::=</span> <span class="pre">&lt;char&gt;+</span></code>, parsing 1,000 characters takes 0.03 seconds instead of 3, and a million characters take about 40 seconds.</p></li>
+<li><p>Grammars with loops that can never end now cause an error, instead of leaving Fandango stuck in an infinite recursion.</p></li>
+<li><p>Fixed an error in protocol specs (“Symbol … is not reachable in grammar”) when a packet symbol expands to another packet symbol.</p></li>
+<li><p>Bytes written to standard output now arrive unchanged: Fandango sets the encoding of standard output to one that can carry every byte, and does not translate newlines on Windows. If standard output cannot do that, Fandango reports an error instead of writing mangled bytes.</p></li>
+<li><p>Files given with <code class="docutils literal notranslate"><span class="pre">-f</span></code> are now closed when the command is done.</p></li>
+</ul>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 1.2: </span>(August 2026)</p>
 <ul class="simple">

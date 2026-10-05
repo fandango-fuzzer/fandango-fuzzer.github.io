@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Conversion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Case Study: PNG" href="Png.html" />
+    <link rel="next" title="Fandango and Fanbase" href="Fanbase.html" />
     <link rel="prev" title="Bits and Bit Fields" href="Bits.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -106,7 +106,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.0/" style="color:white;">Fandango 1.3</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -208,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
@@ -621,37 +622,37 @@ Traceback (most recent call last):
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/.venv/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">10</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
     sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
              <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f7f597b32e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f9ae3bb7420&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">58</span>, in <span class=" -Color -Color-Magenta">main</span>
     last_status = run(command, args)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f7f58d2c180&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">521</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f9ae31311c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">529</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f7f5a702160&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f9ae4d062a0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">519</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">527</span>, in <span class=" -Color -Color-Magenta">run</span>
     <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
     <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.parse_command) at 0x7f7f58d0b880&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">283</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.parse_command) at 0x7f9ae3130900&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">288</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
     <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f7f5a702160&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f9ae4d062a0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
     raise e
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">280</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">285</span>, in <span class=" -Color -Color-Magenta">parse_command</span>
     tree = parse_file(fd, args, grammar, constraints, settings)
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.utils.parse_file) at 0x7f7f59512e80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">136</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.utils.parse_file) at 0x7f9ae3917ec0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">136</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/utils.py&quot;</span>, line <span class=" -Color -Color-Magenta">318</span>, in <span class=" -Color -Color-Magenta">parse_file</span>
     for tree in <span class=" -Color -Color-Bold -Color-Bold-Red">gen</span>:
                 <span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.GeneratorWithReturn.__iter__) at 0x7f7f5a28c680&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">29</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.GeneratorWithReturn.__iter__) at 0x7f9ae46687c0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">29</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">22</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
     self._return_value = <span class=" -Color -Color-Bold -Color-Bold-Red">yield from self.generator</span>
                          <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.parse) at 0x7f7f597b1e40&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">69</span>, in <span class=" -Color -Color-Magenta">parse</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.parse) at 0x7f9ae3bb5f80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">69</span>, in <span class=" -Color -Color-Magenta">parse</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">495</span>, in <span class=" -Color -Color-Magenta">parse</span>
     <span class=" -Color -Color-Red">self.grammar.populate_sources</span><span class=" -Color -Color-Bold -Color-Bold-Red">(tree)</span>
     <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
@@ -805,24 +806,24 @@ has the same effect as the original <a class="reference download internal" downl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0260123623301392
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5957282919032397
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2936817873698593
-3123298110233901
-3336701555629205
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7736474590275577
+0465007959666903
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3347741354178266
-7564626551844199
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7392755135341691
+8832688132576330
+4805482395689390
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9424174148396171
-5527171571725904
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0305813479704403
+8879074621309869
+8939588507630997
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5574661285753319
-6373389491980770
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7149478006368406
 </pre></div>
 </div>
 </div>
@@ -885,11 +886,11 @@ So when should one use constraints, and when converters?</p>
       </div>
     </a>
     <a class="right-next"
-       href="Png.html"
+       href="Fanbase.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Case Study: PNG</p>
+        <p class="prev-next-title">Fandango and Fanbase</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

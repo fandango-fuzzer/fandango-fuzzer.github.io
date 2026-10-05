@@ -106,7 +106,7 @@
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.0/" style="color:white;">Fandango 1.3</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -208,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
@@ -494,22 +495,22 @@ Just invoke Fandango without a command:</p>
 <p>and you will get the same results:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rsmpxznzjwazwzditv Dipdg,1319122436751942
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yqaxkqveuijsywikqz Oeggaqndcf,781689078265
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thlsifrnjwcvlg Aehwwtodcucp,7145081783
-Zdod Sorhnhlmvsze,627460
-Pbgrbfprusmbh Bxkkramvag,48
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Czvpogfqruvzmgry Yjykavcbxywekza,5315217430380548046
+Oynwhcudri Nlzqfgpy,9145494880881625
+Jsnzsllgtcsgzueqtu Rpmxcykynhddojk,207981918624
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ebkyhcaustlhzcsibw Crtxnfii,3613848201944921
-Ydjhygncgdinnspqlkajk Fbyrpmrqxsvy,532333007271231530
-Psfzvtcceibhb Fgrlzhhdtescfih,09920324
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ffujikosyunrmkrazbl Omsfbkepjovohe,5
+Rpn Occevh,81359958216
+Evtky Siupoetrjapvq,7313459172
+Ephxpoldoff Jatkntbaumxrkd,902
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dijordex Fxsgqwbcpgtksi,50775
-Imuidbpsdznblke Br,5776774
-Qtibmfriqmoagup Zsyyfzqiagvznjq,847821356814325571
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qdafxjtkfeuzmlz Rnnh,6207
+Hzqtmmvtj Kzdifdpxagfu,4797140909707
 </pre></div>
 </div>
 </div>
@@ -666,22 +667,20 @@ To have Fandango read and execute commands from, say, <code class="docutils lite
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fiuxoydakkngjgjqj Wwxygypntrsgnlwrfbgc,4915761473733441240
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qsvdkknmqdyxuzplvobxp Ojaj,9029
+Ptx Uhggvxubnlrzhtjdfpcru,7406311739956913247
+Edko Yrz,961034630084786
+Vdoniisoz Dwvdrxuj,35
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cppggmmhxhyuq Ppdsfawlojhxvrtrlwavt,8706
-Ldpx Xdoxicmkq,38994747
-Opccpxlwwdpvazcgvsc Vkitbgou,2463
-Qmjmqo Dhtus,94424
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Deezfdwwfig Kmeoucsobhpbquseqzk,79510734458
+Qptzsfiewmeuop Fietfpsphoztoii,02123152430955262503
+Aejdrntua Yactuaelb,3610349
+Cw Snrllgchmbf,973
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Egjvzkjmaewouz Iqwremz,92955600194471979318
-Etbmqfo Flxywhaxvz,04788631538314393
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yxsfhtbmnxz Gyockfixhooasxchfeiwz,20
-Annfzyqwtzduxxvwxohp Chtbdzvanw,25260256529
-Viwfltlm Wibzgbu,3561653353
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trzcpwgopd Rjooryixytgzkqtf,4170889
+Uovb Jvsczptaeefgfkfiqtlux,6
 </pre></div>
 </div>
 </div>

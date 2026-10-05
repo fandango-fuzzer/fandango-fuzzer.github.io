@@ -462,7 +462,7 @@ window.runMermaid = runMermaid;</script>
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.2.0/" style="color:white;">Fandango 1.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.0/" style="color:white;">Fandango 1.3</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -564,6 +564,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
@@ -1371,7 +1372,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>brw-r-xr--         335 J-XUiwHw8uK28pPh9F q6TbOaQYABR1                2021594 Mar 19 20:16 6%j5ydG$$lIy
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lrwx-wx--x            101 C           x 2609015 Jul 16 06:53 |onjA([
+
+cr---w-r-x     893 n9lghV0TPOHrKH jXD9d           6364321 Jan 07 05:29 _cSr20Gp=S;~
 </pre></div>
 </div>
 </div>
@@ -1407,17 +1410,15 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER kUuLj7m4W
-PASS n9Jq3MNk_
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
+PASS rOMMePCqrrV3ASBd2VoT
+AUTH SSL
+AUTH TLS
+AUTH SSL
+AUTH TLS
 USER the_user
 PASS the_password
-PWD
-EPSV
-SYST
 TYPE I
-LIST
-PWD
-OPTS UTF8 ON
 EPSV
 QUIT
 </pre></div>
@@ -1433,23 +1434,36 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-$P&lt;&lt;hR,I5M4n
-220-%}kh]*`0m
-220-\P6
-220-]
-220-4A6&amp;bw+
-220-R)K.86R2^|.U#VNsl
-220-9}m_k^)azD&amp;z5
-220 ?08FXp2oa6jmB
-530 `[W86&quot;\LC),wp&amp;
-530 Q9+J&#39;7+*/6+
-500 b#0O+)&amp;@+z&gt;M?q
-500 cj5
-331 !VUS_QB*Tp
-230 SQ
-200 2bH/#_LU^/hE@
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-R),&lt;Lirckr
+220-yi6!,c!%\ix
+220-sbpf?F=D
+220-CXSEB
+220-*};&#39;d^RaeSm4=eJ
+220-.J/&gt;:88tt
+220-2E?`KKM%*K
+220-.nQ*+#{/
+220-L&gt;TLB-D
+220-UyIjMld_3*)bx)
+220-|18lXs:Z(]]
+220-QhN3{,!x9?]W8z)f$@J
+220-8\M
+220-l1qVQU&amp;7cj
+220-YN_
+220-k?||s7 }:&quot;S$
+220-)GTc*Z[bEU9558&gt;:&lt;f;
+220-OUE7D
+220-
+220 &gt;ubj`3&lt;+KUMAqE&gt;l
+500 Nto)CWq..M)[X0bd
+331 @:a&gt;7u~6T +EJ3Zo&amp;
+530 H
+331 g
+230 F|Z&quot;mC`I*;Q
+200 sn%qX}oW&gt;jA
+215 Linux
 229 Entering Extended Passive Mode (|||50100|)
-221 R&gt;
+200 Q4`}`5kXpV%~[;
+221 R_b
 </pre></div>
 </div>
 </div>

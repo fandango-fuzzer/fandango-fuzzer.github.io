@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fandango and Fanbase &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Fanbase';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Case Study: PNG" href="Png.html" />
+    <link rel="prev" title="Data Converters" href="Conversion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.0/" style="color:white;">Fandango 1.3</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fandango and Fanbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hatching Specs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Style.html">Fandango Style Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FFanbase.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Fanbase.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<a href="_static/fandango.pdf" target="_blank"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Download PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fandango and Fanbase</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#producing-inputs-from-a-fanbase-spec">Producing Inputs from a Fanbase Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-spec">Choosing a Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-a-fanbase-spec">Customizing a Fanbase Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-specs-are-installed">Where Specs Are Installed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-another-registry">Using Another Registry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-reference">Command Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fandango-f"><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">-F</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fanbase"><code class="docutils literal notranslate"><span class="pre">fanbase</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fandango-and-fanbase">
+<span id="sec-fanbase"></span><h1>Fandango and Fanbase<a class="headerlink" href="#fandango-and-fanbase" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://github.com/fandango-fuzzer/fanbase">Fanbase</a> is a collection of ready-made Fandango specs for many file formats. Instead of writing a spec for PNG, GIF, or TIFF yourself, you name the format and Fandango fetches the spec and produces inputs.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.3: </span>The <code class="docutils literal notranslate"><span class="pre">-F</span></code> option and the <code class="docutils literal notranslate"><span class="pre">fanbase</span></code> command require Fandango 1.3 or later.</p>
+</div>
+<section id="producing-inputs-from-a-fanbase-spec">
+<h2>Producing Inputs from a Fanbase Spec<a class="headerlink" href="#producing-inputs-from-a-fanbase-spec" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">-F</span></code> option works like <code class="docutils literal notranslate"><span class="pre">-f</span></code>, but its argument is the name of a Fanbase spec rather than a file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>png<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p>This</p>
+<ol class="arabic simple">
+<li><p>looks up the default PNG spec, <code class="docutils literal notranslate"><span class="pre">png</span></code>, in the Fanbase registry;</p></li>
+<li><p>installs it in Fandango’s standard library location, unless the installed copy is already up to date; and</p></li>
+<li><p>produces 10 PNG files, <code class="docutils literal notranslate"><span class="pre">png-inputs/fandango-0000.png</span></code> to <code class="docutils literal notranslate"><span class="pre">png-inputs/fandango-0009.png</span></code>.</p></li>
+</ol>
+<p>Because the format is known, you do not need <code class="docutils literal notranslate"><span class="pre">-x</span></code> for the file name extension, and you do not need <code class="docutils literal notranslate"><span class="pre">-o</span></code> or <code class="docutils literal notranslate"><span class="pre">-d</span></code> to say where the files go. If you give neither, Fandango writes into a fresh directory named after the spec (<code class="docutils literal notranslate"><span class="pre">png-inputs</span></code>, then <code class="docutils literal notranslate"><span class="pre">png-inputs-2</span></code>, and so on).</p>
+<p>Everything else works as it does with <code class="docutils literal notranslate"><span class="pre">-f</span></code>. You can set the population size or a random seed, write to one file, or hand each input to a program to test (which then gets a file with the right extension):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>png<span class="w"> </span>-n<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-d<span class="w"> </span>pngs<span class="w"> </span>--population-size<span class="o">=</span><span class="m">50</span>
+$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>gif<span class="w"> </span>--random-seed<span class="o">=</span><span class="m">42</span><span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-o<span class="w"> </span>one-gif.gif
+$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>png<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>file
+</pre></div>
+</div>
+</section>
+<section id="choosing-a-spec">
+<h2>Choosing a Spec<a class="headerlink" href="#choosing-a-spec" title="Link to this heading">#</a></h2>
+<p>Every format has a default spec, named after the format. Other specs for the same format are named <code class="docutils literal notranslate"><span class="pre">&lt;format&gt;-&lt;what</span> <span class="pre">makes</span> <span class="pre">it</span> <span class="pre">different&gt;</span></code>. Use <code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">list</span></code> to see what is available:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fanbase<span class="w"> </span>list
+<span class="w">  </span>bmp<span class="w">   </span><span class="m">3</span><span class="w"> </span>specs
+<span class="w">  </span>gif<span class="w">   </span><span class="m">3</span><span class="w"> </span>specs
+<span class="w">  </span>jpeg<span class="w">  </span><span class="m">3</span><span class="w"> </span>specs
+<span class="w">  </span>png<span class="w">   </span><span class="m">6</span><span class="w"> </span>specs
+<span class="w">  </span>tiff<span class="w">  </span><span class="m">4</span><span class="w"> </span>specs
+<span class="w">  </span>webp<span class="w">  </span><span class="m">3</span><span class="w"> </span>specs
+
+$<span class="w"> </span>fanbase<span class="w"> </span>list<span class="w"> </span>png
+<span class="w"> </span>*png<span class="w">             </span>Valid<span class="w"> </span>PNGs<span class="w"> </span>of<span class="w"> </span>every<span class="w"> </span>colour<span class="w"> </span><span class="nb">type</span><span class="w"> </span>with<span class="w"> </span>all<span class="w"> </span>the<span class="w"> </span>standard<span class="w"> </span>chunks
+<span class="w">  </span>png-32x32<span class="w">       </span>32x32<span class="w"> </span>RGB<span class="w"> </span>PNG<span class="w"> </span>with<span class="w"> </span>lengths<span class="w"> </span>and<span class="w"> </span>CRCs<span class="w"> </span>written<span class="w"> </span>as<span class="w"> </span>constraints
+<span class="w">  </span>png-apng<span class="w">        </span>Animated<span class="w"> </span>PNG<span class="w"> </span><span class="o">(</span>APNG<span class="o">)</span><span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>usual<span class="w"> </span>ancillary<span class="w"> </span>chunks
+<span class="w">  </span>png-boundary<span class="w">    </span>Same<span class="w"> </span>as<span class="w"> </span>png,<span class="w"> </span>with<span class="w"> </span>values<span class="w"> </span>taken<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>edges<span class="w"> </span>of<span class="w"> </span>what<span class="w"> </span>the<span class="w"> </span>format<span class="w"> </span>allows
+<span class="w">  </span>png-container<span class="w">   </span>PNG<span class="w"> </span>chunk<span class="w"> </span>structure<span class="w"> </span>only<span class="p">;</span><span class="w"> </span>image<span class="w"> </span>data<span class="w"> </span>is<span class="w"> </span>arbitrary<span class="w"> </span>bytes,<span class="w"> </span>so<span class="w"> </span>most<span class="w"> </span>files<span class="w"> </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>decode
+<span class="w">  </span>png-extensions<span class="w">  </span>1x1<span class="w"> </span>PNGs<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>registered<span class="w"> </span>extension<span class="w"> </span>chunks,<span class="w"> </span>APNG<span class="w"> </span>included
+
+*<span class="w"> </span>installed
+</pre></div>
+</div>
+<p>A spec other than the default is requested by its name:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>png-apng<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>-d<span class="w"> </span>apngs
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">show</span></code> tells you more about a spec: its description, version, file name extensions, and the Python packages it needs.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fanbase<span class="w"> </span>show<span class="w"> </span>png-apng
+</pre></div>
+</div>
+</section>
+<section id="customizing-a-fanbase-spec">
+<h2>Customizing a Fanbase Spec<a class="headerlink" href="#customizing-a-fanbase-spec" title="Link to this heading">#</a></h2>
+<p>To change a Fanbase spec, write a spec of your own that <em>includes</em> the Fanbase spec and <em>redefines</em> the rules you want to change. Installed specs are found by <code class="docutils literal notranslate"><span class="pre">include()</span></code> under <code class="docutils literal notranslate"><span class="pre">&lt;format&gt;/&lt;name&gt;.fan</span></code>. For instance, the default PNG spec chooses between five colour types in a rule <code class="docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code>. To produce only RGB images, create <code class="docutils literal notranslate"><span class="pre">rgb.fan</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s2">&quot;png/png.fan&quot;</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">image</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">png_truecolor</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>and combine it with the Fanbase spec:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>png<span class="w"> </span>-f<span class="w"> </span>rgb.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p>Fanbase specs come first, so rules in files given with <code class="docutils literal notranslate"><span class="pre">-f</span></code> override them. If the spec is already installed, <code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">fuzz</span> <span class="pre">-f</span> <span class="pre">rgb.fan</span> <span class="pre">-x</span> <span class="pre">.png</span> <span class="pre">-n</span> <span class="pre">10</span></code> works as well.</p>
+</section>
+<section id="where-specs-are-installed">
+<h2>Where Specs Are Installed<a class="headerlink" href="#where-specs-are-installed" title="Link to this heading">#</a></h2>
+<p>Specs are installed in the first of these directories, which are also the ones Fandango searches for <code class="docutils literal notranslate"><span class="pre">include()</span></code>:</p>
+<ol class="arabic simple">
+<li><p>the first directory in <code class="docutils literal notranslate"><span class="pre">$FANDANGO_PATH</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$XDG_DATA_HOME/fandango</span></code>; or, if that is not set,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/Library/Fandango</span></code> (macOS) or <code class="docutils literal notranslate"><span class="pre">~/.local/share/fandango</span></code> (other systems).</p></li>
+</ol>
+<p>An installed spec is <code class="docutils literal notranslate"><span class="pre">&lt;format&gt;/&lt;name&gt;.fan</span></code> in that directory, together with a copy of its metadata, <code class="docutils literal notranslate"><span class="pre">&lt;format&gt;/&lt;name&gt;.yml</span></code>.</p>
+<p>Each time you use <code class="docutils literal notranslate"><span class="pre">-F</span></code>, Fandango asks the registry whether the installed copy is still current, and fetches the spec again if it has changed. Only the spec you ask for is downloaded. If the registry cannot be reached, Fandango uses the installed copy and warns you, so test runs do not depend on the network.</p>
+<p>A few specs import third-party Python packages, which must be installed beforehand. These are listed by <code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">show</span></code>. If a package is missing, Fandango stops and tells you what to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>. Most specs only need the Python standard library.</p>
+</section>
+<section id="using-another-registry">
+<h2>Using Another Registry<a class="headerlink" href="#using-another-registry" title="Link to this heading">#</a></h2>
+<p>By default, specs come from the public registry at <code class="docutils literal notranslate"><span class="pre">https://github.com/fandango-fuzzer/fanbase</span></code>. To use a different one, a local checkout or a URL, set <code class="docutils literal notranslate"><span class="pre">FANBASE_REGISTRY</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">FANBASE_REGISTRY</span><span class="o">=</span>~/code/my-registry
+$<span class="w"> </span>fandango<span class="w"> </span>fuzz<span class="w"> </span>-F<span class="w"> </span>png<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+</section>
+<section id="command-reference">
+<h2>Command Reference<a class="headerlink" href="#command-reference" title="Link to this heading">#</a></h2>
+<section id="fandango-f">
+<h3><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">-F</span></code><a class="headerlink" href="#fandango-f" title="Link to this heading">#</a></h3>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">-F</span> <span class="pre">NAME</span></code>, <code class="docutils literal notranslate"><span class="pre">--fanbase-file</span> <span class="pre">NAME</span></code></dt><dd><p>Use the Fanbase spec <code class="docutils literal notranslate"><span class="pre">NAME</span></code> (such as <code class="docutils literal notranslate"><span class="pre">png</span></code> or <code class="docutils literal notranslate"><span class="pre">png-apng</span></code>). Can be given multiple times. Available with all commands that take <code class="docutils literal notranslate"><span class="pre">-f</span></code>. Unless given, <code class="docutils literal notranslate"><span class="pre">-x</span></code> is set to the format’s file name extension.</p>
+</dd>
+</dl>
+</section>
+<section id="fanbase">
+<h3><code class="docutils literal notranslate"><span class="pre">fanbase</span></code><a class="headerlink" href="#fanbase" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">fanbase</span></code> command is installed together with Fandango.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">list</span> <span class="pre">[FORMAT]</span></code></dt><dd><p>List the formats, or the specs of a format. Installed specs are marked with <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">show</span> <span class="pre">NAME</span></code></dt><dd><p>Show a spec’s metadata.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">install</span> <span class="pre">NAME...</span></code></dt><dd><p>Install specs without using them. <code class="docutils literal notranslate"><span class="pre">--into</span> <span class="pre">DIR</span></code> installs into another directory. Installing a spec that is up to date does nothing.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">update</span> <span class="pre">[NAME...]</span></code></dt><dd><p>Update the given specs, or all installed specs, to the registry’s latest versions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">reindex</span> <span class="pre">[--check]</span></code></dt><dd><p>For registry maintainers: refresh the <code class="docutils literal notranslate"><span class="pre">metadata.yml</span></code> files and <code class="docutils literal notranslate"><span class="pre">index.yml</span></code> of a local registry. With <code class="docutils literal notranslate"><span class="pre">--check</span></code>, only report what is out of date.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fanbase</span> <span class="pre">--registry</span> <span class="pre">PATH-OR-URL</span> <span class="pre">COMMAND</span></code></dt><dd><p>Use a registry other than the default, for this command.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Conversion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Converters</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Png.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case Study: PNG</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#producing-inputs-from-a-fanbase-spec">Producing Inputs from a Fanbase Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-spec">Choosing a Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-a-fanbase-spec">Customizing a Fanbase Spec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-specs-are-installed">Where Specs Are Installed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-another-registry">Using Another Registry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-reference">Command Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fandango-f"><code class="docutils literal notranslate"><span class="pre">fandango</span> <span class="pre">-F</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fanbase"><code class="docutils literal notranslate"><span class="pre">fanbase</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
