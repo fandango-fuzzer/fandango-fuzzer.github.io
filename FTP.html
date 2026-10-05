@@ -564,7 +564,6 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
@@ -585,6 +584,7 @@ window.runMermaid = runMermaid;</script>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Style.html">Fandango Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -1372,9 +1372,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dr-x-wx--x                   79 RWrWYJOJpWwZ3N7A -6ZJ    815061 Jan 08 02:25 @c$RLxq)n%IF
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--wx-wx--x              668 DL2         itxgi6zVRpyNQDHw  5801306 Apr 18 02:38 qfDS]2%D]bH:6-s^9H@&lt;
 
-crw-rw-r-x          974 eYmsFT                 zSRvEm-1lC8               5234862 Apr 17 01:07 oUH 7r\Ai92@S#kS~O*|
+d---r--r--             257 fyHj4YtJ4         uXuzKdaND                 393630 Mar 11 15:23 *,&lt;2V3
 </pre></div>
 </div>
 </div>
@@ -1410,12 +1410,20 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
+AUTH TLS
+USER MFGlc
+PASS the_password
+AUTH SSL
 USER the_user
 PASS the_password
 EPSV
-OPTS UTF8 ON
 TYPE I
+OPTS UTF8 ON
+OPTS UTF8 ON
+SYST
+LIST
+EPSV
 QUIT
 </pre></div>
 </div>
@@ -1430,28 +1438,27 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-t E&#39;\-s
-220-/sT-cn
-220-.Ygxn{h%x`F|,RYtdN
-220-i `^oTfzO*Qloqv06cT
-220-uW0%p;&amp;[
-220-?r8V
-220 ?,tLoSl@
-331 2EO)
-230 x5e8#8M3NAl$KT
-211-Features:
- EPSV
-211 End
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-#.J
+220-yu`0u&lt;C
+220-xm`,72qKl~&quot;
+220-_`+ L\@[):
+220-`m$;&#39;Wr8^C0&quot;16(R[
+220-`%a&amp;
+220-tY
+220-H&lt;pv5bn$*&#39;h
+220-xd\FE8sEd*UB
+220-?&amp;MMJ;w(~-l&amp;k\gN=C+
+220-B-~
+220-|s&#39;FfN_gqsL
+220 q|dj&quot;&amp;#T}5x)
+331 rA:=z@u]#xZ&amp;&lt;4,
+230 C*vl@!f&amp;qK)
 229 Entering Extended Passive Mode (|||50100|)
-200 cF^i*=
-150 f8bR
-226 SQ\W&gt;x{yoL,Oc9P
+200 f
+150 5D
+226 T}7q,1$lDFuw9y
 229 Entering Extended Passive Mode (|||50100|)
-150 \.
-226 cFl
-215 Linux
-229 Entering Extended Passive Mode (|||50100|)
-221 do|.G! 88
+221 2W&amp;ngK&gt;wy&gt;O]w
 </pre></div>
 </div>
 </div>
