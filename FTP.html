@@ -64,6 +64,8 @@
 
 
 
+
+
 const initStyles = () => {
     const defaultStyle = document.createElement('style');
     defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
@@ -1372,9 +1374,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d--x---r-x                  154 O1xYnPCCYN         8ga               1346732 Apr 23 14:33 a&lt;zD
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr--r-xr--        65 9E1RTgGt_WnsQcS2               1qjMRK           3863209 Apr 19 03:40 c.PFyJaNz%I3h+$?
 
-dr-x-wx---           575 pJfcjiu792Gl8                 52ucXN                  5172102 Mar 10 04:03 83.6B4hCO0
+lrw-r-xrwx                    118 eNDJfKIe2G-1gCFUf              n_NZqGZ59xxH5wE8N    8457183 Mar 15 13:53 3&amp;[$XCb]NF2&lt;0=@V
 </pre></div>
 </div>
 </div>
@@ -1410,13 +1412,25 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH TLS
-AUTH SSL
-USER the_user
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
 PASS the_password
-TYPE I
-FEAT
 EPSV
+OPTS UTF8 ON
+TYPE I
+SYST
+LIST
+PWD
+SYST
+OPTS UTF8 ON
+EPSV
+LIST
+EPSV
+LIST
+PWD
+PWD
+EPSV
+SYST
+FEAT
 QUIT
 </pre></div>
 </div>
@@ -1431,31 +1445,19 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-_{%6-XobGtk
-220-SuTM7#R-C~baB
-220-@f[vUzuY|6P|y^HJrL
-220-nyGO?v1Ma#ocU
-220-9(&#39;x&amp;B@
-220-:
-220-d5J\m&#39;EO~cRJ&quot;$2MR8
-220-mA$XOr;?0{t
-220-{B&quot;C;I}wo;4]|t$N*~
-220-R&quot;W^A7
-220-Fj
-220-h&amp;X^Xk
-220-IE0Q]w0tCp5[OVD_]U&gt;
-220-v&gt;|^w*-.),
-220 2_!4
-530 nD(?A{{*
-500 R0UXuZKlc,\.NYTl9M=
-331 TQ2we7$nn2^V{#4Xx=
-230 qn
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-Cnwtv7=
+220-16-^NwZ5N(aH
+220-
+220-g4u 1Qi
+220-H&gt;!rry7kf\@C
+220 Rl
+331 }|oD~VYi8#8RaZGj2L
+530 $I/M3KqBr_g4)cs?O
+331 (4R&gt;f
+230 fU$&quot;y*=jG.7F#
 229 Entering Extended Passive Mode (|||50100|)
-257 &quot;/&quot; is the current directory
-257 &quot;/26nmMh2h9moKx/i331T9NFf2zYr8DSIUB4/unf1/VQJouNuvN1sxSL/j/pcUxOpyiq/P1/vHVwliIagFl1/lXA9tq/B34VvFaJXeI7up8V6pUn&quot; is the current directory
-200 {D:\v/Kb
-257 &quot;/&quot; is the current directory
-221 f4;T$-
+200 Dc-5-&gt;1nrn8\&#39;
+221 Kqg
 </pre></div>
 </div>
 </div>
