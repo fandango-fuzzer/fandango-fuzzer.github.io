@@ -1374,9 +1374,9 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr--r-xr--        65 9E1RTgGt_WnsQcS2               1qjMRK           3863209 Apr 19 03:40 c.PFyJaNz%I3h+$?
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr-xr--r-- 123 uV30TvuK9mb7mVosY      ZBXmV8SkOfgV7M_6s             2643358 Apr 06 11:08  *bq9fPWx}V(sV*2S@zv
 
-lrw-r-xrwx                    118 eNDJfKIe2G-1gCFUf              n_NZqGZ59xxH5wE8N    8457183 Mar 15 13:53 3&amp;[$XCb]NF2&lt;0=@V
+lr--rw-r--             85 e6v         _Xd4c              2423842 Sep 12 06:26 $&amp;&#39;`x)2K\hOH($#/(0~
 </pre></div>
 </div>
 </div>
@@ -1412,26 +1412,106 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
-PASS the_password
-EPSV
-OPTS UTF8 ON
-TYPE I
-SYST
-LIST
-PWD
-SYST
-OPTS UTF8 ON
-EPSV
-LIST
-EPSV
-LIST
-PWD
-PWD
-EPSV
-SYST
-FEAT
-QUIT
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeError: &#39;generator&#39; object is not subscriptable
+  Evaluation failed: limit_errors(___fandango_140256938216912_1___)
+fandango:ERROR: Error evaluating constraint limit_errors(&lt;start&gt;)
+TypeError: &#39;generator&#39; object is not subscriptable
+  Evaluation failed: limit_errors(___fandango_140256938216912_1___)
+TypeError: &#39;generator&#39; object is not subscriptable
+  Evaluation failed: limit_errors(___fandango_140256938216912_1___)
+Traceback (most recent call last):
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/.venv/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">10</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+    sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
+             <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f901d921bc0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">58</span>, in <span class=" -Color -Color-Magenta">main</span>
+    last_status = run(command, args)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f901d66fb00&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">529</span>, in <span class=" -Color -Color-Magenta">run</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f901edfa480&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">527</span>, in <span class=" -Color -Color-Magenta">run</span>
+    <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
+    <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.fuzz_command) at 0x7f901d66f100&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">fuzz_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">199</span>, in <span class=" -Color -Color-Magenta">fuzz_command</span>
+    population = fandango.fuzz(
+        solution_callback=solutions_callback,
+    ...&lt;4 lines&gt;...
+        **settings,
+    )
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.fuzz) at 0x7f901d920680&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">128</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">454</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
+    for s in <span class=" -Color -Color-Bold -Color-Bold-Red">generator</span>:
+             <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.generate_solutions) at 0x7f901d920400&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">319</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
+    yield from self.fandango.generate(max_generations=max_generations, mode=mode)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm.generate) at 0x7f901e5db380&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">370</span>, in <span class=" -Color -Color-Magenta">generate</span>
+    yield from self._generate_simple(max_generations=max_generations)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm._generate_simple) at 0x7f901e5db420&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">53</span>, in <span class=" -Color -Color-Magenta">_generate_simple</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">387</span>, in <span class=" -Color -Color-Magenta">_generate_simple</span>
+    yield from self.generate_initial_population()
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm.generate_initial_population) at 0x7f901e5dae80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">29</span>, in <span class=" -Color -Color-Magenta">generate_initial_population</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">189</span>, in <span class=" -Color -Color-Magenta">generate_initial_population</span>
+    yield from self.population_manager.refill_population(
+    ...&lt;4 lines&gt;...
+    )
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.population.PopulationManager.refill_population) at 0x7f901e5d8e00&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">116</span>, in <span class=" -Color -Color-Magenta">refill_population</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/population.py&quot;</span>, line <span class=" -Color -Color-Magenta">104</span>, in <span class=" -Color -Color-Magenta">refill_population</span>
+    ).<span class=" -Color -Color-Red">collect</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>
+      <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.GeneratorWithReturn.collect) at 0x7f901e550720&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">11</span>, in <span class=" -Color -Color-Magenta">collect</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">41</span>, in <span class=" -Color -Color-Magenta">collect</span>
+    return <span class=" -Color -Color-Red">list</span><span class=" -Color -Color-Bold -Color-Bold-Red">(self)</span>, self.return_value
+           <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.GeneratorWithReturn.__iter__) at 0x7f901e5505e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">29</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">22</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
+    self._return_value = <span class=" -Color -Color-Bold -Color-Bold-Red">yield from self.generator</span>
+                         <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.evaluation.Evaluator.evaluate_individual) at 0x7f901e5aade0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">50</span>, in <span class=" -Color -Color-Magenta">evaluate_individual</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">255</span>, in <span class=" -Color -Color-Magenta">evaluate_individual</span>
+    hard_fitness, failing_trees, suggestion = <span class=" -Color -Color-Red">self.evaluate_hard_constraints</span><span class=" -Color -Color-Bold -Color-Bold-Red">(</span>
+                                              <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">individual</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">)</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.evaluation.Evaluator.evaluate_hard_constraints) at 0x7f901e5aab60&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">38</span>, in <span class=" -Color -Color-Magenta">evaluate_hard_constraints</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">168</span>, in <span class=" -Color -Color-Magenta">evaluate_hard_constraints</span>
+    return <span class=" -Color -Color-Red">self._evaluate_constraints</span><span class=" -Color -Color-Bold -Color-Bold-Red">(individual, self._hard_constraints)</span>
+           <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.evaluation.Evaluator._evaluate_constraints) at 0x7f901e5aaca0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">65</span>, in <span class=" -Color -Color-Magenta">_evaluate_constraints</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">199</span>, in <span class=" -Color -Color-Magenta">_evaluate_constraints</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f901edfa480&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">189</span>, in <span class=" -Color -Color-Magenta">_evaluate_constraints</span>
+    result = constraint.fitness(individual)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.constraints.expression.ExpressionConstraint.fitness) at 0x7f901dee2e80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">99</span>, in <span class=" -Color -Color-Magenta">fitness</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/constraints/expression.py&quot;</span>, line <span class=" -Color -Color-Magenta">79</span>, in <span class=" -Color -Color-Magenta">fitness</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e, f&quot;Evaluation failed: {self.expression}&quot;)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f901edfa480&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/constraints/expression.py&quot;</span>, line <span class=" -Color -Color-Magenta">65</span>, in <span class=" -Color -Color-Magenta">fitness</span>
+    result = self.eval(self.expression, self.global_variables, local_vars)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.constraints.constraint.Constraint.eval) at 0x7f901e521260&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">83</span>, in <span class=" -Color -Color-Magenta">eval</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/constraints/constraint.py&quot;</span>, line <span class=" -Color -Color-Magenta">77</span>, in <span class=" -Color -Color-Magenta">eval</span>
+    return eval(expression, global_variables, local_variables)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;string&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">1</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;string&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">18</span>, in <span class=" -Color -Color-Magenta">limit_errors</span>
+<span class=" -Color -Color-Bold -Color-Bold-Magenta">TypeError</span>: <span class=" -Color -Color-Magenta">&#39;generator&#39; object is not subscriptable</span>
+Evaluation failed: limit_errors(___fandango_140256938216912_1___)
 </pre></div>
 </div>
 </div>
@@ -1445,19 +1525,104 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-Cnwtv7=
-220-16-^NwZ5N(aH
-220-
-220-g4u 1Qi
-220-H&gt;!rry7kf\@C
-220 Rl
-331 }|oD~VYi8#8RaZGj2L
-530 $I/M3KqBr_g4)cs?O
-331 (4R&gt;f
-230 fU$&quot;y*=jG.7F#
-229 Entering Extended Passive Mode (|||50100|)
-200 Dc-5-&gt;1nrn8\&#39;
-221 Kqg
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TypeError: &#39;generator&#39; object is not subscriptable
+  Evaluation failed: limit_errors(___fandango_140150727953872_1___)
+fandango:ERROR: Error evaluating constraint limit_errors(&lt;start&gt;)
+TypeError: &#39;generator&#39; object is not subscriptable
+  Evaluation failed: limit_errors(___fandango_140150727953872_1___)
+TypeError: &#39;generator&#39; object is not subscriptable
+  Evaluation failed: limit_errors(___fandango_140150727953872_1___)
+Traceback (most recent call last):
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/.venv/bin/fandango&quot;</span>, line <span class=" -Color -Color-Magenta">10</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+    sys.exit(<span class=" -Color -Color-Red">main</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>)
+             <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.main) at 0x7f7762f21bc0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">68</span>, in <span class=" -Color -Color-Magenta">main</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">58</span>, in <span class=" -Color -Color-Magenta">main</span>
+    last_status = run(command, args)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.run) at 0x7f7762c6fb00&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">51</span>, in <span class=" -Color -Color-Magenta">run</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">529</span>, in <span class=" -Color -Color-Magenta">run</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f77643fa480&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">527</span>, in <span class=" -Color -Color-Magenta">run</span>
+    <span class=" -Color -Color-Red">command</span><span class=" -Color -Color-Bold -Color-Bold-Red">(args)</span>
+    <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.cli.commands.fuzz_command) at 0x7f7762c6f100&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">33</span>, in <span class=" -Color -Color-Magenta">fuzz_command</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/cli/commands.py&quot;</span>, line <span class=" -Color -Color-Magenta">199</span>, in <span class=" -Color -Color-Magenta">fuzz_command</span>
+    population = fandango.fuzz(
+        solution_callback=solutions_callback,
+    ...&lt;4 lines&gt;...
+        **settings,
+    )
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.fuzz) at 0x7f7762f20680&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">128</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">454</span>, in <span class=" -Color -Color-Magenta">fuzz</span>
+    for s in <span class=" -Color -Color-Bold -Color-Bold-Red">generator</span>:
+             <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.api.Fandango.generate_solutions) at 0x7f7762f20400&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/api.py&quot;</span>, line <span class=" -Color -Color-Magenta">319</span>, in <span class=" -Color -Color-Magenta">generate_solutions</span>
+    yield from self.fandango.generate(max_generations=max_generations, mode=mode)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm.generate) at 0x7f7763bdb380&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">72</span>, in <span class=" -Color -Color-Magenta">generate</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">370</span>, in <span class=" -Color -Color-Magenta">generate</span>
+    yield from self._generate_simple(max_generations=max_generations)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm._generate_simple) at 0x7f7763bdb420&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">53</span>, in <span class=" -Color -Color-Magenta">_generate_simple</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">387</span>, in <span class=" -Color -Color-Magenta">_generate_simple</span>
+    yield from self.generate_initial_population()
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.algorithm.simple.SimpleGeneticAlgorithm.generate_initial_population) at 0x7f7763bdae80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">29</span>, in <span class=" -Color -Color-Magenta">generate_initial_population</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/algorithm/simple.py&quot;</span>, line <span class=" -Color -Color-Magenta">189</span>, in <span class=" -Color -Color-Magenta">generate_initial_population</span>
+    yield from self.population_manager.refill_population(
+    ...&lt;4 lines&gt;...
+    )
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.population.PopulationManager.refill_population) at 0x7f7763bd8e00&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">116</span>, in <span class=" -Color -Color-Magenta">refill_population</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/population.py&quot;</span>, line <span class=" -Color -Color-Magenta">104</span>, in <span class=" -Color -Color-Magenta">refill_population</span>
+    ).<span class=" -Color -Color-Red">collect</span><span class=" -Color -Color-Bold -Color-Bold-Red">()</span>
+      <span class=" -Color -Color-Red">~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.GeneratorWithReturn.collect) at 0x7f7763b44720&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">11</span>, in <span class=" -Color -Color-Magenta">collect</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">41</span>, in <span class=" -Color -Color-Magenta">collect</span>
+    return <span class=" -Color -Color-Red">list</span><span class=" -Color -Color-Bold -Color-Bold-Red">(self)</span>, self.return_value
+           <span class=" -Color -Color-Red">~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.GeneratorWithReturn.__iter__) at 0x7f7763b445e0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">29</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">22</span>, in <span class=" -Color -Color-Magenta">__iter__</span>
+    self._return_value = <span class=" -Color -Color-Bold -Color-Bold-Red">yield from self.generator</span>
+                         <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.evaluation.Evaluator.evaluate_individual) at 0x7f7763baade0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">50</span>, in <span class=" -Color -Color-Magenta">evaluate_individual</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">255</span>, in <span class=" -Color -Color-Magenta">evaluate_individual</span>
+    hard_fitness, failing_trees, suggestion = <span class=" -Color -Color-Red">self.evaluate_hard_constraints</span><span class=" -Color -Color-Bold -Color-Bold-Red">(</span>
+                                              <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">individual</span>
+        <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">)</span>
+    <span class=" -Color -Color-Bold -Color-Bold-Red">^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.evaluation.Evaluator.evaluate_hard_constraints) at 0x7f7763baab60&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">38</span>, in <span class=" -Color -Color-Magenta">evaluate_hard_constraints</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">168</span>, in <span class=" -Color -Color-Magenta">evaluate_hard_constraints</span>
+    return <span class=" -Color -Color-Red">self._evaluate_constraints</span><span class=" -Color -Color-Bold -Color-Bold-Red">(individual, self._hard_constraints)</span>
+           <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.evolution.evaluation.Evaluator._evaluate_constraints) at 0x7f7763baaca0&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">65</span>, in <span class=" -Color -Color-Magenta">_evaluate_constraints</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">199</span>, in <span class=" -Color -Color-Magenta">_evaluate_constraints</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f77643fa480&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/evolution/evaluation.py&quot;</span>, line <span class=" -Color -Color-Magenta">189</span>, in <span class=" -Color -Color-Magenta">_evaluate_constraints</span>
+    result = constraint.fitness(individual)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.constraints.expression.ExpressionConstraint.fitness) at 0x7f77634e2e80&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">99</span>, in <span class=" -Color -Color-Magenta">fitness</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/constraints/expression.py&quot;</span>, line <span class=" -Color -Color-Magenta">79</span>, in <span class=" -Color -Color-Magenta">fitness</span>
+    <span class=" -Color -Color-Red">print_exception</span><span class=" -Color -Color-Bold -Color-Bold-Red">(e, f&quot;Evaluation failed: {self.expression}&quot;)</span>
+    <span class=" -Color -Color-Red">~~~~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.logger.print_exception) at 0x7f77643fa480&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">54</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/logger.py&quot;</span>, line <span class=" -Color -Color-Magenta">64</span>, in <span class=" -Color -Color-Magenta">print_exception</span>
+    raise e
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/constraints/expression.py&quot;</span>, line <span class=" -Color -Color-Magenta">65</span>, in <span class=" -Color -Color-Magenta">fitness</span>
+    result = self.eval(self.expression, self.global_variables, local_vars)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;@beartype(fandango.constraints.constraint.Constraint.eval) at 0x7f7763b21260&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">83</span>, in <span class=" -Color -Color-Magenta">eval</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/fandango/fandango/src/fandango/constraints/constraint.py&quot;</span>, line <span class=" -Color -Color-Magenta">77</span>, in <span class=" -Color -Color-Magenta">eval</span>
+    return eval(expression, global_variables, local_variables)
+  File <span class=" -Color -Color-Magenta">&quot;&lt;string&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">1</span>, in <span class=" -Color -Color-Magenta">&lt;module&gt;</span>
+  File <span class=" -Color -Color-Magenta">&quot;&lt;string&gt;&quot;</span>, line <span class=" -Color -Color-Magenta">18</span>, in <span class=" -Color -Color-Magenta">limit_errors</span>
+<span class=" -Color -Color-Bold -Color-Bold-Magenta">TypeError</span>: <span class=" -Color -Color-Magenta">&#39;generator&#39; object is not subscriptable</span>
+Evaluation failed: limit_errors(___fandango_140150727953872_1___)
 </pre></div>
 </div>
 </div>
