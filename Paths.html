@@ -221,6 +221,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Timers.html">Timers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
@@ -565,16 +566,16 @@ As an example, here is how to print a derivation tree from <code class="docutils
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;  # Position 0x0000 (0); Rfxuvlxaulbcgmkjo Nxdzsa,6550933917
-  &lt;person_name&gt; ::= &lt;first_name&gt; &#39; &#39; &lt;last_name&gt;  # Position 0x0001 (1); Rfxuvlxaulbcgmkjo Nxdzsa
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;person_name&gt; &#39;,&#39; &lt;age&gt;  # Position 0x0000 (0); Kibuvlxaulbcgmkjov Ktp,179870
+  &lt;person_name&gt; ::= &lt;first_name&gt; &#39; &#39; &lt;last_name&gt;  # Position 0x0001 (1); Kibuvlxaulbcgmkjov Ktp
     &lt;first_name&gt; ::= &lt;name&gt;
-      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Rfxuvlxaulbcgmkjo
+      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Kibuvlxaulbcgmkjov
         &lt;ascii_uppercase_letter&gt; ::= &lt;_ascii_uppercase_letter&gt;
-          &lt;_ascii_uppercase_letter&gt; ::= &#39;R&#39;  # Position 0x0002 (2)
+          &lt;_ascii_uppercase_letter&gt; ::= &#39;K&#39;  # Position 0x0002 (2)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;f&#39;  # Position 0x0003 (3)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;i&#39;  # Position 0x0003 (3)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x0004 (4)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;b&#39;  # Position 0x0004 (4)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
           &lt;_ascii_lowercase_letter&gt; ::= &#39;u&#39;  # Position 0x0005 (5)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
@@ -603,41 +604,29 @@ As an example, here is how to print a derivation tree from <code class="docutils
           &lt;_ascii_lowercase_letter&gt; ::= &#39;j&#39;  # Position 0x0011 (17)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
           &lt;_ascii_lowercase_letter&gt; ::= &#39;o&#39;  # Position 0x0012 (18)
+        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;v&#39;  # Position 0x0013 (19)
     &lt;last_name&gt; ::= &lt;name&gt;
-      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Nxdzsa
+      &lt;name&gt; ::= &lt;ascii_uppercase_letter&gt; &lt;ascii_lowercase_letter&gt; &lt;ascii_lowercase_letter&gt;  # Ktp
         &lt;ascii_uppercase_letter&gt; ::= &lt;_ascii_uppercase_letter&gt;
-          &lt;_ascii_uppercase_letter&gt; ::= &#39;N&#39;  # Position 0x0013 (19)
+          &lt;_ascii_uppercase_letter&gt; ::= &#39;K&#39;  # Position 0x0014 (20)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;x&#39;  # Position 0x0014 (20)
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;t&#39;  # Position 0x0015 (21)
         &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;d&#39;  # Position 0x0015 (21)
-        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;z&#39;  # Position 0x0016 (22)
-        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;s&#39;  # Position 0x0017 (23)
-        &lt;ascii_lowercase_letter&gt; ::= &lt;_ascii_lowercase_letter&gt;
-          &lt;_ascii_lowercase_letter&gt; ::= &#39;a&#39;  # Position 0x0018 (24)
-  &lt;age&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # 6550933917
+          &lt;_ascii_lowercase_letter&gt; ::= &#39;p&#39;  # Position 0x0016 (22)
+  &lt;age&gt; ::= &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt; &lt;digit&gt;  # 179870
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;6&#39;  # Position 0x0019 (25)
+      &lt;_digit&gt; ::= &#39;1&#39;  # Position 0x0017 (23)
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x001a (26)
+      &lt;_digit&gt; ::= &#39;7&#39;  # Position 0x0018 (24)
     &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;5&#39;  # Position 0x001b (27)
+      &lt;_digit&gt; ::= &#39;9&#39;  # Position 0x0019 (25)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;8&#39;  # Position 0x001a (26)
+    &lt;digit&gt; ::= &lt;_digit&gt;
+      &lt;_digit&gt; ::= &#39;7&#39;  # Position 0x001b (27)
     &lt;digit&gt; ::= &lt;_digit&gt;
       &lt;_digit&gt; ::= &#39;0&#39;  # Position 0x001c (28)
-    &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;9&#39;  # Position 0x001d (29)
-    &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;3&#39;  # Position 0x001e (30)
-    &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;3&#39;  # Position 0x001f (31)
-    &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;9&#39;  # Position 0x0020 (32)
-    &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;1&#39;  # Position 0x0021 (33)
-    &lt;digit&gt; ::= &lt;_digit&gt;
-      &lt;_digit&gt; ::= &#39;7&#39;  # Position 0x0022 (34)
 </pre></div>
 </div>
 </div>
@@ -692,30 +681,28 @@ For instance, if we want to refer to a <code class="docutils literal notranslate
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guvrftowydryx Vvqshse,4028682
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mhytix Irmvwazvurakhkdh,0012905
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qxxvyx Byqeqbndu,65684400
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coelzscejfmrcakx Iuwxmrkhbdsyicgmzma,15212109
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rezuufx Zhiraoqudzcf,0731
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ynpgteijocmvkx Lya,231574747568199
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sqtapuamx Ftzkufow,2978571974770008906
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yarpndhwx Ymucoprgk,642980580030948723
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zehbpjx Fwtdzgx,86
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mhytix Uwdvzskjwunqxk,94817298627
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nhdxzjhmpxxlax Myqmunvymvjvhxv,17589724221813
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yarpndhwx Lya,642980580030948723
+Ynpgteijocmvkx Ymucoprgk,231574747568199
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qxxvyx Hyqeqbndu,65684400
-Zehbpjx Fwtdzgx,36
-Nhdxzjhmpxxlax Jyqmunvymvjvhxv,17589724221813
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qxxvyx Byteqbndu,65684400
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mhytix Irmvwazmurakhkdh,0012905
+Mhytix Coelzscejfmrcakx,0012905
+Mhytix Irmvwazvurakhkdh,0012605
 </pre></div>
 </div>
 </div>
@@ -745,24 +732,26 @@ This is useful, for instance, if you want to compare several children against a 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Christian,608
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chase,90055357670399
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Christian,606
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christina Chase,14092432449
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Christian,741
-Christopher Christian,638
-Christopher Christian,208
-Christina Christian,608
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chase,90051357670399
+Chad Chase,20754357677399
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Christian,635
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chase,95051357670399
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Christian,9665577178049
-Christina Christian,374343
-Christopher Christian,708
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chad Chase,20054357677399
+Chad Chase,90025357670399
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Chase,20754357677399
+Chad Chase,50754357677399
+Chad Chase,90052357670399
 </pre></div>
 </div>
 </div>
@@ -785,28 +774,26 @@ Hence, <code class="docutils literal notranslate"><span class="pre">&lt;start&gt
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cheryl Cortez,98786457867
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Hodge,0594059
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Herrera,923769510002
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charles Ward,94924945103238148899
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Meyers,49112
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Juarez,65769
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Meyers,09112
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christian Vang,12
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Meyers,5314597608831352516
-Christopher Thompson,923769510002
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Juarez,61769
+Christine Hodge,254815951
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Meyers,99
-Cheryl Cortez,78786457867
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christopher Meyers,5641229729605666607
-Christopher Meyers,47787776
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Christine Hodge,097502
+Charles Ward,55205564
+Charles Crane,768022
+Christopher Garza,65769
 </pre></div>
 </div>
 </div>
@@ -842,28 +829,26 @@ This allows you to express the earlier constraint in a possibly more readable fo
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Kaaqrfjo,7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mysdx Pveyudqnoobkxerjsoyd,7124319824939
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Paaqrfjo,7
-Blacychlsyx Aaaqrfjo,7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trx Klcptisjifz,5628084022004518
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Kaaqrfjo,238961240
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ghqtrmsyyx Jrzsvsictinbnixte,4311
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Kaaqrfjo,9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jupvjmxabbioilqjdgex Sgvn,18305715894
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Isxnajkuqj,374584335794830
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vhrvqvdgemx Acgkdxtjkokyxwbbz,6
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Rsxnajkuqj,374584335794830
-Blacychlsyx Isxnajkuqj,7
-Blacychlsyx Aaaqrfjo,374584335794830
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blacychlsyx Muxcnijpnxgmhxnkwds,7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trx Pveyudqnoobkxerjsoyd,5628084022004518
+Mysdx Klcptisjifz,7124319824939
+Trx Klcptisjifz,5628084022004588
+Jupvjmxabbioilqjdgex Sgvn,18305715194
+Jupvjmxabbioilqjdgex Rgvn,18305715894
 </pre></div>
 </div>
 </div>
@@ -907,22 +892,24 @@ A simpler way to think about <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xktqoslugmpavoxx Olyaaretafesvilaxpf,805537
-Xrggvkuol Yxp,7860749524
-Xlvkjquhu Vddhrcdoevcyyarmxqn,14721539
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xkaqfjivtmcjr Vvfizlitwqpzjoewdl,816079091
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xhcqvhavbgjrhiulbpit Ddlzr,136
-Xjezwfeqbxhtacbqeff Velslbnaptmhxrc,847002703967846
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xdjqrobekyhhycpsbfrcw Ydfzisvon,6020606935284652195
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xgb Rczfmrttznyb,7818088958054
-Xerpkidcv Yqjvq,7078831
-Xiay Tzndjsn,7711387258454
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xgkzykzsxclrtpaxbarc Ztqjfpvpv,0755254282
+Xshjjnkjnt Dekoflclyroujh,913908660
+Xn Kixvy,4436218090
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xkcqskwo Zrntkvswaphzbw,21307074697421360
-Xuczdwkdfkbffbdzgr Rmpheiejdzijx,45
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xkeejlbgmsiiukovqunxf Uhmcswicdgwejjmtjbnl,64041784482483
+Xqwfwwfzsfyuqpfraszk Gedq,553131419480424514
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xvaxetvpmfmftmnp Zvveakpvwpudtuab,9
+Xdi Wewunrrravl,4774
+Xpe Mfxjfl,2
 </pre></div>
 </div>
 </div>
@@ -947,22 +934,22 @@ What would the expression <code class="docutils literal notranslate"><span class
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pifetwafqfdiuqackbtwu Hxxxx,3
-Dlzlweqoilwuepufnmzcw Pxxxxxx,0750589911
-Vufu Uxxxxx,910525419307
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hocgvddcc Xxxxxxxxxxxxxxxxxxxx,55
+Hxubcniay Exx,905
+Wzzqgmdulj Pxxxxxxxxxxxx,268132399233199641
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Slzvuervgru Uxxxxxxxxxxxxxxx,13026
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bviusd Xxxxxxxxxxxxx,4213540321396195365
+Lir Kxxxxx,594937815799
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aduohhhmllvmms Yxxxxxxxxxxxxxx,2472100339
-Ttyrtldynevgioiye Xxxxxxx,6
-Ppbmtmrrekyxhbmt Yxxxxxx,81948209480
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pdbzehpucxpfqtri Kxxxxxxxx,1860625761
+Zvj Exxxx,2470857474732
+Tyrxk Gxx,9996996925
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yhbpzdjsyioiyvjzcrni Ox,194228
-Sofxu Mxxxxxxxxx,2937232912533
-Uxvwchnsvniho Fxxx,27242
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Etsdsis Oxxxxxxxxxx,68100
+Gcemwo Cxxxxx,71881076222135954
 </pre></div>
 </div>
 </div>
@@ -1019,28 +1006,32 @@ For instance, we can have a constraint check whether a particular element is in 
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Asxusxjxlrc Hhrnfbjbblzdqpbtnp,80588582073
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Az Yle,46711692945
+Agnebr Zkijhevcvvtcmqg,0202
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aseeskhf Edosugvafheakhwkwuqbu,341
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Abeslltksztrumjbk Unhcxgx,56439408190666457878
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ah Fokqlwydmgfqqsdginog,9814549940574493
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Omjuayjawavoj Afxpbtgovnu,5734
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ayplqnboseywakkj Mlgbclbmsnljnygimfqg,239131
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ihewakrpog Arzfryhpfbzurnjxwk,475538343194
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arsrcmeowkkygayzcuk Txivklnm,8378406
-Nykihjceousknl Akwdusgidfsyvwuwm,9713216129989120
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ahjsjrztxkksxhes Mybkiiakfnrwz,5429882393654
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ah Fokqlwydmbfqqsdginog,9814549940574493
-Ayplqnboseewakkj Mlgbclbmsnljnygimfqg,239131
-Ayplqnboseywakkj Mlgbclbmszljnygimfqg,239131
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aezwpkcebx Tqn,6700179369394
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aseeskhf Edosugvafheakhwkwuqbu,351
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aahtpypsrx Pwskwfvmwcbnvbyt,2489483271804
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oslsmdjrstxstbxotydh Avkkgqsyikyyzvznq,0071
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Almhwizrjc Qyiwdgdedxiqjzxqixzup,90404236
 </pre></div>
 </div>
 </div>
@@ -1071,24 +1062,26 @@ Here we use the Python <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Paaaaaaa Zrlhzsjcwgloqevrkksbc,3799501379203883
-Maaaaaaaaaaaaaaaaaa Zm,550390971
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iaaaaaaaaaaa Laplhkdlixkbpxf,039458940359083
+Saaaaaaaaaaaaaaa Aklhfsc,9823
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Haaaaaaaaaaa Oqempdajbvyfdrqhjqqdv,25813180460552
-Gaaa Ebcyqogftehbqfs,508393409436
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yaaaaaaaaaaaaaaaaaa Xvstdkatlohxsmva,740057
+Jaaaaaa Kiqabrzcdjossdy,7566985425364
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Taaaaaaaaaa Ummncxjvrdnkads,80592567
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Daaaaaaaaaa Dsx,8124396581169338059
+Faaaaaaaaaaaaaaaaaaaa Wr,26
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gaaaaaaaaaaaaaaa Xietzsyrsbbyjfonegil,3409669
-Zaaa Rybtmfefpnhxho,08873982754339651
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Qaaaaaaaaaaaaaaaaaa Dugsmunsrsxcjrphw,922290544466438004
+Maaa Rairiafpymsaoq,149408685475
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iaaaaaaaaaaaa Skknxugskcbho,35246965867730667912
-Xaaaaaaaaaaaa Jnmuv,92508141014618
-Xa Dt,42572329212951
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oaaaaaaaaaaaaaaa Mpzofsxgmnq,2075858107969396
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oaaaaaaaaaa Nbsfjbjniyzigok,29261722862
 </pre></div>
 </div>
 </div>
@@ -1121,13 +1114,13 @@ This is what we do here with <code class="docutils literal notranslate"><span cl
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gqjpax Szex,263527840079667749
-Gaaaaa Saax,263527840079667749
-Raaaapaaaaaaiaaaippg Fd,5725
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ykqxdjfh Vxsvafvllizbfwtphva,1182352495286734
+Yaaaaaaa Vxaaafvalaaafaaahva,1182352495286734
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vpneimpakdrlwgbnxtz Gqufcq,8068297942
-Vaaaaapaaaaaaaanaaa Gaaaaq,8068297942
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arzv Qwmktfvpfptrapv,1834352538
+Aaaa Qaaaaavafptrapv,1834352538
+Iaaaaaaxaaai Iaaabaasaatakifzddha,63355368499994
 </pre></div>
 </div>
 </div>
@@ -1137,17 +1130,15 @@ Vaaaaapaaaaaaaanaaa Gaaaaq,8068297942
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iaa Na,050629394123
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yaaaaa Aaaa,1345
+Laaaaaaaaaaaaaaa Saaaaaaaa,204209675
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maaa Za,275
-Waaaaa Oaa,68
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Baaaaa Iaaaaaaaaaa,193504347546845
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ka Jaa,788
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maaaa La,17909
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vaaaaaaaaaa Haaaaaa,7729
+Iaaaaa Gaaaaaaaaaaa,2
 </pre></div>
 </div>
 </div>

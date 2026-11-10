@@ -221,6 +221,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Timers.html">Timers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
@@ -470,16 +471,16 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13382712434963237
-07254169632
-106
-3725127654
-7675691
-82382603876278
-12432408104
-05823282547376723972
-6728
-45200
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>640654241
+390765074927
+01
+8093293
+73507
+432876299678550306
+2067855
+209
+089
+85460455659691268
 </pre></div>
 </div>
 </div>
@@ -518,7 +519,7 @@ For instance, these are all the options supported by <code class="docutils liter
                      [--file-mode {text,binary,auto}] [--no-cache]
                      [--no-stdlib] [-s SEPARATOR] [-d DIRECTORY]
                      [-x FILENAME_EXTENSION]
-                     [--format {string,bits,tree,grammar,value,repr,1,none}]
+                     [--format {string,bits,tree,grammar,value,repr,pickle,1,none}]
                      [--validate] [-N MAX_GENERATIONS] [--infinite]
                      [--population-size POPULATION_SIZE]
                      [--elitism-rate ELITISM_RATE]
@@ -591,11 +592,13 @@ Output settings:
   -x, --filename-extension FILENAME_EXTENSION
                         Extension of generated file names (default: &#39;.txt&#39;, or
                         the format&#39;s extension with -F).
-  --format {string,bits,tree,grammar,value,repr,1,none}
+  --format {string,bits,tree,grammar,value,repr,pickle,1,none}
                         Produce output(s) as string (default), as a bit
                         string, as a derivation tree, as a grammar, as a
-                        Python value, in internal representation, as the
-                        constant &#39;1&#39; (for testing), or none.
+                        Python value, in internal representation, as a Python
+                        pickle of the derivation tree (binary, one pickle per
+                        output, no separator), as the constant &#39;1&#39; (for
+                        testing), or none.
   --validate            Run internal consistency checks for debugging.
 
 Generation settings:
@@ -625,11 +628,11 @@ Generation settings:
                         Maximal value the number of repetitions can be
                         increased to.
   --max-node-rate MAX_NODE_RATE
-                        Rate at which the maximal number of nodes in a tree is
-                        increased.
+                        Rate at which the number of nodes a tree may have on
+                        top of those it needs at least is increased.
   --max-nodes MAX_NODES
-                        Maximal value, the number of nodes in a tree can be
-                        increased to.
+                        Maximal number of nodes a tree may have on top of
+                        those it needs at least.
   -n, --desired-solutions, --num-outputs DESIRED_SOLUTIONS
                         Number of outputs to produce.
   --best-effort         Produce a &#39;best effort&#39; population (may not satisfy

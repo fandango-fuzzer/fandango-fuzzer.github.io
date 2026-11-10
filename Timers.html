@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Timers &#8212; Fuzzing with Fandango</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Timers';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Case Study: FTP" href="FTP.html" />
+    <link rel="prev" title="Customizing Party Communication" href="Parties.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.1/" style="color:white;">Fandango 1.3.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fandango.png" class="logo__image only-light" alt="Fuzzing with Fandango - Home"/>
+    <img src="_static/fandango.png" class="logo__image only-dark pst-js-only" alt="Fuzzing with Fandango - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Fuzzing with Fandango
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Fandango</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Fandango FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing to Fandango</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">First Steps</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Documentation Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FirstSpec.html">A First Fandango Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Invoking.html">Invoking Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fuzzing.html">Fuzzing with Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strategies.html">Some Fuzzing Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hands-On</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HandsOn.html">Hands-On: Fuzzing a Protocol End to End</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Input Generation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Constraints.html">Shaping Inputs with Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Shell.html">The Fandango Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generators.html">Data Generators and Fakers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Regexes.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recursive.html">Complex Input Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Paths.html">Accessing Input Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Converters.html">Converting ANTLR and Other Input Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Diversity.html">Covering Specs and Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO8601.html">Case Study: ISO 8601 Date + Time</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Binary Inputs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Binary.html">Generating Binary Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bits.html">Bits and Bit Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conversion.html">Data Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Png.html">Case Study: PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gif.html">Case Study: GIF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Mp3.html">Case Study: MP3</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Checking Responses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parsing.html">Parsing Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outputs.html">Checking Outputs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Testing Protocols</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Timers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hatching Specs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Hatching.html">Hatching Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Style.html">Fandango Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fanbase.html">Fandango and Fanbase</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fandango Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Fandango Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installing.html">Installing Fandango</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Commands.html">Fandango Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Language.html">Fandango Language Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stdlib.html">Fandango Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DerivationTree.html">Derivation Tree Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonAPI.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FandangoParty.html">FandangoParty Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Including.html">Fandango File Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LanguageServer.html">Fandango Language Server</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/fandango-fuzzer/fandango/issues/new?title=Issue%20on%20page%20%2FTimers.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Timers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<a href="_static/fandango.pdf" target="_blank"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Download PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Timers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timer-parties">Timer Parties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-timer">A First Timer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-for-a-reply">Waiting for a Reply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-timers-behave">How Timers Behave</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="timers">
+<span id="sec-timers"></span><h1>Timers<a class="headerlink" href="#timers" title="Link to this heading">#</a></h1>
+<p>Many protocols react to time passing:
+a client sends a request again if no reply arrives within a few seconds,
+a peer sends a keepalive after a period of silence,
+and a session expires after some minutes.
+To test such interactions, a Fandango spec can <em>start</em> and <em>cancel</em> timers and react to them <em>expiring</em>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.2: </span>Timers are available in Fandango 1.2 and later.</p>
+</div>
+<section id="timer-parties">
+<h2>Timer Parties<a class="headerlink" href="#timer-parties" title="Link to this heading">#</a></h2>
+<p>Fandango models timers as two predefined <a class="reference internal" href="Parties.html#sec-parties"><span class="std std-ref">parties</span></a>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TimerControl</span></code> receives the commands from Fandango to start and cancel timers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TimerEvent</span></code> reports that a timer has expired. Like a remote party, it is not controlled by Fandango; its messages arrive on their own.</p></li>
+</ul>
+<p>Both classes are predefined within <code class="docutils literal notranslate"><span class="pre">.fan</span></code> files; they need not be imported.</p>
+<p>The messages are defined in the <a class="reference internal" href="Stdlib.html#sec-stdlib"><span class="std std-ref">standard library</span></a>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Message</p></th>
+<th class="head"><p>Party</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Start a timer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TimerControl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;timer_start&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">start:</span> <span class="pre">ID</span> <span class="pre">(SECONDS)\n</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cancel a timer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TimerControl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;timer_cancel&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cancel:</span> <span class="pre">ID\n</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>A timer expired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TimerEvent</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;timer_expired&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">expired:</span> <span class="pre">ID\n</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ID</span></code> (<code class="docutils literal notranslate"><span class="pre">&lt;timer_id&gt;</span></code>) is a number that identifies the timer.
+<code class="docutils literal notranslate"><span class="pre">SECONDS</span></code> (<code class="docutils literal notranslate"><span class="pre">&lt;timer_timeout&gt;</span></code>) is the duration of the timer in seconds, such as <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">0.25</span></code>.</p>
+</section>
+<section id="a-first-timer">
+<h2>A First Timer<a class="headerlink" href="#a-first-timer" title="Link to this heading">#</a></h2>
+<p>Here is a spec that starts a timer, waits for it to expire, and then prints a message:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;TimerControl:wait_start&gt; &lt;TimerEvent:wait_expired&gt; &lt;StdOut:done&gt;
+&lt;wait_start&gt; ::= &lt;timer_start&gt;
+&lt;wait_expired&gt; ::= &lt;timer_expired&gt;
+&lt;done&gt; ::= &#39;Timer expired\n&#39;
+
+where str(&lt;wait_start&gt;..&lt;timer_id&gt;) == &#39;1&#39;
+where str(&lt;wait_start&gt;..&lt;timer_timeout&gt;) == &#39;0.5&#39;
+where str(&lt;wait_expired&gt;..&lt;timer_id&gt;) == &#39;1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The rules <code class="docutils literal notranslate"><span class="pre">&lt;wait_start&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;wait_expired&gt;</span></code> give the timer messages names of their own, so that the constraints can set them to timer <code class="docutils literal notranslate"><span class="pre">1</span></code> and half a second.
+Running this spec with the <code class="docutils literal notranslate"><span class="pre">talk</span></code> command prints the message after half a second:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>timer.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timer expired
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="waiting-for-a-reply">
+<h2>Waiting for a Reply<a class="headerlink" href="#waiting-for-a-reply" title="Link to this heading">#</a></h2>
+<p>The typical use of a timer is to limit how long to wait for a reply.
+The following spec sends <code class="docutils literal notranslate"><span class="pre">PING</span></code> to a program and starts a timer of one second.
+If the program answers in time, Fandango cancels the timer; otherwise, the timer expires:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; ::= &lt;In:request&gt; &lt;TimerControl:reply_start&gt; &lt;reply&gt;
+&lt;reply&gt; ::= &lt;Out:response&gt; &lt;TimerControl:reply_cancel&gt; | &lt;TimerEvent:reply_expired&gt;
+&lt;request&gt; ::= &#39;PING\n&#39;
+&lt;response&gt; ::= &#39;PING\n&#39;
+
+&lt;reply_start&gt; ::= &lt;timer_start&gt;
+&lt;reply_cancel&gt; ::= &lt;timer_cancel&gt;
+&lt;reply_expired&gt; ::= &lt;timer_expired&gt;
+
+where all(str(&lt;t&gt;..&lt;timer_timeout&gt;) == &#39;1&#39; for &lt;t&gt; in *&lt;reply_start&gt;)
+where all(str(&lt;s&gt;..&lt;timer_id&gt;) == &#39;1&#39; for &lt;s&gt; in *&lt;reply_start&gt;)
+where all(str(&lt;c&gt;..&lt;timer_id&gt;) == &#39;1&#39; for &lt;c&gt; in *&lt;reply_cancel&gt;)
+where all(str(&lt;e&gt;..&lt;timer_id&gt;) == &#39;1&#39; for &lt;e&gt; in *&lt;reply_expired&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The constraints use <code class="docutils literal notranslate"><span class="pre">all(...)</span></code> since a symbol such as <code class="docutils literal notranslate"><span class="pre">&lt;reply_cancel&gt;</span></code> need not occur in a run, or may occur several times.</p>
+<p>Against <code class="docutils literal notranslate"><span class="pre">cat</span></code>, which echoes its input, the reply arrives and the timer is cancelled.
+With <code class="docutils literal notranslate"><span class="pre">-v</span></code>, Fandango logs the messages exchanged:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>timer-reply.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>cat
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;request&gt; &#39;PING\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Against a program that never answers, the timer expires:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fandango<span class="w"> </span>-v<span class="w"> </span>talk<span class="w"> </span>-f<span class="w"> </span>timer-reply.fan<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;sleep 3&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;request&gt; &#39;PING\n&#39;
+fandango:INFO: TimerControl: &lt;reply_start&gt; &#39;start: 1 (1)\n&#39;
+fandango:INFO: TimerEvent: &lt;reply_expired&gt; &#39;expired: 1\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>To try again after a timeout, let the expiry lead back to the request, as in</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">exchange</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">In</span><span class="p">:</span><span class="n">request</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">TimerControl</span><span class="p">:</span><span class="n">reply_start</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">reply</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">reply</span><span class="o">&gt;</span> <span class="p">:</span><span class="o">:=</span> <span class="o">&lt;</span><span class="n">Out</span><span class="p">:</span><span class="n">response</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">TimerControl</span><span class="p">:</span><span class="n">reply_cancel</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">TimerEvent</span><span class="p">:</span><span class="n">reply_expired</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">exchange</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="how-timers-behave">
+<h2>How Timers Behave<a class="headerlink" href="#how-timers-behave" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Starting a timer whose <code class="docutils literal notranslate"><span class="pre">ID</span></code> is running restarts it with the new duration.</p></li>
+<li><p>A cancelled timer does not expire. If it has already expired but its expiry has not been handled yet, cancelling drops the expiry.</p></li>
+<li><p>An expiry is handled only where the grammar allows a <code class="docutils literal notranslate"><span class="pre">TimerEvent</span></code> message next. Until then, it waits.</p></li>
+<li><p>While Fandango waits for a message and the grammar allows an expiry next, there is no time limit. Hence, a spec should only expect expiries of timers it has started.</p></li>
+<li><p>At the end of a run, all timers are stopped.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use one <code class="docutils literal notranslate"><span class="pre">ID</span></code> per timer of the protocol, and constants in the spec for the IDs and durations.
+The <a class="reference external" href="https://github.com/fandango-fuzzer/fandango/blob/main/evaluation/protocol_testing_eval/wireguard/wireguard.fan">WireGuard spec</a> runs six timers this way, for handshakes, keepalives, and rekeying.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Parties.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Customizing Party Communication</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="FTP.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Case Study: FTP</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timer-parties">Timer Parties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-timer">A First Timer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-for-a-reply">Waiting for a Reply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-timers-behave">How Timers Behave</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Antonio Zamudio Amaya, Valentin Huber, Alexander Liggesmeyer, Marius Smytzek, and Andreas Zeller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026 CISPA Helmholtz Center for Information Security (www.cispa.de). All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

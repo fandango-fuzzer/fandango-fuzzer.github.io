@@ -221,6 +221,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Timers.html">Timers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FTP.html">Case Study: FTP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
@@ -443,6 +444,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bytes">Bytes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utf-8-characters">UTF-8 characters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-numbers">Binary Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timers">Timers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fandango-dancer">Fandango Dancer</a></li>
 </ul>
             </nav>
@@ -769,6 +771,33 @@ Note that these symbols only specify the <em>length</em>; they do not cover sign
 </div>
 </div>
 </section>
+<section id="timers">
+<h2>Timers<a class="headerlink" href="#timers" title="Link to this heading">#</a></h2>
+<p>These symbols are the messages to start, cancel, and expire <a class="reference internal" href="Timers.html#sec-timers"><span class="std std-ref">timers</span></a> in protocol specs.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;_timer_number&gt; ::= r&#39;[0-9]+&#39;
+&lt;timer_number&gt; ::= &lt;_timer_number&gt;
+
+&lt;_timer_timeout&gt; ::= &lt;timer_number&gt; (&#39;.&#39; &lt;timer_number&gt;)?
+&lt;timer_timeout&gt; ::= &lt;_timer_timeout&gt;
+
+&lt;_timer_id&gt; ::= &lt;timer_number&gt;
+&lt;timer_id&gt; ::= &lt;_timer_id&gt;
+
+&lt;_timer_expired&gt; ::= &#39;expired: &#39; &lt;timer_id&gt; &#39;\n&#39;
+&lt;timer_expired&gt; ::= &lt;_timer_expired&gt;
+
+&lt;_timer_cancel&gt; ::= &#39;cancel: &#39; &lt;timer_id&gt; &#39;\n&#39;
+&lt;timer_cancel&gt; ::= &lt;_timer_cancel&gt;
+
+&lt;_timer_start&gt; ::= &#39;start: &#39; &lt;timer_id&gt; &#39; (&#39; &lt;timer_timeout&gt; &#39;)\n&#39;
+&lt;timer_start&gt; ::= &lt;_timer_start&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="fandango-dancer">
 <h2>Fandango Dancer<a class="headerlink" href="#fandango-dancer" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;fandango-dancer&gt;</span></code> symbol is used to test UTF-8 compatibility.</p>
@@ -858,6 +887,7 @@ Note that these symbols only specify the <em>length</em>; they do not cover sign
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bytes">Bytes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utf-8-characters">UTF-8 characters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-numbers">Binary Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timers">Timers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fandango-dancer">Fandango Dancer</a></li>
 </ul>
   </nav></div>

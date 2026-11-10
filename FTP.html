@@ -422,7 +422,7 @@ window.runMermaid = runMermaid;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Case Study: DNS" href="DNS.html" />
-    <link rel="prev" title="Customizing Party Communication" href="Parties.html" />
+    <link rel="prev" title="Timers" href="Timers.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -579,6 +579,7 @@ window.runMermaid = runMermaid;</script>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Protocols.html">Testing Protocols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Parties.html">Customizing Party Communication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Timers.html">Timers</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Case Study: FTP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DNS.html">Case Study: DNS</a></li>
 </ul>
@@ -1374,11 +1375,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l--xrw-r-x      914 3Ae7XW M9Sk1fq7           8679775 May 18 13:08 GlioAL:6SoE
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>br---w-r-- 250 U1TN-n                    Zp      2789134 Jul 04 04:01 w6&gt;3-OF|+h?_&gt;P
 
-c--xr-----   412 72IBLiJrq8  rV         8178885 Jul 02 12:39 7t1^jt[u8tJF.is&lt;KoM
+d-wxrw-rwx           130 dDFsx-uAyb-PUPs5Ay   04pCx3Q               1561975 Apr 11 00:48 y$z]93r+zH%$QaBw
 
-d-w----rw-              290 tNWqvaWcv9T8P_mIYtdE              GpNTbzbl0WnsnAeJYIX0 8682824 Jun 01 16:11 /+OY8
+drwx----w-      497 s97ZIc1rz k0nVyEXp          4735255 Apr 19 04:34 .)MqP_
 </pre></div>
 </div>
 </div>
@@ -1414,16 +1415,25 @@ There is no other interaction or state following, so we’re done.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>USER the_user
+PASS aamX3H
 USER the_user
-PASS cko
+PASS zRbsdLQzrSkYA
 AUTH TLS
+AUTH TLS
+AUTH SSL
 USER the_user
 PASS the_password
+OPTS UTF8 ON
+PWD
+PWD
 TYPE I
 EPSV
+LIST
+EPSV
+SYST
 FEAT
-PWD
+FEAT
 QUIT
 </pre></div>
 </div>
@@ -1438,28 +1448,21 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-\p.$,i/`5^=@E
-220-6&#39;,
-220-E3\yc1~v,teLB%K*
-220-c:u/0[zR5 HMq
-220-jjac,%.(L!
-220-nkx~Q2&gt;f_.kKSU8;_@Y
-220 .}Z_y5+V6}]X
-500 7)  pJ8g/_k
-331 FeHw1l
-230 &#39;**!2`D|
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-rEn;JBD&quot;kfqS)Pg~Z
+220-
+220-^knRZK:Z6ig
+220-
+220-`n&#39;i&gt;]i%ND&amp;XL\
+220--|P%:#yc4.w)
+220- 
+220 8&amp;02w#
+331 b9Njk(HJGQ@e;VY&amp;Nq%
+230 ]NqB+WEt^cC=
+257 &quot;/&quot; is the current directory
+257 &quot;/8c/tXcoJXAW01rD/cjIwHJtM/Wfh5uM7EaoKn4vyQ/t6z99sqphsQDQ8Bl2j/FP9/xcs_svaTt/btV6dcYHsUOwYyaAc9e/A3lMoK1iZ6/8wRAHH/wgoa3r1/l51vSveVDkNyIl9h7hhP/UK4qE0rwD2A4g1J1kiXc/mIfajidssOPuSW/RYOcRgKW3eJQuRYFcXw/R/V5EZNSDL_rka5FW/9OG9M0ezzjMYmOgfP/b&quot; is the current directory
 229 Entering Extended Passive Mode (|||50100|)
-200 Xpqcgc\ &gt;hcS0ckzeg
-215 Linux
-200 },Q`LDMrW.%.RPWPeo
-150 e{D
-226 1pS/r?3I&amp;-+YPP$NH
-215 Linux
-215 Linux
-257 &quot;/dCCWYU7g/2ZP0KDW/uLLDU3v6IRdiIrFFM/CnfwdH_hJzL/Ihl/GGl2tRxn0LL0/lLWYgaOHf9e/rIOOhgrofJUPTBoX8xga/k68DZ/2ysyC/FPSgZj3L/yxZJ382LVvLoDus8o/uoxThN_7fF&quot; is the current directory
-215 Linux
-229 Entering Extended Passive Mode (|||50100|)
-221 QbQcA&#39;B$?3@&quot;&amp;AC,
+200 )0A^nweGMZ%(G5z9b_@Z
+221 &lt;`{&lt;o8hQE)sf:&lt;
 </pre></div>
 </div>
 </div>
@@ -1500,12 +1503,12 @@ QUIT
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Parties.html"
+       href="Timers.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Customizing Party Communication</p>
+        <p class="prev-next-title">Timers</p>
       </div>
     </a>
     <a class="right-next"
