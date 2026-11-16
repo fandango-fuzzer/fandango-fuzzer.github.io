@@ -1023,14 +1023,12 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
+fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: ---------- Generating  for 500 generations----------
-fandango:INFO: Current coverage: 10.00%
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Current coverage: 10.00%
+fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
 fandango:INFO: Current coverage: 10.00%
 fandango:INFO: Out: &lt;m220&gt; &#39;220 localhost Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 30.00%
@@ -1131,9 +1129,9 @@ When invoked with the <code class="docutils literal notranslate"><span class="pr
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com c+!VlF
+220 host.example.com E
 QUIT
-221 k=j.
+221 @7IC
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1364,7 +1362,10 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
 250 Hello host.example.com, glad to meet you
-592 Error
+250 Ok
+250 Ok
+354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+599 Error
 </pre></div>
 </div>
 </div>
