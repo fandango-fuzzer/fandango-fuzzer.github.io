@@ -1017,13 +1017,15 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
-fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: File mode: text
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
-fandango:INFO: ---------- Done initializing base population ----------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: ---------- Generating  for 500 generations----------
 fandango:INFO: Current coverage: 10.00%
 </pre></div>
@@ -1032,10 +1034,10 @@ fandango:INFO: Current coverage: 10.00%
 fandango:INFO: Current coverage: 10.00%
 fandango:INFO: Out: &lt;m220&gt; &#39;220 localhost Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 30.00%
-fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Current coverage: 100.00%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: In: &lt;quit&gt; &#39;QUIT\n&#39;
+fandango:INFO: Current coverage: 100.00%
 fandango:INFO: Out: &lt;m221&gt; &#39;221 Bye\n&#39;
 fandango:INFO: Current coverage: 100.00%
 </pre></div>
@@ -1129,9 +1131,9 @@ When invoked with the <code class="docutils literal notranslate"><span class="pr
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com
+220 host.example.com c+!VlF
 QUIT
-221 X_
+221 k=j.
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1361,7 +1363,8 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-558 Error
+250 Hello host.example.com, glad to meet you
+592 Error
 </pre></div>
 </div>
 </div>
