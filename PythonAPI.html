@@ -919,7 +919,7 @@ This is either</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">population_size:</span> <span class="pre">int</span></code>: set the population size (default: 100).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">desired_solutions:</span> <span class="pre">int</span></code>: set the number of desired solutions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">initial_population:</span> <span class="pre">List[Union[DerivationTree,</span> <span class="pre">str]]</span></code>: set the initial population.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_generations:</span> <span class="pre">int</span></code>: set the maximum number of generations (default: 500).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_generations:</span> <span class="pre">int</span></code>: set the maximum number of generations (default: no limit if <code class="docutils literal notranslate"><span class="pre">desired_solutions</span></code> is given, otherwise 500).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">warnings_are_errors:</span> <span class="pre">bool</span></code> can be set to True to raise an exception on warnings.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">best_effort:</span> <span class="pre">bool</span></code> can be set to True to return the population even if it does not satisfy the constraints.</p></li>
 </ul>
@@ -985,16 +985,16 @@ To iterate over all trees parsed, use a construct such as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Veronica Williams,7898061
-Kristin Conley,6397
-Matthew Garcia,23458895
-Kayla Ibarra,659246638543975
-Bridget Lynch,634604
-Heather Castillo,857981336281305642
-Brenda Gilbert,4
-Kathleen Smith,2101542009
-Dustin Johnson,7299076
-Edward Berger,2911874812184609702
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timothy Mueller,7248408501
+Robert Holmes,3148235956980
+Samuel Barrett,7716088479634827892
+Renee Thomas,63357576778270730
+Jacqueline Sharp,93563
+Jeffrey Miller,56949110322768
+Julie Williams,4296
+Joshua Pennington,39563446361195
+Stephanie Velazquez,3150885569
+Michael Gregory,0516911365192026
 </pre></div>
 </div>
 </div>
@@ -1036,16 +1036,16 @@ Edward Berger,2911874812184609702
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Generating (additional) initial population (size: 100)...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ccbc
-accabcc
-b
-accccbacbcabbaccb
-bababaccccba
-cacbabcc
-c
-baaaabcccccbbba
-bbaaabbbbaa
-ccaaaaaa
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>acbacbc
+bcbaacbbabacb
+bca
+aacacabbba
+bcbaccab
+cabaca
+bccbcbcacbbacac
+bcccaaabcbacbcab
+baaaacabacba
+aabcaccb
 </pre></div>
 </div>
 </div>
@@ -1127,7 +1127,7 @@ ccaaaaaa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f9678cfc760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Fandango.parse at 0x7f27bc14ae90&gt;
 </pre></div>
 </div>
 </div>

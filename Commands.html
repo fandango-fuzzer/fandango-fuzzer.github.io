@@ -597,7 +597,8 @@ Output settings:
 Generation settings:
   -N, --max-generations MAX_GENERATIONS
                         Maximum number of generations to run the algorithm
-                        (ignored if --infinite is set).
+                        (ignored if --infinite is set). Default: no limit if
+                        -n is given, otherwise 500.
   --infinite            Run the algorithm indefinitely.
   --population-size POPULATION_SIZE
                         Size of the population.
@@ -628,8 +629,10 @@ Generation settings:
                         those it needs at least.
   -n, --desired-solutions, --num-outputs DESIRED_SOLUTIONS
                         Number of outputs to produce.
-  --best-effort         Produce a &#39;best effort&#39; population (may not satisfy
-                        all constraints).
+  --best-effort         If fewer than the desired number of solutions are
+                        found, fill up the output with individuals of the
+                        final population (which may not satisfy all
+                        constraints).
   -i, --initial-population INITIAL_POPULATION
                         Directory or ZIP archive with initial population.
   --progress-bar {on,off,auto}
@@ -884,7 +887,8 @@ Output settings:
 Generation settings:
   -N, --max-generations MAX_GENERATIONS
                         Maximum number of generations to run the algorithm
-                        (ignored if --infinite is set).
+                        (ignored if --infinite is set). Default: no limit if
+                        -n is given, otherwise 500.
   --infinite            Run the algorithm indefinitely.
   --population-size POPULATION_SIZE
                         Size of the population.
@@ -915,8 +919,10 @@ Generation settings:
                         those it needs at least.
   -n, --desired-solutions, --num-outputs DESIRED_SOLUTIONS
                         Number of outputs to produce.
-  --best-effort         Produce a &#39;best effort&#39; population (may not satisfy
-                        all constraints).
+  --best-effort         If fewer than the desired number of solutions are
+                        found, fill up the output with individuals of the
+                        final population (which may not satisfy all
+                        constraints).
   -i, --initial-population INITIAL_POPULATION
                         Directory or ZIP archive with initial population.
   --progress-bar {on,off,auto}

@@ -471,16 +471,22 @@ The command we need is called <code class="docutils literal notranslate"><span c
 <p>And this is what we get:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87386602339506
-197
-2002196259713
-45886459977713981
-11045646966541
-72106
-76424729761874
-3340026712753796849
-4454094779
-4758
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8975
+53111118356
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>453832458135
+6544007184250
+838180277300339276
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88112372502752907682
+855489248015228
+9569040769841904
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2724531463414857
+649609
 </pre></div>
 </div>
 </div>
@@ -604,7 +610,8 @@ Output settings:
 Generation settings:
   -N, --max-generations MAX_GENERATIONS
                         Maximum number of generations to run the algorithm
-                        (ignored if --infinite is set).
+                        (ignored if --infinite is set). Default: no limit if
+                        -n is given, otherwise 500.
   --infinite            Run the algorithm indefinitely.
   --population-size POPULATION_SIZE
                         Size of the population.
@@ -635,8 +642,10 @@ Generation settings:
                         those it needs at least.
   -n, --desired-solutions, --num-outputs DESIRED_SOLUTIONS
                         Number of outputs to produce.
-  --best-effort         Produce a &#39;best effort&#39; population (may not satisfy
-                        all constraints).
+  --best-effort         If fewer than the desired number of solutions are
+                        found, fill up the output with individuals of the
+                        final population (which may not satisfy all
+                        constraints).
   -i, --initial-population INITIAL_POPULATION
                         Directory or ZIP archive with initial population.
   --progress-bar {on,off,auto}
