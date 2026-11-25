@@ -466,7 +466,7 @@ window.runMermaid = runMermaid;</script>
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.1/" style="color:white;">Fandango 1.3.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.2/" style="color:white;">Fandango 1.3.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -1017,9 +1017,7 @@ The <code class="docutils literal notranslate"><span class="pre">In:</span></cod
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Setting command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
+fandango:INFO: Starting subprocess with command [&#39;telnet&#39;, &#39;localhost&#39;, &#39;8025&#39;]
 fandango:INFO: File mode: text
 fandango:INFO: ---------- Initializing base population ----------
 fandango:INFO: ---------- Initializing FANDANGO algorithm ---------- 
@@ -1028,7 +1026,9 @@ fandango:INFO: ---------- Initializing FANDANGO algorithm ----------
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: ---------- Done initializing base population ----------
 fandango:INFO: ---------- Generating  for 500 generations----------
 fandango:INFO: Current coverage: 10.00%
-fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fandango:INFO: Out: &lt;telnet_intro&gt; &quot;Trying ::1...\nConnected to localhost.\nEscape character is &#39;^]&#39;.\n&quot;
 fandango:INFO: Current coverage: 10.00%
 fandango:INFO: Out: &lt;m220&gt; &#39;220 localhost Python SMTP 1.4.6\n&#39;
 fandango:INFO: Current coverage: 30.00%
@@ -1129,9 +1129,9 @@ When invoked with the <code class="docutils literal notranslate"><span class="pr
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying localhost...
 Connected to localhost.
 Escape character is &#39;^]&#39;.
-220 host.example.com Ipb:sl/LnHc
+220 host.example.com szjgo
 QUIT
-221 6&lt;*h&amp;?v&amp;W.dX\+H
+221 tH
 Connection closed by foreign host.
 </pre></div>
 </div>
@@ -1354,8 +1354,9 @@ use the <a class="reference external" href="https://graphviz.org/doc/info/comman
 MAIL FROM:&lt;alice@example.com&gt;
 RCPT TO:&lt;alice@example.com&gt;
 DATA
-GIyc!o3F+&#39;N=fCqNBp
+=cKszo-3XbHre,
 .
+QUIT
 </pre></div>
 </div>
 </div>
@@ -1366,10 +1367,7 @@ GIyc!o3F+&#39;N=fCqNBp
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220 host.example.com ESMTP Postfix
-250 Hello host.example.com, glad to meet you
-250 Ok
-250 Ok
-567 Error
+593 Error
 </pre></div>
 </div>
 </div>

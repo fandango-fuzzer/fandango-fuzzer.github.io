@@ -464,7 +464,7 @@ window.runMermaid = runMermaid;</script>
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 <aside class="bd-header-announcement" aria-label="Announcement">
-  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.1/" style="color:white;">Fandango 1.3.1</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
+  <div class="bd-header-announcement__content"><a href="https://pypi.org/project/fandango-fuzzer/1.3.2/" style="color:white;">Fandango 1.3.2</a> is now available! Check out the <a href="https://fandango-fuzzer.github.io/ReleaseNotes.html#" style="color:white;">release notes</a> for details.</div>
 </aside>
 
   
@@ -895,7 +895,7 @@ In our spec, we name these <code class="docutils literal notranslate"><span clas
 <p>In our setting, we assume that Fandango is acting as <em>client</em> to test an FTP server.
 Fandango connects to a server running on port 25521 on the local host.
 Whenever received a message using the <code class="docutils literal notranslate"><span class="pre">ClientControl</span></code> party, it marks the message as received from the <code class="docutils literal notranslate"><span class="pre">ServerControl</span></code> party.
-The call to <code class="docutils literal notranslate"><span class="pre">self.start()</span></code> in the constructior starts the party and lets it connect to the socket.</p>
+The call to <code class="docutils literal notranslate"><span class="pre">self.start()</span></code> in the constructor starts the party and lets it connect to the socket.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClientControl</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -909,7 +909,7 @@ The call to <code class="docutils literal notranslate"><span class="pre">self.st
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ServerControl</span></code> party is the counterpart to <code class="docutils literal notranslate"><span class="pre">ClientControl</span></code>.
 As in our scenario we are assuming that Fandango is acting as <em>client</em> we set the <code class="docutils literal notranslate"><span class="pre">connection_mode</span></code> to <code class="docutils literal notranslate"><span class="pre">ConnectionMode.EXTERNAL</span></code>.
-The party does, therefore, not connect to a socket. The call to <code class="docutils literal notranslate"><span class="pre">self.start()</span></code> in the constructior is ignored.</p>
+The party does, therefore, not connect to a socket. The call to <code class="docutils literal notranslate"><span class="pre">self.start()</span></code> in the constructor is ignored.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ServerControl</span><span class="p">(</span><span class="n">NetworkParty</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -1375,11 +1375,11 @@ Therefore, we use <code class="docutils literal notranslate"><span class="pre">S
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>crw---xr--        766 wTpaT6LG L8ilegKOi3kU         2302111 Dec 14 06:04 tC
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lr-xrwx--x                595 FtyI31o      xHrbUsh7uB6    5582241 Aug 10 13:24 p:dOGx@&gt;f&amp;&amp;[;O
 
-b-wx-wxrw-  342 Jqy             mO-6v5z      1242415 Aug 21 22:42 iVkI,A&quot;/}ni
+c-wxr-x--x          784 Z                    q2ZvvR72b                    1439476 Jun 15 21:52 BTE&lt;r~Tg$*AT6#
 
---wx-w-rw-                300 eTsSwh-      SlQJMdiRFU2zy2D          4215938 Aug 05 03:07 n 9_2y&quot;;tMny^Av
+l-w--w-r-x           283 hZZ6su2r            PBFxHoONTE2c8RN1UmuP 6588354 May 05 23:26 &#39;ZZ~r5o&lt;d+v1ce
 </pre></div>
 </div>
 </div>
@@ -1417,13 +1417,15 @@ There is no other interaction or state following, so we’re done.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUTH SSL
 AUTH TLS
-USER MhZ8NDl
-PASS JRh4gtl6WEeD
-AUTH SSL
 AUTH TLS
 USER the_user
+PASS H8pdr1DZuQT
+AUTH SSL
+USER the_user
 PASS the_password
+EPSV
 TYPE I
+LIST
 EPSV
 QUIT
 </pre></div>
@@ -1439,21 +1441,27 @@ QUIT
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-3xR?oh@xW5t~4%
-220-V_y2X
-220-A/P
-220 gtg 5O,pvgD7yT
-500 sBV+--+D~g&quot;}
-331 =5?lI4V(_YS&gt;)PUr
-530 ;&gt;+@ZG?+Y?
-530 @dQ&quot;.zcIOs+&#39;j
-331 0&amp;%0nN;,yVacydw/5
-230 x8S`X*7+9r
-200 7&lt;7d
-200 OjqW+r9#Dv
-200 hNyC}bz@K
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220-PLe{V3L
+220-S%(hdbk3%yC(Rb
+220-U@.$xp?Bo&#39;NU&lt;=syq9
+220-8-GXu5oU{&gt;a(&quot;8sR`t
+220-eZwD;YyD3%?68
+220-g*I:qT.Tu9&lt;}
+220-2acNm$5C$J6l.&quot;&amp;
+220-/K3+~9@.3U1
+220- =F10sP&#39; q\
+220-&quot;-X
+220-$lvh\G&lt;@Q
+220-;Sv,:l%yVkDtb]
+220-m
+220 /5&amp;N69\q9Hml
+331 [$QhXd4UB(2
+530 &gt;ftt4Zz.&quot;O&quot;`&#39;c
+331 bX~
+230 W\&amp;,@I?X_E
 229 Entering Extended Passive Mode (|||50100|)
-221 `kz73Nh-kFT.K~3GP
+200 Mh]~hd;rR
+221 &amp;.kY&amp;#p`3fPj(
 </pre></div>
 </div>
 </div>
